@@ -69,6 +69,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Navigation\AIWalkingScript.cs" />
+    <Compile Include="Assets\Scripts\Navigation\Node.cs" />
+    <Compile Include="Assets\Scripts\Navigation\NodeWorld.cs" />
     <Compile Include="Assets\Scripts\Navigation\TiledWorld.cs" />
     <Compile Include="Assets\Scripts\Timer\CountTimerScript.cs" />
   </ItemGroup>
