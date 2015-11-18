@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.2.2f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -70,9 +68,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Buildings\Arrow\ArrowBullet.cs" />
     <Compile Include="Assets\Scripts\Buildings\Arrow\ArrowTowerScript.cs" />
+    <Compile Include="Assets\Scripts\Buildings\BuildingSpawnScript.cs" />
     <Compile Include="Assets\Scripts\Economy\BaseScript.cs" />
+    <Compile Include="Assets\Scripts\Economy\EnemyStatScript.cs" />
     <Compile Include="Assets\Scripts\EnumScript.cs" />
     <Compile Include="Assets\Scripts\Michiel TEST Scripts\EnemyTestScript.cs" />
     <Compile Include="Assets\Scripts\Navigation\AIWalkingScript.cs" />
