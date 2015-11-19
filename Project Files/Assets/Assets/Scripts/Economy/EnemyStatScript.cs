@@ -32,6 +32,7 @@ public class EnemyStatScript : MonoBehaviour {
         {
             //DROP GOLD HERE
             _baseStats.AddGold(_goldCarrying);
+            Destroy(this.gameObject);
             Debug.Log("Enemy Died");
         }
     }

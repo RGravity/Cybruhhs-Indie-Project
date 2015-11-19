@@ -6,6 +6,8 @@ public class BuildingSpawnScript : MonoBehaviour {
     private BaseScript _baseStats;
     [SerializeField]
     private Material _arrowTowerMaterial;
+    [SerializeField]
+    private int _arrowTowerPrice;
 
 
 	// Use this for initialization
@@ -24,7 +26,7 @@ public class BuildingSpawnScript : MonoBehaviour {
     /// </summary>
     void OnMouseDown()
     {
-        if (_baseStats.Gold >= 150 && !this.GetComponent<ArrowTowerScript>())
+        if (_baseStats.Gold >= _arrowTowerPrice && !this.GetComponent<ArrowTowerScript>())
         {
             gameObject.AddComponent<ArrowTowerScript>();
             gameObject.GetComponent<Renderer>().material = _arrowTowerMaterial;
