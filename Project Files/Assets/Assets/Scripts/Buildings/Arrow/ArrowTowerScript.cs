@@ -12,7 +12,7 @@ public class ArrowTowerScript : MonoBehaviour {
     [SerializeField]
     private int _damage = 2;
     [SerializeField]
-    private int _rateOfFire = 1;
+    private float _rateOfFire = 2;
     private bool _allowShoot = true;
     private float _countdownTime;
     
@@ -45,12 +45,12 @@ public class ArrowTowerScript : MonoBehaviour {
     /// </summary>
     private void _checkForEnemies()
     {
-        Object[] enemies = GameObject.FindObjectsOfType<EnemyTestScript>();
-        foreach (GameObject enemy in enemies)
+        UnitScript[] enemies = GameObject.FindObjectsOfType<UnitScript>();
+        foreach (UnitScript enemy in enemies)
         {
             if ((enemy.transform.position - _thisPosition).magnitude < 10)
             {
-                _enemyInRange = enemy;
+                _enemyInRange = enemy.gameObject;
                 break;
             }
         }
