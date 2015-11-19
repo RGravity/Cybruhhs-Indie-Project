@@ -52,9 +52,9 @@
      <Compile Include="Assets\Assets\Scripts\EnumScript.cs" />
      <Compile Include="Assets\Assets\Scripts\Michiel TEST Scripts\EnemyTestScript.cs" />
      <Compile Include="Assets\Assets\Scripts\Navigation\AIWalkingScript.cs" />
-     <Compile Include="Assets\Assets\Scripts\Navigation\Node.cs" />
-     <Compile Include="Assets\Assets\Scripts\Navigation\NodeWorld.cs" />
-     <Compile Include="Assets\Assets\Scripts\Navigation\TiledWorld.cs" />
+     <Compile Include="Assets\Assets\Scripts\Navigation\NodeScript.cs" />
+     <Compile Include="Assets\Assets\Scripts\Navigation\NodeWorldScript.cs" />
+     <Compile Include="Assets\Assets\Scripts\Navigation\TiledWorldScript.cs" />
      <Compile Include="Assets\Assets\Scripts\Timer\CountTimerScript.cs" />
      <None Include="Assets\ProjectSettings\ProjectVersion.txt" />
  <Reference Include="UnityEngine.UI">

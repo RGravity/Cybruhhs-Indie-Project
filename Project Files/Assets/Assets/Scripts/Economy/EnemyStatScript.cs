@@ -11,7 +11,6 @@ public class EnemyStatScript : MonoBehaviour {
 
     public int Health { get { return _health; } }
 
-
     void Start()
     {
         _baseStats = GameObject.FindObjectOfType<BaseScript>();

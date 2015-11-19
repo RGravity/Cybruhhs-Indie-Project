@@ -4,6 +4,8 @@ using System.Collections;
 public class BuildingSpawnScript : MonoBehaviour {
 
     private BaseScript _baseStats;
+    [SerializeField]
+    private Material _arrowTowerMaterial;
 
 
 	// Use this for initialization
@@ -16,12 +18,16 @@ public class BuildingSpawnScript : MonoBehaviour {
 	
 	}
 
+    /// <summary>
+    /// <para>Check if Gold is Sufficient</para>
+    /// <para>If so build Arrow Tower</para>
+    /// </summary>
     void OnMouseDown()
     {
         if (_baseStats.Gold >= 150 && !this.GetComponent<ArrowTowerScript>())
         {
             gameObject.AddComponent<ArrowTowerScript>();
-            gameObject.GetComponent<Material>().color = Color.red;
+            gameObject.GetComponent<Renderer>().material = _arrowTowerMaterial;
         }
         else
         {
