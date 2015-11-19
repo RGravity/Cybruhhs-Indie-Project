@@ -45,14 +45,17 @@ public class UnitScript : MonoBehaviour {
 		// Have we moved our visible piece close enough to the target tile that we can
 		// advance to the next step in our pathfinding?
 		if(Vector3.Distance(transform.position, _map.TileCoordToWorldCoord(_tileX,_tileY )) < 0.1f)
-			AdvancePathing();
+            _advancePathing();
 
 		// Smoothly animate towards the correct map tile.
 		transform.position = Vector3.Lerp(transform.position, _map.TileCoordToWorldCoord(_tileX, _tileY), 5f * Time.deltaTime);
 	}
 
-	// Advances our pathfinding progress by one tile.
-	void AdvancePathing() {
+    /// <summary>
+    /// <para>Move according to the pathfinding on TileMapScript</para>
+    /// <para></para>
+    /// </summary>
+    private void _advancePathing() {
 		if(_currentPath == null)
 			return;
 
@@ -76,15 +79,5 @@ public class UnitScript : MonoBehaviour {
             // So let's just clear our pathfinding info.
             _currentPath = null;
 		}
-	}
-
-	// The "Next Turn" button calls this.
-	public void NextTurn() {
-		// Make sure to wrap-up any outstanding movement left over.
-		while(_currentPath != null) {
-			AdvancePathing();
-		}
-
-		// Reset our available movement points.
 	}
 }

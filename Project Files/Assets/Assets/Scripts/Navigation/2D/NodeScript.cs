@@ -14,14 +14,14 @@ public class NodeScript {
 		_neighbours = new List<NodeScript>();
 	}
 	
-	public float DistanceTo(NodeScript n) {
-		if(n == null) {
+	public float DistanceTo(NodeScript pNode) {
+		if(pNode == null) {
 			Debug.LogError("WTF?");
 		}
 		
 		return Vector2.Distance(
 			new Vector2(_x, _y),
-			new Vector2(n._x, n._y)
+			new Vector2(pNode._x, pNode._y)
 			);
 	}
 	
