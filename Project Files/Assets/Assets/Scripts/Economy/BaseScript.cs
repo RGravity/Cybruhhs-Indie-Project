@@ -8,16 +8,19 @@ public class BaseScript : MonoBehaviour {
     [SerializeField]
     private int _gold;
 
+    public int Gold { get { return _gold; } }
+
     void Update()
     {
-        CheckHealth();
+        Debug.Log("Current Gold amount is: " + _gold);
+        _checkHealth();
     }
 
     /// <summary>
     /// <para>Check if Health is 0</para>
     /// <para>if Health is 0 then Game Over</para>
     /// </summary>
-    private void CheckHealth()
+    private void _checkHealth()
     {
         if (_health <= 0)
         {

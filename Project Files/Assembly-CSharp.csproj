@@ -45,22 +45,24 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Assets\Scripts\Buildings\Arrow\ArrowTowerScript.cs" />
+     <Compile Include="Assets\Assets\Scripts\Buildings\BuildingSpawnScript.cs" />
      <Compile Include="Assets\Assets\Scripts\Economy\BaseScript.cs" />
-     <Compile Include="Assets\Assets\Scripts\Navigation\AIWalkingScript.cs" />
-     <Compile Include="Assets\Assets\Scripts\Navigation\TiledWorld.cs" />
+     <Compile Include="Assets\Assets\Scripts\Economy\EnemyStatScript.cs" />
+     <Compile Include="Assets\Assets\Scripts\EnumScript.cs" />
+     <Compile Include="Assets\Assets\Scripts\Michiel TEST Scripts\EnemyTestScript.cs" />
+     <Compile Include="Assets\Assets\Scripts\Navigation\2D\ClickableTileScript.cs" />
+     <Compile Include="Assets\Assets\Scripts\Navigation\2D\NodeScript.cs" />
+     <Compile Include="Assets\Assets\Scripts\Navigation\2D\TileMapScript.cs" />
+     <Compile Include="Assets\Assets\Scripts\Navigation\2D\TileTypeScript.cs" />
+     <Compile Include="Assets\Assets\Scripts\Navigation\2D\UnitScript.cs" />
      <Compile Include="Assets\Assets\Scripts\Timer\CountTimerScript.cs" />
      <None Include="Assets\ProjectSettings\ProjectVersion.txt" />
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>D:/Programs/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Programs/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>D:/Programs/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Analytics">
- <HintPath>D:/Programs/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Cecil">
  <HintPath>D:/Programs/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>
