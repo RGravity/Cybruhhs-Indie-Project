@@ -17,7 +17,6 @@ public class BuildingSpawnScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
 	}
 
     /// <summary>
@@ -30,10 +29,11 @@ public class BuildingSpawnScript : MonoBehaviour {
         {
             gameObject.AddComponent<ArrowTowerScript>();
             gameObject.GetComponent<Renderer>().material = _arrowTowerMaterial;
+            _baseStats.LowerGold(_arrowTowerPrice);
         }
         else
         {
-            Debug.Log("not enough gold!");
+            Debug.Log("not enough gold or already a turret there!");
         }
     }
 }
