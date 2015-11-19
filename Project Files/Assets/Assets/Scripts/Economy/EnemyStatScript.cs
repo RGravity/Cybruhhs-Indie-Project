@@ -27,10 +27,12 @@ public class EnemyStatScript : MonoBehaviour {
     /// </summary>
     private void _checkHealth()
     {
+        Debug.Log("Current Health of Enemy:" + _health);
         if (_health <= 0)
         {
             //DROP GOLD HERE
             _baseStats.AddGold(_goldCarrying);
+            Debug.Log("Enemy Died");
         }
     }
 

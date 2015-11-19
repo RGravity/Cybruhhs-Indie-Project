@@ -70,6 +70,7 @@ public class ArrowTowerScript : MonoBehaviour {
             {
                 _enemyInRange = null;
             }
+            Debug.Log("Enemy Shot");
         }
         else if (Time.time >= _countdownTime)
         {

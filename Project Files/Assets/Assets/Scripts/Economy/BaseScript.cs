@@ -12,6 +12,7 @@ public class BaseScript : MonoBehaviour {
 
     void Update()
     {
+        Debug.Log("Current Gold amount is: " + _gold);
         _checkHealth();
     }
 

@@ -51,10 +51,11 @@
      <Compile Include="Assets\Assets\Scripts\Economy\EnemyStatScript.cs" />
      <Compile Include="Assets\Assets\Scripts\EnumScript.cs" />
      <Compile Include="Assets\Assets\Scripts\Michiel TEST Scripts\EnemyTestScript.cs" />
-     <Compile Include="Assets\Assets\Scripts\Navigation\AIWalkingScript.cs" />
-     <Compile Include="Assets\Assets\Scripts\Navigation\NodeScript.cs" />
-     <Compile Include="Assets\Assets\Scripts\Navigation\NodeWorldScript.cs" />
-     <Compile Include="Assets\Assets\Scripts\Navigation\TiledWorldScript.cs" />
+     <Compile Include="Assets\Assets\Scripts\Navigation\2D\ClickableTileScript.cs" />
+     <Compile Include="Assets\Assets\Scripts\Navigation\2D\NodeScript.cs" />
+     <Compile Include="Assets\Assets\Scripts\Navigation\2D\TileMapScript.cs" />
+     <Compile Include="Assets\Assets\Scripts\Navigation\2D\TileTypeScript.cs" />
+     <Compile Include="Assets\Assets\Scripts\Navigation\2D\UnitScript.cs" />
      <Compile Include="Assets\Assets\Scripts\Timer\CountTimerScript.cs" />
      <None Include="Assets\ProjectSettings\ProjectVersion.txt" />
  <Reference Include="UnityEngine.UI">
