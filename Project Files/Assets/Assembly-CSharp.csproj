@@ -45,11 +45,12 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Buildings\Arrow\ArrowBullet.cs" />
      <Compile Include="Assets\Scripts\Buildings\Arrow\ArrowTowerScript.cs" />
+     <Compile Include="Assets\Scripts\Buildings\BuildingSpawnScript.cs" />
      <Compile Include="Assets\Scripts\DontDestroyOnLoad\DontDestroyOnLoadMusicScript.cs" />
      <Compile Include="Assets\Scripts\DontDestroyOnLoad\DontDestroyOnLoadSoundScript.cs" />
      <Compile Include="Assets\Scripts\Economy\BaseScript.cs" />
+     <Compile Include="Assets\Scripts\Economy\EnemyStatScript.cs" />
      <Compile Include="Assets\Scripts\EnumScript.cs" />
      <Compile Include="Assets\Scripts\MenuScripts\MenuCreditsButtonScript.cs" />
      <Compile Include="Assets\Scripts\MenuScripts\MenuOptionsButtonScript.cs" />
@@ -57,10 +58,14 @@
      <Compile Include="Assets\Scripts\MenuScripts\MenuReturnButtonScript.cs" />
      <Compile Include="Assets\Scripts\MenuScripts\MenuStartButtonScript.cs" />
      <Compile Include="Assets\Scripts\Michiel TEST Scripts\EnemyTestScript.cs" />
-     <Compile Include="Assets\Scripts\Navigation\AIWalkingScript.cs" />
-     <Compile Include="Assets\Scripts\Navigation\Node.cs" />
-     <Compile Include="Assets\Scripts\Navigation\NodeWorld.cs" />
-     <Compile Include="Assets\Scripts\Navigation\TiledWorld.cs" />
+     <Compile Include="Assets\Scripts\Navigation\2D\ClickableTileScript.cs" />
+     <Compile Include="Assets\Scripts\Navigation\2D\GenerateMapVisualScript.cs" />
+     <Compile Include="Assets\Scripts\Navigation\2D\GenerateNodeMap.cs" />
+     <Compile Include="Assets\Scripts\Navigation\2D\NodeScript.cs" />
+     <Compile Include="Assets\Scripts\Navigation\2D\TileMapScript.cs" />
+     <Compile Include="Assets\Scripts\Navigation\2D\TileTypeScript.cs" />
+     <Compile Include="Assets\Scripts\Navigation\2D\UnitScript.cs" />
+     <Compile Include="Assets\Scripts\Navigation\2D\WaveScript.cs" />
      <Compile Include="Assets\Scripts\OptionsScripts\MusicVolumeScript.cs" />
      <Compile Include="Assets\Scripts\OptionsScripts\SFXVolumeScript.cs" />
      <Compile Include="Assets\Scripts\Timer\CountTimerScript.cs" />

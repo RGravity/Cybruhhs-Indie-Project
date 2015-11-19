@@ -9,9 +9,9 @@ public class MenuCreditsButtonScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        _menuCanvas = GameObject.FindGameObjectWithTag("MenuCanvas");
-        _creditCanvas = GameObject.FindGameObjectWithTag("CreditCanvas");
-        _optionsCanvas = GameObject.FindGameObjectWithTag("OptionsCanvas");
+        _menuCanvas = GameObject.Find("MenuCanvas");
+        _optionsCanvas = GameObject.Find("OptionsCanvas");
+        _creditCanvas = GameObject.Find("CreditsCanvas");
     }
 	
 	// Update is called once per frame
