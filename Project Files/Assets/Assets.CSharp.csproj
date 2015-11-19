@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.2.2f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -77,10 +75,13 @@
     <Compile Include="Assets\Scripts\EnumScript.cs" />
     <Compile Include="Assets\Scripts\Michiel TEST Scripts\EnemyTestScript.cs" />
     <Compile Include="Assets\Scripts\Navigation\2D\ClickableTileScript.cs" />
+    <Compile Include="Assets\Scripts\Navigation\2D\GenerateMapVisualScript.cs" />
+    <Compile Include="Assets\Scripts\Navigation\2D\GenerateNodeMap.cs" />
     <Compile Include="Assets\Scripts\Navigation\2D\NodeScript.cs" />
     <Compile Include="Assets\Scripts\Navigation\2D\TileMapScript.cs" />
     <Compile Include="Assets\Scripts\Navigation\2D\TileTypeScript.cs" />
     <Compile Include="Assets\Scripts\Navigation\2D\UnitScript.cs" />
+    <Compile Include="Assets\Scripts\Navigation\2D\WaveScript.cs" />
     <Compile Include="Assets\Scripts\Timer\CountTimerScript.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />

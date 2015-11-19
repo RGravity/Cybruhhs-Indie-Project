@@ -14,7 +14,9 @@ public class ClickableTileScript : MonoBehaviour {
 		if(EventSystem.current.IsPointerOverGameObject())
 			return;
 
-		map.GeneratePathTo((int)map.EndPosition.x, (int)map.EndPosition.y);
+        //map.GeneratePathTo((int)map.EndPosition.x, (int)map.EndPosition.y);
+        //
+
         map.SetWalkable(tileX, tileY, false);
 	}
 

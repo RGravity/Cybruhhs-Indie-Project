@@ -15,6 +15,10 @@ public class TileMapScript : MonoBehaviour {
     private Vector3 _endPosition;
     public Vector3 EndPosition { get { return _endPosition; } set { _endPosition = value; } }
 
+    private Vector3 _waveStartposition;
+
+    public Vector3 WaveStartPosition { get {return _waveStartposition; } set { _waveStartposition = value; } }
+
     //TileData reads the XML Needs to be change with Tiled.
     private int[,] _tileData =
     {
@@ -71,10 +75,18 @@ public class TileMapScript : MonoBehaviour {
                 switch (_tileData[y, x])
                 {
                     case 1:
-                        _selectedUnit.GetComponent<UnitScript>().TileX = x;
-                        _selectedUnit.GetComponent<UnitScript>().TileY = y;
+                        //_selectedUnit.GetComponent<UnitScript>().TileX = x;
+                       // _selectedUnit.GetComponent<UnitScript>().TileY = y;
                         _selectedUnit.GetComponent<UnitScript>().Map = this;
                         _selectedUnit.GetComponentInChildren<MeshRenderer>().enabled = true;
+                        _waveStartposition = new Vector3(x, y, -1);
+                        GameObject waveObject = new GameObject();
+                        WaveScript waveScript = waveObject.AddComponent<WaveScript>();
+                        waveScript.GruntSize = 10;
+                        waveScript.HeavySize = 10;
+                        waveScript.FlyingSize = 10;
+                        waveScript.PaladinSize = 10;
+                        waveScript.Map = this;
                         break;
                     case 2:
                         GameObject endCube = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -124,14 +136,18 @@ public class TileMapScript : MonoBehaviour {
     /// </summary>
     private void _generatePathfindingGraph() {
         // Initialize the array
-        _graph = new NodeScript[_mapSizeX,_mapSizeY];
+        _graph = GenerateNodeMap.GeneratePathfindingGraph(_mapSizeX, _mapSizeY);
+        #region MyRegion
+        /*_graph = new NodeScript[_mapSizeX, _mapSizeY];
 
-		// Initialize a Node for each spot in the array
-		for(int x=0; x < _mapSizeX; x++) {
-			for(int y=0; y < _mapSizeY; y++) {
-                _graph[x,y] = new NodeScript();
-                _graph[x,y].X = x;
-                _graph[x,y].Y = y;
+        // Initialize a Node for each spot in the array
+        for (int x = 0; x < _mapSizeX; x++)
+        {
+            for (int y = 0; y < _mapSizeY; y++)
+            {
+                _graph[x, y] = new NodeScript();
+                _graph[x, y].X = x;
+                _graph[x, y].Y = y;
                 #region create the node
                 //GameObject node = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                 //node.transform.position = new Vector3(x, y, -1);
@@ -140,19 +156,21 @@ public class TileMapScript : MonoBehaviour {
             }
         }
 
-		// Now that all the nodes exist, calculate their neighbours
-		for(int x=0; x < _mapSizeX; x++) {
-			for(int y=0; y < _mapSizeY; y++) {
+        // Now that all the nodes exist, calculate their neighbours
+        for (int x = 0; x < _mapSizeX; x++)
+        {
+            for (int y = 0; y < _mapSizeY; y++)
+            {
 
-				// This is the 4-way connection version:
-				if(x > 0)
-                    _graph[x,y].Neighbours.Add(_graph[x-1, y] );
-				if(x < _mapSizeX-1)
-                    _graph[x,y].Neighbours.Add(_graph[x+1, y] );
-				if(y > 0)
-                    _graph[x,y].Neighbours.Add(_graph[x, y-1] );
-				if(y < _mapSizeY-1)
-                    _graph[x,y].Neighbours.Add(_graph[x, y+1] );
+                // This is the 4-way connection version:
+                if (x > 0)
+                    _graph[x, y].Neighbours.Add(_graph[x - 1, y]);
+                if (x < _mapSizeX - 1)
+                    _graph[x, y].Neighbours.Add(_graph[x + 1, y]);
+                if (y > 0)
+                    _graph[x, y].Neighbours.Add(_graph[x, y - 1]);
+                if (y < _mapSizeY - 1)
+                    _graph[x, y].Neighbours.Add(_graph[x, y + 1]);
 
                 #region diagonal
                 // This is the 8-way connection version (allows diagonal movement)
@@ -181,8 +199,9 @@ public class TileMapScript : MonoBehaviour {
                 //	graph[x,y].neighbours.Add( graph[x, y+1] );
                 #endregion
             }
-        }
-	}
+        } */
+        #endregion
+    }
     /// <summary>
     /// <para>Create the tiles based on tiles that you make in the _generateMapData</para>
     /// <para></para>
