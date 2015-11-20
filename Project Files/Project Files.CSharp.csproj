@@ -51,11 +51,17 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Advertisements">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Analytics">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
@@ -68,12 +74,29 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Assets\Scripts\Buildings\Arrow\ArrowBullet.cs" />
     <Compile Include="Assets\Assets\Scripts\Buildings\Arrow\ArrowTowerScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\Buildings\BuildingSpawnScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\DontDestroyOnLoad\DontDestroyOnLoadMusicScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\DontDestroyOnLoad\DontDestroyOnLoadSoundScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\Economy\BaseScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\Economy\EnemyStatScript.cs" />
     <Compile Include="Assets\Assets\Scripts\EnumScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\MenuScripts\MenuCreditsButtonScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\MenuScripts\MenuOptionsButtonScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\MenuScripts\MenuQuitButtonScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\MenuScripts\MenuReturnButtonScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\MenuScripts\MenuStartButtonScript.cs" />
     <Compile Include="Assets\Assets\Scripts\Michiel TEST Scripts\EnemyTestScript.cs" />
-    <Compile Include="Assets\Assets\Scripts\Navigation\AIWalkingScript.cs" />
-    <Compile Include="Assets\Assets\Scripts\Navigation\TiledWorld.cs" />
+    <Compile Include="Assets\Assets\Scripts\Navigation\2D\ClickableTileScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\Navigation\2D\GenerateMapVisualScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\Navigation\2D\GenerateNodeMap.cs" />
+    <Compile Include="Assets\Assets\Scripts\Navigation\2D\NodeScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\Navigation\2D\TileMapScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\Navigation\2D\TileTypeScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\Navigation\2D\UnitScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\Navigation\2D\WaveScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\OptionsScripts\MusicVolumeScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\OptionsScripts\SFXVolumeScript.cs" />
     <Compile Include="Assets\Assets\Scripts\Timer\CountTimerScript.cs" />
   </ItemGroup>
   <ItemGroup>
