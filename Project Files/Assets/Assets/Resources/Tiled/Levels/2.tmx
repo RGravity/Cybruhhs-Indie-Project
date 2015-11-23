@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="19" tilewidth="64" tileheight="64" nextobjectid="1">
+ <tileset firstgid="1" name="Tiles" tilewidth="64" tileheight="64" tilecount="1">
+  <tile id="0">
+   <properties>
+    <property name="Walkable" value="true"/>
+   </properties>
+   <image source="../../Tiled Tiles/Base.png"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="2" name="Tileset" tilewidth="64" tileheight="64" tilecount="5">
+  <tile id="0">
+   <properties>
+    <property name="Walkable" value="true"/>
+   </properties>
+   <image width="64" height="64" source="../Tiles/Base.png"/>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="Walkable" value="false"/>
+   </properties>
+   <image width="64" height="64" source="../Tiles/InsideCamera.png"/>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="Walkable" value="false"/>
+   </properties>
+   <image width="64" height="64" source="../Tiles/OutsideCamera.png"/>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="Walkable" value="true"/>
+   </properties>
+   <image width="64" height="64" source="../Tiles/Road.png"/>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="Walkable" value="true"/>
+   </properties>
+   <image width="64" height="64" source="../Tiles/Spawn.png"/>
+  </tile>
+ </tileset>
+ <layer name="Tile Layer 1" width="32" height="19">
+  <data encoding="csv">
+4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
+4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,
+4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,
+4,3,3,3,5,5,5,5,5,5,3,3,3,3,3,5,5,5,5,5,5,5,5,5,5,5,5,5,5,3,3,4,
+4,3,3,3,5,5,5,5,5,5,3,3,3,3,3,5,5,5,5,5,5,5,5,5,5,5,5,5,5,3,3,4,
+4,3,3,3,5,5,3,3,5,5,3,3,3,3,3,5,5,3,3,3,3,3,3,3,3,3,3,5,5,3,3,4,
+4,3,3,3,5,5,3,3,5,5,3,3,3,3,3,5,5,3,3,3,3,3,3,3,3,3,3,5,5,3,3,4,
+4,3,3,3,5,5,3,3,5,5,3,3,3,3,3,5,5,5,5,5,5,5,5,5,5,3,3,5,5,3,3,4,
+4,3,3,3,5,5,3,3,5,5,3,3,3,3,3,5,5,5,5,5,5,5,5,5,5,3,3,5,5,3,3,4,
+4,3,3,3,5,5,3,3,5,5,3,3,3,3,3,3,3,3,3,3,3,3,3,5,5,3,3,5,5,3,3,4,
+4,3,3,3,5,5,3,3,5,5,3,3,3,3,3,3,3,3,3,3,3,3,3,5,5,3,3,5,5,3,3,4,
+4,3,3,3,5,5,3,3,5,5,3,3,3,3,3,2,2,5,5,5,5,5,5,5,5,3,3,5,5,3,3,4,
+4,3,3,3,5,5,3,3,5,5,3,3,3,3,3,2,2,5,5,5,5,5,5,5,5,3,3,5,5,3,3,4,
+4,3,3,3,5,5,3,3,5,5,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,5,5,3,3,4,
+4,3,3,3,5,5,3,3,5,5,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,5,5,3,3,4,
+4,3,3,3,5,5,3,3,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,3,3,4,
+4,3,3,3,5,5,3,3,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,3,3,4,
+4,3,3,3,5,5,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,
+4,4,4,4,6,6,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4
+</data>
+ </layer>
+ <imagelayer name="Image Layer 1" x="84" y="38"/>
+</map>
