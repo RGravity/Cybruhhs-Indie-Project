@@ -121,15 +121,16 @@ public class TileMapScript : MonoBehaviour
             }
         }
 
-        //for (int y = 0; y < Mathf.FloorToInt(_mapSizeY / 2); y++)
-        //{
-        //    for (int x = 0; x < _mapSizeX; x++)
-        //    {
-        //        int temp = _tileData[y, x];
-        //        _tileData[y, x] = _tileData[_mapSizeY - y, x];
-        //        _tileData[_mapSizeY - y, x] = temp;
-        //    }
-        //}
+        //flipping the array to match the tiled file
+        for (int y = 0; y < Mathf.FloorToInt(_mapSizeY / 2); y++)
+        {
+            for (int x = 0; x < _mapSizeX; x++)
+            {
+                int temp = _tileData[y, x];
+                _tileData[y, x] = _tileData[_mapSizeY - 1 - y, x];
+                _tileData[_mapSizeY - 1 - y, x] = temp;
+            }
+        }
 
 
 
