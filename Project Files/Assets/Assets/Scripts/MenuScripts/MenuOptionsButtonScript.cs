@@ -3,19 +3,22 @@ using System.Collections;
 
 public class MenuOptionsButtonScript : MonoBehaviour {
 
-    private GameObject _optionsCanvas;
-    private GameObject _menuCanvas;
+
     private GameObject _creditCanvas;
+    private GameObject _menuCanvas;
+    private GameObject _optionsCanvas;
+    private GameObject _selectionCanvas;
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         _menuCanvas = GameObject.Find("MenuCanvas");
         _optionsCanvas = GameObject.Find("OptionsCanvas");
         _creditCanvas = GameObject.Find("CreditsCanvas");
+        _selectionCanvas = GameObject.Find("SelectionCanvas");
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update ()
     {
 	
 	}
@@ -24,8 +27,9 @@ public class MenuOptionsButtonScript : MonoBehaviour {
     /// </summary>
     public void ClickOn()
     {
-        _optionsCanvas.GetComponent<Canvas>().enabled = true;
-        _menuCanvas.GetComponent<Canvas>().enabled = false;
         _creditCanvas.GetComponent<Canvas>().enabled = false;
+        _optionsCanvas.GetComponent<Canvas>().enabled = true;
+        _selectionCanvas.GetComponent<Canvas>().enabled = false;
+        _menuCanvas.GetComponent<Canvas>().enabled = false;
     }
 }
