@@ -47,6 +47,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Buildings\Arrow\ArrowTowerScript.cs" />
      <Compile Include="Assets\Scripts\Buildings\BuildingSpawnScript.cs" />
+     <Compile Include="Assets\Scripts\Buildings\TowerMenuScripts\BuildArrowTowerScript.cs" />
      <Compile Include="Assets\Scripts\DontDestroyOnLoad\DontDestroyOnLoadMusicScript.cs" />
      <Compile Include="Assets\Scripts\DontDestroyOnLoad\DontDestroyOnLoadSoundScript.cs" />
      <Compile Include="Assets\Scripts\Economy\BaseScript.cs" />
