@@ -7,7 +7,12 @@ public class EnemyStatScript : MonoBehaviour {
     private int _health;
     [SerializeField]
     private int _goldCarrying;
+    [SerializeField]
+    private int _damageToBase;
+
+
     private BaseScript _baseStats;
+
 
     public int Health { get { return _health; } }
 
@@ -19,6 +24,7 @@ public class EnemyStatScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         _checkHealth();
+        _checkTarget();
 	}
 
     /// <summary>
@@ -32,8 +38,24 @@ public class EnemyStatScript : MonoBehaviour {
         {
             //DROP GOLD HERE
             _baseStats.AddGold(_goldCarrying);
+            //RemoveGameObject, And Fix Pathfinding.
+            this.gameObject.GetComponent<UnitScript>().Map = null;
             Destroy(this.gameObject);
             Debug.Log("Enemy Died");
+        }
+    }
+
+    /// <summary>
+    /// Lower Health when Enemy reaches base
+    /// </summary>
+    private void _checkTarget()
+    {
+        if (/*ReachedTarget*/ true)
+        {
+            _baseStats.LowerHealth(_damageToBase);
+            _baseStats.LowerGold(_goldCarrying);
+            this.gameObject.GetComponent<UnitScript>().Map = null;
+            Destroy(this.gameObject);
         }
     }
 
