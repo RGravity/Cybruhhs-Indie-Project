@@ -102,9 +102,9 @@ public class WaveScript : MonoBehaviour {
             _endPosition = _map.EndPosition;
             _waveStartPosition = _map.WaveStartPosition;
             _createMonstersGrunt();
-            _createMonstersHeavy();
-            _createMonstersFlying();
-            _createMonstersPaladin();
+            //_createMonstersHeavy();
+            //_createMonstersFlying();
+            //_createMonstersPaladin();
         }
 
     }
@@ -120,12 +120,19 @@ public class WaveScript : MonoBehaviour {
         {
             GameObject gruntObject = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
             gruntObject.name = "Grunt";
-            gruntObject.transform.position = _waveStartPosition;
-            gruntObject.AddComponent<UnitScript>();
-            gruntObject.GetComponent<UnitScript>().Map = _map;
-            gruntObject.GetComponent<UnitScript>().TileX = (int)_map.WaveStartPosition.x;
-            gruntObject.GetComponent<UnitScript>().TileY = (int)_map.WaveStartPosition.y;
-            _map.GeneratePathTo(gruntObject.GetComponent<UnitScript>().TileX, gruntObject.GetComponent<UnitScript>().TileY);
+            gruntObject.transform.localScale = new Vector3(gruntObject.transform.localScale.x /3, gruntObject.transform.localScale.y / 3, gruntObject.transform.localScale.z / 3);
+            //Destroy(gruntObject.GetComponent<CapsuleCollider>());
+            Rigidbody rigidbody = gruntObject.AddComponent<Rigidbody>();
+            rigidbody.useGravity = false;
+            rigidbody.isKinematic = true;
+            //gruntObject.transform.position;
+            //gruntObject.AddComponent<UnitScript>();
+            //gruntObject.GetComponent<UnitScript>().Map = _map;
+            //gruntObject.GetComponent<UnitScript>().TileX = (int)_map.WaveStartPosition.x;
+            //gruntObject.GetComponent<UnitScript>().TileY = (int)_map.WaveStartPosition.y;
+            //gruntObject.GetComponent<UnitScript>().Map.GeneratePathTo((int)_map.EndPosition.x, (int)_map.EndPosition.y);
+            gruntObject.transform.parent = GameObject.FindGameObjectWithTag("Grunt").transform;
+            gruntObject.transform.localPosition = new Vector3(0, 0, -1);
             //grunt.name = "Grunt";
             //grunt.transform.position = _waveStartPosition;
         }
@@ -136,11 +143,13 @@ public class WaveScript : MonoBehaviour {
         {
             GameObject heavyObject = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             heavyObject.name = "Heavy";
-            heavyObject.transform.position = _waveStartPosition;
-            heavyObject.AddComponent<UnitScript>();
-            heavyObject.GetComponent<UnitScript>().Map = _map;
+            //heavyObject.transform.position = _waveStartPosition;
+            //heavyObject.AddComponent<UnitScript>();
+            // heavyObject.GetComponent<UnitScript>().Map = _map;
             //heavy.name = "Heavy";
             //heavy.transform.position = _waveStartPosition;
+            heavyObject.transform.parent = GameObject.FindGameObjectWithTag("Heavy").transform;
+            heavyObject.transform.localPosition = new Vector3(0, 0, -1);
         }
     }
     private void _createMonstersFlying()
@@ -149,11 +158,13 @@ public class WaveScript : MonoBehaviour {
         {
             GameObject flyingObject = GameObject.CreatePrimitive(PrimitiveType.Capsule);
             flyingObject.name = "Flying";
-            flyingObject.transform.position = _waveStartPosition;
-            flyingObject.AddComponent<UnitScript>();
-            flyingObject.GetComponent<UnitScript>().Map = _map;
+            //flyingObject.transform.position = _waveStartPosition;
+            //flyingObject.AddComponent<UnitScript>();
+            //flyingObject.GetComponent<UnitScript>().Map = _map;
             //flying.name = "Flying";
             //flying.transform.position = _waveStartPosition;
+            flyingObject.transform.parent = GameObject.FindGameObjectWithTag("Flying").transform;
+            flyingObject.transform.localPosition = new Vector3(0, 0, -1);
         }
     }
     private void _createMonstersPaladin()
@@ -162,11 +173,13 @@ public class WaveScript : MonoBehaviour {
         {
             GameObject paladinObject = GameObject.CreatePrimitive(PrimitiveType.Quad);
             paladinObject.name = "Paladin";
-            paladinObject.transform.position = _waveStartPosition;
-            paladinObject.AddComponent<UnitScript>();
-            paladinObject.GetComponent<UnitScript>().Map = _map;
+            //paladinObject.transform.position = _waveStartPosition;
+            //paladinObject.AddComponent<UnitScript>();
+            //paladinObject.GetComponent<UnitScript>().Map = _map;
             //paladin.name = "Paladin";
             //paladin.transform.position = _waveStartPosition;
+            paladinObject.transform.parent = GameObject.FindGameObjectWithTag("Paladin").transform;
+            paladinObject.transform.localPosition = new Vector3(0, 0, -1);
         }
     }
 

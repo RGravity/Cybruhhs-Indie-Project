@@ -11,13 +11,13 @@ public class ClickableTileScript : MonoBehaviour {
 	void OnMouseUp() {
 		Debug.Log ("Click!");
 
-		if(EventSystem.current.IsPointerOverGameObject())
-			return;
+		//if(EventSystem.current.IsPointerOverGameObject())
+		//	return;
 
         //map.GeneratePathTo((int)map.EndPosition.x, (int)map.EndPosition.y);
         //
 
-        map.SetWalkable(tileX, tileY, false);
+        //map.SetWalkable(tileX, tileY, false);
 	}
 
 }

@@ -5,6 +5,9 @@ public class TileMapScript : MonoBehaviour {
 
     [SerializeField]
 	private GameObject _selectedUnit;
+    [SerializeField]
+    private Sprite _sprite;
+    public Sprite Sprite { get { return _sprite; } set { _sprite = value; } }
 
     [SerializeField]
 	private TileTypeScript[] _tileTypes;
@@ -75,10 +78,10 @@ public class TileMapScript : MonoBehaviour {
                 switch (_tileData[y, x])
                 {
                     case 1:
-                        //_selectedUnit.GetComponent<UnitScript>().TileX = x;
-                       // _selectedUnit.GetComponent<UnitScript>().TileY = y;
+                        _selectedUnit.GetComponent<UnitScript>().TileX = x;
+                        _selectedUnit.GetComponent<UnitScript>().TileY = y;
                         _selectedUnit.GetComponent<UnitScript>().Map = this;
-                        _selectedUnit.GetComponentInChildren<MeshRenderer>().enabled = true;
+                        //_selectedUnit.GetComponentInChildren<MeshRenderer>().enabled = true;
                         _waveStartposition = new Vector3(x, y, -1);
                         GameObject waveObject = new GameObject();
                         WaveScript waveScript = waveObject.AddComponent<WaveScript>();
