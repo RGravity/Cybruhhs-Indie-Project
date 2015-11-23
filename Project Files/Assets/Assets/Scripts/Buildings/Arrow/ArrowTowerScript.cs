@@ -13,6 +13,8 @@ public class ArrowTowerScript : MonoBehaviour {
     private int _damage = 2;
     [SerializeField]
     private float _rateOfFire = 2;
+    [SerializeField]
+    private float _range = 10;
     private bool _allowShoot = true;
     private float _countdownTime;
     
@@ -22,7 +24,7 @@ public class ArrowTowerScript : MonoBehaviour {
     void Start()
     {
         _thisPosition = this.gameObject.transform.position;
-        //_bullet = (GameObject)Resources.Load("Bullet");
+        _bullet = (GameObject)Resources.Load("Bullet");
     }
 
     // Update is called once per frame
@@ -48,7 +50,7 @@ public class ArrowTowerScript : MonoBehaviour {
         UnitScript[] enemies = GameObject.FindObjectsOfType<UnitScript>();
         foreach (UnitScript enemy in enemies)
         {
-            if ((enemy.transform.position - _thisPosition).magnitude < 10)
+            if ((enemy.transform.position - _thisPosition).magnitude < _range)
             {
                 _enemyInRange = enemy.gameObject;
                 break;
@@ -57,19 +59,22 @@ public class ArrowTowerScript : MonoBehaviour {
     }
 
     /// <summary>
-    /// <para>Lowering Health of the Enemy, and only attack once every x seconds</para>
+    /// <para>Shoot bullet and only attack once every x seconds, when in range</para>
     /// </summary>
     private void _shootEnemy()
     {
         if (_allowShoot)
         {
-            _enemyInRange.GetComponent<EnemyStatScript>().LowerHealth(_damage);
+            //_enemyInRange.GetComponent<EnemyStatScript>().LowerHealth(_damage);
             _allowShoot = false;
             _countdownTime = CountTimerScript.AddSeconds(_rateOfFire);
-            if (_enemyInRange.GetComponent<EnemyStatScript>().Health <= 0)
+            if ((_enemyInRange.transform.position - _thisPosition).magnitude > _range)
             {
                 _enemyInRange = null;
             }
+
+            Instantiate(_bullet);
+
             Debug.Log("Enemy Shot");
         }
         else if (Time.time >= _countdownTime)
