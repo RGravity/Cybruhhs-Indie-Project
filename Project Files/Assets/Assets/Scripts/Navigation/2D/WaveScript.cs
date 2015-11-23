@@ -2,19 +2,8 @@
 using System.Collections.Generic;
 using System.Collections;
 
-public class WaveScript : MonoBehaviour {
-
-    [SerializeField]
-    private GameObject _grunt;
-
-    [SerializeField]
-    private GameObject _heavy;
-
-    [SerializeField]
-    private GameObject _flying;
-
-    [SerializeField]
-    private GameObject _paladin;
+public class WaveScript : MonoBehaviour
+{
 
     //[SerializeField]
     private int _gruntSize;
@@ -37,6 +26,7 @@ public class WaveScript : MonoBehaviour {
     public int PaladinSize { get { return _paladinSize; } set { _paladinSize = value; } }
 
     private List<GameObject> _gruntList;
+    public List<GameObject> GruntList { get { return _gruntList; } set { _gruntList = value; } }
     private List<GameObject> _heavyList;
     private List<GameObject> _flyingList;
     private List<GameObject> _paladinList;
@@ -48,139 +38,78 @@ public class WaveScript : MonoBehaviour {
 
     private Vector3 _waveStartPosition;
 
-    public WaveScript(TileMapScript pMap)
-    {
-        _map = Map;
-        if (_map != null)
-        {
-            for (int i = 0; i < _gruntSize; i++)
-            {
-                _gruntList.Add(_grunt);
-            }
-            for (int i = 0; i < _heavySize; i++)
-            {
-                _heavyList.Add(_heavy);
-            }
-            for (int i = 0; i < _flyingSize; i++)
-            {
-                _flyingList.Add(_flying);
-            }
-            for (int i = 0; i < _paladinSize; i++)
-            {
-                _paladinList.Add(_paladin);
-            }
-            _waveStartPosition = _map.WaveStartPosition;
-            _createMonstersGrunt();
-            _createMonstersHeavy();
-            _createMonstersFlying();
-            _createMonstersPaladin();
-        }
-    }
-
-
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         _map = Map;
-        if (_map != null)
-        {
-            //for (int i = 0; i < _gruntSize; i++)
-            //{
-            //    _gruntList.Add(_grunt);
-            //}
-            //for (int i = 0; i < _heavySize; i++)
-            //{
-            //    _heavyList.Add(_heavy);
-            //}
-            //for (int i = 0; i < _flyingSize; i++)
-            //{
-            //    _flyingList.Add(_flying);
-            //}
-            //for (int i = 0; i < _paladinSize; i++)
-            //{
-            //    _paladinList.Add(_paladin);
-            //}
-            _endPosition = _map.EndPosition;
-            _waveStartPosition = _map.WaveStartPosition;
-            _createMonstersGrunt();
-            //_createMonstersHeavy();
-            //_createMonstersFlying();
-            //_createMonstersPaladin();
-        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
 
     }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
-    private void _createMonstersGrunt()
+    public List<GameObject> CreateMonstersGrunt(int pGruntSize)
     {
-        for (int i = 0; i < _gruntSize; i++)
+        List<GameObject> gruntList = new List<GameObject>();
+        for (int i = 0; i < pGruntSize; i++)
         {
             GameObject gruntObject = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
             gruntObject.name = "Grunt";
-            gruntObject.transform.localScale = new Vector3(gruntObject.transform.localScale.x /3, gruntObject.transform.localScale.y / 3, gruntObject.transform.localScale.z / 3);
-            //Destroy(gruntObject.GetComponent<CapsuleCollider>());
-            Rigidbody rigidbody = gruntObject.AddComponent<Rigidbody>();
-            rigidbody.useGravity = false;
-            rigidbody.isKinematic = true;
-            //gruntObject.transform.position;
-            //gruntObject.AddComponent<UnitScript>();
-            //gruntObject.GetComponent<UnitScript>().Map = _map;
-            //gruntObject.GetComponent<UnitScript>().TileX = (int)_map.WaveStartPosition.x;
-            //gruntObject.GetComponent<UnitScript>().TileY = (int)_map.WaveStartPosition.y;
-            //gruntObject.GetComponent<UnitScript>().Map.GeneratePathTo((int)_map.EndPosition.x, (int)_map.EndPosition.y);
-            gruntObject.transform.parent = GameObject.FindGameObjectWithTag("Grunt").transform;
-            gruntObject.transform.localPosition = new Vector3(0, 0, -1);
-            //grunt.name = "Grunt";
-            //grunt.transform.position = _waveStartPosition;
+            gruntObject.transform.localScale = new Vector3(gruntObject.transform.localScale.x / 3, gruntObject.transform.localScale.y / 3, gruntObject.transform.localScale.z / 3);
+            gruntObject.AddComponent<UnitScript>();
+            gruntObject.AddComponent<GruntScript>();
+            gruntObject.transform.localPosition = new Vector3(this.transform.position.x, this.transform.position.y, -1);
+            gruntList.Add(gruntObject);
         }
+        return gruntList;
     }
-    private void _createMonstersHeavy()
+    public List<GameObject> CreateMonstersHeavy(int pHeavySize)
     {
-        for (int i = 0; i < _heavySize; i++)
+        List<GameObject> heavyList = new List<GameObject>();
+        for (int i = 0; i < pHeavySize; i++)
         {
             GameObject heavyObject = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             heavyObject.name = "Heavy";
-            //heavyObject.transform.position = _waveStartPosition;
-            //heavyObject.AddComponent<UnitScript>();
-            // heavyObject.GetComponent<UnitScript>().Map = _map;
-            //heavy.name = "Heavy";
-            //heavy.transform.position = _waveStartPosition;
-            heavyObject.transform.parent = GameObject.FindGameObjectWithTag("Heavy").transform;
-            heavyObject.transform.localPosition = new Vector3(0, 0, -1);
+            heavyObject.transform.localScale = new Vector3(heavyObject.transform.localScale.x / 3, heavyObject.transform.localScale.y / 3, heavyObject.transform.localScale.z / 3);
+
+            heavyObject.AddComponent<UnitScript>();
+            //heavyObject.AddComponent<GruntScript>();
+            heavyObject.transform.localPosition = new Vector3(this.transform.position.x, this.transform.position.y, -1);
+            heavyList.Add(heavyObject);
         }
+        return heavyList;
     }
-    private void _createMonstersFlying()
+    public List<GameObject> CreateMonstersFlying(int pFlyingSize)
     {
-        for (int i = 0; i < _flyingSize; i++)
+        List<GameObject> flyingList = new List<GameObject>();
+        for (int i = 0; i < pFlyingSize; i++)
         {
             GameObject flyingObject = GameObject.CreatePrimitive(PrimitiveType.Capsule);
             flyingObject.name = "Flying";
-            //flyingObject.transform.position = _waveStartPosition;
-            //flyingObject.AddComponent<UnitScript>();
-            //flyingObject.GetComponent<UnitScript>().Map = _map;
-            //flying.name = "Flying";
-            //flying.transform.position = _waveStartPosition;
-            flyingObject.transform.parent = GameObject.FindGameObjectWithTag("Flying").transform;
-            flyingObject.transform.localPosition = new Vector3(0, 0, -1);
+            flyingObject.transform.localScale = new Vector3(flyingObject.transform.localScale.x / 3, flyingObject.transform.localScale.y / 3, flyingObject.transform.localScale.z / 3);
+            flyingObject.AddComponent<UnitScript>();
+            //flyingObject.AddComponent<GruntScript>();
+            flyingObject.transform.localPosition = new Vector3(this.transform.position.x, this.transform.position.y, -1);
+            flyingList.Add(flyingObject);
         }
+        return flyingList;
     }
-    private void _createMonstersPaladin()
+    public List<GameObject> CreateMonstersPaladin(int pPaladinSize)
     {
-        for (int i = 0; i < _paladinSize; i++)
+        List<GameObject> paladinList = new List<GameObject>();
+        for (int i = 0; i < pPaladinSize; i++)
         {
             GameObject paladinObject = GameObject.CreatePrimitive(PrimitiveType.Quad);
             paladinObject.name = "Paladin";
-            //paladinObject.transform.position = _waveStartPosition;
-            //paladinObject.AddComponent<UnitScript>();
-            //paladinObject.GetComponent<UnitScript>().Map = _map;
-            //paladin.name = "Paladin";
-            //paladin.transform.position = _waveStartPosition;
-            paladinObject.transform.parent = GameObject.FindGameObjectWithTag("Paladin").transform;
-            paladinObject.transform.localPosition = new Vector3(0, 0, -1);
+            paladinObject.transform.localScale = new Vector3(paladinObject.transform.localScale.x / 3, paladinObject.transform.localScale.y / 3, paladinObject.transform.localScale.z / 3);
+            paladinObject.AddComponent<UnitScript>();
+            //paladinObject.AddComponent<GruntScript>();
+            paladinObject.transform.localPosition = new Vector3(this.transform.position.x, this.transform.position.y, -1);
+            paladinList.Add(paladinObject);
         }
+        return paladinList;
     }
 
 }
