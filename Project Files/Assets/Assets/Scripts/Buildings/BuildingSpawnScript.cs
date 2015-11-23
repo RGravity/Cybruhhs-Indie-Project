@@ -9,14 +9,26 @@ public class BuildingSpawnScript : MonoBehaviour {
     [SerializeField]
     private int _arrowTowerPrice;
 
+    private GameObject _menuTower;
 
-	// Use this for initialization
-	void Start () {
+    
+    Vector3 _newMenuPosition;
+
+    private bool _menuTowers = false;
+    public bool MenuTowers {get { return _menuTowers ; }set { _menuTowers = value; } }
+
+
+    // Use this for initialization
+    void Start ()
+    {
         _baseStats = GameObject.FindObjectOfType<BaseScript>();
-	}
+        _menuTower = GameObject.Find("MenuTower");
+    }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
+       
 	}
 
     /// <summary>
@@ -25,15 +37,20 @@ public class BuildingSpawnScript : MonoBehaviour {
     /// </summary>
     void OnMouseDown()
     {
+
         if (_baseStats.Gold >= _arrowTowerPrice && !this.GetComponent<ArrowTowerScript>())
         {
             gameObject.AddComponent<ArrowTowerScript>();
             gameObject.GetComponent<Renderer>().material = _arrowTowerMaterial;
             _baseStats.LowerGold(_arrowTowerPrice);
+
         }
+
         else
         {
             Debug.Log("not enough gold or already a turret there!");
+
         }
+
     }
 }
