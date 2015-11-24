@@ -42,7 +42,7 @@ public class BuildingSpawnScript : MonoBehaviour {
         _centerRect.x = _center.x - _centerButton.width * 0.5f;
         _centerRect.y = 630 - _center.y - _centerButton.height * 0.5f;
 
-        //maybe does something, I(Michiel) cant see what
+        //For Creating the Texture;
         _centerRect.width = _centerButton.width;
         _centerRect.height = _centerButton.height;
 
@@ -58,7 +58,7 @@ public class BuildingSpawnScript : MonoBehaviour {
         for (int i = 0; i < _ringCount; i++)
         {
             rect.x = _center.x + vector.x - width * 0.5f;
-            rect.y = _center.y + vector.y - height * 0.5f;
+            rect.y = 630 - _center.y + vector.y - height * 0.5f;
             _ringRects[i] = rect;
             vector = Quaternion.AngleAxis(_angle, Vector3.forward) * vector;
         }
@@ -66,7 +66,7 @@ public class BuildingSpawnScript : MonoBehaviour {
 
     void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
             RaycastHit vHit = new RaycastHit();
             Ray vRay = _myCam.ScreenPointToRay(Input.mousePosition);
@@ -76,7 +76,6 @@ public class BuildingSpawnScript : MonoBehaviour {
                 {
                     Vector2 tempPos = _myCam.WorldToScreenPoint(vHit.transform.position);
                     _center = new Vector2(tempPos.x, tempPos.y);
-                    Debug.Log(tempPos.x +","+ tempPos.y);
 
                     _calculateEverything();
                 }
@@ -88,7 +87,7 @@ public class BuildingSpawnScript : MonoBehaviour {
     {
         Event currentEvent = Event.current;
 
-        if (currentEvent.type == EventType.MouseDown && _centerRect.Contains(currentEvent.mousePosition))
+        if (currentEvent.type == EventType.MouseDown)
         {
             _showButtons = true;
             _index = -1;
@@ -105,7 +104,7 @@ public class BuildingSpawnScript : MonoBehaviour {
 
         if (currentEvent.type == EventType.MouseDrag)
         {
-            Vector2 mouseOffset = currentEvent.mousePosition - _center;
+            Vector2 mouseOffset = currentEvent.mousePosition - new Vector2(_center.x, 640 - _center.y);
             float angle = Mathf.Atan2(mouseOffset.y, mouseOffset.x) * Mathf.Rad2Deg;
             angle += _angle / 2.0f;
             if (angle < 0)
@@ -115,10 +114,10 @@ public class BuildingSpawnScript : MonoBehaviour {
 
             _index = (int)(angle / _angle);
         }
-        GUI.DrawTexture(_centerRect, _centerButton);
 
         if (_showButtons)
         {
+            GUI.DrawTexture(_centerRect, _centerButton);
             for (int i = 0; i < _normalButtons.Length; i++)
             {
                 if (i != _index)
