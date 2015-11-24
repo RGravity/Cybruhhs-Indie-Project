@@ -59,31 +59,50 @@ public class TileMapScript : MonoBehaviour
 
     void Start()
     {
+        //temporary: for loading level 1 when the game starts(REMOVE WHEN LEVEL SELECTION IS IMPLEMENTED)
+        StartLevel(_level);
+    }
 
+    /// <summary>
+    /// <para>Start level</para>
+    /// <para>Parameter pLevel, put in a int for the requested level</para>
+    /// </summary>
+    public void StartLevel(int pLevel)
+    {
         //Load all the levels in an array
         if (_xmlLevels == null)
         {
             _xmlLevels = Resources.LoadAll("Tiled/Levels");
         }
         //Parse Level to _tileData
-        _importLevel();
+        if (pLevel > 0 && pLevel < _xmlLevels.Length)
+        {
+            _importLevel(pLevel);
 
-        _possibleRoutes = new List<List<NodeScript>>();
+            _possibleRoutes = new List<List<NodeScript>>();
 
-        //Generate Map, Nodes and Visuals
-        _generateMapData();
-        _generatePathfindingGraph();
-        _generateMapVisual();
-        GeneratePathTo((int)_endPosition.x, (int)_endPosition.y); // Set Path
+            //Generate Map, Nodes and Visuals
+            _generateMapData();
+            _generatePathfindingGraph();
+            _generateMapVisual();
+            GeneratePathTo((int)_endPosition.x, (int)_endPosition.y); // Set Path
+        }
+        else
+        {
+            Debug.Log("Could not load level " + pLevel);
+        }
+        
+
+        
     }
 
     /// <summary>
     /// <para>Import the Level and put in TileData</para>
     /// <para>To Generate the level ingame</para>
     /// </summary>
-    private void _importLevel()
+    private void _importLevel(int pLevel)
     {
-        XmlReader Reader = XmlReader.Create(new System.IO.StringReader(_xmlLevels[_level-1].ToString()));
+        XmlReader Reader = XmlReader.Create(new System.IO.StringReader(_xmlLevels[pLevel - 1].ToString()));
 
         //Read XML for Width and Height and make the array _tileData the appropriate size
         Reader.ReadToFollowing("layer");
@@ -117,11 +136,15 @@ public class TileMapScript : MonoBehaviour
             for (int x = 0; x < _mapSizeX; x++)
             {
                 _tileData[y, x] = tileIntArray[index];
+                if (index == tileIntArray.Length-1)
+                {
+                    _tileData[y, x] = tileIntArray[index - 1];
+                }
                 index++;
             }
         }
 
-        //flipping the array to match the tiled file
+        //flipping the array to match the tiled file and the ingame level
         for (int y = 0; y < Mathf.FloorToInt(_mapSizeY / 2); y++)
         {
             for (int x = 0; x < _mapSizeX; x++)
