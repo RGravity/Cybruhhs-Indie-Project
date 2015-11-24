@@ -79,6 +79,7 @@ public class TileMapScript : MonoBehaviour
             _generatePathfindingGraph();
             _generateMapVisual();
             GeneratePathTo((int)_endPosition.x, (int)_endPosition.y); // Set Path
+            //_setwalkablePath();
         }
         else
         {
@@ -505,56 +506,38 @@ public class TileMapScript : MonoBehaviour
             //unit.GetComponent<UnitScript>().CurrentPath = _possibleRoutes[1];
         }
     }
-    //private List<NodeScript> _constructPath(NodeScript pNode)
-    //{
-    //    List<NodeScript> path = new List<NodeScript>();
-    //    while (pNode.PathParent != null)
-    //    {
-    //        path.Add(pNode);
-    //        pNode = pNode.PathParent;
-    //    }
-    //    return path;
-    //}
-
-    //private List<NodeScript> _searchPaths(NodeScript startNode, NodeScript goalNode)
-    //{
-    //    // list of visited nodes
-    //    List<NodeScript> closedList = new List<NodeScript>();
-
-    //    // list of nodes to visit (sorted)
-    //    List<NodeScript> openList = new List<NodeScript>();
-    //    openList.Add(startNode);
-    //    startNode.PathParent = null;
-
-    //    while (openList != null)
-    //    {
-    //        NodeScript node = (NodeScript)openList[1];
-    //        if (node == goalNode)
-    //        {
-    //            // path found!
-    //            return _constructPath(goalNode);
-    //        }
-    //        else
-    //        {
-    //            closedList.add(node);
-
-    //            // add neighbors to the open list
-    //            Iterator i = node.neighbors.iterator();
-    //            while (i.hasNext())
-    //            {
-    //                Node neighborNode = (Node)i.next();
-    //                if (!closedList.contains(neighborNode) &&
-    //                  !openList.contains(neighborNode))
-    //                {
-    //                    neighborNode.pathParent = node;
-    //                    openList.add(neighborNode);
-    //                }
-    //            }
-    //        }
-    //    }
-
-    //    // no path found
-    //    return null;
-    //}
+    private void _setwalkablePath()
+    {
+        foreach (GameObject unit in _selectedUnits)
+        {
+            List<List<NodeScript>> possibleRoutes = new List<List<NodeScript>>();
+            SearchPathScript search = new SearchPathScript(this);
+            unit.GetComponent<UnitScript>().TileX = (int)_waveStartposition.x;
+            unit.GetComponent<UnitScript>().TileY = (int)_waveStartposition.y;
+            unit.GetComponent<UnitScript>().Map = null;
+            if (unit.GetComponent<UnitScript>().CurrentPath != null)
+            {
+                unit.GetComponent<UnitScript>().CurrentPath = null;
+            }
+            if (unit.name == "Grunt")
+            {
+                unit.GetComponent<UnitScript>().Speed = 7;
+            }
+            if (unit.name == "Heavy")
+            {
+                unit.GetComponent<UnitScript>().Speed = 2;
+            }
+            if (unit.name == "Paladin")
+            {
+                unit.GetComponent<UnitScript>().Speed = 5;
+            }
+            if (unit.name == "Flying")
+            {
+                unit.GetComponent<UnitScript>().Speed = 3;
+            }
+            possibleRoutes = search.SearchPaths(_graph[(int)_waveStartposition.x, (int)_waveStartposition.y], _graph[(int)_endPosition.x,(int)_endPosition.y]);
+            unit.GetComponent<UnitScript>().CurrentPath = possibleRoutes[1];
+        }
+    }
 
 }
