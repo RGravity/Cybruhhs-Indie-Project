@@ -38,10 +38,14 @@ public class BuildingSpawnScript : MonoBehaviour {
         _ringCount = _normalButtons.Length;
         _angle = 360.0f / _ringCount;
 
+        //offset button, making sure center of button is at the mouse cusor
         _centerRect.x = _center.x - _centerButton.width * 0.5f;
-        _centerRect.y = _center.y - _centerButton.height * 0.5f;
+        _centerRect.y = 630 - _center.y - _centerButton.height * 0.5f;
+
+        //maybe does something, I(Michiel) cant see what
         _centerRect.width = _centerButton.width;
         _centerRect.height = _centerButton.height;
+
 
         _ringRects = new Rect[_ringCount];
 
@@ -72,6 +76,7 @@ public class BuildingSpawnScript : MonoBehaviour {
                 {
                     Vector2 tempPos = _myCam.WorldToScreenPoint(vHit.transform.position);
                     _center = new Vector2(tempPos.x, tempPos.y);
+                    Debug.Log(tempPos.x +","+ tempPos.y);
 
                     _calculateEverything();
                 }

@@ -5,7 +5,7 @@ public class GruntScript : MonoBehaviour {
 
 
     [SerializeField]
-    private float _speed = 0;
+    private float _speed = 1;
 
     // tileX and tileY represent the correct map-tile position
     // for this piece.  Note that this doesn't necessarily mean
@@ -27,35 +27,35 @@ public class GruntScript : MonoBehaviour {
     {
         // Draw our debug line showing the pathfinding!
         // NOTE: This won't appear in the actual game view.
-        if (_currentPath != null)
-        {
-            int currNode = 0;
+        //if (_currentPath != null)
+        //{
+        //    int currNode = 0;
 
-            while (currNode < _currentPath.Count - 1)
-            {
+        //    while (currNode < _currentPath.Count - 1)
+        //    {
 
-                Vector3 start = _map.TileCoordToWorldCoord(_currentPath[currNode].X, _currentPath[currNode].Y) +
-                    new Vector3(0, 0, -0.5f);
-                Vector3 end = _map.TileCoordToWorldCoord(_currentPath[currNode + 1].X, _currentPath[currNode + 1].Y) +
-                    new Vector3(0, 0, -0.5f);
+        //        Vector3 start = _map.TileCoordToWorldCoord(_currentPath[currNode].X, _currentPath[currNode].Y) +
+        //            new Vector3(0, 0, -0.5f);
+        //        Vector3 end = _map.TileCoordToWorldCoord(_currentPath[currNode + 1].X, _currentPath[currNode + 1].Y) +
+        //            new Vector3(0, 0, -0.5f);
 
-                Debug.DrawLine(start, end, Color.red);
+        //        Debug.DrawLine(start, end, Color.red);
 
-                currNode++;
-            }
-        }
+        //        currNode++;
+        //    }
+        //}
 
-        // Have we moved our visible piece close enough to the target tile that we can
-        // advance to the next step in our pathfinding?
-        if (this != null)
-        {
-            if (Vector3.Distance(transform.position, _map.TileCoordToWorldCoord(_tileX, _tileY)) < 0.1f)
-            {
-                _advancePathing();
-            }
-            // Smoothly animate towards the correct map tile.
-            transform.position = Vector3.Lerp(transform.position, _map.TileCoordToWorldCoord(_tileX, _tileY), _speed * Time.deltaTime);
-        }
+        //// Have we moved our visible piece close enough to the target tile that we can
+        //// advance to the next step in our pathfinding?
+        //if (this != null)
+        //{
+        //    if (Vector3.Distance(transform.position, _map.TileCoordToWorldCoord(_tileX, _tileY)) < 0.1f)
+        //    {
+        //        _advancePathing();
+        //    }
+        //    // Smoothly animate towards the correct map tile.
+        //    transform.position = Vector3.Lerp(transform.position, _map.TileCoordToWorldCoord(_tileX, _tileY), _speed * Time.deltaTime);
+        //}
     }
 
     /// <summary>
