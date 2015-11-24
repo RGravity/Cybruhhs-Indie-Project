@@ -6,12 +6,14 @@ public class MenuCreditsButtonScript : MonoBehaviour {
     private GameObject _creditCanvas;
     private GameObject _menuCanvas;
     private GameObject _optionsCanvas;
+    private GameObject _selectionCanvas;
     // Use this for initialization
     void Start ()
     {
         _menuCanvas = GameObject.Find("MenuCanvas");
         _optionsCanvas = GameObject.Find("OptionsCanvas");
         _creditCanvas = GameObject.Find("CreditsCanvas");
+        _selectionCanvas = GameObject.Find("SelectionCanvas");
     }
 	
 	// Update is called once per frame
@@ -25,6 +27,7 @@ public class MenuCreditsButtonScript : MonoBehaviour {
     {
         _creditCanvas.GetComponent<Canvas>().enabled = true;
         _optionsCanvas.GetComponent<Canvas>().enabled = false;
+        _selectionCanvas.GetComponent<Canvas>().enabled = false;
         _menuCanvas.GetComponent<Canvas>().enabled = false;
     }
 }

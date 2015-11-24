@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scripts\MenuScripts\MenuOptionsButtonScript.cs" />
      <Compile Include="Assets\Scripts\MenuScripts\MenuQuitButtonScript.cs" />
      <Compile Include="Assets\Scripts\MenuScripts\MenuReturnButtonScript.cs" />
+     <Compile Include="Assets\Scripts\MenuScripts\MenuSelectionScript.cs" />
      <Compile Include="Assets\Scripts\MenuScripts\MenuStartButtonScript.cs" />
      <Compile Include="Assets\Scripts\Michiel TEST Scripts\EnemyTestScript.cs" />
      <Compile Include="Assets\Scripts\Navigation\2D\ClickableTileScript.cs" />

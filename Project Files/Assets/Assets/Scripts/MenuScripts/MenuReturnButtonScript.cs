@@ -5,23 +5,26 @@ public class MenuReturnButtonScript : MonoBehaviour
 {
 
     // Use this for initialization
-    private GameObject _optionsCanvas;
-    private GameObject _menuCanvas;
     private GameObject _creditCanvas;
+    private GameObject _menuCanvas;
+    private GameObject _optionsCanvas;
+    private GameObject _selectionCanvas;
     void Start()
     {
-        _menuCanvas = GameObject.Find ("MenuCanvas");
+        _menuCanvas = GameObject.Find("MenuCanvas");
         _optionsCanvas = GameObject.Find("OptionsCanvas");
         _creditCanvas = GameObject.Find("CreditsCanvas");
-    }
+        _selectionCanvas = GameObject.Find("SelectionCanvas");
 
+    }
     /// <summary>
     /// <para>With this fuction, when clicking on the button, it enables the canvas needed while disabling the other canvas </para>
     /// </summary>
     public void ClickOn()
     {
-        _optionsCanvas.GetComponent<Canvas>().enabled = false;
+        _selectionCanvas.GetComponent<Canvas>().enabled = false;
         _creditCanvas.GetComponent<Canvas>().enabled = false;
+        _optionsCanvas.GetComponent<Canvas>().enabled = false;
         _menuCanvas.GetComponent<Canvas>().enabled = true;
     }
 }

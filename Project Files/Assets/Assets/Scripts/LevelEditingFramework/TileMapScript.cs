@@ -1,32 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Xml;
 
 public class TileMapScript : MonoBehaviour
 {
-
-    //[SerializeField]
-    //private GameObject _selectedUnit;
-
     [SerializeField]
     private List<GameObject> _selectedUnits = new List<GameObject>();
-
-    public List<GameObject> SelectedUnits { get { return _selectedUnits; } set { _selectedUnits = value; } }
-
     [SerializeField]
     private TileTypeScript[] _tileTypes;
 
     private int[,] _tiles;
     private NodeScript[,] _graph;
-
     private Vector3 _endPosition;
-    public Vector3 EndPosition { get { return _endPosition; } set { _endPosition = value; } }
-
     private Vector3 _waveStartposition;
-
-    public Vector3 WaveStartPosition { get { return _waveStartposition; } set { _waveStartposition = value; } }
-
     private List<List<NodeScript>> _possibleRoutes;
 
+    public List<GameObject> SelectedUnits { get { return _selectedUnits; } set { _selectedUnits = value; } }
+    public Vector3 EndPosition { get { return _endPosition; } set { _endPosition = value; } }
+    public Vector3 WaveStartPosition { get { return _waveStartposition; } set { _waveStartposition = value; } }
+
+
+    private int _level = 1;
+    //Levels in XML presented as Objects
+    private Object[] _xmlLevels;
     //TileData reads the XML Needs to be change with Tiled.
     private int[,] _tileData =
     {
@@ -56,19 +52,108 @@ public class TileMapScript : MonoBehaviour
 
     void Start()
     {
-        // Setup the selectedUnit's variable
-        //Get the Tilesize
-        _mapSizeX = _tileData.GetLength(1);
-        _mapSizeY = _tileData.GetLength(0);
-
-        _possibleRoutes = new List<List<NodeScript>>();
-
-        //Generate Map, Nodes and Visuals
-        _generateMapData();
-        _generatePathfindingGraph();
-        _generateMapVisual();
-        GeneratePathTo((int)_endPosition.x, (int)_endPosition.y); // Set Path
+        //temporary: for loading level 1 when the game starts(REMOVE WHEN LEVEL SELECTION IS IMPLEMENTED)
+        StartLevel(_level);
     }
+
+    /// <summary>
+    /// <para>Start level</para>
+    /// <para>Parameter pLevel, put in a int for the requested level</para>
+    /// </summary>
+    public void StartLevel(int pLevel)
+    {
+        //Load all the levels in an array
+        if (_xmlLevels == null)
+        {
+            _xmlLevels = Resources.LoadAll("Tiled/Levels");
+        }
+        //Parse Level to _tileData
+        if (pLevel > 0 && pLevel < _xmlLevels.Length)
+        {
+            _importLevel(pLevel);
+
+            _possibleRoutes = new List<List<NodeScript>>();
+
+            //Generate Map, Nodes and Visuals
+            _generateMapData();
+            _generatePathfindingGraph();
+            _generateMapVisual();
+            GeneratePathTo((int)_endPosition.x, (int)_endPosition.y); // Set Path
+        }
+        else
+        {
+            Debug.Log("Could not load level " + pLevel);
+        }
+        
+
+        
+    }
+
+    /// <summary>
+    /// <para>Import the Level and put in TileData</para>
+    /// <para>To Generate the level ingame</para>
+    /// </summary>
+    private void _importLevel(int pLevel)
+    {
+        XmlReader Reader = XmlReader.Create(new System.IO.StringReader(_xmlLevels[pLevel - 1].ToString()));
+
+        //Read XML for Width and Height and make the array _tileData the appropriate size
+        Reader.ReadToFollowing("layer");
+        Reader.MoveToAttribute("width");
+        _mapSizeX = System.Convert.ToInt16(Reader.Value);
+        Reader.MoveToNextAttribute();
+        _mapSizeY = System.Convert.ToInt16(Reader.Value);
+        _tileData = new int[_mapSizeY, _mapSizeX];
+
+        //Read XML for level data
+        Reader.ReadToFollowing("data");
+        string levelData = Reader.ReadInnerXml();
+        //remove unwanted characters
+        levelData = levelData.Replace("\n", "");
+        levelData = levelData.Replace("\r", "");
+
+        //Split string to String array
+        string[] tileStringArray = levelData.Split(',');
+
+        //Convert String array to Int Array
+        int[] tileIntArray = new int[tileStringArray.Length];
+        for (int i = 0; i < tileStringArray.Length - 1; i++)
+        {
+            tileIntArray[i] = System.Convert.ToInt16(tileStringArray[i]);
+        }
+
+        //Put the 1D array into a 2D array
+        int index = 0;
+        for (int y = 0; y < _mapSizeY; y++)
+        {
+            for (int x = 0; x < _mapSizeX; x++)
+            {
+                _tileData[y, x] = tileIntArray[index];
+                if (index == tileIntArray.Length-1)
+                {
+                    _tileData[y, x] = tileIntArray[index - 1];
+                }
+                index++;
+            }
+        }
+
+        //flipping the array to match the tiled file and the ingame level
+        for (int y = 0; y < Mathf.FloorToInt(_mapSizeY / 2); y++)
+        {
+            for (int x = 0; x < _mapSizeX; x++)
+            {
+                int temp = _tileData[y, x];
+                _tileData[y, x] = _tileData[_mapSizeY - 1 - y, x];
+                _tileData[_mapSizeY - 1 - y, x] = temp;
+            }
+        }
+
+
+
+
+
+    }
+
 
     /// <summary>
     /// <para>Create a map based on the TileData</para>
@@ -88,7 +173,20 @@ public class TileMapScript : MonoBehaviour
             {
                 switch (_tileData[y, x])
                 {
-                    case 1:
+                    case 1://BASE
+                        _tiles[x, y] = 0;
+                        _endPosition = new Vector3(x, y, -1);
+                        break;
+                    case 2://Non-walkable ?grass?
+                        _tiles[x, y] = 2;
+                        break;
+                    case 3://Border Outside Camera
+                        _tiles[x, y] = 1;
+                        break;
+                    case 4://Road
+                        _tiles[x, y] = 3;
+                        break;
+                    case 5://Monster spawn tiles
                         //_selectedUnit.GetComponent<UnitScript>().TileX = x;
                         //_selectedUnit.GetComponent<UnitScript>().TileY = y;
                         //_selectedUnit.GetComponent<UnitScript>().Map = this;
@@ -124,17 +222,7 @@ public class TileMapScript : MonoBehaviour
                             unit.GetComponent<UnitScript>().TileY = y;
                             unit.GetComponent<UnitScript>().Map = this;
                         }
-                        break;
-                    case 2:
-                        GameObject endCube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                        endCube.transform.position = new Vector3(x, y, -1);
-                        _endPosition = endCube.transform.position;
-                        break;
-                    case 3:
-                        //GameObject block = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-                        //block.transform.position = new Vector3(x, y, -1);
-                        _tiles[x, y] = 1;
-                        _tileTypes[_tiles[x, y]].IsWalkable = false;
+                        _tiles[x, y] = 4;
                         break;
                     default:
                         _tiles[x, y] = 0;
@@ -254,12 +342,14 @@ public class TileMapScript : MonoBehaviour
             {
                 TileTypeScript tt = _tileTypes[_tiles[x, y]];
                 GameObject go = (GameObject)Instantiate(tt.TileVisualPrefab, new Vector3(x, y, 0), Quaternion.identity);
-
-                ClickableTileScript ct = go.GetComponent<ClickableTileScript>();
-                ct.tileX = x;
-                ct.tileY = y;
-                ct.map = this;
-
+                if (tt.BuildingAllowed)
+                {
+                    go.AddComponent<ClickableTileScript>();
+                    ClickableTileScript ct = go.GetComponent<ClickableTileScript>();
+                    ct.tileX = x;
+                    ct.tileY = y;
+                    ct.map = this;
+                }
             }
         }
     }
