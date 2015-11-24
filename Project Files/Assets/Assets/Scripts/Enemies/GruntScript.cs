@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class UnitScript : MonoBehaviour
-{
+public class GruntScript : MonoBehaviour {
+
+
+    [SerializeField]
+    private float _speed = 0;
 
     // tileX and tileY represent the correct map-tile position
     // for this piece.  Note that this doesn't necessarily mean
@@ -11,7 +14,6 @@ public class UnitScript : MonoBehaviour
     // animations, we are going to be somewhere in between tiles.
     private int _tileX;
     private int _tileY;
-    private float _speed = 0;
     private TileMapScript _map;
     // Our pathfinding info.  Null if we have no destination ordered.
     private List<NodeScript> _currentPath = null;
@@ -20,8 +22,7 @@ public class UnitScript : MonoBehaviour
     public int TileY { get { return _tileY; } set { _tileY = value; } }
     public TileMapScript Map { get { return _map; } set { _map = value; } }
     public List<NodeScript> CurrentPath { get { return _currentPath; } set { _currentPath = value; } }
-    public float Speed { get { return _speed; } set { _speed = value; } }
-    
+
     void Update()
     {
         // Draw our debug line showing the pathfinding!

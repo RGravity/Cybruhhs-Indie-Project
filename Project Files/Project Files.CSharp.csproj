@@ -76,6 +76,7 @@
     <Compile Include="Assets\Assets\Scripts\DontDestroyOnLoad\DontDestroyOnLoadSoundScript.cs" />
     <Compile Include="Assets\Assets\Scripts\Economy\BaseScript.cs" />
     <Compile Include="Assets\Assets\Scripts\Economy\EnemyStatScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\Enemies\GruntScript.cs" />
     <Compile Include="Assets\Assets\Scripts\EnumScript.cs" />
     <Compile Include="Assets\Assets\Scripts\LevelEditingFramework\TileMapScript.cs" />
     <Compile Include="Assets\Assets\Scripts\MenuScripts\MenuCreditsButtonScript.cs" />
@@ -88,7 +89,6 @@
     <Compile Include="Assets\Assets\Scripts\Navigation\2D\ClickableTileScript.cs" />
     <Compile Include="Assets\Assets\Scripts\Navigation\2D\GenerateMapVisualScript.cs" />
     <Compile Include="Assets\Assets\Scripts\Navigation\2D\GenerateNodeMap.cs" />
-    <Compile Include="Assets\Assets\Scripts\Navigation\2D\GruntScript.cs" />
     <Compile Include="Assets\Assets\Scripts\Navigation\2D\NodeScript.cs" />
     <Compile Include="Assets\Assets\Scripts\Navigation\2D\TileTypeScript.cs" />
     <Compile Include="Assets\Assets\Scripts\Navigation\2D\UnitScript.cs" />
