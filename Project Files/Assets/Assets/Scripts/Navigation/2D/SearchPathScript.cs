@@ -123,13 +123,12 @@ public class SearchPathScript
                             neighborNode.PathParent = node;
                             openList.Add(neighborNode);
                             _isAlternative = true;
-                            if (node.Neighbours.Count != i + 1)
-                            {
-                                break;
-                            }
+                            //if (node.Neighbours.Count != i + 1)
+                            //{
+                            //    break;
+                            //}
                             //listCount++;
                         }
-
                         else if (!closedList.Contains(neighborNode) && !openList.Contains(neighborNode) && pPreviousPath.Count < 1)
                         {
                             neighborNode.PathParent = node;

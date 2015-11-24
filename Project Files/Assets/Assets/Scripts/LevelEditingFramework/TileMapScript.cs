@@ -78,8 +78,8 @@ public class TileMapScript : MonoBehaviour
             _generateMapData();
             _generatePathfindingGraph();
             _generateMapVisual();
-            GeneratePathTo((int)_endPosition.x, (int)_endPosition.y); // Set Path
-            //_setwalkablePath();
+            //GeneratePathTo((int)_endPosition.x, (int)_endPosition.y); // Set Path
+            _setwalkablePath();
         }
         else
         {
@@ -514,7 +514,7 @@ public class TileMapScript : MonoBehaviour
             SearchPathScript search = new SearchPathScript(this);
             unit.GetComponent<UnitScript>().TileX = (int)_waveStartposition.x;
             unit.GetComponent<UnitScript>().TileY = (int)_waveStartposition.y;
-            unit.GetComponent<UnitScript>().Map = null;
+            unit.GetComponent<UnitScript>().Map = this;
             if (unit.GetComponent<UnitScript>().CurrentPath != null)
             {
                 unit.GetComponent<UnitScript>().CurrentPath = null;
@@ -536,7 +536,7 @@ public class TileMapScript : MonoBehaviour
                 unit.GetComponent<UnitScript>().Speed = 3;
             }
             possibleRoutes = search.SearchPaths(_graph[(int)_waveStartposition.x, (int)_waveStartposition.y], _graph[(int)_endPosition.x,(int)_endPosition.y]);
-            unit.GetComponent<UnitScript>().CurrentPath = possibleRoutes[1];
+            unit.GetComponent<UnitScript>().CurrentPath = possibleRoutes[0];
         }
     }
 
