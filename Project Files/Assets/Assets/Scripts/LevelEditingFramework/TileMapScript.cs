@@ -4,31 +4,24 @@ using System.Xml;
 
 public class TileMapScript : MonoBehaviour
 {
-
-    //[SerializeField]
-    //private GameObject _selectedUnit;
-
     [SerializeField]
     private List<GameObject> _selectedUnits = new List<GameObject>();
-
-    public List<GameObject> SelectedUnits { get { return _selectedUnits; } set { _selectedUnits = value; } }
-
     [SerializeField]
     private TileTypeScript[] _tileTypes;
 
     private int[,] _tiles;
     private NodeScript[,] _graph;
-
     private Vector3 _endPosition;
-    public Vector3 EndPosition { get { return _endPosition; } set { _endPosition = value; } }
-
     private Vector3 _waveStartposition;
-
-    public Vector3 WaveStartPosition { get { return _waveStartposition; } set { _waveStartposition = value; } }
-
     private List<List<NodeScript>> _possibleRoutes;
 
+    public List<GameObject> SelectedUnits { get { return _selectedUnits; } set { _selectedUnits = value; } }
+    public Vector3 EndPosition { get { return _endPosition; } set { _endPosition = value; } }
+    public Vector3 WaveStartPosition { get { return _waveStartposition; } set { _waveStartposition = value; } }
+
+
     private int _level = 1;
+    //Levels in XML presented as Objects
     private Object[] _xmlLevels;
     //TileData reads the XML Needs to be change with Tiled.
     private int[,] _tileData =
@@ -180,23 +173,20 @@ public class TileMapScript : MonoBehaviour
             {
                 switch (_tileData[y, x])
                 {
-                    case 1:
-                        GameObject endCube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                        endCube.transform.position = new Vector3(x, y, -1);
-                         _endPosition = endCube.transform.position;
-                        break;
-                    case 2:
-                        _tiles[x, y] = 1;
-                        _tileTypes[_tiles[x, y]].IsWalkable = false;
-                        break;
-                    case 3:
-                        _tiles[x, y] = 1;
-                        _tileTypes[_tiles[x, y]].IsWalkable = false;
-                        break;
-                    case 4:
+                    case 1://BASE
                         _tiles[x, y] = 0;
+                        _endPosition = new Vector3(x, y, -1);
                         break;
-                    case 5:
+                    case 2://Non-walkable ?grass?
+                        _tiles[x, y] = 2;
+                        break;
+                    case 3://Border Outside Camera
+                        _tiles[x, y] = 1;
+                        break;
+                    case 4://Road
+                        _tiles[x, y] = 3;
+                        break;
+                    case 5://Monster spawn tiles
                         //_selectedUnit.GetComponent<UnitScript>().TileX = x;
                         //_selectedUnit.GetComponent<UnitScript>().TileY = y;
                         //_selectedUnit.GetComponent<UnitScript>().Map = this;
@@ -232,6 +222,7 @@ public class TileMapScript : MonoBehaviour
                             unit.GetComponent<UnitScript>().TileY = y;
                             unit.GetComponent<UnitScript>().Map = this;
                         }
+                        _tiles[x, y] = 4;
                         break;
                     default:
                         _tiles[x, y] = 0;
@@ -351,12 +342,14 @@ public class TileMapScript : MonoBehaviour
             {
                 TileTypeScript tt = _tileTypes[_tiles[x, y]];
                 GameObject go = (GameObject)Instantiate(tt.TileVisualPrefab, new Vector3(x, y, 0), Quaternion.identity);
-
-                ClickableTileScript ct = go.GetComponent<ClickableTileScript>();
-                ct.tileX = x;
-                ct.tileY = y;
-                ct.map = this;
-
+                if (tt.BuildingAllowed)
+                {
+                    go.AddComponent<ClickableTileScript>();
+                    ClickableTileScript ct = go.GetComponent<ClickableTileScript>();
+                    ct.tileX = x;
+                    ct.tileY = y;
+                    ct.map = this;
+                }
             }
         }
     }

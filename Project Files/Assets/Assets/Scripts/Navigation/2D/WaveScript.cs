@@ -4,39 +4,26 @@ using System.Collections;
 
 public class WaveScript : MonoBehaviour
 {
-
-    //[SerializeField]
+    
     private int _gruntSize;
-
-    public int GruntSize { get { return _gruntSize; } set { _gruntSize = value; } }
-
-    //[SerializeField]
     private int _flyingSize;
-
-    public int FlyingSize { get { return _flyingSize; } set { _flyingSize = value; } }
-
-    //[SerializeField]
     private int _heavySize;
-
-    public int HeavySize { get { return _heavySize; } set { _heavySize = value; } }
-
-    //[SerializeField]
     private int _paladinSize;
-
-    public int PaladinSize { get { return _paladinSize; } set { _paladinSize = value; } }
-
     private List<GameObject> _gruntList;
-    public List<GameObject> GruntList { get { return _gruntList; } set { _gruntList = value; } }
     private List<GameObject> _heavyList;
     private List<GameObject> _flyingList;
     private List<GameObject> _paladinList;
 
     private TileMapScript _map;
     private Vector3 _endPosition;
-
-    public TileMapScript Map { get { return _map; } set { _map = value; } }
-
     private Vector3 _waveStartPosition;
+
+    public int GruntSize { get { return _gruntSize; } set { _gruntSize = value; } }
+    public int FlyingSize { get { return _flyingSize; } set { _flyingSize = value; } }
+    public int HeavySize { get { return _heavySize; } set { _heavySize = value; } }
+    public int PaladinSize { get { return _paladinSize; } set { _paladinSize = value; } }
+    public List<GameObject> GruntList { get { return _gruntList; } set { _gruntList = value; } }
+    public TileMapScript Map { get { return _map; } set { _map = value; } }
 
     // Use this for initialization
     void Start()
@@ -50,10 +37,10 @@ public class WaveScript : MonoBehaviour
 
     }
 
-    public List<GameObject> CreateMonstersGrunt(int pGruntSize)
+    public List<GameObject> CreateMonstersGrunt(int pGruntAmount)
     {
         List<GameObject> gruntList = new List<GameObject>();
-        for (int i = 0; i < pGruntSize; i++)
+        for (int i = 0; i < pGruntAmount; i++)
         {
             GameObject gruntObject = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
             gruntObject.name = "Grunt";
@@ -65,10 +52,10 @@ public class WaveScript : MonoBehaviour
         }
         return gruntList;
     }
-    public List<GameObject> CreateMonstersHeavy(int pHeavySize)
+    public List<GameObject> CreateMonstersHeavy(int pHeavyAmount)
     {
         List<GameObject> heavyList = new List<GameObject>();
-        for (int i = 0; i < pHeavySize; i++)
+        for (int i = 0; i < pHeavyAmount; i++)
         {
             GameObject heavyObject = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             heavyObject.name = "Heavy";
@@ -81,10 +68,10 @@ public class WaveScript : MonoBehaviour
         }
         return heavyList;
     }
-    public List<GameObject> CreateMonstersFlying(int pFlyingSize)
+    public List<GameObject> CreateMonstersFlying(int pFlyingAmount)
     {
         List<GameObject> flyingList = new List<GameObject>();
-        for (int i = 0; i < pFlyingSize; i++)
+        for (int i = 0; i < pFlyingAmount; i++)
         {
             GameObject flyingObject = GameObject.CreatePrimitive(PrimitiveType.Capsule);
             flyingObject.name = "Flying";
@@ -96,10 +83,10 @@ public class WaveScript : MonoBehaviour
         }
         return flyingList;
     }
-    public List<GameObject> CreateMonstersPaladin(int pPaladinSize)
+    public List<GameObject> CreateMonstersPaladin(int pPaladinAmount)
     {
         List<GameObject> paladinList = new List<GameObject>();
-        for (int i = 0; i < pPaladinSize; i++)
+        for (int i = 0; i < pPaladinAmount; i++)
         {
             GameObject paladinObject = GameObject.CreatePrimitive(PrimitiveType.Quad);
             paladinObject.name = "Paladin";
