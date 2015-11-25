@@ -90,6 +90,7 @@
     <Compile Include="Assets\Assets\Scripts\Navigation\2D\GenerateMapVisualScript.cs" />
     <Compile Include="Assets\Assets\Scripts\Navigation\2D\GenerateNodeMap.cs" />
     <Compile Include="Assets\Assets\Scripts\Navigation\2D\NodeScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\Navigation\2D\SearchPathScript.cs" />
     <Compile Include="Assets\Assets\Scripts\Navigation\2D\TileTypeScript.cs" />
     <Compile Include="Assets\Assets\Scripts\Navigation\2D\UnitScript.cs" />
     <Compile Include="Assets\Assets\Scripts\Navigation\2D\WaveScript.cs" />
