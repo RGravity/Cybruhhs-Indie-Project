@@ -97,6 +97,8 @@
     <Compile Include="Assets\Assets\Scripts\OptionsScripts\MusicVolumeScript.cs" />
     <Compile Include="Assets\Assets\Scripts\OptionsScripts\SFXVolumeScript.cs" />
     <Compile Include="Assets\Assets\Scripts\Timer\CountTimerScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\WaveEditingFramework\WaveMainScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\WaveEditingFramework\WaveTemplateScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Assets\Resources\Tiled\Levels\1.xml" />
