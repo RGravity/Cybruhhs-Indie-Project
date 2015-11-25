@@ -536,7 +536,7 @@ public class TileMapScript : MonoBehaviour
                 unit.GetComponent<UnitScript>().Speed = 3;
             }
             possibleRoutes = search.SearchPaths(_graph[(int)_waveStartposition.x, (int)_waveStartposition.y], _graph[(int)_endPosition.x,(int)_endPosition.y]);
-            unit.GetComponent<UnitScript>().CurrentPath = possibleRoutes[0];
+            unit.GetComponent<UnitScript>().CurrentPath = possibleRoutes[1];
         }
     }
 
