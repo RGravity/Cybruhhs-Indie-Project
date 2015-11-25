@@ -15,6 +15,13 @@ public class BuildingSpawnScript : MonoBehaviour {
     private Texture[] _selectedButtons; //The selected state of the Buttons
     [SerializeField]
     private Camera _myCam;
+    [SerializeField]
+    private int _offsetForRadialWheel;
+    
+
+    //TOWERS
+    [SerializeField]
+    private Texture[] _turretTextures;
 
     private int _ringCount;
     private Rect _centerRect;
@@ -22,6 +29,7 @@ public class BuildingSpawnScript : MonoBehaviour {
     private float _angle;
     private bool _showButtons;
     private int _index;
+    private GameObject _selectedTile;
 
 
     // Use this for initialization
@@ -40,7 +48,7 @@ public class BuildingSpawnScript : MonoBehaviour {
 
         //offset button, making sure center of button is at the mouse cusor
         _centerRect.x = _center.x - _centerButton.width * 0.5f;
-        _centerRect.y = 630 - _center.y - _centerButton.height * 0.5f;
+        _centerRect.y = _offsetForRadialWheel - _center.y - _centerButton.height * 0.5f;
 
         //For Creating the Texture;
         _centerRect.width = _centerButton.width;
@@ -58,7 +66,7 @@ public class BuildingSpawnScript : MonoBehaviour {
         for (int i = 0; i < _ringCount; i++)
         {
             rect.x = _center.x + vector.x - width * 0.5f;
-            rect.y = 630 - _center.y + vector.y - height * 0.5f;
+            rect.y = _offsetForRadialWheel - _center.y + vector.y - height * 0.5f;
             _ringRects[i] = rect;
             vector = Quaternion.AngleAxis(_angle, Vector3.forward) * vector;
         }
@@ -76,7 +84,7 @@ public class BuildingSpawnScript : MonoBehaviour {
                 {
                     Vector2 tempPos = _myCam.WorldToScreenPoint(vHit.transform.position);
                     _center = new Vector2(tempPos.x, tempPos.y);
-
+                    _selectedTile = vHit.collider.gameObject;
                     _calculateEverything();
                 }
             } 
@@ -98,13 +106,14 @@ public class BuildingSpawnScript : MonoBehaviour {
             if (_showButtons)
             {
                 Debug.Log("User selected #" + _index);
+                _resolveButtonPressed();
             }
             _showButtons = false;
         }
 
         if (currentEvent.type == EventType.MouseDrag)
         {
-            Vector2 mouseOffset = currentEvent.mousePosition - new Vector2(_center.x, 640 - _center.y);
+            Vector2 mouseOffset = currentEvent.mousePosition - new Vector2(_center.x, _offsetForRadialWheel - _center.y);
             float angle = Mathf.Atan2(mouseOffset.y, mouseOffset.x) * Mathf.Rad2Deg;
             angle += _angle / 2.0f;
             if (angle < 0)
@@ -113,6 +122,7 @@ public class BuildingSpawnScript : MonoBehaviour {
             }
 
             _index = (int)(angle / _angle);
+            Debug.Log(_index);
         }
 
         if (_showButtons)
@@ -129,6 +139,29 @@ public class BuildingSpawnScript : MonoBehaviour {
                     GUI.DrawTexture(_ringRects[i], _selectedButtons[i]);
                 }
             }
+        }
+    }
+
+    /// <summary>
+    /// Place the right Turret
+    /// </summary>
+    private void _resolveButtonPressed()
+    {
+        switch (_index)
+        {
+            //CannonTower
+            case 0:
+                break;
+            //SlowTower            
+            case 1:
+                break;
+            //ArrowTower
+            case 2:
+                _selectedTile.GetComponent<Renderer>().material.mainTexture = _turretTextures[0];
+                _selectedTile.AddComponent<ArrowTowerScript>();
+                break;
+            default:
+                break;
         }
     }
 
