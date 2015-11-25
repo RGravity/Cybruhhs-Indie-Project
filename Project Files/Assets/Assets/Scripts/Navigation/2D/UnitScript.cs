@@ -53,7 +53,7 @@ public class UnitScript : MonoBehaviour
                 _advancePathing();
             }
             // Smoothly animate towards the correct map tile.
-            transform.position = Vector3.Lerp(transform.position, _map.TileCoordToWorldCoord(_tileX, _tileY), _speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, _map.TileCoordToWorldCoord(_tileX, _tileY), _speed * Time.deltaTime);
         }
     }
 

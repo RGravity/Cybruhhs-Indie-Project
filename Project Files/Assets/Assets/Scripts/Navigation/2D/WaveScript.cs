@@ -4,7 +4,11 @@ using System.Collections;
 
 public class WaveScript : MonoBehaviour
 {
-    
+    private GameObject _grunt;
+    private GameObject _heavy;
+    private GameObject _flying;
+    private GameObject _paladin;
+
     private int _gruntSize;
     private int _flyingSize;
     private int _heavySize;
@@ -26,9 +30,9 @@ public class WaveScript : MonoBehaviour
     public TileMapScript Map { get { return _map; } set { _map = value; } }
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
-        _map = Map;
+        _grunt = (GameObject)Resources.Load("Enemies/Grunt");
     }
 
     // Update is called once per frame
@@ -42,11 +46,10 @@ public class WaveScript : MonoBehaviour
         List<GameObject> gruntList = new List<GameObject>();
         for (int i = 0; i < pGruntAmount; i++)
         {
-            GameObject gruntObject = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+            GameObject gruntObject = (GameObject)Instantiate(_grunt, new Vector3(this.transform.position.x, this.transform.position.y, -1), Quaternion.identity);
             gruntObject.name = "Grunt";
-            gruntObject.transform.localScale = new Vector3(gruntObject.transform.localScale.x / 3, gruntObject.transform.localScale.y / 3, gruntObject.transform.localScale.z / 3);
             gruntObject.AddComponent<UnitScript>();
-            gruntObject.AddComponent<GruntScript>();
+            //gruntObject.AddComponent<GruntScript>();
             gruntObject.transform.localPosition = new Vector3(this.transform.position.x, this.transform.position.y, -1);
             gruntList.Add(gruntObject);
         }
