@@ -45,31 +45,38 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Assets\Scripts\Buildings\Arrow\ArrowBulletScript.cs" />
      <Compile Include="Assets\Assets\Scripts\Buildings\Arrow\ArrowTowerScript.cs" />
      <Compile Include="Assets\Assets\Scripts\Buildings\BuildingSpawnScript.cs" />
+     <Compile Include="Assets\Assets\Scripts\Buildings\TowerMenuScripts\BuildArrowTowerScript.cs" />
      <Compile Include="Assets\Assets\Scripts\DontDestroyOnLoad\DontDestroyOnLoadMusicScript.cs" />
      <Compile Include="Assets\Assets\Scripts\DontDestroyOnLoad\DontDestroyOnLoadSoundScript.cs" />
      <Compile Include="Assets\Assets\Scripts\Economy\BaseScript.cs" />
      <Compile Include="Assets\Assets\Scripts\Economy\EnemyStatScript.cs" />
+     <Compile Include="Assets\Assets\Scripts\Enemies\GruntScript.cs" />
      <Compile Include="Assets\Assets\Scripts\EnumScript.cs" />
+     <Compile Include="Assets\Assets\Scripts\LevelEditingFramework\TileMapScript.cs" />
      <Compile Include="Assets\Assets\Scripts\MenuScripts\MenuCreditsButtonScript.cs" />
      <Compile Include="Assets\Assets\Scripts\MenuScripts\MenuOptionsButtonScript.cs" />
      <Compile Include="Assets\Assets\Scripts\MenuScripts\MenuQuitButtonScript.cs" />
      <Compile Include="Assets\Assets\Scripts\MenuScripts\MenuReturnButtonScript.cs" />
+     <Compile Include="Assets\Assets\Scripts\MenuScripts\MenuSelectionScript.cs" />
      <Compile Include="Assets\Assets\Scripts\MenuScripts\MenuStartButtonScript.cs" />
      <Compile Include="Assets\Assets\Scripts\Michiel TEST Scripts\EnemyTestScript.cs" />
      <Compile Include="Assets\Assets\Scripts\Navigation\2D\ClickableTileScript.cs" />
      <Compile Include="Assets\Assets\Scripts\Navigation\2D\GenerateMapVisualScript.cs" />
      <Compile Include="Assets\Assets\Scripts\Navigation\2D\GenerateNodeMap.cs" />
      <Compile Include="Assets\Assets\Scripts\Navigation\2D\NodeScript.cs" />
-     <Compile Include="Assets\Assets\Scripts\Navigation\2D\TileMapScript.cs" />
      <Compile Include="Assets\Assets\Scripts\Navigation\2D\TileTypeScript.cs" />
      <Compile Include="Assets\Assets\Scripts\Navigation\2D\UnitScript.cs" />
      <Compile Include="Assets\Assets\Scripts\Navigation\2D\WaveScript.cs" />
      <Compile Include="Assets\Assets\Scripts\OptionsScripts\MusicVolumeScript.cs" />
      <Compile Include="Assets\Assets\Scripts\OptionsScripts\SFXVolumeScript.cs" />
      <Compile Include="Assets\Assets\Scripts\Timer\CountTimerScript.cs" />
+     <None Include="Assets\Assets\Resources\Tiled\Levels\1.xml" />
+     <None Include="Assets\Assets\Resources\Tiled\Tiles\1.xml" />
      <None Include="Assets\ProjectSettings\ProjectVersion.txt" />
+     <None Include="Assets\Assets\Resources\Tiled\Levels\2.xml" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Programs/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

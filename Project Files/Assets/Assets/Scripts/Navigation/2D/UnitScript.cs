@@ -11,22 +11,17 @@ public class UnitScript : MonoBehaviour
     // animations, we are going to be somewhere in between tiles.
     private int _tileX;
     private int _tileY;
-
-    public int TileX { get { return _tileX; } set { _tileX = value; } }
-    public int TileY { get { return _tileY; } set { _tileY = value; } }
-
+    private float _speed = 0;
     private TileMapScript _map;
-
-    public TileMapScript Map { get { return _map; } set { _map = value; } }
-
     // Our pathfinding info.  Null if we have no destination ordered.
     private List<NodeScript> _currentPath = null;
 
+    public int TileX { get { return _tileX; } set { _tileX = value; } }
+    public int TileY { get { return _tileY; } set { _tileY = value; } }
+    public TileMapScript Map { get { return _map; } set { _map = value; } }
     public List<NodeScript> CurrentPath { get { return _currentPath; } set { _currentPath = value; } }
-
-    private float _speed = 0;
     public float Speed { get { return _speed; } set { _speed = value; } }
-
+    
     void Update()
     {
         // Draw our debug line showing the pathfinding!
@@ -58,7 +53,7 @@ public class UnitScript : MonoBehaviour
                 _advancePathing();
             }
             // Smoothly animate towards the correct map tile.
-            transform.position = Vector3.Lerp(transform.position, _map.TileCoordToWorldCoord(_tileX, _tileY), _speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, _map.TileCoordToWorldCoord(_tileX, _tileY), _speed * Time.deltaTime);
         }
     }
 
