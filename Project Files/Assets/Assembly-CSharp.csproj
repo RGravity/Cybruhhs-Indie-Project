@@ -45,6 +45,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Buildings\Arrow\ArrowBulletScript.cs" />
      <Compile Include="Assets\Scripts\Buildings\Arrow\ArrowTowerScript.cs" />
      <Compile Include="Assets\Scripts\Buildings\BuildingSpawnScript.cs" />
      <Compile Include="Assets\Scripts\Buildings\TowerMenuScripts\BuildArrowTowerScript.cs" />
@@ -53,6 +54,7 @@
      <Compile Include="Assets\Scripts\Economy\BaseScript.cs" />
      <Compile Include="Assets\Scripts\Economy\EnemyStatScript.cs" />
      <Compile Include="Assets\Scripts\EnumScript.cs" />
+     <Compile Include="Assets\Scripts\MenuScripts\GameProgressScript.cs" />
      <Compile Include="Assets\Scripts\MenuScripts\MenuCreditsButtonScript.cs" />
      <Compile Include="Assets\Scripts\MenuScripts\MenuOptionsButtonScript.cs" />
      <Compile Include="Assets\Scripts\MenuScripts\MenuQuitButtonScript.cs" />
@@ -63,6 +65,7 @@
      <Compile Include="Assets\Scripts\Navigation\2D\ClickableTileScript.cs" />
      <Compile Include="Assets\Scripts\Navigation\2D\GenerateMapVisualScript.cs" />
      <Compile Include="Assets\Scripts\Navigation\2D\GenerateNodeMap.cs" />
+     <Compile Include="Assets\Scripts\Navigation\2D\GruntScript.cs" />
      <Compile Include="Assets\Scripts\Navigation\2D\NodeScript.cs" />
      <Compile Include="Assets\Scripts\Navigation\2D\TileMapScript.cs" />
      <Compile Include="Assets\Scripts\Navigation\2D\TileTypeScript.cs" />
