@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-
-public class ArrowTowerScript : MonoBehaviour {
-
-    private BuildingType _buildingType = BuildingType.Both;
+public class CannonTowerScript : MonoBehaviour {
+    private BuildingType _buildingType = BuildingType.Ground;
     private GameObject _bullet;
     private int _tier = 1;
     private Vector3 _thisPosition;
@@ -17,7 +15,7 @@ public class ArrowTowerScript : MonoBehaviour {
     private float _range = 2;
     private bool _allowShoot = true;
     private float _countdownTime;
-    
+
     private GameObject _enemyInRange;
 
     // Use this for initialization
@@ -38,7 +36,7 @@ public class ArrowTowerScript : MonoBehaviour {
         {
             _shootEnemy();
         }
-        
+
     }
 
     /// <summary>
@@ -74,7 +72,7 @@ public class ArrowTowerScript : MonoBehaviour {
             }
 
             GameObject bulletObject = Instantiate(_bullet);
-            bulletObject.transform.position =new Vector3(this._thisPosition.x,this._thisPosition.y,-1);
+            bulletObject.transform.position = new Vector3(this._thisPosition.x, this._thisPosition.y, -1);
             bulletObject.GetComponent<ArrowBulletScript>().ShootEnemy(_enemyInRange, _damage);
 
             Debug.Log("Enemy Shot");
