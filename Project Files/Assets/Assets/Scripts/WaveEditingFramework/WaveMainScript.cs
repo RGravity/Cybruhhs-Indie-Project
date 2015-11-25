@@ -15,6 +15,9 @@ public class WaveMainScript : MonoBehaviour {
     private GameObject _flyingParent;
     private GameObject _paladinParent;
 
+    [SerializeField]
+    private List<LevelWrapperScript> _levelList;
+
     private TileMapScript _map;
     private List<Vector3> _listWaveStartPositions;
     private NodeScript[,] _graph;

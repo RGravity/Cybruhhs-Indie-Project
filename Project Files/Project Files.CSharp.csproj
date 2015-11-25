@@ -79,6 +79,7 @@
     <Compile Include="Assets\Assets\Scripts\Enemies\GruntScript.cs" />
     <Compile Include="Assets\Assets\Scripts\EnumScript.cs" />
     <Compile Include="Assets\Assets\Scripts\LevelEditingFramework\TileMapScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\MenuScripts\GameProgressScript.cs" />
     <Compile Include="Assets\Assets\Scripts\MenuScripts\MenuCreditsButtonScript.cs" />
     <Compile Include="Assets\Assets\Scripts\MenuScripts\MenuOptionsButtonScript.cs" />
     <Compile Include="Assets\Assets\Scripts\MenuScripts\MenuQuitButtonScript.cs" />
@@ -97,6 +98,8 @@
     <Compile Include="Assets\Assets\Scripts\OptionsScripts\MusicVolumeScript.cs" />
     <Compile Include="Assets\Assets\Scripts\OptionsScripts\SFXVolumeScript.cs" />
     <Compile Include="Assets\Assets\Scripts\Timer\CountTimerScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\WaveEditingFramework\Wave Editing Wrappers\LevelWrapperScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\WaveEditingFramework\Wave Editing Wrappers\WaveWrapperScript.cs" />
     <Compile Include="Assets\Assets\Scripts\WaveEditingFramework\WaveMainScript.cs" />
     <Compile Include="Assets\Assets\Scripts\WaveEditingFramework\WaveTemplateScript.cs" />
   </ItemGroup>
