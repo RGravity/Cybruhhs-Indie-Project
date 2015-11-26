@@ -21,6 +21,8 @@ public class TileMapScript : MonoBehaviour
     public Vector3 EndPosition { get { return _endPosition; } set { _endPosition = value; } }
     public Vector3 WaveStartPosition { get { return _waveStartposition; } set { _waveStartposition = value; } }
 
+    public int[,] Tiles { get { return _tiles; } }
+    public TileTypeScript[] TileTypes { get { return _tileTypes; } }
 
     private int _level = 1;
     //Levels in XML presented as Objects

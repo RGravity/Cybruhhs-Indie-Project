@@ -30,11 +30,14 @@ public class BuildingSpawnScript : MonoBehaviour {
     private bool _showButtons;
     private int _index;
     private GameObject _selectedTile;
-
+    private BaseScript _baseScript;
+    private TileMapScript _tileMap;
 
     // Use this for initialization
     void Start ()
     {
+        _tileMap = FindObjectOfType<TileMapScript>();
+        _baseScript = GameObject.FindObjectOfType<BaseScript>();
         _calculateEverything();
     }
 
@@ -80,7 +83,10 @@ public class BuildingSpawnScript : MonoBehaviour {
             Ray vRay = _myCam.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(vRay, out vHit, 1000))
             {
-                if (vHit.collider.gameObject.GetComponent<ClickableTileScript>())
+                int[,] iets = _tileMap.Tiles;
+                int i = iets[(int)vHit.collider.transform.position.x, (int)vHit.collider.transform.position.y];
+
+                if (_tileMap.TileTypes[i].BuildingAllowed)
                 {
                     Vector2 tempPos = _myCam.WorldToScreenPoint(vHit.transform.position);
                     _center = new Vector2(tempPos.x, tempPos.y);
@@ -157,8 +163,12 @@ public class BuildingSpawnScript : MonoBehaviour {
                 break;
             //ArrowTower
             case 2:
-                _selectedTile.GetComponent<Renderer>().material.mainTexture = _turretTextures[0];
-                _selectedTile.AddComponent<ArrowTowerScript>();
+                if (_baseScript.Gold >= 250)
+                {
+                    _selectedTile.GetComponent<Renderer>().material.mainTexture = _turretTextures[0];
+                    _selectedTile.AddComponent<ArrowTowerScript>();
+                    _baseScript.LowerGold(250); 
+                }
                 break;
             default:
                 break;
