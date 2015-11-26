@@ -5,16 +5,16 @@ using System.Collections;
 public class ArrowTowerScript : MonoBehaviour {
 
     private BuildingType _buildingType = BuildingType.Both;
+    private GameObject _bullet;
     private int _tier = 1;
     private Vector3 _thisPosition;
     private float _timeLastShot;
-    private GameObject _bullet;
     [SerializeField]
     private int _damage = 2;
     [SerializeField]
     private float _rateOfFire = 2;
     [SerializeField]
-    private float _range = 10;
+    private float _range = 2;
     private bool _allowShoot = true;
     private float _countdownTime;
     
@@ -73,7 +73,9 @@ public class ArrowTowerScript : MonoBehaviour {
                 _enemyInRange = null;
             }
 
-            Instantiate(_bullet);
+            GameObject bulletObject = Instantiate(_bullet);
+            bulletObject.transform.position =new Vector3(this._thisPosition.x,this._thisPosition.y,-1);
+            bulletObject.GetComponent<ArrowBulletScript>().ShootEnemy(_enemyInRange, _damage);
 
             Debug.Log("Enemy Shot");
         }

@@ -19,6 +19,7 @@ public class EnemyStatScript : MonoBehaviour {
     void Start()
     {
         _baseStats = GameObject.FindObjectOfType<BaseScript>();
+        //this.GetComponent<MeshCollider>().isTrigger = true;
     }
 
 	// Update is called once per frame
@@ -50,13 +51,13 @@ public class EnemyStatScript : MonoBehaviour {
     /// </summary>
     private void _checkTarget()
     {
-        if (/*ReachedTarget*/ true)
-        {
-            _baseStats.LowerHealth(_damageToBase);
-            _baseStats.LowerGold(_goldCarrying);
-            this.gameObject.GetComponent<UnitScript>().Map = null;
-            Destroy(this.gameObject);
-        }
+        //if (/*ReachedTarget*/ true)
+        //{
+        //    _baseStats.LowerHealth(_damageToBase);
+        //    _baseStats.LowerGold(_goldCarrying);
+        //    this.gameObject.GetComponent<UnitScript>().Map = null;
+        //    Destroy(this.gameObject);
+        //}
     }
 
     /// <summary>

@@ -13,6 +13,7 @@ public class TileMapScript : MonoBehaviour
     private NodeScript[,] _graph;
     private Vector3 _endPosition;
     private Vector3 _waveStartposition;
+    private List<Vector3> _listWaveStartPositions;
     private List<List<NodeScript>> _possibleRoutes;
 
     public List<GameObject> SelectedUnits { get { return _selectedUnits; } set { _selectedUnits = value; } }
@@ -52,6 +53,7 @@ public class TileMapScript : MonoBehaviour
 
     void Start()
     {
+        _listWaveStartPositions = new List<Vector3>();
         //temporary: for loading level 1 when the game starts(REMOVE WHEN LEVEL SELECTION IS IMPLEMENTED)
         StartLevel(_level);
     }
@@ -78,8 +80,8 @@ public class TileMapScript : MonoBehaviour
             _generateMapData();
             _generatePathfindingGraph();
             _generateMapVisual();
-            //GeneratePathTo((int)_endPosition.x, (int)_endPosition.y); // Set Path
-            _setwalkablePath();
+
+            GameObject.FindObjectOfType<WaveMainScript>().StartSpawning(_listWaveStartPositions, this, _graph, _endPosition);
         }
         else
         {
@@ -188,42 +190,39 @@ public class TileMapScript : MonoBehaviour
                         _tiles[x, y] = 3;
                         break;
                     case 5://Monster spawn tiles
-                        //_selectedUnit.GetComponent<UnitScript>().TileX = x;
-                        //_selectedUnit.GetComponent<UnitScript>().TileY = y;
-                        //_selectedUnit.GetComponent<UnitScript>().Map = this;
-                        //_selectedUnit.GetComponentInChildren<MeshRenderer>().enabled = true;
-                        _waveStartposition = new Vector3(x, y, -1);
-                        GameObject waveObject = new GameObject();
-                        WaveScript waveScript = waveObject.AddComponent<WaveScript>();
-                        waveObject.transform.position = _waveStartposition;
-                        waveScript.Map = this;
-                        _selectedUnits.AddRange(waveScript.CreateMonstersGrunt(10));
-                        _selectedUnits.AddRange(waveScript.CreateMonstersHeavy(10));
-                        _selectedUnits.AddRange(waveScript.CreateMonstersFlying(10));
-                        _selectedUnits.AddRange(waveScript.CreateMonstersPaladin(10));
-                        foreach (GameObject unit in _selectedUnits)
-                        {
-                            if (unit.name == "Grunt")
-                            {
-                                unit.GetComponent<UnitScript>().Speed = 7;
-                            }
-                            if (unit.name == "Heavy")
-                            {
-                                unit.GetComponent<UnitScript>().Speed = 2;
-                            }
-                            if (unit.name == "Paladin")
-                            {
-                                unit.GetComponent<UnitScript>().Speed = 5;
-                            }
-                            if (unit.name == "Flying")
-                            {
-                                unit.GetComponent<UnitScript>().Speed = 3;
-                            }
-                            unit.GetComponent<UnitScript>().TileX = x;
-                            unit.GetComponent<UnitScript>().TileY = y;
-                            unit.GetComponent<UnitScript>().Map = this;
-                        }
                         _tiles[x, y] = 4;
+                        _listWaveStartPositions.Add(new Vector3(x, y, -1));
+                        //_waveStartposition = new Vector3(x, y, -1);
+                        //GameObject waveObject = new GameObject();
+                        //WaveScript waveScript = waveObject.AddComponent<WaveScript>();
+                        //waveObject.transform.position = _waveStartposition;
+                        //_selectedUnits.AddRange(waveScript.CreateMonstersGrunt(10));
+                        //_selectedUnits.AddRange(waveScript.CreateMonstersHeavy(10));
+                        //_selectedUnits.AddRange(waveScript.CreateMonstersFlying(10));
+                        //_selectedUnits.AddRange(waveScript.CreateMonstersPaladin(10));
+                        //foreach (GameObject unit in _selectedUnits)
+                        //{
+                        //    if (unit.name == "Grunt")
+                        //    {
+                        //        unit.GetComponent<UnitScript>().Speed = 7;
+                        //    }
+                        //    if (unit.name == "Heavy")
+                        //    {
+                        //        unit.GetComponent<UnitScript>().Speed = 2;
+                        //    }
+                        //    if (unit.name == "Paladin")
+                        //    {
+                        //        unit.GetComponent<UnitScript>().Speed = 5;
+                        //    }
+                        //    if (unit.name == "Flying")
+                        //    {
+                        //        unit.GetComponent<UnitScript>().Speed = 3;
+                        //    }
+                        //    unit.GetComponent<UnitScript>().TileX = x;
+                        //    unit.GetComponent<UnitScript>().TileY = y;
+                        //    unit.GetComponent<UnitScript>().Map = this;
+                        //}
+
                         break;
                     default:
                         _tiles[x, y] = 0;
@@ -389,122 +388,125 @@ public class TileMapScript : MonoBehaviour
     /// <para>Create the Path from start to end</para>
     /// <para></para>
     /// </summary>
+    
     public void GeneratePathTo(int pX, int pY)
     {
+        #region Old Path(Do not delete, maybe we need it if the new path fails)
         // Clear out our unit's old path.
-        foreach (GameObject unit in _selectedUnits)
-        {
-            unit.GetComponent<UnitScript>().CurrentPath = null;
-        }
-        foreach (GameObject unit in _selectedUnits)
-        {
-            if (UnitCanEnterTile(pX, pY) == false)
-            {
-                // We probably clicked on a mountain or something, so just quit out.
-                return;
-            }
+        //foreach (GameObject unit in _selectedUnits)
+        //{
+        //    unit.GetComponent<UnitScript>().CurrentPath = null;
+        //}
+        //foreach (GameObject unit in _selectedUnits)
+        //{
+        //    if (UnitCanEnterTile(pX, pY) == false)
+        //    {
+        //        // We probably clicked on a mountain or something, so just quit out.
+        //        return;
+        //    }
 
-            Dictionary<NodeScript, float> dist = new Dictionary<NodeScript, float>();
-            Dictionary<NodeScript, NodeScript> prev = new Dictionary<NodeScript, NodeScript>();
+        //    Dictionary<NodeScript, float> dist = new Dictionary<NodeScript, float>();
+        //    Dictionary<NodeScript, NodeScript> prev = new Dictionary<NodeScript, NodeScript>();
 
-            // Setup the "Q" -- the list of nodes we haven't checked yet.
-            List<NodeScript> unvisited = new List<NodeScript>();
+        //    // Setup the "Q" -- the list of nodes we haven't checked yet.
+        //    List<NodeScript> unvisited = new List<NodeScript>();
 
-            NodeScript source = _graph[unit.GetComponent<UnitScript>().TileX, unit.GetComponent<UnitScript>().TileY];
+        //    NodeScript source = _graph[unit.GetComponent<UnitScript>().TileX, unit.GetComponent<UnitScript>().TileY];
 
-            NodeScript target = _graph[pX, pY];
+        //    NodeScript target = _graph[pX, pY];
 
-            dist[source] = 0;
-            prev[source] = null;
+        //    dist[source] = 0;
+        //    prev[source] = null;
 
-            // Initialize everything to have INFINITY distance, since
-            // we don't know any better right now. Also, it's possible
-            // that some nodes CAN'T be reached from the source,
-            // which would make INFINITY a reasonable value
-            foreach (NodeScript v in _graph)
-            {
-                if (v != source)
-                {
-                    dist[v] = Mathf.Infinity;
-                    prev[v] = null;
-                }
+        //    // Initialize everything to have INFINITY distance, since
+        //    // we don't know any better right now. Also, it's possible
+        //    // that some nodes CAN'T be reached from the source,
+        //    // which would make INFINITY a reasonable value
+        //    foreach (NodeScript v in _graph)
+        //    {
+        //        if (v != source)
+        //        {
+        //            dist[v] = Mathf.Infinity;
+        //            prev[v] = null;
+        //        }
 
-                unvisited.Add(v);
-            }
+        //        unvisited.Add(v);
+        //    }
 
-            while (unvisited.Count > 0)
-            {
-                // "u" is going to be the unvisited node with the smallest distance.
-                NodeScript u = null;
+        //    while (unvisited.Count > 0)
+        //    {
+        //        // "u" is going to be the unvisited node with the smallest distance.
+        //        NodeScript u = null;
 
-                foreach (NodeScript possibleU in unvisited)
-                {
-                    if (u == null || dist[possibleU] < dist[u])
-                    {
-                        u = possibleU;
-                    }
-                }
+        //        foreach (NodeScript possibleU in unvisited)
+        //        {
+        //            if (u == null || dist[possibleU] < dist[u])
+        //            {
+        //                u = possibleU;
+        //            }
+        //        }
 
-                if (u == target)
-                {
-                    break;  // Exit the while loop!
-                }
+        //        if (u == target)
+        //        {
+        //            break;  // Exit the while loop!
+        //        }
 
-                unvisited.Remove(u);
+        //        unvisited.Remove(u);
 
-                foreach (NodeScript v in u.Neighbours)
-                {
-                    //float alt = dist[u] + u.DistanceTo(v);
-                    float alt = dist[u] + CostToEnterTile(u.X, u.Y, v.X, v.Y);
-                    if (alt < dist[v])
-                    {
-                        dist[v] = alt;
-                        prev[v] = u;
-                    }
-                }
-            }
+        //        foreach (NodeScript v in u.Neighbours)
+        //        {
+        //            //float alt = dist[u] + u.DistanceTo(v);
+        //            float alt = dist[u] + CostToEnterTile(u.X, u.Y, v.X, v.Y);
+        //            if (alt < dist[v])
+        //            {
+        //                dist[v] = alt;
+        //                prev[v] = u;
+        //            }
+        //        }
+        //    }
 
-            // If we get there, the either we found the shortest route
-            // to our target, or there is no route at ALL to our target.
+        //    // If we get there, the either we found the shortest route
+        //    // to our target, or there is no route at ALL to our target.
 
-            if (prev[target] == null)
-            {
-                // No route between our target and the source
-                return;
-            }
+        //    if (prev[target] == null)
+        //    {
+        //        // No route between our target and the source
+        //        return;
+        //    }
 
-            List<NodeScript> currentPath = new List<NodeScript>();
+        //    List<NodeScript> currentPath = new List<NodeScript>();
 
-            NodeScript curr = target;
+        //    NodeScript curr = target;
 
-            // Step through the "prev" chain and add it to our path
-            while (curr != null)
-            {
-                currentPath.Add(curr);
-                curr = prev[curr];
-            }
+        //    // Step through the "prev" chain and add it to our path
+        //    while (curr != null)
+        //    {
+        //        currentPath.Add(curr);
+        //        curr = prev[curr];
+        //    }
 
-            // Right now, currentPath describes a route from out target to our source
-            // So we need to invert it!
+        //    // Right now, currentPath describes a route from out target to our source
+        //    // So we need to invert it!
 
-            currentPath.Reverse();
+        //    currentPath.Reverse();
 
 
-            #region Michael is Working here
-            //foreach (List<NodeScript> nodeListRoute in _possibleRoutes)
-            //{
-            //    if (!nodeListRoute.Equals(currentPath))
-            //    {
-            //        _possibleRoutes.Add(currentPath);
-            //        break;
-            //    }
-            //}
-            //List<NodeScript> route = this.GeneratePathTo((int)_endPosition.x, (int)_endPosition.y, currentPath);
-            #endregion
-            unit.GetComponent<UnitScript>().CurrentPath = currentPath;
+        //    #region Michael is Working here
+        //    //foreach (List<NodeScript> nodeListRoute in _possibleRoutes)
+        //    //{
+        //    //    if (!nodeListRoute.Equals(currentPath))
+        //    //    {
+        //    //        _possibleRoutes.Add(currentPath);
+        //    //        break;
+        //    //    }
+        //    //}
+        //    //List<NodeScript> route = this.GeneratePathTo((int)_endPosition.x, (int)_endPosition.y, currentPath);
+        //    #endregion
+        //    unit.GetComponent<UnitScript>().CurrentPath = currentPath;
 
-            //unit.GetComponent<UnitScript>().CurrentPath = _possibleRoutes[1];
-        }
+        //    //unit.GetComponent<UnitScript>().CurrentPath = _possibleRoutes[1];
+        //}
+        #endregion
     }
     private void _setwalkablePath()
     {
