@@ -8,7 +8,8 @@ public class ArrowBulletScript : MonoBehaviour {
     private AudioSource _arrowHit;
     // Use this for initialization
     void Start () {
-        _arrowHit = GameObject.Find("ArrowHit").GetComponent<AudioSource>();
+        if (_arrowHit != null)
+            _arrowHit = GameObject.Find("ArrowHit").GetComponent<AudioSource>();
     }
 	
 	// Update is called once per frame
