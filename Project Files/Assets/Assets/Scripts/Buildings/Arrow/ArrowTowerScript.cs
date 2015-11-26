@@ -19,6 +19,7 @@ public class ArrowTowerScript : MonoBehaviour {
     private float _countdownTime;
     
     private GameObject _enemyInRange;
+   
 
     // Use this for initialization
     void Start()

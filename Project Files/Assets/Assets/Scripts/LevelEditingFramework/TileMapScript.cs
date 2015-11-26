@@ -57,7 +57,14 @@ public class TileMapScript : MonoBehaviour
         _listWaveStartPositions = new List<Vector3>();
         _map = GameObject.FindObjectOfType<DontDestroyOnLoadMusicScript>();
         //temporary: for loading level 1 when the game starts(REMOVE WHEN LEVEL SELECTION IS IMPLEMENTED)
-        StartLevel(_map.Level);
+        if (_map != null)
+        {
+            StartLevel(_map.Level);
+        }
+        else
+        {
+            StartLevel(_level);
+        }
 
     }
 
