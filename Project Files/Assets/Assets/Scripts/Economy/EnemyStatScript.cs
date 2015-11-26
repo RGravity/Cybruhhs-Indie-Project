@@ -9,6 +9,10 @@ public class EnemyStatScript : MonoBehaviour {
     private int _goldCarrying;
     [SerializeField]
     private int _damageToBase;
+    [SerializeField]
+    private EnemyType _enemyType;
+
+    public EnemyType EnemyType { get { return _enemyType; } }
 
 
     private BaseScript _baseStats;

@@ -14,7 +14,7 @@ public class ArrowTowerScript : MonoBehaviour {
     [SerializeField]
     private float _rateOfFire = 2;
     [SerializeField]
-    private float _range = 2;
+    private float _range = 5;
     private bool _allowShoot = true;
     private float _countdownTime;
     

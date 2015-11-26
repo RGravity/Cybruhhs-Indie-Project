@@ -48,10 +48,13 @@ public class CannonTowerScript : MonoBehaviour {
         UnitScript[] enemies = GameObject.FindObjectsOfType<UnitScript>();
         foreach (UnitScript enemy in enemies)
         {
-            if ((enemy.transform.position - _thisPosition).magnitude < _range)
+            if (enemy.gameObject.GetComponent<EnemyStatScript>().EnemyType == EnemyType.Ground)
             {
-                _enemyInRange = enemy.gameObject;
-                break;
+                if ((enemy.transform.position - _thisPosition).magnitude < _range)
+                {
+                    _enemyInRange = enemy.gameObject;
+                    break;
+                }
             }
         }
     }
@@ -73,9 +76,10 @@ public class CannonTowerScript : MonoBehaviour {
 
             GameObject bulletObject = Instantiate(_bullet);
             bulletObject.transform.position = new Vector3(this._thisPosition.x, this._thisPosition.y, -1);
-            bulletObject.GetComponent<ArrowBulletScript>().ShootEnemy(_enemyInRange, _damage);
+            bulletObject.GetComponent<CannonBulletScript>().ShootEnemy(_enemyInRange, _damage);
 
             Debug.Log("Enemy Shot");
+            
         }
         else if (Time.time >= _countdownTime)
         {
