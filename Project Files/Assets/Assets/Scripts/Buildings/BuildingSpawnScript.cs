@@ -32,6 +32,7 @@ public class BuildingSpawnScript : MonoBehaviour {
     private GameObject _selectedTile;
     private BaseScript _baseScript;
     private TileMapScript _tileMap;
+    private int[] _savedTileIndexes;
 
     // Use this for initialization
     void Start ()
