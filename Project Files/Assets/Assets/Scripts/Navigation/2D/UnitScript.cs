@@ -48,12 +48,12 @@ public class UnitScript : MonoBehaviour
         // advance to the next step in our pathfinding?
         if (this != null)
         {
-            if (Vector3.Distance(transform.position, _map.TileCoordToWorldCoord(_tileX, _tileY)) < 0.1f)
+            if (Vector3.Distance(transform.position, new Vector3(_tileX, _tileY,-1)) < 0.1f)
             {
                 _advancePathing();
             }
             // Smoothly animate towards the correct map tile.
-            transform.position = Vector3.MoveTowards(transform.position, _map.TileCoordToWorldCoord(_tileX, _tileY), _speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(_tileX, _tileY, -1), _speed * Time.deltaTime);
         }
     }
 

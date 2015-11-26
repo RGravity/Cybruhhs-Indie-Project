@@ -95,7 +95,7 @@ public class BuildingSpawnScript : MonoBehaviour {
     {
         Event currentEvent = Event.current;
 
-        if (currentEvent.type == EventType.MouseDown)
+        if (currentEvent.type == EventType.MouseDown && _centerRect.Contains(currentEvent.mousePosition))
         {
             _showButtons = true;
             _index = -1;
