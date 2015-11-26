@@ -9,12 +9,16 @@ public class MenuReturnButtonScript : MonoBehaviour
     private GameObject _menuCanvas;
     private GameObject _optionsCanvas;
     private GameObject _selectionCanvas;
+    private DontDestroyOnLoadMusicScript _map;
+    private AudioSource _click;
     void Start()
     {
         _menuCanvas = GameObject.Find("MenuCanvas");
         _optionsCanvas = GameObject.Find("OptionsCanvas");
         _creditCanvas = GameObject.Find("CreditsCanvas");
         _selectionCanvas = GameObject.Find("SelectionCanvas");
+        _map = GameObject.FindObjectOfType<DontDestroyOnLoadMusicScript>();
+        _click = GameObject.Find("Click").GetComponent<AudioSource>();
 
     }
     /// <summary>
@@ -26,6 +30,18 @@ public class MenuReturnButtonScript : MonoBehaviour
         _creditCanvas.GetComponent<Canvas>().enabled = false;
         _optionsCanvas.GetComponent<Canvas>().enabled = false;
         _menuCanvas.GetComponent<Canvas>().enabled = true;
+        _map.Level = 0;
+        _click.Play();
+    }
+
+    public void Enter()
+    {
+        _click.Play();
+    }
+
+    public void Exit()
+    {
+        _click.Play();
     }
 }
 

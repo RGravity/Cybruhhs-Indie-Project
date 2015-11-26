@@ -15,6 +15,7 @@ public class TileMapScript : MonoBehaviour
     private Vector3 _waveStartposition;
     private List<Vector3> _listWaveStartPositions;
     private List<List<NodeScript>> _possibleRoutes;
+    private DontDestroyOnLoadMusicScript _map;
 
     public List<GameObject> SelectedUnits { get { return _selectedUnits; } set { _selectedUnits = value; } }
     public Vector3 EndPosition { get { return _endPosition; } set { _endPosition = value; } }
@@ -54,8 +55,10 @@ public class TileMapScript : MonoBehaviour
     void Start()
     {
         _listWaveStartPositions = new List<Vector3>();
+        _map = GameObject.FindObjectOfType<DontDestroyOnLoadMusicScript>();
         //temporary: for loading level 1 when the game starts(REMOVE WHEN LEVEL SELECTION IS IMPLEMENTED)
-        StartLevel(_level);
+        StartLevel(_map.Level);
+
     }
 
     /// <summary>
@@ -64,6 +67,7 @@ public class TileMapScript : MonoBehaviour
     /// </summary>
     public void StartLevel(int pLevel)
     {
+       
         //Load all the levels in an array
         if (_xmlLevels == null)
         {
