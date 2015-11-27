@@ -5,8 +5,11 @@ public class ArrowBulletScript : MonoBehaviour {
 
     private GameObject _enemy;
     private int _damage;
+    private AudioSource _arrowHit;
     // Use this for initialization
     void Start () {
+        if (_arrowHit != null)
+            _arrowHit = GameObject.Find("ArrowHit").GetComponent<AudioSource>();
     }
 	
 	// Update is called once per frame
@@ -18,6 +21,10 @@ public class ArrowBulletScript : MonoBehaviour {
             {
                 EnemyStatScript stats = _enemy.GetComponent<EnemyStatScript>();
                 stats.LowerHealth(_damage);
+                if (_arrowHit != null)
+                {
+                    _arrowHit.Play();
+                }
                 Destroy(this.gameObject);
             }
         }

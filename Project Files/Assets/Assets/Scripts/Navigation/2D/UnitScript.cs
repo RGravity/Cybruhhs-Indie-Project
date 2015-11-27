@@ -21,7 +21,10 @@ public class UnitScript : MonoBehaviour
     public TileMapScript Map { get { return _map; } set { _map = value; } }
     public List<NodeScript> CurrentPath { get { return _currentPath; } set { _currentPath = value; } }
     public float Speed { get { return _speed; } set { _speed = value; } }
-    
+
+    private bool _isDirectionRight = false;
+    private bool _isDirectionLeft = false;
+
     void Update()
     {
         // Draw our debug line showing the pathfinding!
@@ -54,6 +57,32 @@ public class UnitScript : MonoBehaviour
             }
             // Smoothly animate towards the correct map tile.
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(_tileX, _tileY, -1), _speed * Time.deltaTime);
+            if (transform.position.x - _tileX < 0 && _isDirectionLeft == false)
+            {
+                if (transform.localScale.x == 1)
+                {
+                    transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
+                }
+                else if (transform.localScale.x == -1)
+                {
+                    transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
+                }
+                _isDirectionLeft = true;
+                _isDirectionRight = false;
+            }
+            if (transform.position.x - _tileX > 0 && _isDirectionRight == false)
+            {
+                if (transform.localScale.x == -1)
+                {
+                    transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
+                }
+                else if (transform.localScale.x == 1)
+                {
+                    transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
+                }
+                _isDirectionRight = true;
+                _isDirectionLeft = false;
+            }
         }
     }
 

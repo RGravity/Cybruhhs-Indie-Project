@@ -35,7 +35,10 @@ public class MenuSelectionScript : MonoBehaviour {
     private bool _level9Unlocked;
     private bool _level10Unlocked;
 
-    private bool _resave = false;
+    private DontDestroyOnLoadMusicScript _map;
+    private AudioSource _click;
+
+    private bool _resave;
 
     public bool Level2Unlocked {get { return _level2Unlocked; } set { _level2Unlocked = value; }}
     public bool Level3Unlocked { get { return _level3Unlocked; } set { _level3Unlocked = value; }}
@@ -63,7 +66,8 @@ public class MenuSelectionScript : MonoBehaviour {
         _level9 = GameObject.Find("Level9");
         _level10 = GameObject.Find("Level10");
 
-        
+        _map = GameObject.FindObjectOfType<DontDestroyOnLoadMusicScript>();
+        _click = GameObject.Find("Click").GetComponent<AudioSource>();
 
         saveAndLoad();
 }
@@ -75,10 +79,16 @@ public class MenuSelectionScript : MonoBehaviour {
 
         if (Input.GetKey (KeyCode.Space))
         {
-            _level2Unlocked = true;
+            _level3Unlocked = true;
             saveAndLoad();
         }
-      
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            _level4Unlocked = true;
+            saveAndLoad();
+        }
+
     }
 
     private void saveAndLoad()
@@ -124,7 +134,12 @@ public class MenuSelectionScript : MonoBehaviour {
 
             if (_resave == false)
             {
-                _xml.Save("SavedData.xml");
+                XmlWriterSettings ssettings = new XmlWriterSettings();
+                ssettings.Indent = true;
+
+                XmlWriter sw = XmlWriter.Create("SavedData.xml", ssettings);
+                _xml.Save(sw);
+                sw.Close();
             }
 
             
@@ -188,11 +203,19 @@ public class MenuSelectionScript : MonoBehaviour {
          
         }
         _resave = true;
-        _xml.Save("SavedData.xml");
+
+        XmlWriterSettings settings = new XmlWriterSettings();
+        settings.Indent = true;
+        
+        XmlWriter w = XmlWriter.Create("SavedData.xml", settings);
+        _xml.Save(w);
+        w.Close();
+       
+
 
     }
 
-   
+
 
     private void unlockLeveled()
     {
@@ -246,69 +269,134 @@ public class MenuSelectionScript : MonoBehaviour {
 
     public void LevelOne()
     {
-        Debug.Log("Load Level One");
+        _map.Level = 1;
+        _click.Play();
     }
     public void LevelTwo()
     {
         if (_level2Unlocked == true)
         {
-            Debug.Log("Load Level Two");
+            _map.Level = 2;
+            _click.Play();
+        }
+        else
+        {
+            _map.Level = 0;
         }
     }
     public void LevelThree()
     {
         if (_level3Unlocked == true)
         {
-            Debug.Log("Load Level Three");
+            _map.Level = 3;
+            _click.Play();
+        }
+        else
+        {
+            _map.Level = 0;
         }
     }
     public void LevelFour()
     {
         if (_level4Unlocked == true)
         {
-            Debug.Log("Load Level Four");
+            _map.Level = 4;
+            _click.Play();
+        }
+        else
+        {
+            _map.Level = 0;
         }
     }
     public void LevelFive()
     {
         if (_level5Unlocked == true)
         {
-            Debug.Log("Load Level Five");
+            _map.Level = 5;
+            _click.Play();
+        }
+        else
+        {
+            _map.Level = 0;
         }
     }
     public void LevelSix()
     {
         if (_level6Unlocked == true)
         {
-            Debug.Log("Load Level Six");
+            _map.Level = 6;
+            _click.Play();
+        }
+        else
+        {
+            _map.Level = 0;
         }
     }
     public void LevelSeven()
     {
         if (_level7Unlocked == true)
         {
-            Debug.Log("Load Level Seven");
+            _map.Level = 7;
+            _click.Play();
+        }
+        else
+        {
+            _map.Level = 0;
         }
     }
     public void LevelEight()
     {
         if (_level8Unlocked == true)
         {
-            Debug.Log("Load Level Eight");
+            _map.Level = 8;
+            _click.Play();
+        }
+        else
+        {
+            _map.Level = 0;
         }
     }
     public void LevelNine()
     {
         if (_level9Unlocked == true)
         {
-            Debug.Log("Load Level Nine");
+            _map.Level = 9;
+            _click.Play();
+        }
+        else
+        {
+            _map.Level = 0;
         }
     }
     public void LevelTen()
     {
         if (_level10Unlocked == true)
         {
-            Debug.Log("Load Level Ten");
+            _map.Level = 10;
+            _click.Play();
         }
+        else
+        {
+            _map.Level = 0;
+        }
+    }
+
+    public void StartGame()
+    {
+        if (_map.Level > 0)
+        {
+            _click.Play();
+            Application.LoadLevel(1);
+        }
+    }
+
+    public void Enter()
+    {
+        _click.Play();
+    }
+
+    public void Exit()
+    {
+        _click.Play();
     }
 }

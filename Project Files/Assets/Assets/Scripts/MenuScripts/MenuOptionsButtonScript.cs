@@ -8,6 +8,7 @@ public class MenuOptionsButtonScript : MonoBehaviour {
     private GameObject _menuCanvas;
     private GameObject _optionsCanvas;
     private GameObject _selectionCanvas;
+    private AudioSource _click;
     // Use this for initialization
     void Start()
     {
@@ -15,6 +16,7 @@ public class MenuOptionsButtonScript : MonoBehaviour {
         _optionsCanvas = GameObject.Find("OptionsCanvas");
         _creditCanvas = GameObject.Find("CreditsCanvas");
         _selectionCanvas = GameObject.Find("SelectionCanvas");
+        _click = GameObject.Find("Click").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -31,5 +33,17 @@ public class MenuOptionsButtonScript : MonoBehaviour {
         _optionsCanvas.GetComponent<Canvas>().enabled = true;
         _selectionCanvas.GetComponent<Canvas>().enabled = false;
         _menuCanvas.GetComponent<Canvas>().enabled = false;
+        _click.Play();
     }
+
+    public void Enter()
+    {
+        _click.Play();
+    }
+
+    public void Exit()
+    {
+        _click.Play();
+    }
+
 }

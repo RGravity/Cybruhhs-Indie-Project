@@ -6,6 +6,7 @@ public class SFXVolumeScript : MonoBehaviour {
 
     private Slider _soundSlider;
     private AudioSource[] _sound;
+    private AudioSource _click;
     // Use this for initialization
 
     void Start () {
@@ -13,6 +14,7 @@ public class SFXVolumeScript : MonoBehaviour {
         _sound = GameObject.FindObjectOfType <DontDestroyOnLoadSoundScript>().GetComponentsInChildren<AudioSource>();
         _soundSlider.value = PlayerPrefs.GetFloat("SoundVolume");
         PlayerPrefs.SetFloat("SoundVolume", _soundSlider.value);
+        _click = GameObject.Find("Click").GetComponent<AudioSource>();
     }
 	
 	// Update is called once per frame
@@ -28,7 +30,14 @@ public class SFXVolumeScript : MonoBehaviour {
         {
             _sound[i].volume = _soundSlider.value;
             PlayerPrefs.SetFloat("SoundVolume", _soundSlider.value);
+            
         }
+       
+    }
+
+    public void TikSound()
+    {
+        _click.Play();
     }
 
     public void ResetVolume()
@@ -39,6 +48,8 @@ public class SFXVolumeScript : MonoBehaviour {
             _soundSlider.value = 0.5f;
             _sound[i].volume = _soundSlider.value;
             PlayerPrefs.SetFloat("SoundVolume", _soundSlider.value);
+            _click.Play();
         }
     }
+
 }

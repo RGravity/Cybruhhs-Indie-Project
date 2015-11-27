@@ -7,3 +7,10 @@ public enum BuildingType
     Air,
     Both,
 }
+
+public enum EnemyType
+{
+    Ground,
+    Air,
+    Both,
+}

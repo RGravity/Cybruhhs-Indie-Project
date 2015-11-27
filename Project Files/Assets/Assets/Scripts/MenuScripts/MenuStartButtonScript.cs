@@ -10,6 +10,8 @@ public class MenuStartButtonScript : MonoBehaviour {
     private GameObject _optionsCanvas;
     private GameObject _selectionCanvas;
     private GameObject _startButton;
+
+    private AudioSource _click;
     void Start ()
     {
         _menuCanvas = GameObject.Find("MenuCanvas");
@@ -17,6 +19,7 @@ public class MenuStartButtonScript : MonoBehaviour {
         _creditCanvas = GameObject.Find("CreditsCanvas");
         _selectionCanvas = GameObject.Find("SelectionCanvas");
         _startButton = GameObject.Find("Start Button");
+        _click = GameObject.Find("Click").GetComponent<AudioSource>();
 
     }
 	
@@ -34,14 +37,17 @@ public class MenuStartButtonScript : MonoBehaviour {
         _creditCanvas.GetComponent<Canvas>().enabled = false;
         _optionsCanvas.GetComponent<Canvas>().enabled = false;
         _menuCanvas.GetComponent<Canvas>().enabled = false;
+        _click.Play();
     }
 
     public void PointEnter()
     {
         _startButton.GetComponent<RectTransform>().sizeDelta = new Vector2(505, 355);
+        _click.Play();
     }
     public void PointExit()
     {
         _startButton.GetComponent<RectTransform>().sizeDelta = new Vector2(286, 251);
+        _click.Play();
     }
 }

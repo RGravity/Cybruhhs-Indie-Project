@@ -20,6 +20,7 @@ public class CannonBulletScript : MonoBehaviour {
             {
                 EnemyStatScript stats = _enemy.GetComponent<EnemyStatScript>();
                 stats.LowerHealth(_damage);
+
                 Destroy(this.gameObject);
             }
         }

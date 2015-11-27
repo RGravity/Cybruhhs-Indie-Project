@@ -6,6 +6,7 @@ public class MusicVolumeScript : MonoBehaviour {
 
     private Slider _musicSlider;
     private AudioSource[] _music;
+    private AudioSource _click;
    
     void Start()
     {
@@ -13,6 +14,7 @@ public class MusicVolumeScript : MonoBehaviour {
         _music = GameObject.FindObjectOfType<DontDestroyOnLoadMusicScript>().GetComponentsInChildren<AudioSource>();
         _musicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
         PlayerPrefs.SetFloat("MusicVolume", _musicSlider.value);
+        _click = GameObject.Find("Click").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -39,5 +41,15 @@ public class MusicVolumeScript : MonoBehaviour {
             _music[i].volume = _musicSlider.value;
             PlayerPrefs.SetFloat("SoundVolume", _musicSlider.value);
         }
+    }
+
+    public void Enter()
+    {
+        _click.Play();
+    }
+
+    public void Exit()
+    {
+        _click.Play();
     }
 }
