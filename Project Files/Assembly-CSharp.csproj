@@ -51,6 +51,7 @@
      <Compile Include="Assets\Assets\Scripts\Buildings\Cannon\CannonBulletScript.cs" />
      <Compile Include="Assets\Assets\Scripts\Buildings\Cannon\CannonTowerScript.cs" />
      <Compile Include="Assets\Assets\Scripts\Buildings\TowerMenuScripts\BuildArrowTowerScript.cs" />
+     <Compile Include="Assets\Assets\Scripts\DontDestroyOnLoad\CheckForMusicScript.cs" />
      <Compile Include="Assets\Assets\Scripts\DontDestroyOnLoad\DontDestroyOnLoadMusicScript.cs" />
      <Compile Include="Assets\Assets\Scripts\DontDestroyOnLoad\DontDestroyOnLoadSoundScript.cs" />
      <Compile Include="Assets\Assets\Scripts\Economy\BaseScript.cs" />
@@ -58,7 +59,6 @@
      <Compile Include="Assets\Assets\Scripts\Enemies\GruntScript.cs" />
      <Compile Include="Assets\Assets\Scripts\EnumScript.cs" />
      <Compile Include="Assets\Assets\Scripts\LevelEditingFramework\TileMapScript.cs" />
-     <Compile Include="Assets\Assets\Scripts\MenuScripts\GameProgressScript.cs" />
      <Compile Include="Assets\Assets\Scripts\MenuScripts\MenuCreditsButtonScript.cs" />
      <Compile Include="Assets\Assets\Scripts\MenuScripts\MenuOptionsButtonScript.cs" />
      <Compile Include="Assets\Assets\Scripts\MenuScripts\MenuQuitButtonScript.cs" />
@@ -81,10 +81,12 @@
      <Compile Include="Assets\Assets\Scripts\WaveEditingFramework\Wave Editing Wrappers\LevelWrapperScript.cs" />
      <Compile Include="Assets\Assets\Scripts\WaveEditingFramework\Wave Editing Wrappers\WaveWrapperScript.cs" />
      <Compile Include="Assets\Assets\Scripts\WaveEditingFramework\WaveMainScript.cs" />
+     <Compile Include="Assets\Assets\Scripts\WaveEditingFramework\WavePartProgressScript.cs" />
      <Compile Include="Assets\Assets\Scripts\WaveEditingFramework\WaveTemplateScript.cs" />
      <None Include="Assets\Assets\Resources\Tiled\Levels\1.xml" />
      <None Include="Assets\Assets\Resources\Tiled\Tiles\1.xml" />
      <None Include="Assets\ProjectSettings\ProjectVersion.txt" />
+     <None Include="Assets\SavedData.xml" />
      <None Include="Assets\Assets\Resources\Tiled\Levels\2.xml" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Programs/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
