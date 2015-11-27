@@ -112,6 +112,7 @@
     <None Include="Assets\Assets\Resources\Tiled\Levels\2.xml" />
     <None Include="Assets\Assets\Resources\Tiled\Tiles\1.xml" />
     <None Include="Assets\ProjectSettings\ProjectVersion.txt" />
+    <None Include="Assets\SavedData.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
