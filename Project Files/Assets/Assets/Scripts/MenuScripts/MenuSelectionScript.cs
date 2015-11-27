@@ -386,7 +386,9 @@ public class MenuSelectionScript : MonoBehaviour {
         if (_map.Level > 0)
         {
             _click.Play();
+            _map.Play = true;
             Application.LoadLevel(1);
+           
         }
     }
 

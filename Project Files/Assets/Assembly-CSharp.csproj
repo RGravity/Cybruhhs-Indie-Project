@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\Buildings\Cannon\CannonBulletScript.cs" />
      <Compile Include="Assets\Scripts\Buildings\Cannon\CannonTowerScript.cs" />
      <Compile Include="Assets\Scripts\Buildings\TowerMenuScripts\BuildArrowTowerScript.cs" />
+     <Compile Include="Assets\Scripts\DontDestroyOnLoad\CheckForMusicScript.cs" />
      <Compile Include="Assets\Scripts\DontDestroyOnLoad\DontDestroyOnLoadMusicScript.cs" />
      <Compile Include="Assets\Scripts\DontDestroyOnLoad\DontDestroyOnLoadSoundScript.cs" />
      <Compile Include="Assets\Scripts\Economy\BaseScript.cs" />
@@ -58,7 +59,6 @@
      <Compile Include="Assets\Scripts\Enemies\GruntScript.cs" />
      <Compile Include="Assets\Scripts\EnumScript.cs" />
      <Compile Include="Assets\Scripts\LevelEditingFramework\TileMapScript.cs" />
-     <Compile Include="Assets\Scripts\MenuScripts\GameProgressScript.cs" />
      <Compile Include="Assets\Scripts\MenuScripts\MenuCreditsButtonScript.cs" />
      <Compile Include="Assets\Scripts\MenuScripts\MenuOptionsButtonScript.cs" />
      <Compile Include="Assets\Scripts\MenuScripts\MenuQuitButtonScript.cs" />
