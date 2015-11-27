@@ -19,17 +19,27 @@ public class ArrowTowerScript : MonoBehaviour {
     private float _countdownTime;
     
     private GameObject _enemyInRange;
-   
+    private AudioSource _shoot1;
+    private AudioSource _shoot2;
+    private AudioSource _shoot3;
 
-    // Use this for initialization
+    private CheckForMusicScript _check;
+    // Use this for initializations
     void Start()
     {
         _thisPosition = this.gameObject.transform.position;
         _bullet = (GameObject)Resources.Load("Bullet");
+        _check = GameObject.FindObjectOfType<CheckForMusicScript>();
+        if (_check.Check == true)
+        {
+            _shoot1 = GameObject.Find("ArrowShoot1").GetComponent<AudioSource>();
+            _shoot2 = GameObject.Find("ArrowShoot2").GetComponent<AudioSource>();
+            _shoot3 = GameObject.Find("ArrowShoot3").GetComponent<AudioSource>();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+// Update is called once per frame
+void Update()
     {
         if (_enemyInRange == null)
         {
@@ -77,6 +87,22 @@ public class ArrowTowerScript : MonoBehaviour {
             GameObject bulletObject = Instantiate(_bullet);
             bulletObject.transform.position =new Vector3(this._thisPosition.x,this._thisPosition.y,-1);
             bulletObject.GetComponent<ArrowBulletScript>().ShootEnemy(_enemyInRange, _damage);
+            int random = Random.Range(0, 2);
+
+            switch (random)
+            {
+                case 0:
+                    if (_shoot1 != null) _shoot1.Play();
+                    break;
+                case 1:
+                    if (_shoot1 != null) _shoot2.Play();
+                    break;
+                case 2:
+                    if (_shoot1 != null) _shoot3.Play();
+                    break;
+
+            }
+
 
             Debug.Log("Enemy Shot");
         }

@@ -5,7 +5,9 @@ using System.Collections.Generic;
 public class WaveWrapperScript{
 
     [SerializeField]
-    private string WaveNr = "Wave ";
+    private string _waveNr = "Wave ";
     [SerializeField]
-    private List<WaveTemplateScript> WaveParts;
+    private List<WaveTemplateScript> _waveParts;
+
+    public List<WaveTemplateScript> WaveParts { get { return _waveParts; } }
 }

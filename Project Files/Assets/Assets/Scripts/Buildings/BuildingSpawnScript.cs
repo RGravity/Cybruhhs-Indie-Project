@@ -23,6 +23,7 @@ public class BuildingSpawnScript : MonoBehaviour {
     [SerializeField]
     private Texture[] _turretTextures;
 
+    private CheckForMusicScript _check;
     private int _ringCount;
     private Rect _centerRect;
     private Rect[] _ringRects;
@@ -33,13 +34,23 @@ public class BuildingSpawnScript : MonoBehaviour {
     private BaseScript _baseScript;
     private TileMapScript _tileMap;
     private int[] _savedTileIndexes;
+    private AudioSource _buy;
 
     // Use this for initialization
+
     void Start ()
     {
+        _check = GameObject.FindObjectOfType<CheckForMusicScript>();
         _tileMap = FindObjectOfType<TileMapScript>();
         _baseScript = GameObject.FindObjectOfType<BaseScript>();
         _calculateEverything();
+        if (_check.Check == true)
+        {
+            _buy = GameObject.Find("SellSound").GetComponent<AudioSource>();
+        }
+
+        
+
     }
 
     /// <summary>
@@ -168,7 +179,11 @@ public class BuildingSpawnScript : MonoBehaviour {
                 {
                     _selectedTile.GetComponent<Renderer>().material.mainTexture = _turretTextures[0];
                     _selectedTile.AddComponent<ArrowTowerScript>();
-                    _baseScript.LowerGold(250); 
+                    _baseScript.LowerGold(250);
+                    if (_buy != null)
+                    {
+                        _buy.Play();
+                    }
                 }
                 break;
             default:

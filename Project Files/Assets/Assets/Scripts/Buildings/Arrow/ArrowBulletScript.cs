@@ -6,10 +6,15 @@ public class ArrowBulletScript : MonoBehaviour {
     private GameObject _enemy;
     private int _damage;
     private AudioSource _arrowHit;
+    private CheckForMusicScript _check;
     // Use this for initialization
-    void Start () {
-        if (_arrowHit != null)
+    void Start()
+    {
+        _check = GameObject.FindObjectOfType<CheckForMusicScript>();
+        if (_check.Check == true)
+        {
             _arrowHit = GameObject.Find("ArrowHit").GetComponent<AudioSource>();
+        }
     }
 	
 	// Update is called once per frame

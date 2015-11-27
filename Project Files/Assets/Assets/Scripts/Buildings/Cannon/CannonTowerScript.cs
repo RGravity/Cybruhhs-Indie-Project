@@ -17,12 +17,18 @@ public class CannonTowerScript : MonoBehaviour {
     private float _countdownTime;
 
     private GameObject _enemyInRange;
-
+    private AudioSource _cannonFire;
+    private CheckForMusicScript _check;
     // Use this for initialization
     void Start()
     {
         _thisPosition = this.gameObject.transform.position;
         _bullet = (GameObject)Resources.Load("Bullet");
+        _check = GameObject.FindObjectOfType<CheckForMusicScript>();
+        if (_check.Check == true)
+        {
+            _cannonFire = GameObject.Find("CannonHit").GetComponent<AudioSource>();
+        }
     }
 
     // Update is called once per frame
@@ -77,6 +83,10 @@ public class CannonTowerScript : MonoBehaviour {
             GameObject bulletObject = Instantiate(_bullet);
             bulletObject.transform.position = new Vector3(this._thisPosition.x, this._thisPosition.y, -1);
             bulletObject.GetComponent<CannonBulletScript>().ShootEnemy(_enemyInRange, _damage);
+            if (_cannonFire != null)
+            {
+                _cannonFire.Play();
+            }
 
             Debug.Log("Enemy Shot");
             
