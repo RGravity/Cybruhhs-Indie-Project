@@ -75,24 +75,39 @@ public class WaveMainScript : MonoBehaviour {
     /// <summary>
     /// <para>Wave Spawn Control Method (Wave Control Room)</para>
     /// </summary>
-	// Update is called once per frame
 	void Update () {
+        if (_waveProgressList.Count > 0)
+        {
+            if (_waveProgressList[_waveProgressList.Count - 1].SecToWaitForNextPart != 0 && (_waveProgressList[_waveProgressList.Count - 1].TimeStarted + _waveProgressList[_waveProgressList.Count - 1].SecToWaitForNextPart) >= Time.time)
+            {
+                _startNextWavePart = true;
+            }
+        }
+        
+
+
+        //Enter when spawning is started and Last wave part is NOT done spawning
         if (_spawningStarted && !_LastPartDone)
         {
+            //Enter when Debug level and wave in inspector are bigger than 0
             if (_debugLevel > 0 && _debugWave > 0)
             {
+                //Enter when next part should be loaded
                 if (_startNextWavePart)
                 {
                     WaveTemplateScript wavePart = null;
                     do
                     {
-
                         if (_currentWavePart <= _levelList[_debugLevel - 1].WaveList[_debugWave - 1].WaveParts.Count - 1)
                         {
                             wavePart = _levelList[_debugLevel - 1].WaveList[_debugWave - 1].WaveParts[_currentWavePart];
                             _createIngameWavePart(wavePart);
                             _currentWavePart++;
                             _startNextWavePart = false;
+                            if (_waveProgressList[_waveProgressList.Count-1].SecToWaitForNextPart > 0)
+                            {
+                                break;
+                            }
                         }
                         else
                         {
@@ -102,11 +117,6 @@ public class WaveMainScript : MonoBehaviour {
                     
                 }
                 _updateWave();
-                
-                //_spawnGrunt(_listWaveStartPositions[Random.Range(0, _listWaveStartPositions.Count - 1)], 1);
-                //_spawnHeavy(_listWaveStartPositions[Random.Range(0, _listWaveStartPositions.Count - 1)], 1);
-                //_spawnFlying(_listWaveStartPositions[Random.Range(0, _listWaveStartPositions.Count - 1)], 1);
-                //_spawnPaladin(_listWaveStartPositions[Random.Range(0, _listWaveStartPositions.Count - 1)], 1);
             }
         }
     }
@@ -115,6 +125,7 @@ public class WaveMainScript : MonoBehaviour {
     {
         foreach (WavePartProgressScript part in _waveProgressList)
         {
+            #region Grunt Wave Spawning
             if (part.GruntAmountSpawned == 0 && part.GruntAmountRemaining > 0)
             {
                 _spawnGrunt(_listWaveStartPositions[part.Path], part.Path);
@@ -134,6 +145,73 @@ public class WaveMainScript : MonoBehaviour {
                     part.GruntAmountRemaining--;
                 }
             }
+            #endregion
+
+            #region Heavy Wave Spawning
+            if (part.HeavyAmountSpawned == 0 && part.HeavyAmountRemaining > 0)
+            {
+                _spawnHeavy(_listWaveStartPositions[part.Path], part.Path);
+                part.HeavyAmountSpawned++;
+                part.HeavyAmountRemaining--;
+            }
+            else if (part.TimeStarted + (part.HeavyAmountSpawned * part.TimeBetweenEnemies) > Time.time)
+            {
+                continue;
+            }
+            else if (part.TimeStarted + (part.HeavyAmountSpawned * part.TimeBetweenEnemies) <= Time.time)
+            {
+                if (part.HeavyAmountRemaining > 0)
+                {
+                    _spawnHeavy(_listWaveStartPositions[part.Path], part.Path);
+                    part.HeavyAmountSpawned++;
+                    part.HeavyAmountRemaining--;
+                }
+            }
+            #endregion
+
+            #region Flying Wave Spawning
+            if (part.FlyingAmountSpawned == 0 && part.FlyingAmountRemaining > 0)
+            {
+                _spawnFlying(_listWaveStartPositions[part.Path], part.Path);
+                part.FlyingAmountSpawned++;
+                part.FlyingAmountRemaining--;
+            }
+            else if (part.TimeStarted + (part.FlyingAmountSpawned * part.TimeBetweenEnemies) > Time.time)
+            {
+                continue;
+            }
+            else if (part.TimeStarted + (part.FlyingAmountSpawned * part.TimeBetweenEnemies) <= Time.time)
+            {
+                if (part.FlyingAmountRemaining > 0)
+                {
+                    _spawnFlying(_listWaveStartPositions[part.Path], part.Path);
+                    part.FlyingAmountSpawned++;
+                    part.FlyingAmountRemaining--;
+                }
+            }
+            #endregion
+
+            #region Paladin Wave Spawning
+            if (part.PaladinAmountSpawned == 0 && part.PaladinAmountRemaining > 0)
+            {
+                _spawnPaladin(_listWaveStartPositions[part.Path], part.Path);
+                part.PaladinAmountSpawned++;
+                part.PaladinAmountRemaining--;
+            }
+            else if (part.TimeStarted + (part.PaladinAmountSpawned * part.TimeBetweenEnemies) > Time.time)
+            {
+                continue;
+            }
+            else if (part.TimeStarted + (part.PaladinAmountSpawned * part.TimeBetweenEnemies) <= Time.time)
+            {
+                if (part.PaladinAmountRemaining > 0)
+                {
+                    _spawnPaladin(_listWaveStartPositions[part.Path], part.Path);
+                    part.PaladinAmountSpawned++;
+                    part.PaladinAmountRemaining--;
+                }
+            }
+            #endregion
         }
     }
 
