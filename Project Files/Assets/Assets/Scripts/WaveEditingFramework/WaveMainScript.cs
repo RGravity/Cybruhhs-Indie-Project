@@ -128,7 +128,7 @@ public class WaveMainScript : MonoBehaviour {
             #region Grunt Wave Spawning
             if (part.GruntAmountSpawned == 0 && part.GruntAmountRemaining > 0)
             {
-                _spawnGrunt(_listWaveStartPositions[part.Path], part.Path);
+                _spawnGrunt(_listWaveStartPositions[part.Path-1], part.Path);
                 part.GruntAmountSpawned++;
                 part.GruntAmountRemaining--;
             }
@@ -140,7 +140,7 @@ public class WaveMainScript : MonoBehaviour {
             {
                 if (part.GruntAmountRemaining > 0)
                 {
-                    _spawnGrunt(_listWaveStartPositions[part.Path], part.Path);
+                    _spawnGrunt(_listWaveStartPositions[part.Path-1], part.Path);
                     part.GruntAmountSpawned++;
                     part.GruntAmountRemaining--;
                 }
@@ -150,7 +150,7 @@ public class WaveMainScript : MonoBehaviour {
             #region Heavy Wave Spawning
             if (part.HeavyAmountSpawned == 0 && part.HeavyAmountRemaining > 0)
             {
-                _spawnHeavy(_listWaveStartPositions[part.Path], part.Path);
+                _spawnHeavy(_listWaveStartPositions[part.Path-1], part.Path);
                 part.HeavyAmountSpawned++;
                 part.HeavyAmountRemaining--;
             }
@@ -162,7 +162,7 @@ public class WaveMainScript : MonoBehaviour {
             {
                 if (part.HeavyAmountRemaining > 0)
                 {
-                    _spawnHeavy(_listWaveStartPositions[part.Path], part.Path);
+                    _spawnHeavy(_listWaveStartPositions[part.Path-1], part.Path);
                     part.HeavyAmountSpawned++;
                     part.HeavyAmountRemaining--;
                 }
@@ -172,7 +172,7 @@ public class WaveMainScript : MonoBehaviour {
             #region Flying Wave Spawning
             if (part.FlyingAmountSpawned == 0 && part.FlyingAmountRemaining > 0)
             {
-                _spawnFlying(_listWaveStartPositions[part.Path], part.Path);
+                _spawnFlying(_listWaveStartPositions[part.Path-1], part.Path);
                 part.FlyingAmountSpawned++;
                 part.FlyingAmountRemaining--;
             }
@@ -184,7 +184,7 @@ public class WaveMainScript : MonoBehaviour {
             {
                 if (part.FlyingAmountRemaining > 0)
                 {
-                    _spawnFlying(_listWaveStartPositions[part.Path], part.Path);
+                    _spawnFlying(_listWaveStartPositions[part.Path-1], part.Path);
                     part.FlyingAmountSpawned++;
                     part.FlyingAmountRemaining--;
                 }
@@ -194,7 +194,7 @@ public class WaveMainScript : MonoBehaviour {
             #region Paladin Wave Spawning
             if (part.PaladinAmountSpawned == 0 && part.PaladinAmountRemaining > 0)
             {
-                _spawnPaladin(_listWaveStartPositions[part.Path], part.Path);
+                _spawnPaladin(_listWaveStartPositions[part.Path-1], part.Path);
                 part.PaladinAmountSpawned++;
                 part.PaladinAmountRemaining--;
             }
@@ -206,7 +206,7 @@ public class WaveMainScript : MonoBehaviour {
             {
                 if (part.PaladinAmountRemaining > 0)
                 {
-                    _spawnPaladin(_listWaveStartPositions[part.Path], part.Path);
+                    _spawnPaladin(_listWaveStartPositions[part.Path-1], part.Path);
                     part.PaladinAmountSpawned++;
                     part.PaladinAmountRemaining--;
                 }
