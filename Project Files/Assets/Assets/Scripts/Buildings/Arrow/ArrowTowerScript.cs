@@ -28,7 +28,7 @@ public class ArrowTowerScript : MonoBehaviour {
     void Start()
     {
         _thisPosition = this.gameObject.transform.position;
-        _bullet = (GameObject)Resources.Load("Bullet");
+        _bullet = (GameObject)Resources.Load("ArrowBullet");
         _check = GameObject.FindObjectOfType<CheckForMusicScript>();
         if (_check.Check == true)
         {
