@@ -27,4 +27,8 @@ public class WaveTemplateScript{
     public int AmountOfHeavy { get { return _amountOfHeavy; } }
     public int AmountOfFlying { get { return _amountOfFlying; } }
     public int AmountofPaladin { get { return _amountOfPaladin; } }
+    public int Path { get { return _path; } }
+    public float TimeBetweenEnemies { get { return _timeBetweenEnemies; } }
+    public float SecToWaitForNextPart { get { return _secToWaitForNextPart; } }
+
 }

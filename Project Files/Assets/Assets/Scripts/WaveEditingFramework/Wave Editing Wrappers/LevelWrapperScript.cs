@@ -5,7 +5,9 @@ using System.Collections.Generic;
 public class LevelWrapperScript{
 
     [SerializeField]
-    private string Levelnr = "Level ";
+    private string _levelNr = "Level ";
     [SerializeField]
-    private List<WaveWrapperScript> WaveList;
+    private List<WaveWrapperScript> _waveList;
+
+    public List<WaveWrapperScript> WaveList { get { return _waveList; } }
 }

@@ -71,6 +71,8 @@
     <Compile Include="Assets\Assets\Scripts\Buildings\Arrow\ArrowBulletScript.cs" />
     <Compile Include="Assets\Assets\Scripts\Buildings\Arrow\ArrowTowerScript.cs" />
     <Compile Include="Assets\Assets\Scripts\Buildings\BuildingSpawnScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\Buildings\Cannon\CannonBulletScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\Buildings\Cannon\CannonTowerScript.cs" />
     <Compile Include="Assets\Assets\Scripts\Buildings\TowerMenuScripts\BuildArrowTowerScript.cs" />
     <Compile Include="Assets\Assets\Scripts\DontDestroyOnLoad\DontDestroyOnLoadMusicScript.cs" />
     <Compile Include="Assets\Assets\Scripts\DontDestroyOnLoad\DontDestroyOnLoadSoundScript.cs" />
@@ -86,6 +88,7 @@
     <Compile Include="Assets\Assets\Scripts\MenuScripts\MenuReturnButtonScript.cs" />
     <Compile Include="Assets\Assets\Scripts\MenuScripts\MenuSelectionScript.cs" />
     <Compile Include="Assets\Assets\Scripts\MenuScripts\MenuStartButtonScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\MenuScripts\PauseScript.cs" />
     <Compile Include="Assets\Assets\Scripts\Michiel TEST Scripts\EnemyTestScript.cs" />
     <Compile Include="Assets\Assets\Scripts\Navigation\2D\ClickableTileScript.cs" />
     <Compile Include="Assets\Assets\Scripts\Navigation\2D\GenerateMapVisualScript.cs" />
@@ -101,6 +104,7 @@
     <Compile Include="Assets\Assets\Scripts\WaveEditingFramework\Wave Editing Wrappers\LevelWrapperScript.cs" />
     <Compile Include="Assets\Assets\Scripts\WaveEditingFramework\Wave Editing Wrappers\WaveWrapperScript.cs" />
     <Compile Include="Assets\Assets\Scripts\WaveEditingFramework\WaveMainScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\WaveEditingFramework\WavePartProgressScript.cs" />
     <Compile Include="Assets\Assets\Scripts\WaveEditingFramework\WaveTemplateScript.cs" />
   </ItemGroup>
   <ItemGroup>

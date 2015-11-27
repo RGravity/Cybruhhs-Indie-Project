@@ -53,6 +53,11 @@ public class TileMapScript : MonoBehaviour
 
     void Start()
     {
+        if (FindObjectOfType<WaveMainScript>().DebugLevel != 0)
+        {
+            _level = FindObjectOfType<WaveMainScript>().DebugLevel;
+        }
+
         _listWaveStartPositions = new List<Vector3>();
         //temporary: for loading level 1 when the game starts(REMOVE WHEN LEVEL SELECTION IS IMPLEMENTED)
         StartLevel(_level);
@@ -70,7 +75,7 @@ public class TileMapScript : MonoBehaviour
             _xmlLevels = Resources.LoadAll("Tiled/Levels");
         }
         //Parse Level to _tileData
-        if (pLevel > 0 && pLevel < _xmlLevels.Length)
+        if (pLevel > 0 && pLevel <= _xmlLevels.Length)
         {
             _importLevel(pLevel);
 
