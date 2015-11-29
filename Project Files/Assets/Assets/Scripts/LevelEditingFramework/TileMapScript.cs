@@ -99,7 +99,7 @@ public class TileMapScript : MonoBehaviour
             _generatePathfindingGraph();
             _generateMapVisual();
 
-            GameObject.FindObjectOfType<WaveMainScript>().StartSpawning(_listWaveStartPositions, this, _graph, _endPosition);
+            GameObject.FindObjectOfType<WaveMainScript>().StartSpawning(_listWaveStartPositions, this, _graph, _endPosition, pLevel);
         }
         else
         {
