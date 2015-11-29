@@ -179,7 +179,7 @@ public class BuildingSpawnScript : MonoBehaviour {
                 {
                     _selectedTile.GetComponent<Renderer>().material.mainTexture = _turretTextures[0];
                     _selectedTile.AddComponent<ArrowTowerScript>();
-                    _baseScript.LowerGold(200);
+                    //_baseScript.LowerGold(200);
                     if (_buy != null)
                     {
                         _buy.Play();

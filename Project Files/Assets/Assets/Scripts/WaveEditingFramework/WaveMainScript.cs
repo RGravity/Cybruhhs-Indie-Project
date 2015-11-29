@@ -78,7 +78,7 @@ public class WaveMainScript : MonoBehaviour {
 	void Update () {
         if (_waveProgressList.Count > 0)
         {
-            if (_waveProgressList[_waveProgressList.Count - 1].SecToWaitForNextPart != 0 && (_waveProgressList[_waveProgressList.Count - 1].TimeStarted + _waveProgressList[_waveProgressList.Count - 1].SecToWaitForNextPart) >= Time.time)
+            if (_waveProgressList[_waveProgressList.Count - 1].SecToWaitForNextPart != 0 && (_waveProgressList[_waveProgressList.Count - 1].TimeStarted + _waveProgressList[_waveProgressList.Count - 1].SecToWaitForNextPart) <= Time.time)
             {
                 _startNextWavePart = true;
             }
@@ -104,6 +104,7 @@ public class WaveMainScript : MonoBehaviour {
                             _createIngameWavePart(wavePart);
                             _currentWavePart++;
                             _startNextWavePart = false;
+
                             if (_waveProgressList[_waveProgressList.Count-1].SecToWaitForNextPart > 0)
                             {
                                 break;
