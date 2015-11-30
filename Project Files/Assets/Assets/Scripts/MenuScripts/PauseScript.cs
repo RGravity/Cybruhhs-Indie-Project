@@ -23,7 +23,7 @@ public class PauseScript : MonoBehaviour {
         _radialMenu = GameObject.FindObjectOfType<BuildingSpawnScript>().gameObject;
         _check = GameObject.FindObjectOfType<CheckForMusicScript>();
         if (_check.Check == true)_map = GameObject.FindObjectOfType<DontDestroyOnLoadMusicScript>();
-	}
+	
 	}
 	
 	// Update is called once per frame
