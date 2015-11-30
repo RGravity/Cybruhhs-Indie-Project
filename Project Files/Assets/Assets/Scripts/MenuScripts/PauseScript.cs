@@ -10,6 +10,7 @@ public class PauseScript : MonoBehaviour {
     private GameObject _backGround;
     private GameObject _pauseButton;
     private GameObject _radialMenu;
+    private CheckForMusicScript _check;
 
     public bool PauseGame { get { return _pauseGame; } set { _pauseGame = value; } }
 
@@ -20,7 +21,11 @@ public class PauseScript : MonoBehaviour {
         _backGround = GameObject.Find("OverlayPause");
         _pauseButton = GameObject.Find("PauseButton");
         _radialMenu = GameObject.FindObjectOfType<BuildingSpawnScript>().gameObject;
-        _map = GameObject.FindObjectOfType<DontDestroyOnLoadMusicScript>();
+        _check = GameObject.FindObjectOfType<CheckForMusicScript>();
+        if (_check.Check == true)
+        {
+            _map = GameObject.FindObjectOfType<DontDestroyOnLoadMusicScript>();
+        }
 	}
 	
 	// Update is called once per frame
@@ -65,6 +70,5 @@ public class PauseScript : MonoBehaviour {
     public void QuitGame()
     {
         _map.Play2 = true;
-        Application.LoadLevel(0);
     }
 }

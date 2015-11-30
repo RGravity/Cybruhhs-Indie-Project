@@ -59,12 +59,14 @@
      <Compile Include="Assets\Scripts\Enemies\GruntScript.cs" />
      <Compile Include="Assets\Scripts\EnumScript.cs" />
      <Compile Include="Assets\Scripts\LevelEditingFramework\TileMapScript.cs" />
+     <Compile Include="Assets\Scripts\MenuScripts\CybruhhsTitleScreen.cs" />
      <Compile Include="Assets\Scripts\MenuScripts\MenuCreditsButtonScript.cs" />
      <Compile Include="Assets\Scripts\MenuScripts\MenuOptionsButtonScript.cs" />
      <Compile Include="Assets\Scripts\MenuScripts\MenuQuitButtonScript.cs" />
      <Compile Include="Assets\Scripts\MenuScripts\MenuReturnButtonScript.cs" />
      <Compile Include="Assets\Scripts\MenuScripts\MenuSelectionScript.cs" />
      <Compile Include="Assets\Scripts\MenuScripts\MenuStartButtonScript.cs" />
+     <Compile Include="Assets\Scripts\MenuScripts\MovingLoading.cs" />
      <Compile Include="Assets\Scripts\MenuScripts\PauseScript.cs" />
      <Compile Include="Assets\Scripts\Michiel TEST Scripts\EnemyTestScript.cs" />
      <Compile Include="Assets\Scripts\Navigation\2D\ClickableTileScript.cs" />
@@ -86,17 +88,11 @@
      <None Include="Assets\Resources\Tiled\Levels\1.xml" />
      <None Include="Assets\Resources\Tiled\Tiles\1.xml" />
      <None Include="Assets\Resources\Tiled\Levels\2.xml" />
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Analytics">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Cecil">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>
