@@ -16,6 +16,7 @@ public class ArrowTowerScript : MonoBehaviour {
     [SerializeField]
     private float _range = 5;
     private bool _allowShoot = true;
+    [SerializeField]
     private float _countdownTime;
     
     private GameObject _enemyInRange;
@@ -28,7 +29,7 @@ public class ArrowTowerScript : MonoBehaviour {
     void Start()
     {
         _thisPosition = this.gameObject.transform.position;
-        _bullet = (GameObject)Resources.Load("Bullet");
+        _bullet = (GameObject)Resources.Load("ArrowBullet");
         _check = GameObject.FindObjectOfType<CheckForMusicScript>();
         if (_check.Check == true)
         {
@@ -41,14 +42,18 @@ public class ArrowTowerScript : MonoBehaviour {
 // Update is called once per frame
 void Update()
     {
-        if (_enemyInRange == null)
-        {
+        //if (_enemyInRange == null)
+        //{
             _checkForEnemies();
-        }
-        else
+        //}
+        //else
+        //{
+        if (_enemyInRange != null)
         {
             _shootEnemy();
+
         }
+        //}
         
     }
 
@@ -104,7 +109,7 @@ void Update()
             }
 
 
-            Debug.Log("Enemy Shot");
+            //Debug.Log("Enemy Shot");
         }
         else if (Time.time >= _countdownTime)
         {

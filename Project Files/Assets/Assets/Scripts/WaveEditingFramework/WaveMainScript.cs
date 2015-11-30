@@ -4,40 +4,59 @@ using System.Collections.Generic;
 
 public class WaveMainScript : MonoBehaviour {
 
+    //Prefab GameObjects
     private GameObject _grunt;
     private GameObject _heavy;
     private GameObject _flying;
     private GameObject _paladin;
 
+    //Parent GameObjects
     private GameObject _enemyParent;
     private GameObject _gruntParent;
     private GameObject _heavyParent;
     private GameObject _flyingParent;
     private GameObject _paladinParent;
 
-    [SerializeField]
-    private int _debugLevel = 0;
-    [SerializeField]
-    private int _debugWave = 0;
-    [SerializeField]
-    private List<LevelWrapperScript> _levelList;
-    private List<WavePartProgressScript> _waveProgressList;
-    private int _currentWavePart = 0;
-    private bool _startNextWavePart = true;
-    private bool _LastPartDone = false;
-
+    //TileMapScript variables
     private TileMapScript _map;
     private List<Vector3> _listWaveStartPositions;
     private NodeScript[,] _graph;
     private Vector3 _endPosition;
+    
+    // ---- wave editing framework variables ----
 
+    //Level and wave variables
+    private int _currentLevel = 1;
+    private int _currentWave = 0;
+    //debug level and wave
+    [SerializeField]
+    private int _debugLevel = 0;
+    [SerializeField]
+    private int _debugWave = 0;
+    //waves List
+    [SerializeField]
+    private List<LevelWrapperScript> _levelList;
+    //other variables
     private bool _spawningStarted = false;
+    private List<WavePartProgressScript> _waveProgressList;
+    private int _currentWavePart = 0;
+    private bool _startNextWavePart = true;
+    private bool _LastPartDone = true;
+    private BuildingWaveScript _buildWaveScript;
+    //variable for build wave
+    private bool _buildWaveStarted = false;
+    private bool _buildWaveEnded = true;
+    private bool _spawningDone = true;
+
 
     public int DebugLevel { get { return _debugLevel; } }
+    public bool BuildWaveStarted { get { return _buildWaveStarted; } set { _buildWaveStarted = value; } }
+    public bool BuildWaveEnded { get { return _buildWaveEnded; } set { _buildWaveEnded = value; } }
 
     // Use this for initialization
     void Start () {
         _waveProgressList = new List<WavePartProgressScript>();
+        _buildWaveScript = FindObjectOfType<BuildingWaveScript>();
 
         _grunt = (GameObject)Resources.Load("Enemies/Grunt");
         _heavy = (GameObject)Resources.Load("Enemies/Heavy");
@@ -61,13 +80,14 @@ public class WaveMainScript : MonoBehaviour {
         _paladinParent.transform.parent = _enemyParent.transform;
     }
 
-    public void StartSpawning(List<Vector3> pListWaveStartPositions, TileMapScript pMap, NodeScript[,] pGraph, Vector3 pEndPosition)
+    public void StartSpawning(List<Vector3> pListWaveStartPositions, TileMapScript pMap, NodeScript[,] pGraph, Vector3 pEndPosition, int pLevel)
     {
         _listWaveStartPositions = pListWaveStartPositions;
         _map = pMap;
         _graph = pGraph;
         _endPosition = pEndPosition;
         _spawningStarted = true;
+        _currentLevel = pLevel;
         
     }
 	
@@ -75,24 +95,55 @@ public class WaveMainScript : MonoBehaviour {
     /// <summary>
     /// <para>Wave Spawn Control Method (Wave Control Room)</para>
     /// </summary>
-	// Update is called once per frame
 	void Update () {
-        if (_spawningStarted && !_LastPartDone)
+
+        //checking if the next wave part is allowed to spawn
+        if (_waveProgressList.Count > 0)
         {
-            if (_debugLevel > 0 && _debugWave > 0)
+            if (_waveProgressList[_waveProgressList.Count - 1].SecToWaitForNextPart != 0 && (_waveProgressList[_waveProgressList.Count - 1].TimeStarted + _waveProgressList[_waveProgressList.Count - 1].SecToWaitForNextPart) <= Time.time)
             {
+                _startNextWavePart = true;
+            }
+        }
+
+        if (!_buildWaveStarted && _buildWaveEnded && _spawningDone)
+        {
+            UnitScript[] enemiesLeft = FindObjectsOfType<UnitScript>();
+            if (enemiesLeft.Length == 0)
+            {
+                _spawningDone = false;
+                _LastPartDone = false;
+                _startNextWavePart = true;
+                _currentWavePart = 0;
+                _currentWave++;
+                _buildWaveScript.StartBuildingWave();
+            }
+        }
+
+        //Enter when spawning is started and Last wave part is NOT done spawning
+        if (_spawningStarted && !_LastPartDone && _buildWaveEnded)
+        {
+            //wave spawning
+            if (_debugLevel > 0 && _debugWave > 0)
+            #region Debug Wave Spawning
+            {
+                //Enter when next part should be loaded
                 if (_startNextWavePart)
                 {
                     WaveTemplateScript wavePart = null;
                     do
                     {
-
                         if (_currentWavePart <= _levelList[_debugLevel - 1].WaveList[_debugWave - 1].WaveParts.Count - 1)
                         {
                             wavePart = _levelList[_debugLevel - 1].WaveList[_debugWave - 1].WaveParts[_currentWavePart];
                             _createIngameWavePart(wavePart);
                             _currentWavePart++;
                             _startNextWavePart = false;
+
+                            if (_waveProgressList[_waveProgressList.Count-1].SecToWaitForNextPart > 0)
+                            {
+                                break;
+                            }
                         }
                         else
                         {
@@ -101,23 +152,69 @@ public class WaveMainScript : MonoBehaviour {
                     } while (true);
                     
                 }
-                _updateWave();
-                
-                //_spawnGrunt(_listWaveStartPositions[Random.Range(0, _listWaveStartPositions.Count - 1)], 1);
-                //_spawnHeavy(_listWaveStartPositions[Random.Range(0, _listWaveStartPositions.Count - 1)], 1);
-                //_spawnFlying(_listWaveStartPositions[Random.Range(0, _listWaveStartPositions.Count - 1)], 1);
-                //_spawnPaladin(_listWaveStartPositions[Random.Range(0, _listWaveStartPositions.Count - 1)], 1);
-            }
-        }
-    }
 
+            }
+            #endregion
+            else if (_debugLevel == 0 && _debugWave == 0)
+            #region Real Wave Spawning
+            {
+                //Enter when next part should be loaded
+                if (_startNextWavePart)
+                {
+                    WaveTemplateScript wavePart = null;
+                    do
+                    {
+                        if (_currentWavePart <= _levelList[_currentLevel - 1].WaveList[_currentWave - 1].WaveParts.Count - 1)
+                        {
+                            wavePart = _levelList[_currentLevel - 1].WaveList[_currentWave - 1].WaveParts[_currentWavePart];
+                            _createIngameWavePart(wavePart);
+                            _currentWavePart++;
+                            _startNextWavePart = false;
+
+                            if (_waveProgressList[_waveProgressList.Count - 1].SecToWaitForNextPart > 0)
+                            {
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    } while (true);
+
+                }
+            }
+            #endregion
+            
+            _updateWave();
+        }
+
+        
+
+        
+    }
+    
+    /// <summary>
+    /// <para>Update wave</para>
+    /// <para>Spawn monsters with the correct timing and update the wave part variables</para>
+    /// </summary>
     private void _updateWave()
     {
         foreach (WavePartProgressScript part in _waveProgressList)
         {
+            if (part.GruntAmountRemaining == 0 && part.HeavyAmountRemaining == 0 && part.FlyingAmountRemaining == 0 && part.PaladinAmountRemaining == 0)
+            {
+                _spawningDone = true;
+            }
+            else
+            {
+                _spawningDone = false;
+            }
+
+            #region Grunt Wave Spawning
             if (part.GruntAmountSpawned == 0 && part.GruntAmountRemaining > 0)
             {
-                _spawnGrunt(_listWaveStartPositions[part.Path], part.Path);
+                _spawnGrunt(_listWaveStartPositions[part.Path-1], part.Path);
                 part.GruntAmountSpawned++;
                 part.GruntAmountRemaining--;
             }
@@ -129,14 +226,85 @@ public class WaveMainScript : MonoBehaviour {
             {
                 if (part.GruntAmountRemaining > 0)
                 {
-                    _spawnGrunt(_listWaveStartPositions[part.Path], part.Path);
+                    _spawnGrunt(_listWaveStartPositions[part.Path-1], part.Path);
                     part.GruntAmountSpawned++;
                     part.GruntAmountRemaining--;
                 }
             }
+            #endregion
+
+            #region Heavy Wave Spawning
+            if (part.HeavyAmountSpawned == 0 && part.HeavyAmountRemaining > 0)
+            {
+                _spawnHeavy(_listWaveStartPositions[part.Path - 1], part.Path);
+                part.HeavyAmountSpawned++;
+                part.HeavyAmountRemaining--;
+            }
+            else if (part.TimeStarted + (part.HeavyAmountSpawned * part.TimeBetweenEnemies) > Time.time)
+            {
+                continue;
+            }
+            else if (part.TimeStarted + (part.HeavyAmountSpawned * part.TimeBetweenEnemies) <= Time.time)
+            {
+                if (part.HeavyAmountRemaining > 0)
+                {
+                    _spawnHeavy(_listWaveStartPositions[part.Path - 1], part.Path);
+                    part.HeavyAmountSpawned++;
+                    part.HeavyAmountRemaining--;
+                }
+            }
+            #endregion
+
+            #region Flying Wave Spawning
+            if (part.FlyingAmountSpawned == 0 && part.FlyingAmountRemaining > 0)
+            {
+                _spawnFlying(_listWaveStartPositions[part.Path-1], part.Path);
+                part.FlyingAmountSpawned++;
+                part.FlyingAmountRemaining--;
+            }
+            else if (part.TimeStarted + (part.FlyingAmountSpawned * part.TimeBetweenEnemies) > Time.time)
+            {
+                continue;
+            }
+            else if (part.TimeStarted + (part.FlyingAmountSpawned * part.TimeBetweenEnemies) <= Time.time)
+            {
+                if (part.FlyingAmountRemaining > 0)
+                {
+                    _spawnFlying(_listWaveStartPositions[part.Path-1], part.Path);
+                    part.FlyingAmountSpawned++;
+                    part.FlyingAmountRemaining--;
+                }
+            }
+            #endregion
+
+            #region Paladin Wave Spawning
+            if (part.PaladinAmountSpawned == 0 && part.PaladinAmountRemaining > 0)
+            {
+                _spawnPaladin(_listWaveStartPositions[part.Path-1], part.Path);
+                part.PaladinAmountSpawned++;
+                part.PaladinAmountRemaining--;
+            }
+            else if (part.TimeStarted + (part.PaladinAmountSpawned * part.TimeBetweenEnemies) > Time.time)
+            {
+                continue;
+            }
+            else if (part.TimeStarted + (part.PaladinAmountSpawned * part.TimeBetweenEnemies) <= Time.time)
+            {
+                if (part.PaladinAmountRemaining > 0)
+                {
+                    _spawnPaladin(_listWaveStartPositions[part.Path-1], part.Path);
+                    part.PaladinAmountSpawned++;
+                    part.PaladinAmountRemaining--;
+                }
+            }
+            #endregion
         }
     }
 
+    /// <summary>
+    /// <para>Create wave part inside the code, for correctly spawning enemies</para>
+    /// </summary>
+    /// <param name="part"></param>
     private void _createIngameWavePart(WaveTemplateScript part)
     {
         WavePartProgressScript partProgress = new WavePartProgressScript();

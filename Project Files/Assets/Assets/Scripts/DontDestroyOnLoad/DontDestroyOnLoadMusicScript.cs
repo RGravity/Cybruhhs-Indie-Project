@@ -54,10 +54,10 @@ public class DontDestroyOnLoadMusicScript : MonoBehaviour
     {
         if (_play == true)
         {
-            StopCoroutine("PlayNextInGameMusic");
-            StartCoroutine("PlayNextInGameMusic");
+            //StopCoroutine("PlayNextInGameMusic");
+            //StartCoroutine("PlayNextInGameMusic");
             _music[0].Stop();
-            _music[1].Play();
+            _music[2].Play();
             _play = false;
         }
 
@@ -67,13 +67,13 @@ public class DontDestroyOnLoadMusicScript : MonoBehaviour
     {
         if (_play2 == true)
         {
-            Application.LoadLevel(0);
             _music[0].Play();
             _music[1].Stop();
             _music[2].Stop();
             _level = 0;
             StopCoroutine("PlayNextInGameMusic");
             _play2 = false;
+            Application.LoadLevel(0);
         }
 
     }

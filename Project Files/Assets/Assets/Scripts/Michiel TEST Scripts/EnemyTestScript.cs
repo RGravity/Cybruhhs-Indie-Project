@@ -25,5 +25,10 @@ public class EnemyTestScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         this.gameObject.transform.Translate(new Vector3(_speed/40f, 0, 0));
+
+        if(CountTimerScript.IsTimerDown(Time.time, 0, 0, 5))
+        {
+            int test = 0;
+        }
 	}
 }

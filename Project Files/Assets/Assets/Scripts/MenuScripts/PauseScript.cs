@@ -5,12 +5,12 @@ public class PauseScript : MonoBehaviour {
 
     private bool _pauseGame = false;
     private DontDestroyOnLoadMusicScript _map;
+    private CheckForMusicScript _check;
     private GameObject _resumeButton;
     private GameObject _quitButton;
     private GameObject _backGround;
     private GameObject _pauseButton;
     private GameObject _radialMenu;
-    private CheckForMusicScript _check;
 
     public bool PauseGame { get { return _pauseGame; } set { _pauseGame = value; } }
 
@@ -22,10 +22,8 @@ public class PauseScript : MonoBehaviour {
         _pauseButton = GameObject.Find("PauseButton");
         _radialMenu = GameObject.FindObjectOfType<BuildingSpawnScript>().gameObject;
         _check = GameObject.FindObjectOfType<CheckForMusicScript>();
-        if (_check.Check == true)
-        {
-            _map = GameObject.FindObjectOfType<DontDestroyOnLoadMusicScript>();
-        }
+        if (_check.Check == true)_map = GameObject.FindObjectOfType<DontDestroyOnLoadMusicScript>();
+	}
 	}
 	
 	// Update is called once per frame
