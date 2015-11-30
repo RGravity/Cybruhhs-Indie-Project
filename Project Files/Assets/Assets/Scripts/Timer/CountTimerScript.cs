@@ -41,20 +41,21 @@ public static class CountTimerScript {
     /// <para>pMinutes is AddMinutes.</para>
     /// <para>pSeconds is AddSeconds./<para>
     /// </summary>
-    public static bool IsTimerDown(float pStartTime = 0,float pEndTime = 0, float pMinutes = 0, float pSeconds = 0)
+    public static bool IsTimerDown(float pStartTime = 0,float pEndTime = 0, float pMinutes = 0, float pSeconds = 0, float pMilliSeconds =1)
     {
+        pStartTime = Time.time;
         if (pEndTime == 0)
         {
-            _endTime = pStartTime + (pMinutes * 60) + pSeconds;
+            _endTime = pStartTime + (pMinutes * 60) + pSeconds + (pMilliSeconds / 1000);
         }
         if (_endTime < pStartTime)
         {
             return true;
         }
-        else if(_endTime > pStartTime)
-        {
-            return false;
-        }
+        //else if(_endTime > pStartTime)
+        //{
+        //    return false;
+        //}
 
         IsTimerDown(pStartTime, _endTime);
         return false;

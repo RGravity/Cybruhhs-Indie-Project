@@ -38,7 +38,7 @@ public class EnemyStatScript : MonoBehaviour {
     /// </summary>
     private void _checkHealth()
     {
-        Debug.Log("Current Health of Enemy:" + _health);
+        //Debug.Log("Current Health of Enemy:" + _health);
         if (_health <= 0)
         {
             //DROP GOLD HERE
@@ -46,7 +46,7 @@ public class EnemyStatScript : MonoBehaviour {
             //RemoveGameObject, And Fix Pathfinding.
             this.gameObject.GetComponent<UnitScript>().Map = null;
             Destroy(this.gameObject);
-            Debug.Log("Enemy Died");
+            //Debug.Log("Enemy Died");
         }
     }
 
