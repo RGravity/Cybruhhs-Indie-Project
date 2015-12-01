@@ -47,7 +47,7 @@ public class UnitScript : MonoBehaviour
             }
         }
 
-        // Have we moved our visible piece close enough to the target tile that we can
+        // Have we moved our Unit close enough to the target tile that we can
         // advance to the next step in our pathfinding?
         if (this != null)
         {
@@ -96,12 +96,9 @@ public class UnitScript : MonoBehaviour
             return;
 
         // Teleport us to our correct "current" position, in case we
-        // haven't finished the animation yet.
+        // haven't finished walking there yet.
         transform.position = _map.TileCoordToWorldCoord(_tileX, _tileY);
-
-        // Get cost from current tile to next tile
-        //remainingMovement -= map.CostToEnterTile(currentPath[0].x, currentPath[0].y, currentPath[1].x, currentPath[1].y );
-
+        
         // Move us to the next tile in the sequence
         _tileX = _currentPath[1].X;
         _tileY = _currentPath[1].Y;
