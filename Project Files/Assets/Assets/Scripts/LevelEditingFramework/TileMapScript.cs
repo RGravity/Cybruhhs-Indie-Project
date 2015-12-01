@@ -226,9 +226,11 @@ public class TileMapScript : MonoBehaviour
                         break;
                     case 11://Monster spawn tiles(actual spawn)
                         _tiles[x, y] = 4;
+                        _listWaveStartPositions.Add(new Vector3(x, y, -1));
                         break;
                     case 12://Base(actual end position)
                         _tiles[x, y] = 0;
+                        _endPosition = new Vector3(x, y, -1);
                         break;
                     default:
                         _tiles[x, y] = 2;
