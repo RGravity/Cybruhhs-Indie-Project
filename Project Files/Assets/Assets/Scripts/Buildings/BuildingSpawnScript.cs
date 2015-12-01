@@ -31,12 +31,12 @@ public class BuildingSpawnScript : MonoBehaviour {
     private float _angle;
     private bool _showButtons;
     private int _index;
-    private GameObject _selectedTile;
+    private GameObject[] _selectedTile;
     private BaseScript _baseScript;
     private TileMapScript _tileMap;
     private int[] _savedTileIndexes;
     private AudioSource _buy;
-    private int _indexofSelectedTile;
+    private int[] _indexofSelectedTile;
 
     // Use this for initialization
 
@@ -98,17 +98,44 @@ public class BuildingSpawnScript : MonoBehaviour {
             Ray vRay = _myCam.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(vRay, out vHit, 1000))
             {
-                Debug.Log("this Works");
-                int[,] iets = _tileMap.Tiles;
-                _indexofSelectedTile = iets[(int)vHit.collider.transform.position.x, (int)vHit.collider.transform.position.y];
-               
+                int[,] tiles = _tileMap.Tiles;
+                _indexofSelectedTile = new int[4];
+                _indexofSelectedTile[0] = tiles[(int)vHit.collider.transform.position.x, (int)vHit.collider.transform.position.y];
 
-                if (_tileMap.TileTypes[_indexofSelectedTile].BuildingAllowed)
+                Collider[] tower = new Collider[0];
+                switch (vHit.collider.gameObject.GetComponent<BuildPlacementTilesScript>().TowerPlaceNr)
                 {
-                    Debug.Log("And This also works");
+                    case TowerNoneNumbers.Tower1:
+                        tower = Physics.OverlapSphere(new Vector3(vHit.collider.transform.position.x - 0.5f, vHit.collider.transform.position.y - 0.5f), 0.5f);
+                        break;
+                    case TowerNoneNumbers.Tower2:
+                        tower = Physics.OverlapSphere(new Vector3(vHit.collider.transform.position.x + 0.5f, vHit.collider.transform.position.y - 0.5f), 0.5f);
+                        break;
+                    case TowerNoneNumbers.Tower3:
+                        tower = Physics.OverlapSphere(new Vector3(vHit.collider.transform.position.x - 0.5f, vHit.collider.transform.position.y + 0.5f), 0.5f);
+                        break;
+                    case TowerNoneNumbers.Tower4:
+                        tower = Physics.OverlapSphere(new Vector3(vHit.collider.transform.position.x + 0.5f, vHit.collider.transform.position.y + 0.5f), 0.5f);
+                        break;
+                    default:
+                        break;
+                }
+
+                if (_tileMap.TileTypes[_indexofSelectedTile[0]].BuildingAllowed && !vHit.collider.gameObject.GetComponent<ArrowTowerScript>() && !vHit.collider.gameObject.GetComponent<CannonTowerScript>() && !vHit.collider.gameObject.GetComponent<SlowTowerScript>())
+                {
                     Vector2 tempPos = _myCam.WorldToScreenPoint(vHit.transform.position);
                     _center = new Vector2(tempPos.x, tempPos.y);
-                    _selectedTile = vHit.collider.gameObject;
+                    _selectedTile = new GameObject[tower.Length];
+                    for (int i = 0; i < tower.Length; i++)
+                    {
+                        _selectedTile[i] = tower[i].gameObject;
+                    }
+                    _calculateEverything();
+                }
+                else
+                {
+                    _center = new Vector2(-100, -100);
+                    _selectedTile = null;
                     _calculateEverything();
                 }
             } 
@@ -175,6 +202,20 @@ public class BuildingSpawnScript : MonoBehaviour {
         {
             //CannonTower
             case 0:
+                if (_baseScript.Gold >= 250)
+                {
+                    for (int i = 0; i < _selectedTile.Length; i++)
+                    {
+                        _selectedTile[i].GetComponent<Renderer>().material.mainTexture = _turretTextures[i];
+                        _selectedTile[3].AddComponent<CannonTowerScript>();
+                        _selectedTile[i].AddComponent<UpgradeTowerScript>();
+                    }
+                    //_baseScript.LowerGold(200);
+                    if (_buy != null)
+                    {
+                        _buy.Play();
+                    }
+                }
                 break;
             //SlowTower            
             case 1:
@@ -183,10 +224,12 @@ public class BuildingSpawnScript : MonoBehaviour {
             case 2:
                 if (_baseScript.Gold >= 200)
                 {
-                    _selectedTile.GetComponent<Renderer>().material.mainTexture = _turretTextures[0];
-                    _selectedTile.AddComponent<ArrowTowerScript>();
-                    _selectedTile.AddComponent<UpgradeTowerScript>();
-                    _tileMap.TileTypes[_indexofSelectedTile].BuildingAllowed = false;
+                    for (int i = 0; i < _selectedTile.Length; i++)
+                    {
+                        _selectedTile[i].GetComponent<Renderer>().material.mainTexture = _turretTextures[i];
+                        _selectedTile[3].AddComponent<ArrowTowerScript>();
+                        _selectedTile[i].AddComponent<UpgradeTowerScript>();
+                    }
                     //_baseScript.LowerGold(200);
                     if (_buy != null)
                     {
