@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-
-public class ArrowTowerScript : MonoBehaviour {
+public class SlowTowerScript : MonoBehaviour {
 
     private BuildingType _buildingType = BuildingType.Both;
     private GameObject _bullet;
@@ -18,18 +17,20 @@ public class ArrowTowerScript : MonoBehaviour {
     private bool _allowShoot = true;
     [SerializeField]
     private float _countdownTime;
-    
+
     private GameObject _enemyInRange;
     private AudioSource _shoot1;
     private AudioSource _shoot2;
     private AudioSource _shoot3;
 
     private CheckForMusicScript _check;
+
+    //AUDIOSOURCE NEEDS TO BE CHANGED
     // Use this for initializations
     void Start()
     {
         _thisPosition = this.gameObject.transform.position;
-        _bullet = (GameObject)Resources.Load("ArrowBullet");
+        _bullet = (GameObject)Resources.Load("SlowBullet");
         _check = GameObject.FindObjectOfType<CheckForMusicScript>();
         if (_check.Check == true)
         {
@@ -39,12 +40,12 @@ public class ArrowTowerScript : MonoBehaviour {
         }
     }
 
-// Update is called once per frame
-void Update()
+    // Update is called once per frame
+    void Update()
     {
         //if (_enemyInRange == null)
         //{
-            _checkForEnemies();
+        _checkForEnemies();
         //}
         //else
         //{
@@ -54,7 +55,7 @@ void Update()
 
         }
         //}
-        
+
     }
 
     /// <summary>
@@ -90,7 +91,7 @@ void Update()
             }
 
             GameObject bulletObject = Instantiate(_bullet);
-            bulletObject.transform.position =new Vector3(this._thisPosition.x,this._thisPosition.y,-1);
+            bulletObject.transform.position = new Vector3(this._thisPosition.x, this._thisPosition.y, -1);
             bulletObject.GetComponent<ArrowBulletScript>().ShootEnemy(_enemyInRange, _damage);
             int random = Random.Range(0, 2);
 
@@ -120,7 +121,7 @@ void Update()
     /// Updates the Tier of the tower
     /// </summary>
     /// <returns></returns>
-    public bool UpdateTowerArrow()
+    public bool UpdateTowerSlow()
     {
         if (_tier > 3)
         {

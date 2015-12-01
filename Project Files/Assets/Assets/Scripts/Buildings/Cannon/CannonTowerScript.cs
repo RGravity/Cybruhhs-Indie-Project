@@ -23,7 +23,7 @@ public class CannonTowerScript : MonoBehaviour {
     void Start()
     {
         _thisPosition = this.gameObject.transform.position;
-        _bullet = (GameObject)Resources.Load("Bullet");
+        _bullet = (GameObject)Resources.Load("CannonBullet");
         _check = GameObject.FindObjectOfType<CheckForMusicScript>();
         if (_check.Check == true)
         {
@@ -95,5 +95,18 @@ public class CannonTowerScript : MonoBehaviour {
         {
             _allowShoot = true;
         }
+    }
+    /// <summary>
+    /// Updates the Tier of the tower
+    /// </summary>
+    /// <returns></returns>
+    public bool UpdateTowerCannon()
+    {
+        if (_tier > 3)
+        {
+            return false;
+        }
+        _tier++;
+        return true;
     }
 }

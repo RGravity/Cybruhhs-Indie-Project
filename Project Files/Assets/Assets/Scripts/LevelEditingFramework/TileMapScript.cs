@@ -210,38 +210,19 @@ public class TileMapScript : MonoBehaviour
                     case 5://Monster spawn tiles
                         _tiles[x, y] = 4;
                         _listWaveStartPositions.Add(new Vector3(x, y, -1));
-                        //_waveStartposition = new Vector3(x, y, -1);
-                        //GameObject waveObject = new GameObject();
-                        //WaveScript waveScript = waveObject.AddComponent<WaveScript>();
-                        //waveObject.transform.position = _waveStartposition;
-                        //_selectedUnits.AddRange(waveScript.CreateMonstersGrunt(10));
-                        //_selectedUnits.AddRange(waveScript.CreateMonstersHeavy(10));
-                        //_selectedUnits.AddRange(waveScript.CreateMonstersFlying(10));
-                        //_selectedUnits.AddRange(waveScript.CreateMonstersPaladin(10));
-                        //foreach (GameObject unit in _selectedUnits)
-                        //{
-                        //    if (unit.name == "Grunt")
-                        //    {
-                        //        unit.GetComponent<UnitScript>().Speed = 7;
-                        //    }
-                        //    if (unit.name == "Heavy")
-                        //    {
-                        //        unit.GetComponent<UnitScript>().Speed = 2;
-                        //    }
-                        //    if (unit.name == "Paladin")
-                        //    {
-                        //        unit.GetComponent<UnitScript>().Speed = 5;
-                        //    }
-                        //    if (unit.name == "Flying")
-                        //    {
-                        //        unit.GetComponent<UnitScript>().Speed = 3;
-                        //    }
-                        //    unit.GetComponent<UnitScript>().TileX = x;
-                        //    unit.GetComponent<UnitScript>().TileY = y;
-                        //    unit.GetComponent<UnitScript>().Map = this;
-                        //}
-
                         break;
+                    case 6://bridge
+                        _tiles[x, y] = 3;
+                        break;
+                    case 7://tower placement tile 1
+                        break;
+                    case 8://tower placement tile 2
+                        break;
+                    case 9://tower placement tile 3
+                        break;
+                    case 10://tower placement tile 4
+                        break;
+
                     default:
                         _tiles[x, y] = 0;
                         break;

@@ -8,12 +8,16 @@ public class BuildingWaveScript : MonoBehaviour {
     private float _milliSecondsRemaining;
     private bool _buildingWaveActive = false;
     private WaveMainScript _waveScript;
+    private NextWaveTimerScript _waveTimer;
+    private bool _startNextWave = false;
 
     public bool BuildingWaveActive { get { return _buildingWaveActive; } }
+    public bool StartNextWave { set { _startNextWave = value; } }
 
 	// Use this for initialization
 	void Start () {
         _waveScript = FindObjectOfType<WaveMainScript>();
+        _waveTimer = FindObjectOfType<NextWaveTimerScript>();
         _milliSecondsRemaining = _SecondsToBuild;
     }
 	
@@ -21,11 +25,16 @@ public class BuildingWaveScript : MonoBehaviour {
 	void Update () {
         if (_buildingWaveActive)
         {
+            if (_startNextWave)
+            {
+                _milliSecondsRemaining = 0;
+            }
+
             _milliSecondsRemaining -= Time.deltaTime;
             int SecondsRemaining = (int)Mathf.Ceil(_milliSecondsRemaining);
 
             // ------ replace with code to update the HUD Timer ------
-            Debug.Log(SecondsRemaining);
+            _waveTimer.SetNextWaveTimer(SecondsRemaining);
             // -------------------------------------------------------
 
             if (_milliSecondsRemaining <= 0)

@@ -55,13 +55,12 @@ public class EnemyStatScript : MonoBehaviour {
     /// </summary>
     private void _checkTarget()
     {
-        //if (/*ReachedTarget*/ true)
-        //{
-        //    _baseStats.LowerHealth(_damageToBase);
-        //    _baseStats.LowerGold(_goldCarrying);
-        //    this.gameObject.GetComponent<UnitScript>().Map = null;
-        //    Destroy(this.gameObject);
-        //}
+        if (this.GetComponent<UnitScript>().CurrentPath == null)
+        {
+            _baseStats.LowerHealth(_damageToBase);
+            _baseStats.LowerGold(_goldCarrying);
+            Destroy(this.gameObject);
+        }
     }
 
     /// <summary>
