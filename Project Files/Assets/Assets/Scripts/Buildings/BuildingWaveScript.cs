@@ -9,8 +9,10 @@ public class BuildingWaveScript : MonoBehaviour {
     private bool _buildingWaveActive = false;
     private WaveMainScript _waveScript;
     private NextWaveTimerScript _waveTimer;
+    private bool _startNextWave = false;
 
     public bool BuildingWaveActive { get { return _buildingWaveActive; } }
+    public bool StartNextWave { set { _startNextWave = value; } }
 
 	// Use this for initialization
 	void Start () {
@@ -23,6 +25,11 @@ public class BuildingWaveScript : MonoBehaviour {
 	void Update () {
         if (_buildingWaveActive)
         {
+            if (_startNextWave)
+            {
+                _milliSecondsRemaining = 0;
+            }
+
             _milliSecondsRemaining -= Time.deltaTime;
             int SecondsRemaining = (int)Mathf.Ceil(_milliSecondsRemaining);
 
