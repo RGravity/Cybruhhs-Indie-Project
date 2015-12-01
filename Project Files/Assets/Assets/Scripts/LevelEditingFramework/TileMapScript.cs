@@ -215,12 +215,16 @@ public class TileMapScript : MonoBehaviour
                         _tiles[x, y] = 3;
                         break;
                     case 7://tower placement tile 1
+                        _tiles[x, y] = 5;
                         break;
                     case 8://tower placement tile 2
+                        _tiles[x, y] = 6;
                         break;
                     case 9://tower placement tile 3
+                        _tiles[x, y] = 7;
                         break;
                     case 10://tower placement tile 4
+                        _tiles[x, y] = 8;
                         break;
 
                     default:
