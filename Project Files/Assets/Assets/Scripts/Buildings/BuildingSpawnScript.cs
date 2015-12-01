@@ -36,6 +36,7 @@ public class BuildingSpawnScript : MonoBehaviour {
     private TileMapScript _tileMap;
     private int[] _savedTileIndexes;
     private AudioSource _buy;
+    private int _indexofSelectedTile;
 
     // Use this for initialization
 
@@ -98,9 +99,10 @@ public class BuildingSpawnScript : MonoBehaviour {
             if (Physics.Raycast(vRay, out vHit, 1000))
             {
                 int[,] iets = _tileMap.Tiles;
-                int i = iets[(int)vHit.collider.transform.position.x, (int)vHit.collider.transform.position.y];
+                _indexofSelectedTile = iets[(int)vHit.collider.transform.position.x, (int)vHit.collider.transform.position.y];
+               
 
-                if (_tileMap.TileTypes[i].BuildingAllowed)
+                if (_tileMap.TileTypes[_indexofSelectedTile].BuildingAllowed)
                 {
                     Vector2 tempPos = _myCam.WorldToScreenPoint(vHit.transform.position);
                     _center = new Vector2(tempPos.x, tempPos.y);
@@ -181,6 +183,8 @@ public class BuildingSpawnScript : MonoBehaviour {
                 {
                     _selectedTile.GetComponent<Renderer>().material.mainTexture = _turretTextures[0];
                     _selectedTile.AddComponent<ArrowTowerScript>();
+                    _selectedTile.AddComponent<UpgradeTowerScript>();
+                    _tileMap.TileTypes[_indexofSelectedTile].BuildingAllowed = false;
                     //_baseScript.LowerGold(200);
                     if (_buy != null)
                     {
