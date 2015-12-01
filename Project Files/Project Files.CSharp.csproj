@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="Assets\Assets\Scripts\Buildings\Arrow\ArrowBulletScript.cs" />
     <Compile Include="Assets\Assets\Scripts\Buildings\Arrow\ArrowTowerScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\Buildings\BuildPlacementTilesScript.cs" />
     <Compile Include="Assets\Assets\Scripts\Buildings\BuildingSpawnScript.cs" />
     <Compile Include="Assets\Assets\Scripts\Buildings\BuildingWaveScript.cs" />
     <Compile Include="Assets\Assets\Scripts\Buildings\Cannon\CannonBulletScript.cs" />

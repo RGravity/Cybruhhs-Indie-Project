@@ -28,6 +28,7 @@ public class BuildingWaveScript : MonoBehaviour {
             if (_startNextWave)
             {
                 _milliSecondsRemaining = 0;
+                _startNextWave = false;
             }
 
             _milliSecondsRemaining -= Time.deltaTime;
