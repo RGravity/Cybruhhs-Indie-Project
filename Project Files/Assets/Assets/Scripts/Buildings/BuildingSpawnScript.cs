@@ -41,7 +41,6 @@ public class BuildingSpawnScript : MonoBehaviour {
 
     void Start ()
     {
-        _offsetForRadialWheel = Screen.height;
         _check = GameObject.FindObjectOfType<CheckForMusicScript>();
         _tileMap = FindObjectOfType<TileMapScript>();
         _baseScript = GameObject.FindObjectOfType<BaseScript>();
@@ -91,6 +90,7 @@ public class BuildingSpawnScript : MonoBehaviour {
 
     void Update()
     {
+        _offsetForRadialWheel = Screen.height;
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit vHit = new RaycastHit();
