@@ -15,7 +15,8 @@ public class BuildingSpawnScript : MonoBehaviour {
     private Texture[] _selectedButtons; //The selected state of the Buttons
     [SerializeField]
     private Camera _myCam;
-    [SerializeField]
+
+
     private int _offsetForRadialWheel;
     
 
@@ -40,6 +41,7 @@ public class BuildingSpawnScript : MonoBehaviour {
 
     void Start ()
     {
+        _offsetForRadialWheel = Screen.height;
         _check = GameObject.FindObjectOfType<CheckForMusicScript>();
         _tileMap = FindObjectOfType<TileMapScript>();
         _baseScript = GameObject.FindObjectOfType<BaseScript>();
