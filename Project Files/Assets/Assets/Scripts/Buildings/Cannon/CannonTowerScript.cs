@@ -41,6 +41,9 @@ public class CannonTowerScript : MonoBehaviour {
     private bool _allowShoot = true;
     private float _countdownTime;
 
+    [SerializeField]
+    private float _speedProjectile;
+
     private GameObject _enemyInRange;
     private AudioSource _cannonFire;
     private CheckForMusicScript _check;
@@ -82,9 +85,12 @@ public class CannonTowerScript : MonoBehaviour {
         UnitScript[] enemies = GameObject.FindObjectsOfType<UnitScript>();
         if (enemies.Length > 0)
         {
-            if ((enemies[enemies.Length - 1].transform.position - _thisPosition).magnitude < _range)
+            if (enemies[enemies.Length - 1].gameObject.GetComponent<EnemyStatScript>().EnemyType == EnemyType.Ground)
             {
-                _enemyInRange = enemies[enemies.Length - 1].gameObject;
+                if ((enemies[enemies.Length - 1].transform.position - _thisPosition).magnitude < _range)
+                {
+                    _enemyInRange = enemies[enemies.Length - 1].gameObject;
+                }
             }
         }
     }
@@ -106,7 +112,7 @@ public class CannonTowerScript : MonoBehaviour {
 
             GameObject bulletObject = Instantiate(_bullet);
             bulletObject.transform.position = new Vector3(this._thisPosition.x, this._thisPosition.y, -1);
-            bulletObject.GetComponent<CannonBulletScript>().ShootEnemy(_enemyInRange, _damage);
+            bulletObject.GetComponent<CannonBulletScript>().ShootEnemy(_enemyInRange, _damage, _speedProjectile);
             if (_cannonFire != null)
             {
                 _cannonFire.Play();

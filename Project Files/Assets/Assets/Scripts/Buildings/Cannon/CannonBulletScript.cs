@@ -5,6 +5,7 @@ public class CannonBulletScript : MonoBehaviour {
 
     private GameObject _enemy;
     private int _damage;
+    private float _speed;
     private AudioSource _hit1;
     private AudioSource _hit2;
     private AudioSource _hit3;
@@ -28,7 +29,7 @@ public class CannonBulletScript : MonoBehaviour {
     {
         if (_enemy != null)
         {
-            this.transform.position = Vector3.MoveTowards(this.transform.position, _enemy.transform.position, 7 * Time.deltaTime);
+            this.transform.position = Vector3.MoveTowards(this.transform.position, _enemy.transform.position, _speed * Time.deltaTime);
             if (Vector3.Distance(transform.position, _enemy.transform.position) < 0.3f)
             {
                 EnemyStatScript stats = _enemy.GetComponent<EnemyStatScript>();
@@ -54,8 +55,9 @@ public class CannonBulletScript : MonoBehaviour {
         }
     }
 
-    public void ShootEnemy(GameObject pEnemy, int pDamage)
+    public void ShootEnemy(GameObject pEnemy, int pDamage, float pSpeedProjectile)
     {
+        _speed = pSpeedProjectile;
         _enemy = pEnemy;
         _damage = pDamage;
     }

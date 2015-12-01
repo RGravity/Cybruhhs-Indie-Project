@@ -5,6 +5,7 @@ public class ArrowBulletScript : MonoBehaviour {
 
     private GameObject _enemy;
     private int _damage;
+    private float _speed;
     private AudioSource _arrowHit;
     private CheckForMusicScript _check;
     private Vector3 _thisStartPosition;
@@ -23,7 +24,7 @@ public class ArrowBulletScript : MonoBehaviour {
 	void Update () {
         if (_enemy != null)
         {
-            this.transform.position = Vector3.MoveTowards(this.transform.position, _enemy.transform.position, 7 * Time.deltaTime);
+            this.transform.position = Vector3.MoveTowards(this.transform.position, _enemy.transform.position, _speed * Time.deltaTime);
             float arrowDirection = _thisStartPosition.x - _enemy.transform.position.x;
             if (arrowDirection < 0)
             {
@@ -52,8 +53,9 @@ public class ArrowBulletScript : MonoBehaviour {
 
 	}
 
-    public void ShootEnemy(GameObject pEnemy, int pDamage)
+    public void ShootEnemy(GameObject pEnemy, int pDamage, float pSpeedProjectile)
     {
+        _speed = pSpeedProjectile;
         _enemy = pEnemy;
         _damage = pDamage;
     }
