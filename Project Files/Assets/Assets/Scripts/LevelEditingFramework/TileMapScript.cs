@@ -196,7 +196,6 @@ public class TileMapScript : MonoBehaviour
                 {
                     case 1://BASE
                         _tiles[x, y] = 0;
-                        _endPosition = new Vector3(x, y, -1);
                         break;
                     case 2://Non-walkable ?grass?
                         _tiles[x, y] = 2;
@@ -209,7 +208,6 @@ public class TileMapScript : MonoBehaviour
                         break;
                     case 5://Monster spawn tiles
                         _tiles[x, y] = 4;
-                        _listWaveStartPositions.Add(new Vector3(x, y, -1));
                         break;
                     case 6://bridge
                         _tiles[x, y] = 9;
@@ -226,9 +224,14 @@ public class TileMapScript : MonoBehaviour
                     case 10://tower placement tile 4
                         _tiles[x, y] = 8;
                         break;
-
-                    default:
+                    case 11://Monster spawn tiles(actual spawn)
+                        _tiles[x, y] = 4;
+                        break;
+                    case 12://Base(actual end position)
                         _tiles[x, y] = 0;
+                        break;
+                    default:
+                        _tiles[x, y] = 2;
                         break;
                 }
             }
