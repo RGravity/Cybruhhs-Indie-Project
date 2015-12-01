@@ -49,6 +49,8 @@ public class SlowTowerScript : MonoBehaviour {
     private float _rangeTier3 = 5;
     #endregion
 
+    private bool _isNextEnemy = false;
+
     private bool _allowShoot = true;
     [SerializeField]
     private float _countdownTime;
@@ -59,6 +61,8 @@ public class SlowTowerScript : MonoBehaviour {
     private AudioSource _shoot3;
 
     private CheckForMusicScript _check;
+
+    private int _nextEnemy = 1;
 
     //AUDIOSOURCE NEEDS TO BE CHANGED
     // Use this for initializations
@@ -103,12 +107,27 @@ public class SlowTowerScript : MonoBehaviour {
     private void _checkForEnemies()
     {
         UnitScript[] enemies = GameObject.FindObjectsOfType<UnitScript>();
+        _nextEnemy = 1;
         if (enemies.Length > 0)
         {
-            if ((enemies[enemies.Length - 1].transform.position - _thisPosition).magnitude < _range)
+            if (enemies[enemies.Length - _nextEnemy].IsSlowed || _isNextEnemy)
             {
-                _enemyInRange = enemies[enemies.Length - 1].gameObject;
+                if ((enemies[enemies.Length - _nextEnemy - 1].transform.position - _thisPosition).magnitude < _range)
+                {
+                    //Debug.Log(_nextEnemy);
+                    _nextEnemy++;
+                    _enemyInRange = enemies[enemies.Length - _nextEnemy].gameObject;
+                }
             }
+            else
+            {
+                if ((enemies[enemies.Length - _nextEnemy].transform.position - _thisPosition).magnitude < _range)
+                {
+                    _isNextEnemy = true;
+                    _enemyInRange = enemies[enemies.Length - _nextEnemy].gameObject;
+                }
+            }
+
         }
     }
 
