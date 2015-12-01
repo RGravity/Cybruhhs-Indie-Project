@@ -88,7 +88,7 @@ public class WaveMainScript : MonoBehaviour {
         _endPosition = pEndPosition;
         _spawningStarted = true;
         _currentLevel = pLevel;
-        FindObjectOfType<WaveIndicatorScript>().SetWaveIndicator(_currentWave, )
+        FindObjectOfType<WaveIndicatorScript>().SetWaveIndicator(_currentWave, _levelList[_currentLevel - 1].WaveList.Count);
         
     }
 	
@@ -124,7 +124,7 @@ public class WaveMainScript : MonoBehaviour {
         //Enter when spawning is started and Last wave part is NOT done spawning
         if (_spawningStarted && !_LastPartDone && _buildWaveEnded)
         {
-
+            FindObjectOfType<WaveIndicatorScript>().SetWaveIndicator(_currentWave, _levelList[_currentLevel - 1].WaveList.Count);
             //wave spawning
             if (_debugLevel > 0 && _debugWave > 0)
             #region Debug Wave Spawning
