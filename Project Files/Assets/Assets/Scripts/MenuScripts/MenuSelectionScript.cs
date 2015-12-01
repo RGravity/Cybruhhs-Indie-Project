@@ -70,25 +70,12 @@ public class MenuSelectionScript : MonoBehaviour {
         _click = GameObject.Find("Click").GetComponent<AudioSource>();
 
         saveAndLoad();
-}
+    }
 
     // Update is called once per frame
     void Update ()
     {
         unlockLeveled();
-
-        if (Input.GetKey (KeyCode.Space))
-        {
-            _level3Unlocked = true;
-            saveAndLoad();
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            _level4Unlocked = true;
-            saveAndLoad();
-        }
-
     }
 
     private void saveAndLoad()
