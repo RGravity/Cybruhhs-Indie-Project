@@ -51,17 +51,11 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Analytics">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
@@ -124,7 +118,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Assets\Resources\Tiled\Levels\1.xml" />
+    <None Include="Assets\Assets\Resources\Tiled\Levels\10.xml" />
     <None Include="Assets\Assets\Resources\Tiled\Levels\2.xml" />
+    <None Include="Assets\Assets\Resources\Tiled\Levels\3.xml" />
+    <None Include="Assets\Assets\Resources\Tiled\Levels\4.xml" />
+    <None Include="Assets\Assets\Resources\Tiled\Levels\5.xml" />
+    <None Include="Assets\Assets\Resources\Tiled\Levels\6.xml" />
+    <None Include="Assets\Assets\Resources\Tiled\Levels\7.xml" />
+    <None Include="Assets\Assets\Resources\Tiled\Levels\8.xml" />
+    <None Include="Assets\Assets\Resources\Tiled\Levels\9.xml" />
     <None Include="Assets\Assets\Resources\Tiled\Tiles\1.xml" />
     <None Include="Assets\ProjectSettings\ProjectVersion.txt" />
     <None Include="Assets\SavedData.xml" />
