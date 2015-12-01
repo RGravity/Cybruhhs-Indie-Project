@@ -1,30 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class UpgradeTowerScript : BuildingSpawnScript {
-
-
-    [SerializeField]
-    private Camera _myCam;
+public class UpgradeTowerScript : MonoBehaviour {
 
     private CheckForMusicScript _check;
-    private TileMapScript _tileMap;
-    private GameObject _selectedTile;
+    private ArrowTowerScript _arrowTower;
+    private CannonTowerScript _cannonTower;
+    private SlowTowerScript _slowTower;
 
-    void Start ()
+    void Start()
     {
         _check = GameObject.FindObjectOfType<CheckForMusicScript>();
-        _tileMap = FindObjectOfType<TileMapScript>();
+       
+
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
 
-	}
+    }
 
-    private void Upgrade()
+
+    void OnMouseDown()
     {
 
+        Debug.Log("It's Something!");
     }
 }

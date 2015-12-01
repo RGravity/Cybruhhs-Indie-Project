@@ -36,12 +36,12 @@ public class BuildingSpawnScript : MonoBehaviour {
     private TileMapScript _tileMap;
     private int[] _savedTileIndexes;
     private AudioSource _buy;
+    private int _indexofSelectedTile;
 
     // Use this for initialization
 
     void Start ()
     {
-        _offsetForRadialWheel = Screen.height;
         _check = GameObject.FindObjectOfType<CheckForMusicScript>();
         _tileMap = FindObjectOfType<TileMapScript>();
         _baseScript = GameObject.FindObjectOfType<BaseScript>();
@@ -91,17 +91,21 @@ public class BuildingSpawnScript : MonoBehaviour {
 
     void Update()
     {
+        _offsetForRadialWheel = Screen.height;
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit vHit = new RaycastHit();
             Ray vRay = _myCam.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(vRay, out vHit, 1000))
             {
+                Debug.Log("this Works");
                 int[,] iets = _tileMap.Tiles;
-                int i = iets[(int)vHit.collider.transform.position.x, (int)vHit.collider.transform.position.y];
+                _indexofSelectedTile = iets[(int)vHit.collider.transform.position.x, (int)vHit.collider.transform.position.y];
+               
 
-                if (_tileMap.TileTypes[i].BuildingAllowed)
+                if (_tileMap.TileTypes[_indexofSelectedTile].BuildingAllowed)
                 {
+                    Debug.Log("And This also works");
                     Vector2 tempPos = _myCam.WorldToScreenPoint(vHit.transform.position);
                     _center = new Vector2(tempPos.x, tempPos.y);
                     _selectedTile = vHit.collider.gameObject;
@@ -181,6 +185,8 @@ public class BuildingSpawnScript : MonoBehaviour {
                 {
                     _selectedTile.GetComponent<Renderer>().material.mainTexture = _turretTextures[0];
                     _selectedTile.AddComponent<ArrowTowerScript>();
+                    _selectedTile.AddComponent<UpgradeTowerScript>();
+                    _tileMap.TileTypes[_indexofSelectedTile].BuildingAllowed = false;
                     //_baseScript.LowerGold(200);
                     if (_buy != null)
                     {

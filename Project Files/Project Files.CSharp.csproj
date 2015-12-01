@@ -75,7 +75,9 @@
     <Compile Include="Assets\Assets\Scripts\Buildings\BuildingWaveScript.cs" />
     <Compile Include="Assets\Assets\Scripts\Buildings\Cannon\CannonBulletScript.cs" />
     <Compile Include="Assets\Assets\Scripts\Buildings\Cannon\CannonTowerScript.cs" />
-    <Compile Include="Assets\Assets\Scripts\Buildings\TowerMenuScripts\BuildArrowTowerScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\Buildings\Slow\SlowBulletScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\Buildings\Slow\SlowTowerScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\Buildings\UpgradeTowerScript.cs" />
     <Compile Include="Assets\Assets\Scripts\DontDestroyOnLoad\CheckForMusicScript.cs" />
     <Compile Include="Assets\Assets\Scripts\DontDestroyOnLoad\DontDestroyOnLoadMusicScript.cs" />
     <Compile Include="Assets\Assets\Scripts\DontDestroyOnLoad\DontDestroyOnLoadSoundScript.cs" />
@@ -116,7 +118,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Assets\Resources\Tiled\Levels\1.xml" />
+    <None Include="Assets\Assets\Resources\Tiled\Levels\10.xml" />
     <None Include="Assets\Assets\Resources\Tiled\Levels\2.xml" />
+    <None Include="Assets\Assets\Resources\Tiled\Levels\3.xml" />
+    <None Include="Assets\Assets\Resources\Tiled\Levels\4.xml" />
+    <None Include="Assets\Assets\Resources\Tiled\Levels\5.xml" />
+    <None Include="Assets\Assets\Resources\Tiled\Levels\6.xml" />
+    <None Include="Assets\Assets\Resources\Tiled\Levels\7.xml" />
+    <None Include="Assets\Assets\Resources\Tiled\Levels\8.xml" />
+    <None Include="Assets\Assets\Resources\Tiled\Levels\9.xml" />
     <None Include="Assets\Assets\Resources\Tiled\Tiles\1.xml" />
     <None Include="Assets\ProjectSettings\ProjectVersion.txt" />
     <None Include="Assets\SavedData.xml" />
