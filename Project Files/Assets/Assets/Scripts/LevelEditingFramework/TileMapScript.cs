@@ -212,7 +212,7 @@ public class TileMapScript : MonoBehaviour
                         _listWaveStartPositions.Add(new Vector3(x, y, -1));
                         break;
                     case 6://bridge
-                        _tiles[x, y] = 3;
+                        _tiles[x, y] = 9;
                         break;
                     case 7://tower placement tile 1
                         _tiles[x, y] = 5;
@@ -510,39 +510,6 @@ public class TileMapScript : MonoBehaviour
         //    //unit.GetComponent<UnitScript>().CurrentPath = _possibleRoutes[1];
         //}
         #endregion
-    }
-    private void _setwalkablePath()
-    {
-        foreach (GameObject unit in _selectedUnits)
-        {
-            List<List<NodeScript>> possibleRoutes = new List<List<NodeScript>>();
-            SearchPathScript search = new SearchPathScript(this);
-            unit.GetComponent<UnitScript>().TileX = (int)_waveStartposition.x;
-            unit.GetComponent<UnitScript>().TileY = (int)_waveStartposition.y;
-            unit.GetComponent<UnitScript>().Map = this;
-            if (unit.GetComponent<UnitScript>().CurrentPath != null)
-            {
-                unit.GetComponent<UnitScript>().CurrentPath = null;
-            }
-            if (unit.name == "Grunt")
-            {
-                unit.GetComponent<UnitScript>().Speed = 7;
-            }
-            if (unit.name == "Heavy")
-            {
-                unit.GetComponent<UnitScript>().Speed = 2;
-            }
-            if (unit.name == "Paladin")
-            {
-                unit.GetComponent<UnitScript>().Speed = 5;
-            }
-            if (unit.name == "Flying")
-            {
-                unit.GetComponent<UnitScript>().Speed = 3;
-            }
-            possibleRoutes = search.SearchPaths(_graph[(int)_waveStartposition.x, (int)_waveStartposition.y], _graph[(int)_endPosition.x,(int)_endPosition.y]);
-            unit.GetComponent<UnitScript>().CurrentPath = possibleRoutes[1];
-        }
     }
 
 }
