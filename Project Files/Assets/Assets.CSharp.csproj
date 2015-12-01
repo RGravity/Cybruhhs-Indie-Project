@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.2.2f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -72,13 +70,14 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Buildings\Arrow\ArrowBulletScript.cs" />
     <Compile Include="Assets\Scripts\Buildings\Arrow\ArrowTowerScript.cs" />
+    <Compile Include="Assets\Scripts\Buildings\BuildPlacementTilesScript.cs" />
     <Compile Include="Assets\Scripts\Buildings\BuildingSpawnScript.cs" />
     <Compile Include="Assets\Scripts\Buildings\BuildingWaveScript.cs" />
     <Compile Include="Assets\Scripts\Buildings\Cannon\CannonBulletScript.cs" />
     <Compile Include="Assets\Scripts\Buildings\Cannon\CannonTowerScript.cs" />
     <Compile Include="Assets\Scripts\Buildings\Slow\SlowBulletScript.cs" />
     <Compile Include="Assets\Scripts\Buildings\Slow\SlowTowerScript.cs" />
-    <Compile Include="Assets\Scripts\Buildings\TowerMenuScripts\BuildArrowTowerScript.cs" />
+    <Compile Include="Assets\Scripts\Buildings\UpgradeTowerScript.cs" />
     <Compile Include="Assets\Scripts\DontDestroyOnLoad\CheckForMusicScript.cs" />
     <Compile Include="Assets\Scripts\DontDestroyOnLoad\DontDestroyOnLoadMusicScript.cs" />
     <Compile Include="Assets\Scripts\DontDestroyOnLoad\DontDestroyOnLoadSoundScript.cs" />

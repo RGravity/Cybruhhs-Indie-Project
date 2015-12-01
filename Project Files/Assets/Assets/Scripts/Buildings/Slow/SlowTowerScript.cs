@@ -8,12 +8,47 @@ public class SlowTowerScript : MonoBehaviour {
     private int _tier = 1;
     private Vector3 _thisPosition;
     private float _timeLastShot;
+
+    #region SlowTime
+    private float _slowTime = 2;
     [SerializeField]
-    private int _damage = 2;
+    private float _slowTimeTier1 = 2;
     [SerializeField]
-    private float _rateOfFire = 2;
+    private float _slowTimeTier2 = 5;
     [SerializeField]
+    private float _slowTimeTier3 = 8;
+    #endregion
+
+    #region SlowAmount
+    private float _slowAmount = 0.5f;
+    [SerializeField]
+    private float _slowAmountTier1 = 0.5f;
+    [SerializeField]
+    private float _slowAmountTier2 = 5;
+    [SerializeField]
+    private float _slowAmountTier3 = 8;
+    #endregion
+
+    #region Rate of fire
+    private float _rateOfFire = 0;
+    [SerializeField]
+    private float _rateOfFireTier1 = 2;
+    [SerializeField]
+    private float _rateOfFireTier2 = 1.5f;
+    [SerializeField]
+    private float _rateOfFireTier3 = 0.5f;
+    #endregion
+
+    #region Range of fire
     private float _range = 5;
+    [SerializeField]
+    private float _rangeTier1 = 5;
+    [SerializeField]
+    private float _rangeTier2 = 5;
+    [SerializeField]
+    private float _rangeTier3 = 5;
+    #endregion
+
     private bool _allowShoot = true;
     [SerializeField]
     private float _countdownTime;
@@ -38,6 +73,9 @@ public class SlowTowerScript : MonoBehaviour {
             _shoot2 = GameObject.Find("ArrowShoot2").GetComponent<AudioSource>();
             _shoot3 = GameObject.Find("ArrowShoot3").GetComponent<AudioSource>();
         }
+        _slowTime = _slowTimeTier1;
+        _range = _rangeTier1;
+        _rateOfFire = _rateOfFireTier1;
     }
 
     // Update is called once per frame
@@ -65,12 +103,11 @@ public class SlowTowerScript : MonoBehaviour {
     private void _checkForEnemies()
     {
         UnitScript[] enemies = GameObject.FindObjectsOfType<UnitScript>();
-        foreach (UnitScript enemy in enemies)
+        if (enemies.Length > 0)
         {
-            if ((enemy.transform.position - _thisPosition).magnitude < _range)
+            if ((enemies[enemies.Length - 1].transform.position - _thisPosition).magnitude < _range)
             {
-                _enemyInRange = enemy.gameObject;
-                break;
+                _enemyInRange = enemies[enemies.Length - 1].gameObject;
             }
         }
     }
@@ -92,7 +129,7 @@ public class SlowTowerScript : MonoBehaviour {
 
             GameObject bulletObject = Instantiate(_bullet);
             bulletObject.transform.position = new Vector3(this._thisPosition.x, this._thisPosition.y, -1);
-            bulletObject.GetComponent<ArrowBulletScript>().ShootEnemy(_enemyInRange, _damage);
+            bulletObject.GetComponent<SlowBulletScript>().ShootEnemy(_enemyInRange, _slowTime, _slowAmount);
             int random = Random.Range(0, 2);
 
             switch (random)
@@ -128,6 +165,20 @@ public class SlowTowerScript : MonoBehaviour {
             return false;
         }
         _tier++;
+        if (_tier == 2)
+        {
+            _slowTime = _slowTimeTier2;
+            _rateOfFire = _rateOfFireTier2;
+            _range = _rangeTier2;
+            _slowAmount = _slowAmountTier2;
+        }
+        if (_tier == 3)
+        {
+            _slowTime = _slowTimeTier3;
+            _rateOfFire = _rateOfFireTier3;
+            _range = _rangeTier3;
+            _slowAmount = _slowAmountTier3;
+        }
         return true;
     }
 }
