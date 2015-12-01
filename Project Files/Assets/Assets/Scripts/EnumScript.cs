@@ -14,3 +14,11 @@ public enum EnemyType
     Air,
     Both,
 }
+
+public enum TowerNoneNumbers
+{
+    Tower1,
+    Tower2,
+    Tower3,
+    Tower4,
+}
