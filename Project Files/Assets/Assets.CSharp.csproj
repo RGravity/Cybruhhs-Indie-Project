@@ -74,6 +74,8 @@
     <Compile Include="Assets\Scripts\Buildings\BuildingWaveScript.cs" />
     <Compile Include="Assets\Scripts\Buildings\Cannon\CannonBulletScript.cs" />
     <Compile Include="Assets\Scripts\Buildings\Cannon\CannonTowerScript.cs" />
+    <Compile Include="Assets\Scripts\Buildings\Slow\SlowTowerArrow.cs" />
+    <Compile Include="Assets\Scripts\Buildings\Slow\SlowTowerScript.cs" />
     <Compile Include="Assets\Scripts\Buildings\TowerMenuScripts\BuildArrowTowerScript.cs" />
     <Compile Include="Assets\Scripts\DontDestroyOnLoad\CheckForMusicScript.cs" />
     <Compile Include="Assets\Scripts\DontDestroyOnLoad\DontDestroyOnLoadMusicScript.cs" />
