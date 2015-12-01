@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SlowTowerArrow : MonoBehaviour {
+public class SlowBulletScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
