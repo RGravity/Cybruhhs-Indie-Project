@@ -12,6 +12,7 @@ public class NextWaveButtonScript : MonoBehaviour {
         if (_startNextWave)
         {
             FindObjectOfType<BuildingWaveScript>().StartNextWave = true;
+            _startNextWave = true;
         }
     }
 }

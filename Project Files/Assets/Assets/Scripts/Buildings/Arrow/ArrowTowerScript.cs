@@ -116,4 +116,17 @@ void Update()
             _allowShoot = true;
         }
     }
+    /// <summary>
+    /// Updates the Tier of the tower
+    /// </summary>
+    /// <returns></returns>
+    public bool UpdateTowerArrow()
+    {
+        if (_tier > 3)
+        {
+            return false;
+        }
+        _tier++;
+        return true;
+    }
 }

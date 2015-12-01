@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.2.2f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -74,6 +76,8 @@
     <Compile Include="Assets\Scripts\Buildings\BuildingWaveScript.cs" />
     <Compile Include="Assets\Scripts\Buildings\Cannon\CannonBulletScript.cs" />
     <Compile Include="Assets\Scripts\Buildings\Cannon\CannonTowerScript.cs" />
+    <Compile Include="Assets\Scripts\Buildings\Slow\SlowBulletScript.cs" />
+    <Compile Include="Assets\Scripts\Buildings\Slow\SlowTowerScript.cs" />
     <Compile Include="Assets\Scripts\Buildings\TowerMenuScripts\BuildArrowTowerScript.cs" />
     <Compile Include="Assets\Scripts\DontDestroyOnLoad\CheckForMusicScript.cs" />
     <Compile Include="Assets\Scripts\DontDestroyOnLoad\DontDestroyOnLoadMusicScript.cs" />
@@ -82,13 +86,18 @@
     <Compile Include="Assets\Scripts\Economy\EnemyStatScript.cs" />
     <Compile Include="Assets\Scripts\Enemies\GruntScript.cs" />
     <Compile Include="Assets\Scripts\EnumScript.cs" />
+    <Compile Include="Assets\Scripts\HUD\NextWaveButtonScript.cs" />
+    <Compile Include="Assets\Scripts\HUD\NextWaveTimerScript.cs" />
+    <Compile Include="Assets\Scripts\HUD\WaveIndicatorScript.cs" />
     <Compile Include="Assets\Scripts\LevelEditingFramework\TileMapScript.cs" />
+    <Compile Include="Assets\Scripts\MenuScripts\CybruhhsTitleScreen.cs" />
     <Compile Include="Assets\Scripts\MenuScripts\MenuCreditsButtonScript.cs" />
     <Compile Include="Assets\Scripts\MenuScripts\MenuOptionsButtonScript.cs" />
     <Compile Include="Assets\Scripts\MenuScripts\MenuQuitButtonScript.cs" />
     <Compile Include="Assets\Scripts\MenuScripts\MenuReturnButtonScript.cs" />
     <Compile Include="Assets\Scripts\MenuScripts\MenuSelectionScript.cs" />
     <Compile Include="Assets\Scripts\MenuScripts\MenuStartButtonScript.cs" />
+    <Compile Include="Assets\Scripts\MenuScripts\MovingLoading.cs" />
     <Compile Include="Assets\Scripts\MenuScripts\PauseScript.cs" />
     <Compile Include="Assets\Scripts\Michiel TEST Scripts\EnemyTestScript.cs" />
     <Compile Include="Assets\Scripts\Navigation\2D\ClickableTileScript.cs" />

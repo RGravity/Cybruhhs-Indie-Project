@@ -5,18 +5,16 @@ public class MenuReturnButtonScript : MonoBehaviour
 {
 
     // Use this for initialization
-    private GameObject _creditCanvas;
-    private GameObject _menuCanvas;
-    private GameObject _optionsCanvas;
-    private GameObject _selectionCanvas;
     private DontDestroyOnLoadMusicScript _map;
     private AudioSource _click;
+    private Animator _returnSelection;
+    private Animator _returnOptions;
+    private Animator _returnCredits;
     void Start()
     {
-        _menuCanvas = GameObject.Find("MenuCanvas");
-        _optionsCanvas = GameObject.Find("OptionsCanvas");
-        _creditCanvas = GameObject.Find("CreditsCanvas");
-        _selectionCanvas = GameObject.Find("SelectionCanvas");
+        _returnSelection = GameObject.Find("SelectionMenu").GetComponent<Animator>();
+        _returnOptions = GameObject.Find("OptionsMenu").GetComponent<Animator>();
+        _returnCredits = GameObject.Find("CreditsMenu").GetComponent<Animator>();
         _map = GameObject.FindObjectOfType<DontDestroyOnLoadMusicScript>();
         _click = GameObject.Find("Click").GetComponent<AudioSource>();
 
@@ -24,13 +22,21 @@ public class MenuReturnButtonScript : MonoBehaviour
     /// <summary>
     /// <para>With this fuction, when clicking on the button, it enables the canvas needed while disabling the other canvas </para>
     /// </summary>
-    public void ClickOn()
+    /// 
+    public void ReturnFromSelection()
     {
-        _selectionCanvas.GetComponent<Canvas>().enabled = false;
-        _creditCanvas.GetComponent<Canvas>().enabled = false;
-        _optionsCanvas.GetComponent<Canvas>().enabled = false;
-        _menuCanvas.GetComponent<Canvas>().enabled = true;
+        _returnSelection.Play("SelectionFadeOut");
         _map.Level = 0;
+        _click.Play();
+    }
+    public void ReturnFromCredits()
+    {
+        _returnCredits.Play("CreditsFadeOut");
+        _click.Play();
+    }
+    public void ReturnFromOptions()
+    {
+        _returnOptions.Play("OptionsFadeOut");
         _click.Play();
     }
 

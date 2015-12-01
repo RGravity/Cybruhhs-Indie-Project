@@ -2,20 +2,13 @@
 using System.Collections;
 
 public class MenuCreditsButtonScript : MonoBehaviour {
-
-    private GameObject _creditCanvas;
-    private GameObject _menuCanvas;
-    private GameObject _optionsCanvas;
-    private GameObject _selectionCanvas;
-
+    
+    private Animator _returnCredits;
     private AudioSource _click;
     // Use this for initialization
     void Start ()
     {
-        _menuCanvas = GameObject.Find("MenuCanvas");
-        _optionsCanvas = GameObject.Find("OptionsCanvas");
-        _creditCanvas = GameObject.Find("CreditsCanvas");
-        _selectionCanvas = GameObject.Find("SelectionCanvas");
+        _returnCredits = GameObject.Find("CreditsMenu").GetComponent<Animator>();
         _click = GameObject.Find("Click").GetComponent<AudioSource>();
     }
 	
@@ -28,10 +21,7 @@ public class MenuCreditsButtonScript : MonoBehaviour {
     /// </summary>
     public void ClickOn()
     {
-        _creditCanvas.GetComponent<Canvas>().enabled = true;
-        _optionsCanvas.GetComponent<Canvas>().enabled = false;
-        _selectionCanvas.GetComponent<Canvas>().enabled = false;
-        _menuCanvas.GetComponent<Canvas>().enabled = false;
+        _returnCredits.Play("CreditsFadeIn");
         _click.Play();
     }
 
