@@ -5,6 +5,7 @@ public class SlowBulletScript : MonoBehaviour {
 
     private GameObject _enemy;
     private float _speedTime;
+    private float _speed;
     private float _amountOfSpeed;
     private AudioSource _hit1;
     private AudioSource _hit2;
@@ -30,7 +31,7 @@ public class SlowBulletScript : MonoBehaviour {
     {
         if (_enemy != null)
         {
-            this.transform.position = Vector3.MoveTowards(this.transform.position, _enemy.transform.position, 7 * Time.deltaTime);
+            this.transform.position = Vector3.MoveTowards(this.transform.position, _enemy.transform.position, _speed * Time.deltaTime);
             if (Vector3.Distance(transform.position, _enemy.transform.position) < 0.3f)
             {
                 UnitScript stats = _enemy.GetComponent<UnitScript>();
@@ -64,8 +65,9 @@ public class SlowBulletScript : MonoBehaviour {
         }
     }
 
-    public void ShootEnemy(GameObject pEnemy, float pSpeedTime, float pAmountOfSpeed)
+    public void ShootEnemy(GameObject pEnemy, float pSpeedTime, float pAmountOfSpeed, float pSpeedProjectile)
     {
+        _speed = pSpeedProjectile;
         _enemy = pEnemy;
         _speedTime = pSpeedTime;
         _amountOfSpeed = pAmountOfSpeed;

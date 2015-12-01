@@ -54,6 +54,8 @@ public class SlowTowerScript : MonoBehaviour {
     private bool _allowShoot = true;
     [SerializeField]
     private float _countdownTime;
+    [SerializeField]
+    private float _speedProjectile;
 
     private GameObject _enemyInRange;
     private AudioSource _shoot1;
@@ -148,7 +150,7 @@ public class SlowTowerScript : MonoBehaviour {
 
             GameObject bulletObject = Instantiate(_bullet);
             bulletObject.transform.position = new Vector3(this._thisPosition.x, this._thisPosition.y, -1);
-            bulletObject.GetComponent<SlowBulletScript>().ShootEnemy(_enemyInRange, _slowTime, _slowAmount);
+            bulletObject.GetComponent<SlowBulletScript>().ShootEnemy(_enemyInRange, _slowTime, _slowAmount, _speedProjectile);
             int random = Random.Range(0, 2);
 
             switch (random)
