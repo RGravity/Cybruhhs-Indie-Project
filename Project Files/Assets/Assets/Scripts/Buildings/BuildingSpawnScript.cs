@@ -98,12 +98,14 @@ public class BuildingSpawnScript : MonoBehaviour {
             Ray vRay = _myCam.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(vRay, out vHit, 1000))
             {
+                Debug.Log("this Works");
                 int[,] iets = _tileMap.Tiles;
                 _indexofSelectedTile = iets[(int)vHit.collider.transform.position.x, (int)vHit.collider.transform.position.y];
                
 
                 if (_tileMap.TileTypes[_indexofSelectedTile].BuildingAllowed)
                 {
+                    Debug.Log("And This also works");
                     Vector2 tempPos = _myCam.WorldToScreenPoint(vHit.transform.position);
                     _center = new Vector2(tempPos.x, tempPos.y);
                     _selectedTile = vHit.collider.gameObject;
