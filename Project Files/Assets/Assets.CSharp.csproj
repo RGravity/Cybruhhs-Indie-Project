@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\Buildings\Arrow\ArrowBulletScript.cs" />
     <Compile Include="Assets\Scripts\Buildings\Arrow\ArrowTowerScript.cs" />
     <Compile Include="Assets\Scripts\Buildings\BuildingSpawnScript.cs" />
+    <Compile Include="Assets\Scripts\Buildings\BuildingWaveScript.cs" />
     <Compile Include="Assets\Scripts\Buildings\Cannon\CannonBulletScript.cs" />
     <Compile Include="Assets\Scripts\Buildings\Cannon\CannonTowerScript.cs" />
     <Compile Include="Assets\Scripts\Buildings\TowerMenuScripts\BuildArrowTowerScript.cs" />
