@@ -92,11 +92,19 @@
      <Compile Include="Assets\Assets\Scripts\WaveEditingFramework\WaveMainScript.cs" />
      <Compile Include="Assets\Assets\Scripts\WaveEditingFramework\WavePartProgressScript.cs" />
      <Compile Include="Assets\Assets\Scripts\WaveEditingFramework\WaveTemplateScript.cs" />
+     <None Include="Assets\Assets\Resources\Tiled\Levels\6.xml" />
+     <None Include="Assets\Assets\Resources\Tiled\Levels\4.xml" />
+     <None Include="Assets\Assets\Resources\Tiled\Levels\8.xml" />
+     <None Include="Assets\Assets\Resources\Tiled\Levels\7.xml" />
      <None Include="Assets\Assets\Resources\Tiled\Levels\1.xml" />
      <None Include="Assets\Assets\Resources\Tiled\Tiles\1.xml" />
      <None Include="Assets\ProjectSettings\ProjectVersion.txt" />
+     <None Include="Assets\Assets\Resources\Tiled\Levels\3.xml" />
      <None Include="Assets\SavedData.xml" />
+     <None Include="Assets\Assets\Resources\Tiled\Levels\5.xml" />
      <None Include="Assets\Assets\Resources\Tiled\Levels\2.xml" />
+     <None Include="Assets\Assets\Resources\Tiled\Levels\9.xml" />
+     <None Include="Assets\Assets\Resources\Tiled\Levels\10.xml" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Programs/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
