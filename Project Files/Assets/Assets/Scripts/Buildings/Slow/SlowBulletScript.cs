@@ -36,10 +36,12 @@ public class SlowBulletScript : MonoBehaviour {
                 UnitScript stats = _enemy.GetComponent<UnitScript>();
                 if (Time.time < _speedTime)
                 {
+                    stats.IsSlowed = true;
                     stats.Speed = _amountOfSpeed;
                 }
                 if (Time.time > _speedTime)
                 {
+                    stats.IsSlowed = false;
                     Destroy(this.gameObject);
                 }
 

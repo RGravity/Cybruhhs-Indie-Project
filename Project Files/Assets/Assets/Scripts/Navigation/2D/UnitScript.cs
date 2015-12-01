@@ -22,6 +22,9 @@ public class UnitScript : MonoBehaviour
     public List<NodeScript> CurrentPath { get { return _currentPath; } set { _currentPath = value; } }
     public float Speed { get { return _speed; } set { _speed = value; } }
 
+    private bool _isSlowed = false;
+    public bool IsSlowed { get { return _isSlowed; } set { _isSlowed = value; } }
+
     private bool _isDirectionRight = false;
     private bool _isDirectionLeft = false;
 
