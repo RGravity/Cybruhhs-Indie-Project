@@ -3,19 +3,13 @@ using System.Collections;
 
 public class MenuOptionsButtonScript : MonoBehaviour {
 
-
-    private GameObject _creditCanvas;
-    private GameObject _menuCanvas;
-    private GameObject _optionsCanvas;
-    private GameObject _selectionCanvas;
+    
+    private Animator _returnOptions;
     private AudioSource _click;
     // Use this for initialization
     void Start()
     {
-        _menuCanvas = GameObject.Find("MenuCanvas");
-        _optionsCanvas = GameObject.Find("OptionsCanvas");
-        _creditCanvas = GameObject.Find("CreditsCanvas");
-        _selectionCanvas = GameObject.Find("SelectionCanvas");
+        _returnOptions = GameObject.Find("OptionsMenu").GetComponent<Animator>();
         _click = GameObject.Find("Click").GetComponent<AudioSource>();
     }
 
@@ -29,10 +23,7 @@ public class MenuOptionsButtonScript : MonoBehaviour {
     /// </summary>
     public void ClickOn()
     {
-        _creditCanvas.GetComponent<Canvas>().enabled = false;
-        _optionsCanvas.GetComponent<Canvas>().enabled = true;
-        _selectionCanvas.GetComponent<Canvas>().enabled = false;
-        _menuCanvas.GetComponent<Canvas>().enabled = false;
+        _returnOptions.Play("OptionsFadeIn");
         _click.Play();
     }
 

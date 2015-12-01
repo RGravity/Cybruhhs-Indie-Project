@@ -46,7 +46,7 @@ public class BuildingSpawnScript : MonoBehaviour {
         _calculateEverything();
         if (_check.Check == true)
         {
-            _buy = GameObject.Find("SellSound").GetComponent<AudioSource>();
+            //_buy = GameObject.Find("SellSound").GetComponent<AudioSource>();
         }
 
         
@@ -190,5 +190,4 @@ public class BuildingSpawnScript : MonoBehaviour {
                 break;
         }
     }
-
 }
