@@ -212,7 +212,7 @@ public class TileMapScript : MonoBehaviour
                         _listWaveStartPositions.Add(new Vector3(x, y, -1));
                         break;
                     case 6://bridge
-                        _tiles[x, y] = 3;
+                        _tiles[x, y] = 9;
                         break;
                     case 7://tower placement tile 1
                         _tiles[x, y] = 5;
