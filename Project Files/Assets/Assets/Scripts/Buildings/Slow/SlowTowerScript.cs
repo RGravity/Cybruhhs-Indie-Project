@@ -56,7 +56,7 @@ public class SlowTowerScript : MonoBehaviour {
     [SerializeField]
     private float _countdownTime;
     [SerializeField]
-    private float _speedProjectile;
+    private float _speedProjectile = 6;
 
     private GameObject _enemyInRange;
     private AudioSource _shoot1;
