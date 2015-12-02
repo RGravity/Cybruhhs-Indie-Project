@@ -117,6 +117,11 @@ public class WaveMainScript : MonoBehaviour {
                 _startNextWavePart = true;
                 _currentWavePart = 0;
                 _currentWave++;
+                if (_debugLevel > 0 || _debugWave > 0)
+                {
+                    _debugWave++;
+                }
+
                 _buildWaveScript.StartBuildingWave();
             }
         }
@@ -126,9 +131,17 @@ public class WaveMainScript : MonoBehaviour {
         {
             FindObjectOfType<WaveIndicatorScript>().SetWaveIndicator(_currentWave, _levelList[_currentLevel - 1].WaveList.Count);
             //wave spawning
-            if (_debugLevel > 0 && _debugWave > 0)
+            if (_debugLevel > 0 || _debugWave > 0)
             #region Debug Wave Spawning
             {
+                if (_debugWave == 0)
+                {
+                    _debugWave = 1;
+                }
+                if (_debugLevel == 0)
+                {
+                    _debugLevel = 1;
+                }
                 //Enter when next part should be loaded
                 if (_startNextWavePart)
                 {
