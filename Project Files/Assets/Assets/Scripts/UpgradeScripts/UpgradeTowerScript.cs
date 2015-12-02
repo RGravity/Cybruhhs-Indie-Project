@@ -25,10 +25,47 @@ public class UpgradeTowerScript : MonoBehaviour {
 
     void Start()
     {
+        //checking for all the tower places
+        Collider[] tower = new Collider [0];
+        switch (gameObject.GetComponent<BuildPlacementTilesScript>().TowerPlaceNr)
+        {
+           
+            case TowerNoneNumbers.Tower1:
+                tower = Physics.OverlapSphere(new Vector3(gameObject.transform.position.x + 0.5f, gameObject.transform.position.y - 0.5f), 0.5f);
+                break;
+            case TowerNoneNumbers.Tower2:
+                tower = Physics.OverlapSphere(new Vector3(gameObject.transform.position.x - 0.5f, gameObject.transform.position.y - 0.5f), 0.5f);
+                break;
+            case TowerNoneNumbers.Tower3:
+                
+                tower = Physics.OverlapSphere(new Vector3(gameObject.transform.position.x + 0.5f, gameObject.transform.position.y + 0.5f), 0.5f);
+                break;
+            case TowerNoneNumbers.Tower4:
+               
+                tower = Physics.OverlapSphere(new Vector3(gameObject.transform.position.x - 0.5f, gameObject.transform.position.y + 0.5f), 0.5f);
+                break;
+            default:
+                break;
+        }
+        //put the correct script in the correct variable
+        for (int i = 0; i < tower.Length; i++)
+        {
+            if (tower[i].gameObject.GetComponent<ArrowTowerScript>())
+            {
+                _arrowTower = tower[i].gameObject.GetComponent<ArrowTowerScript>();
+               
+            }
+            if (tower[i].gameObject.GetComponent<CannonTowerScript>())
+            {
+                _cannonTower = tower[i].gameObject.GetComponent<CannonTowerScript>();
+            }
+            if (tower[i].gameObject.GetComponent<SlowTowerScript>())
+            {
+                _slowTower = tower[i].GetComponent<SlowTowerScript>();
+            }
+        }
         _check = FindObjectOfType<CheckForMusicScript>();
-        _arrowTower = FindObjectOfType<ArrowTowerScript>();
-        _cannonTower = FindObjectOfType<CannonTowerScript>();
-        _slowTower = FindObjectOfType<SlowTowerScript>();
+        
         _upgradeOne = FindObjectOfType<UpgradeOneButtonScript>();
         _upgradeTwo = FindObjectOfType<UpgradeTwoButtonScript>();
 
@@ -128,7 +165,6 @@ public class UpgradeTowerScript : MonoBehaviour {
         {
             _arrowTower.UpdateTowerArrow();
             _upgradeOne.Tree = false;
-            Debug.Log("Tier: " + _arrowTower.Tier);
             _disappear = true;
         }
         else if (_upgradeOne.Troll == true)
@@ -166,9 +202,14 @@ public class UpgradeTowerScript : MonoBehaviour {
     {
         if (gameObject.GetComponent<ArrowTowerScript>())
         {
-            if (gameObject.GetComponent<ArrowTowerScript>().Tier == 1) _upgradeTreeAppear = true;
-
-            else if (gameObject.GetComponent<ArrowTowerScript>().Tier == 2) _upgradeTreeAppear2 = true;
+            if (gameObject.GetComponent<ArrowTowerScript>().Tier == 1)
+            {
+                _upgradeTreeAppear = true;
+            }
+            else if (gameObject.GetComponent<ArrowTowerScript>().Tier == 2)
+            {
+                _upgradeTreeAppear2 = true;
+            }
         }
         else if (gameObject.GetComponent<CannonTowerScript>())
         {

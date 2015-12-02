@@ -236,7 +236,7 @@ public class BuildingSpawnScript : MonoBehaviour
             case 0:
                 if (_baseScript.Gold >= 250)
                 {
-                    _selectedTile[3].AddComponent<CannonTowerScript>();
+                    _selectedTile[1].AddComponent<CannonTowerScript>();
                     for (int i = 0; i < _selectedTile.Length; i++)
                     {
                         _selectedTile[i].GetComponent<Renderer>().material.mainTexture = _cannonTurretTextures[i];
@@ -254,7 +254,7 @@ public class BuildingSpawnScript : MonoBehaviour
             case 1:
                 if (_baseScript.Gold >= 150)
                 {
-                    _selectedTile[3].AddComponent<SlowTowerScript>();
+                    _selectedTile[1].AddComponent<SlowTowerScript>();
                     for (int i = 0; i < _selectedTile.Length; i++)
                     {
                         _selectedTile[i].GetComponent<Renderer>().material.mainTexture = _cannonTurretTextures[i];
@@ -272,7 +272,7 @@ public class BuildingSpawnScript : MonoBehaviour
             case 2:
                 if (_baseScript.Gold >= 200)
                 {
-                    _selectedTile[3].AddComponent<ArrowTowerScript>();
+                    _selectedTile[1].AddComponent<ArrowTowerScript>();
                     for (int i = 0; i < _selectedTile.Length; i++)
                     {
                         _selectedTile[i].GetComponent<Renderer>().material.mainTexture = _arrowTurretTextures[i];
