@@ -51,6 +51,7 @@ public class SlowTowerScript : MonoBehaviour {
     #endregion
 
     private bool _isNextEnemy = false;
+    private int _indexForEnemy = 0;
 
     private bool _allowShoot = true;
     [SerializeField]
@@ -111,27 +112,25 @@ public class SlowTowerScript : MonoBehaviour {
     private void _checkForEnemies()
     {
         UnitScript[] enemies = GameObject.FindObjectsOfType<UnitScript>();
-        _nextEnemy = 1;
         if (enemies.Length > 0)
         {
-            if (_isNextEnemy || enemies[enemies.Length - _nextEnemy].IsSlowed)
+            if (_isNextEnemy || enemies[_indexForEnemy].IsSlowed)
             {
-                if ((enemies[enemies.Length - _nextEnemy - 1].transform.position - _thisPosition).magnitude < _range)
+                _indexForEnemy++;
+                if (_indexForEnemy >= enemies.Length)
                 {
-                    //Debug.Log(_nextEnemy);
-                    _nextEnemy++;
-                    _enemyInRange = enemies[enemies.Length - _nextEnemy].gameObject;
+                    _indexForEnemy = 0;
                 }
+                _isNextEnemy = false;
+            }
+            if ((enemies[_indexForEnemy].transform.position - _thisPosition).magnitude < _range)
+            {
+                _enemyInRange = enemies[_indexForEnemy].gameObject;
             }
             else
             {
-                if ((enemies[enemies.Length - _nextEnemy].transform.position - _thisPosition).magnitude < _range)
-                {
-                    _isNextEnemy = true;
-                    _enemyInRange = enemies[enemies.Length - _nextEnemy].gameObject;
-                }
+                _isNextEnemy = true;
             }
-
         }
     }
 
