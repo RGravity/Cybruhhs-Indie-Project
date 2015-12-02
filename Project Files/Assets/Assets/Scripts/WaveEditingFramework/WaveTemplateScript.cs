@@ -15,9 +15,13 @@ public class WaveTemplateScript{
     [SerializeField]
     private int _amountOfPaladin;
     [SerializeField]
-    private int _path;
-    [SerializeField]
     private float _timeBetweenEnemies;
+    [SerializeField]
+    private int _beginPositionNr;
+    [SerializeField]
+    private int _endPositionNr;
+    [SerializeField]
+    private int _path;
     [SerializeField]
     private float _secToWaitForNextPart;
 
@@ -27,8 +31,10 @@ public class WaveTemplateScript{
     public int AmountOfHeavy { get { return _amountOfHeavy; } }
     public int AmountOfFlying { get { return _amountOfFlying; } }
     public int AmountofPaladin { get { return _amountOfPaladin; } }
-    public int Path { get { return _path; } }
     public float TimeBetweenEnemies { get { return _timeBetweenEnemies; } }
+    public int BeginPositionNr { get { return _beginPositionNr; } }
+    public int EndPositionNr { get { return _endPositionNr; } }
+    public int Path { get { return _path; } }
     public float SecToWaitForNextPart { get { return _secToWaitForNextPart; } }
 
 }

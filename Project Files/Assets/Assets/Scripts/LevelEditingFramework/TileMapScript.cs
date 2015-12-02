@@ -14,6 +14,7 @@ public class TileMapScript : MonoBehaviour
     private Vector3 _endPosition;
     private Vector3 _waveStartposition;
     private List<Vector3> _listWaveStartPositions;
+    private List<Vector3> _listWaveEndPositions;
     private List<List<NodeScript>> _possibleRoutes;
     private DontDestroyOnLoadMusicScript _map;
 
@@ -62,6 +63,7 @@ public class TileMapScript : MonoBehaviour
         }
 
         _listWaveStartPositions = new List<Vector3>();
+        _listWaveEndPositions = new List<Vector3>();
         _map = GameObject.FindObjectOfType<DontDestroyOnLoadMusicScript>();
         //temporary: for loading level 1 when the game starts(REMOVE WHEN LEVEL SELECTION IS IMPLEMENTED)
         if (_map != null)
@@ -99,7 +101,7 @@ public class TileMapScript : MonoBehaviour
             _generatePathfindingGraph();
             _generateMapVisual();
 
-            GameObject.FindObjectOfType<WaveMainScript>().StartSpawning(_listWaveStartPositions, this, _graph, _endPosition, pLevel);
+            GameObject.FindObjectOfType<WaveMainScript>().StartSpawning(_listWaveStartPositions, _listWaveEndPositions, this, _graph, pLevel);
         }
         else
         {
@@ -230,7 +232,7 @@ public class TileMapScript : MonoBehaviour
                         break;
                     case 12://Base(actual end position)
                         _tiles[x, y] = 0;
-                        _endPosition = new Vector3(x, y, -1);
+                        _listWaveEndPositions.Add(new Vector3(x, y, -1));
                         break;
                     default:
                         _tiles[x, y] = 2;

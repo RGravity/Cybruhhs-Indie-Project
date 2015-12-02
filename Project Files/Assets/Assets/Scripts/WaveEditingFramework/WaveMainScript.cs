@@ -20,8 +20,8 @@ public class WaveMainScript : MonoBehaviour {
     //TileMapScript variables
     private TileMapScript _map;
     private List<Vector3> _listWaveStartPositions;
+    private List<Vector3> _listWaveEndPositions;
     private NodeScript[,] _graph;
-    private Vector3 _endPosition;
     
     // ---- wave editing framework variables ----
 
@@ -80,12 +80,12 @@ public class WaveMainScript : MonoBehaviour {
         _paladinParent.transform.parent = _enemyParent.transform;
     }
 
-    public void StartSpawning(List<Vector3> pListWaveStartPositions, TileMapScript pMap, NodeScript[,] pGraph, Vector3 pEndPosition, int pLevel)
+    public void StartSpawning(List<Vector3> pListWaveStartPositions, List<Vector3> pListWaveEndPositions, TileMapScript pMap, NodeScript[,] pGraph, int pLevel)
     {
         _listWaveStartPositions = pListWaveStartPositions;
+        _listWaveEndPositions = pListWaveEndPositions;
         _map = pMap;
         _graph = pGraph;
-        _endPosition = pEndPosition;
         _spawningStarted = true;
         _currentLevel = pLevel;
         FindObjectOfType<WaveIndicatorScript>().SetWaveIndicator(_currentWave, _levelList[_currentLevel - 1].WaveList.Count);
@@ -204,6 +204,9 @@ public class WaveMainScript : MonoBehaviour {
     {
         foreach (WavePartProgressScript part in _waveProgressList)
         {
+            Vector3 startPosition = _listWaveStartPositions[part.BeginPositionNr - 1];
+            Vector3 endPosition = _listWaveEndPositions[part.EndPositionNr - 1];
+
             if (part.GruntAmountRemaining == 0 && part.HeavyAmountRemaining == 0 && part.FlyingAmountRemaining == 0 && part.PaladinAmountRemaining == 0)
             {
                 _spawningDone = true;
@@ -216,7 +219,7 @@ public class WaveMainScript : MonoBehaviour {
             #region Grunt Wave Spawning
             if (part.GruntAmountSpawned == 0 && part.GruntAmountRemaining > 0)
             {
-                _spawnGrunt(_listWaveStartPositions[part.Path-1], part.Path);
+                _spawnGrunt(part.Path, startPosition, endPosition);
                 part.GruntAmountSpawned++;
                 part.GruntAmountRemaining--;
             }
@@ -228,7 +231,7 @@ public class WaveMainScript : MonoBehaviour {
             {
                 if (part.GruntAmountRemaining > 0)
                 {
-                    _spawnGrunt(_listWaveStartPositions[part.Path-1], part.Path);
+                    _spawnGrunt(part.Path, startPosition, endPosition);
                     part.GruntAmountSpawned++;
                     part.GruntAmountRemaining--;
                 }
@@ -238,7 +241,7 @@ public class WaveMainScript : MonoBehaviour {
             #region Heavy Wave Spawning
             if (part.HeavyAmountSpawned == 0 && part.HeavyAmountRemaining > 0)
             {
-                _spawnHeavy(_listWaveStartPositions[part.Path - 1], part.Path);
+                _spawnHeavy(part.Path, startPosition, endPosition);
                 part.HeavyAmountSpawned++;
                 part.HeavyAmountRemaining--;
             }
@@ -250,7 +253,7 @@ public class WaveMainScript : MonoBehaviour {
             {
                 if (part.HeavyAmountRemaining > 0)
                 {
-                    _spawnHeavy(_listWaveStartPositions[part.Path - 1], part.Path);
+                    _spawnHeavy(part.Path, startPosition, endPosition);
                     part.HeavyAmountSpawned++;
                     part.HeavyAmountRemaining--;
                 }
@@ -260,7 +263,7 @@ public class WaveMainScript : MonoBehaviour {
             #region Flying Wave Spawning
             if (part.FlyingAmountSpawned == 0 && part.FlyingAmountRemaining > 0)
             {
-                _spawnFlying(_listWaveStartPositions[part.Path-1], part.Path);
+                _spawnFlying(part.Path, startPosition, endPosition);
                 part.FlyingAmountSpawned++;
                 part.FlyingAmountRemaining--;
             }
@@ -272,7 +275,7 @@ public class WaveMainScript : MonoBehaviour {
             {
                 if (part.FlyingAmountRemaining > 0)
                 {
-                    _spawnFlying(_listWaveStartPositions[part.Path-1], part.Path);
+                    _spawnFlying(part.Path, startPosition, endPosition);
                     part.FlyingAmountSpawned++;
                     part.FlyingAmountRemaining--;
                 }
@@ -282,7 +285,7 @@ public class WaveMainScript : MonoBehaviour {
             #region Paladin Wave Spawning
             if (part.PaladinAmountSpawned == 0 && part.PaladinAmountRemaining > 0)
             {
-                _spawnPaladin(_listWaveStartPositions[part.Path-1], part.Path);
+                _spawnPaladin(part.Path, startPosition, endPosition);
                 part.PaladinAmountSpawned++;
                 part.PaladinAmountRemaining--;
             }
@@ -294,7 +297,7 @@ public class WaveMainScript : MonoBehaviour {
             {
                 if (part.PaladinAmountRemaining > 0)
                 {
-                    _spawnPaladin(_listWaveStartPositions[part.Path-1], part.Path);
+                    _spawnPaladin(part.Path, startPosition, endPosition);
                     part.PaladinAmountSpawned++;
                     part.PaladinAmountRemaining--;
                 }
@@ -321,7 +324,25 @@ public class WaveMainScript : MonoBehaviour {
         partProgress.PaladinAmountSpawned = 0;
         partProgress.TimeBetweenEnemies = part.TimeBetweenEnemies;
         partProgress.SecToWaitForNextPart = part.SecToWaitForNextPart;
-        partProgress.Path = part.Path;
+        //if no path is set take the first path
+        if (part.Path == 0){
+            partProgress.Path = 1;
+        } else {
+            partProgress.Path = part.Path;
+        }
+        //if no Begin position is set take the first one.
+        if (part.BeginPositionNr == 0) {
+            partProgress.BeginPositionNr = 1;
+        } else {
+            partProgress.BeginPositionNr = part.BeginPositionNr;
+        }
+        //if no End position is set take the first one.
+        if (part.EndPositionNr == 0) {
+            partProgress.EndPositionNr = 1;
+        } else {
+            partProgress.EndPositionNr = part.EndPositionNr;
+        }
+        
         _waveProgressList.Add(partProgress);
 
         Debug.Log(_waveProgressList.Count);
@@ -330,76 +351,72 @@ public class WaveMainScript : MonoBehaviour {
     /// <summary>
     /// <para>Spawn 1 grunt at selected spawn</para>
     /// </summary>
-    private void _spawnGrunt(Vector3 pTileSpawnPoint, int pPath)
+    private void _spawnGrunt(int pPath, Vector3 pStartPosition, Vector3 pEndPosition)
     {
-        GameObject gruntObject = (GameObject)Instantiate(_grunt, new Vector3((int)pTileSpawnPoint.x, (int)pTileSpawnPoint.y, -1), Quaternion.identity);
-        gruntObject.name = "TEST Grunt";
+        GameObject gruntObject = (GameObject)Instantiate(_grunt, new Vector3((int)pStartPosition.x, (int)pStartPosition.y, -1), Quaternion.identity);
+        gruntObject.name = "Grunt";
         gruntObject.transform.parent = _gruntParent.transform;
         gruntObject.AddComponent<UnitScript>();
         gruntObject.GetComponent<UnitScript>().Speed = 1.5f;
-        gruntObject.GetComponent<UnitScript>().TileX = (int)pTileSpawnPoint.x;
-        gruntObject.GetComponent<UnitScript>().TileY = (int)pTileSpawnPoint.y;
+        gruntObject.GetComponent<UnitScript>().TileX = (int)pStartPosition.x;
+        gruntObject.GetComponent<UnitScript>().TileY = (int)pStartPosition.y;
         gruntObject.GetComponent<UnitScript>().Map = _map;
-        //gruntObject.AddComponent<GruntScript>();
-        gruntObject.transform.localPosition = new Vector3((int)pTileSpawnPoint.x, (int)pTileSpawnPoint.y, -1);
-        _setPath(gruntObject, pPath);
+        gruntObject.transform.localPosition = new Vector3((int)pStartPosition.x, (int)pStartPosition.y, -1);
+        _setPath(gruntObject, pPath, pStartPosition, pEndPosition);
     }
 
     /// <summary>
     /// <para>Spawn 1 heavy at selected spawn</para>
     /// </summary>
-    private void _spawnHeavy(Vector3 pTileSpawnPoint, int pPath)
+    private void _spawnHeavy(int pPath, Vector3 pStartPosition, Vector3 pEndPosition)
     {
-        GameObject heavyObject = (GameObject)Instantiate(_heavy, new Vector3((int)pTileSpawnPoint.x, (int)pTileSpawnPoint.y, -1), Quaternion.identity);
-        heavyObject.name = "TEST Heavy";
+        GameObject heavyObject = (GameObject)Instantiate(_heavy, new Vector3((int)pStartPosition.x, (int)pStartPosition.y, -1), Quaternion.identity);
+        heavyObject.name = "Heavy";
         heavyObject.transform.parent = _heavyParent.transform;
         heavyObject.AddComponent<UnitScript>();
         heavyObject.GetComponent<UnitScript>().Speed = 0.3f;
-        heavyObject.GetComponent<UnitScript>().TileX = (int)pTileSpawnPoint.x;
-        heavyObject.GetComponent<UnitScript>().TileY = (int)pTileSpawnPoint.y;
+        heavyObject.GetComponent<UnitScript>().TileX = (int)pStartPosition.x;
+        heavyObject.GetComponent<UnitScript>().TileY = (int)pStartPosition.y;
         heavyObject.GetComponent<UnitScript>().Map = _map;
-        //gruntObject.AddComponent<GruntScript>();
-        heavyObject.transform.localPosition = new Vector3((int)pTileSpawnPoint.x, (int)pTileSpawnPoint.y, -1);
-        _setPath(heavyObject, pPath);
+        heavyObject.transform.localPosition = new Vector3((int)pStartPosition.x, (int)pStartPosition.y, -1);
+        _setPath(heavyObject, pPath, pStartPosition, pEndPosition);
     }
 
     /// <summary>
     /// <para>Spawn 1 flying at selected spawn</para>
     /// </summary>
-    private void _spawnFlying(Vector3 pTileSpawnPoint, int pPath)
+    private void _spawnFlying(int pPath, Vector3 pStartPosition, Vector3 pEndPosition)
     {
-        GameObject flyingObject = (GameObject)Instantiate(_flying, new Vector3((int)pTileSpawnPoint.x, (int)pTileSpawnPoint.y, -1), Quaternion.identity);
-        flyingObject.name = "TEST Flying";
+        GameObject flyingObject = (GameObject)Instantiate(_flying, new Vector3((int)pStartPosition.x, (int)pStartPosition.y, -1), Quaternion.identity);
+        flyingObject.name = "Flying";
         flyingObject.transform.parent = _flyingParent.transform;
         flyingObject.AddComponent<UnitScript>();
         flyingObject.GetComponent<UnitScript>().Speed = 2f;
-        flyingObject.GetComponent<UnitScript>().TileX = (int)pTileSpawnPoint.x;
-        flyingObject.GetComponent<UnitScript>().TileY = (int)pTileSpawnPoint.y;
+        flyingObject.GetComponent<UnitScript>().TileX = (int)pStartPosition.x;
+        flyingObject.GetComponent<UnitScript>().TileY = (int)pStartPosition.y;
         flyingObject.GetComponent<UnitScript>().Map = _map;
-        //gruntObject.AddComponent<GruntScript>();
-        flyingObject.transform.localPosition = new Vector3((int)pTileSpawnPoint.x, (int)pTileSpawnPoint.y, -1);
-        _setPath(flyingObject, pPath);
+        flyingObject.transform.localPosition = new Vector3((int)pStartPosition.x, (int)pStartPosition.y, -1);
+        _setPath(flyingObject, pPath, pStartPosition, pEndPosition);
     }
 
     /// <summary>
     /// <para>Spawn 1 paladin at selected spawn</para>
     /// </summary>
-    private void _spawnPaladin(Vector3 pTileSpawnPoint, int pPath)
+    private void _spawnPaladin(int pPath, Vector3 pStartPosition, Vector3 pEndPosition)
     {
-        GameObject paladinObject = (GameObject)Instantiate(_paladin, new Vector3((int)pTileSpawnPoint.x, (int)pTileSpawnPoint.y, -1), Quaternion.identity);
-        paladinObject.name = "TEST Paladin";
+        GameObject paladinObject = (GameObject)Instantiate(_paladin, new Vector3((int)pStartPosition.x, (int)pStartPosition.y, -1), Quaternion.identity);
+        paladinObject.name = "Paladin";
         paladinObject.transform.parent = _paladinParent.transform;
         paladinObject.AddComponent<UnitScript>();
         paladinObject.GetComponent<UnitScript>().Speed = 0.8f;
-        paladinObject.GetComponent<UnitScript>().TileX = (int)pTileSpawnPoint.x;
-        paladinObject.GetComponent<UnitScript>().TileY = (int)pTileSpawnPoint.y;
+        paladinObject.GetComponent<UnitScript>().TileX = (int)pStartPosition.x;
+        paladinObject.GetComponent<UnitScript>().TileY = (int)pStartPosition.y;
         paladinObject.GetComponent<UnitScript>().Map = _map;
-        //gruntObject.AddComponent<GruntScript>();
-        paladinObject.transform.localPosition = new Vector3((int)pTileSpawnPoint.x, (int)pTileSpawnPoint.y, -1);
-        _setPath(paladinObject, pPath);
+        paladinObject.transform.localPosition = new Vector3((int)pStartPosition.x, (int)pStartPosition.y, -1);
+        _setPath(paladinObject, pPath, pStartPosition, pEndPosition);
     }
 
-    private void _setPath(GameObject pUnit, int pPath)
+    private void _setPath(GameObject pUnit, int pPath, Vector3 pStartPosition, Vector3 pEndPosition)
     {
         List<List<NodeScript>> possibleRoutes = new List<List<NodeScript>>();
         SearchPathScript search = new SearchPathScript(_map);
@@ -407,14 +424,14 @@ public class WaveMainScript : MonoBehaviour {
         {
             pUnit.GetComponent<UnitScript>().CurrentPath = null;
         }
-        possibleRoutes = search.SearchPaths(_graph[pUnit.GetComponent<UnitScript>().TileX, pUnit.GetComponent<UnitScript>().TileY], _graph[(int)_endPosition.x, (int)_endPosition.y]);
-        if (pPath > 0 && pPath <= possibleRoutes.Count - 1)
-        {
+        possibleRoutes = search.SearchPaths(_graph[(int)pStartPosition.x, (int)pStartPosition.y], _graph[(int)pEndPosition.x, (int)pEndPosition.y]);
+        //if (pPath > 0 && pPath <= possibleRoutes.Count - 1)
+        //{
             pUnit.GetComponent<UnitScript>().CurrentPath = possibleRoutes[pPath-1];
-        }
-        else
-        {
-            Debug.Log("!!! Invalid Path Entered !!!");
-        }
+        //}
+        //else
+        //{
+        //    Debug.Log("!!! Invalid Path Entered !!!");
+        //}
     }
 }
