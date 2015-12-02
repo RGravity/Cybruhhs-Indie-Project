@@ -9,15 +9,43 @@ public class ArrowTowerScript : MonoBehaviour {
     private int _tier = 1;
     private Vector3 _thisPosition;
     private float _timeLastShot;
-    [SerializeField]
+
+    #region Damage
     private int _damage = 2;
     [SerializeField]
-    private float _rateOfFire = 2;
+    private int _damageTier1 = 2;
     [SerializeField]
+    private int _damageTier2 = 4;
+    [SerializeField]
+    private int _damageTier3 = 6;
+    #endregion
+
+    #region Rate of fire
+    private float _rateOfFire = 0;
+    [SerializeField]
+    private float _rateOfFireTier1 = 2;
+    [SerializeField]
+    private float _rateOfFireTier2 = 1.5f;
+    [SerializeField]
+    private float _rateOfFireTier3 = 0.5f;
+    #endregion
+
+    #region Range of fire
     private float _range = 5;
+    [SerializeField]
+    private float _rangeTier1 = 5;
+    [SerializeField]
+    private float _rangeTier2 = 5;
+    [SerializeField]
+    private float _rangeTier3 = 5;
+    #endregion
+
     private bool _allowShoot = true;
     [SerializeField]
     private float _countdownTime;
+
+    [SerializeField]
+    private float _speedProjectile;
     
     private GameObject _enemyInRange;
     private AudioSource _shoot1;
@@ -37,6 +65,9 @@ public class ArrowTowerScript : MonoBehaviour {
             _shoot2 = GameObject.Find("ArrowShoot2").GetComponent<AudioSource>();
             _shoot3 = GameObject.Find("ArrowShoot3").GetComponent<AudioSource>();
         }
+        _rateOfFire = _rateOfFireTier1;
+        _damage = _damageTier1;
+        _range = _rangeTier1;
     }
 
 // Update is called once per frame
@@ -64,12 +95,11 @@ void Update()
     private void _checkForEnemies()
     {
         UnitScript[] enemies = GameObject.FindObjectsOfType<UnitScript>();
-        foreach (UnitScript enemy in enemies)
+        if (enemies.Length > 0)
         {
-            if ((enemy.transform.position - _thisPosition).magnitude < _range)
+            if ((enemies[enemies.Length-1].transform.position - _thisPosition).magnitude < _range)
             {
-                _enemyInRange = enemy.gameObject;
-                break;
+                _enemyInRange = enemies[enemies.Length-1].gameObject;
             }
         }
     }
@@ -91,7 +121,7 @@ void Update()
 
             GameObject bulletObject = Instantiate(_bullet);
             bulletObject.transform.position =new Vector3(this._thisPosition.x,this._thisPosition.y,-1);
-            bulletObject.GetComponent<ArrowBulletScript>().ShootEnemy(_enemyInRange, _damage);
+            bulletObject.GetComponent<ArrowBulletScript>().ShootEnemy(_enemyInRange, _damage,_speedProjectile);
             int random = Random.Range(0, 2);
 
             switch (random)
@@ -127,6 +157,18 @@ void Update()
             return false;
         }
         _tier++;
+        if (_tier == 2)
+        {
+            _damage = _damageTier2;
+            _rateOfFire = _rateOfFireTier2;
+            _range = _rangeTier2;
+        }
+        if (_tier == 3)
+        {
+            _damage = _damageTier3;
+            _rateOfFire = _rateOfFireTier3;
+            _range = _rangeTier3;
+        }
         return true;
     }
 }

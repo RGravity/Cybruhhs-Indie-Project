@@ -107,10 +107,11 @@ public class SearchPathScript
                 closedList.Add(node);
 
                 // add neighbors to the open list
-                //..Iterator i = node.Neighbours.iterator();
                 for (int i = 0; i < node.Neighbours.Count; i++)
                 {
                     NodeScript neighborNode = (NodeScript)node.Neighbours[i];
+                    TileTypeScript NextTileType = _map.TileTypes[_map.Tiles[(int)node.Neighbours[i].X, (int)node.Neighbours[i].Y]];
+                    TileTypeScript CurrentTileType = _map.TileTypes[_map.Tiles[node.X, node.Y]];
                     if (_map.UnitCanEnterTile((int)node.Neighbours[i].X, (int)node.Neighbours[i].Y))
                     {
                         //multiple++;
@@ -123,6 +124,112 @@ public class SearchPathScript
                             neighborNode.PathParent = node;
                             openList.Add(neighborNode);
                             _isAlternative = true;
+                            if (NextTileType.Name == "Bridge")
+                            {
+                                if (CurrentTileType.Name == "Bridge")
+                                {
+                                    if (node.X - neighborNode.X >= 1)
+                                    {
+                                        for (int n = 0; n < neighborNode.Neighbours.Count; n++)
+                                        {
+                                            if (neighborNode.Neighbours[n].X == neighborNode.X - 1)
+                                            {
+                                                neighborNode.Neighbours[n].PathParent = neighborNode;
+                                                openList.Add(neighborNode.Neighbours[n]);
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    else if (node.X - neighborNode.X <= -1)
+                                    {
+                                        for (int n = 0; n < neighborNode.Neighbours.Count; n++)
+                                        {
+                                            if (neighborNode.Neighbours[n].X == neighborNode.X + 1)
+                                            {
+                                                neighborNode.Neighbours[n].PathParent = neighborNode;
+                                                openList.Add(neighborNode.Neighbours[n]);
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    else if (node.Y - neighborNode.Y >= 1)
+                                    {
+                                        for (int n = 0; n < neighborNode.Neighbours.Count; n++)
+                                        {
+                                            if (neighborNode.Neighbours[n].Y == neighborNode.Y - 1)
+                                            {
+                                                neighborNode.Neighbours[n].PathParent = neighborNode;
+                                                openList.Add(neighborNode.Neighbours[n]);
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    else if (node.Y - neighborNode.Y <= -1)
+                                    {
+                                        for (int n = 0; n < neighborNode.Neighbours.Count; n++)
+                                        {
+                                            if (neighborNode.Neighbours[n].Y == neighborNode.Y + 1)
+                                            {
+                                                neighborNode.Neighbours[n].PathParent = neighborNode;
+                                                openList.Add(neighborNode.Neighbours[n]);
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    listCount++;
+                                }
+                            }
+                            else if (CurrentTileType.Name == "Bridge")
+                            {
+                                if (node.PathParent.X - node.X >= 1)
+                                {
+                                    for (int n = 0; n < neighborNode.Neighbours.Count; n++)
+                                    {
+                                        if (neighborNode.Neighbours[n].X == neighborNode.X - 1)
+                                        {
+                                            neighborNode.Neighbours[n].PathParent = neighborNode;
+                                            openList.Add(neighborNode.Neighbours[n]);
+                                            break;
+                                        }
+                                    }
+                                }
+                                else if (node.PathParent.X - node.X <= -1)
+                                {
+                                    for (int n = 0; n < neighborNode.Neighbours.Count; n++)
+                                    {
+                                        if (neighborNode.Neighbours[n].X == neighborNode.X + 1)
+                                        {
+                                            neighborNode.Neighbours[n].PathParent = neighborNode;
+                                            openList.Add(neighborNode.Neighbours[n]);
+                                            break;
+                                        }
+                                    }
+                                }
+                                else if (node.PathParent.Y - node.Y >= 1)
+                                {
+                                    for (int n = 0; n < neighborNode.Neighbours.Count; n++)
+                                    {
+                                        if (neighborNode.Neighbours[n].Y == neighborNode.Y - 1)
+                                        {
+                                            neighborNode.Neighbours[n].PathParent = neighborNode;
+                                            openList.Add(neighborNode.Neighbours[n]);
+                                            break;
+                                        }
+                                    }
+                                }
+                                else if (node.PathParent.Y - node.Y <= -1)
+                                {
+                                    for (int n = 0; n < neighborNode.Neighbours.Count; n++)
+                                    {
+                                        if (neighborNode.Neighbours[n].Y == neighborNode.Y + 1)
+                                        {
+                                            neighborNode.Neighbours[n].PathParent = neighborNode;
+                                            openList.Add(neighborNode.Neighbours[n]);
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
                             //if (node.Neighbours.Count != i + 1)
                             //{
                             //    break;
@@ -133,6 +240,64 @@ public class SearchPathScript
                         {
                             neighborNode.PathParent = node;
                             openList.Add(neighborNode);
+                            if (NextTileType.Name == "Bridge")
+                            {
+                                if (CurrentTileType.Name == "Bridge")
+                                {
+                                    listCount++;
+                                }
+                            }
+                            else if (CurrentTileType.Name == "Bridge")
+                            {
+                                if (node.PathParent.X - node.X >= 1)
+                                {
+                                    for (int n = 0; n < neighborNode.Neighbours.Count; n++)
+                                    {
+                                        if (neighborNode.Neighbours[n].X == neighborNode.X - 1)
+                                        {
+                                            neighborNode.Neighbours[n].PathParent = neighborNode;
+                                            openList.Add(neighborNode.Neighbours[n]);
+                                            break;
+                                        }
+                                    }
+                                }
+                                else if (node.PathParent.X - node.X <= -1)
+                                {
+                                    for (int n = 0; n < neighborNode.Neighbours.Count; n++)
+                                    {
+                                        if (neighborNode.Neighbours[n].X == neighborNode.X + 1)
+                                        {
+                                            neighborNode.Neighbours[n].PathParent = neighborNode;
+                                            openList.Add(neighborNode.Neighbours[n]);
+                                            break;
+                                        }
+                                    }
+                                }
+                                else if (node.PathParent.Y - node.Y >= 1)
+                                {
+                                    for (int n = 0; n < neighborNode.Neighbours.Count; n++)
+                                    {
+                                        if (neighborNode.Neighbours[n].Y == neighborNode.Y - 1)
+                                        {
+                                            neighborNode.Neighbours[n].PathParent = neighborNode;
+                                            openList.Add(neighborNode.Neighbours[n]);
+                                            break;
+                                        }
+                                    }
+                                }
+                                else if (node.PathParent.Y - node.Y <= -1)
+                                {
+                                    for (int n = 0; n < neighborNode.Neighbours.Count; n++)
+                                    {
+                                        if (neighborNode.Neighbours[n].Y == neighborNode.Y + 1)
+                                        {
+                                            neighborNode.Neighbours[n].PathParent = neighborNode;
+                                            openList.Add(neighborNode.Neighbours[n]);
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                     if (node.Neighbours.Count == i + 1 && pPreviousPath.Count > 0 && _isAlternative == false)

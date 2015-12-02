@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.2.2f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -72,13 +70,14 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Buildings\Arrow\ArrowBulletScript.cs" />
     <Compile Include="Assets\Scripts\Buildings\Arrow\ArrowTowerScript.cs" />
+    <Compile Include="Assets\Scripts\Buildings\BuildPlacementTilesScript.cs" />
     <Compile Include="Assets\Scripts\Buildings\BuildingSpawnScript.cs" />
     <Compile Include="Assets\Scripts\Buildings\BuildingWaveScript.cs" />
     <Compile Include="Assets\Scripts\Buildings\Cannon\CannonBulletScript.cs" />
     <Compile Include="Assets\Scripts\Buildings\Cannon\CannonTowerScript.cs" />
     <Compile Include="Assets\Scripts\Buildings\Slow\SlowBulletScript.cs" />
     <Compile Include="Assets\Scripts\Buildings\Slow\SlowTowerScript.cs" />
-    <Compile Include="Assets\Scripts\Buildings\TowerMenuScripts\BuildArrowTowerScript.cs" />
+    <Compile Include="Assets\Scripts\Buildings\UpgradeTowerScript.cs" />
     <Compile Include="Assets\Scripts\DontDestroyOnLoad\CheckForMusicScript.cs" />
     <Compile Include="Assets\Scripts\DontDestroyOnLoad\DontDestroyOnLoadMusicScript.cs" />
     <Compile Include="Assets\Scripts\DontDestroyOnLoad\DontDestroyOnLoadSoundScript.cs" />
@@ -101,7 +100,6 @@
     <Compile Include="Assets\Scripts\MenuScripts\PauseScript.cs" />
     <Compile Include="Assets\Scripts\Michiel TEST Scripts\EnemyTestScript.cs" />
     <Compile Include="Assets\Scripts\Navigation\2D\ClickableTileScript.cs" />
-    <Compile Include="Assets\Scripts\Navigation\2D\GenerateMapVisualScript.cs" />
     <Compile Include="Assets\Scripts\Navigation\2D\GenerateNodeMap.cs" />
     <Compile Include="Assets\Scripts\Navigation\2D\NodeScript.cs" />
     <Compile Include="Assets\Scripts\Navigation\2D\SearchPathScript.cs" />
@@ -118,8 +116,17 @@
     <Compile Include="Assets\Scripts\WaveEditingFramework\WaveTemplateScript.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Resources\Tiled\Levels\1.xml" />
-    <None Include="Assets\Resources\Tiled\Levels\2.xml" />
+    <None Include="Assets\Resources\Tiled\Levels\01.xml" />
+    <None Include="Assets\Resources\Tiled\Levels\02.xml" />
+    <None Include="Assets\Resources\Tiled\Levels\03.xml" />
+    <None Include="Assets\Resources\Tiled\Levels\04.xml" />
+    <None Include="Assets\Resources\Tiled\Levels\05.xml" />
+    <None Include="Assets\Resources\Tiled\Levels\06.xml" />
+    <None Include="Assets\Resources\Tiled\Levels\07.xml" />
+    <None Include="Assets\Resources\Tiled\Levels\08.xml" />
+    <None Include="Assets\Resources\Tiled\Levels\09.xml" />
+    <None Include="Assets\Resources\Tiled\Levels\10.xml" />
+    <None Include="Assets\Resources\Tiled\Levels\11.xml" />
     <None Include="Assets\Resources\Tiled\Tiles\1.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />

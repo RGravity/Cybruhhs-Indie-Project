@@ -75,7 +75,9 @@
     <Compile Include="Assets\Assets\Scripts\Buildings\BuildingWaveScript.cs" />
     <Compile Include="Assets\Assets\Scripts\Buildings\Cannon\CannonBulletScript.cs" />
     <Compile Include="Assets\Assets\Scripts\Buildings\Cannon\CannonTowerScript.cs" />
-    <Compile Include="Assets\Assets\Scripts\Buildings\TowerMenuScripts\BuildArrowTowerScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\Buildings\Slow\SlowBulletScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\Buildings\Slow\SlowTowerScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\Buildings\UpgradeTowerScript.cs" />
     <Compile Include="Assets\Assets\Scripts\DontDestroyOnLoad\CheckForMusicScript.cs" />
     <Compile Include="Assets\Assets\Scripts\DontDestroyOnLoad\DontDestroyOnLoadMusicScript.cs" />
     <Compile Include="Assets\Assets\Scripts\DontDestroyOnLoad\DontDestroyOnLoadSoundScript.cs" />
@@ -98,7 +100,6 @@
     <Compile Include="Assets\Assets\Scripts\MenuScripts\PauseScript.cs" />
     <Compile Include="Assets\Assets\Scripts\Michiel TEST Scripts\EnemyTestScript.cs" />
     <Compile Include="Assets\Assets\Scripts\Navigation\2D\ClickableTileScript.cs" />
-    <Compile Include="Assets\Assets\Scripts\Navigation\2D\GenerateMapVisualScript.cs" />
     <Compile Include="Assets\Assets\Scripts\Navigation\2D\GenerateNodeMap.cs" />
     <Compile Include="Assets\Assets\Scripts\Navigation\2D\NodeScript.cs" />
     <Compile Include="Assets\Assets\Scripts\Navigation\2D\SearchPathScript.cs" />
@@ -115,8 +116,16 @@
     <Compile Include="Assets\Assets\Scripts\WaveEditingFramework\WaveTemplateScript.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Assets\Resources\Tiled\Levels\1.xml" />
-    <None Include="Assets\Assets\Resources\Tiled\Levels\2.xml" />
+    <None Include="Assets\Assets\Resources\Tiled\Levels\01.xml" />
+    <None Include="Assets\Assets\Resources\Tiled\Levels\02.xml" />
+    <None Include="Assets\Assets\Resources\Tiled\Levels\03.xml" />
+    <None Include="Assets\Assets\Resources\Tiled\Levels\04.xml" />
+    <None Include="Assets\Assets\Resources\Tiled\Levels\05.xml" />
+    <None Include="Assets\Assets\Resources\Tiled\Levels\06.xml" />
+    <None Include="Assets\Assets\Resources\Tiled\Levels\07.xml" />
+    <None Include="Assets\Assets\Resources\Tiled\Levels\08.xml" />
+    <None Include="Assets\Assets\Resources\Tiled\Levels\09.xml" />
+    <None Include="Assets\Assets\Resources\Tiled\Levels\10.xml" />
     <None Include="Assets\Assets\Resources\Tiled\Tiles\1.xml" />
     <None Include="Assets\ProjectSettings\ProjectVersion.txt" />
     <None Include="Assets\SavedData.xml" />
