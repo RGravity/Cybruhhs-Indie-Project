@@ -18,6 +18,9 @@ public class WavePartProgressScript {
 
     private float _timeBetweenEnemies;
     private float _secToWaitForNextPart;
+    
+    private int _beginPositionNr;
+    private int _endPositionNr;
 
     public float TimeStarted { get { return _timeStarted; } set { _timeStarted = value; } }
 
@@ -34,5 +37,8 @@ public class WavePartProgressScript {
 
     public float TimeBetweenEnemies { get { return _timeBetweenEnemies; } set { _timeBetweenEnemies = value; } }
     public float SecToWaitForNextPart { get { return _secToWaitForNextPart; } set { _secToWaitForNextPart = value; } }
+
+    public int BeginPositionNr { get { return _beginPositionNr; } set { _beginPositionNr = value; } }
+    public int EndPositionNr { get { return _endPositionNr; } set { _endPositionNr = value; } }
 
 }
