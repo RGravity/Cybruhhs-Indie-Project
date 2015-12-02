@@ -35,6 +35,12 @@ public class BuildingSpawnScript : MonoBehaviour
     private BaseScript _baseScript; //Base Script to lower gold and such.
     private TileMapScript _tileMap; //Tilemap to see if buildable
     private AudioSource _buy; //Buy Sound
+    private AudioSource _troll1; //Troll voice one
+    private AudioSource _troll2; //Troll voice two
+    private AudioSource _spider1; //Spider voice one
+    private AudioSource _spider2; //Spider voice two
+    private AudioSource _tree1; //Tree voice one
+    private AudioSource _tree2; //Tree voice one
 
     // Use this for initialization
     //Load all the Variables and Prepare the Radial Menu
@@ -47,6 +53,12 @@ public class BuildingSpawnScript : MonoBehaviour
         if (_check.Check == true)
         {
             //_buy = GameObject.Find("SellSound").GetComponent<AudioSource>();
+            //_troll1 = GameObject.Find("Troll1").GetComponent<AudioSource>();
+            //_troll2 = GameObject.Find("Troll2").GetComponent<AudioSource>();
+            //_spider1 = GameObject.Find("Spider1").GetComponent<AudioSource>();
+            //_spider2 = GameObject.Find("Spider2").GetComponent<AudioSource>();
+            //_tree1 = GameObject.Find("Tree1").GetComponent<AudioSource>();
+            //_tree2 = GameObject.Find("Tree2").GetComponent<AudioSource>();
         }
     }
 
@@ -245,9 +257,20 @@ public class BuildingSpawnScript : MonoBehaviour
                         _selectedTile[i].GetComponentInChildren<SpriteRenderer>().enabled = false;
                     }
                     _baseScript.LowerGold(250);
-                    if (_buy != null)
+                    int random = Random.Range(0, 1);
+                    if (random == 0)
                     {
-                        _buy.Play();
+                        if (_spider1 != null)
+                        {
+                            _spider1.Play();
+                        }
+                    }
+                    else
+                    {
+                        if (_spider1 != null)
+                        {
+                            _spider2.Play();
+                        }
                     }
                 }
                 break;
@@ -266,10 +289,22 @@ public class BuildingSpawnScript : MonoBehaviour
                         _selectedTile[i].GetComponentInChildren<SpriteRenderer>().enabled = false;
                     }
                     _baseScript.LowerGold(200);
-                    if (_buy != null)
+                    int random = Random.Range(0, 1);
+                    if (random == 0)
                     {
-                        _buy.Play();
+                        if (_troll1 != null)
+                        {
+                            _troll1.Play();
+                        }
                     }
+                    else
+                    {
+                        if (_troll2 != null)
+                        {
+                            _troll2.Play();
+                        }
+                    }
+
                 }
                 break;
             case 2:
@@ -283,9 +318,20 @@ public class BuildingSpawnScript : MonoBehaviour
                         _selectedTile[i].GetComponentInChildren<SpriteRenderer>().enabled = false;
                     }
                     _baseScript.LowerGold(150);
-                    if (_buy != null)
+                    int random = Random.Range(0, 1);
+                    if (random == 0)
                     {
-                        _buy.Play();
+                        if (_tree1 != null)
+                        {
+                            _tree1.Play();
+                        }
+                    }
+                    else
+                    {
+                        if (_tree2 != null)
+                        {
+                            _tree2.Play();
+                        }
                     }
                 }
                 break;

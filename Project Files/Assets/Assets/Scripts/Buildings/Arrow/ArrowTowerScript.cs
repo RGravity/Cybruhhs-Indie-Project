@@ -52,6 +52,11 @@ public class ArrowTowerScript : MonoBehaviour {
     private AudioSource _shoot1;
     private AudioSource _shoot2;
     private AudioSource _shoot3;
+    private AudioSource _tree3;
+    private AudioSource _tree4;
+    private AudioSource _tree5;
+    private AudioSource _tree6;
+    private AudioSource _tree7;
 
     private CheckForMusicScript _check;
     public int Tier { get { return _tier; } set { _tier = value; }  }
@@ -66,6 +71,12 @@ public class ArrowTowerScript : MonoBehaviour {
             _shoot1 = GameObject.Find("ArrowShoot1").GetComponent<AudioSource>();
             _shoot2 = GameObject.Find("ArrowShoot2").GetComponent<AudioSource>();
             _shoot3 = GameObject.Find("ArrowShoot3").GetComponent<AudioSource>();
+
+            _tree3 = GameObject.Find("Tree3").GetComponent<AudioSource>();
+            _tree4 = GameObject.Find("Tree4").GetComponent<AudioSource>();
+            _tree5 = GameObject.Find("Tree5").GetComponent<AudioSource>();
+            _tree6 = GameObject.Find("Tree6").GetComponent<AudioSource>();
+            _tree7 = GameObject.Find("Tree7").GetComponent<AudioSource>();
         }
         _rateOfFire = _rateOfFireTier1;
         _damage = _damageTier1;
@@ -165,6 +176,21 @@ void Update()
             _damage = _damageTier2;
             _rateOfFire = _rateOfFireTier2;
             _range = _rangeTier2;
+            int random = Random.Range(0, 1);
+            if (random == 0)
+            {
+                if (_tree3 != null)
+                {
+                    _tree3.Play();
+                }
+            }
+            else 
+            {
+                if (_tree4 != null)
+                {
+                    _tree4.Play();
+                }
+            }
             return false;
         }
         if (_tier == 3)
@@ -172,6 +198,28 @@ void Update()
             _damage = _damageTier3;
             _rateOfFire = _rateOfFireTier3;
             _range = _rangeTier3;
+            int random = Random.Range(0, 9);
+            if (random <= 3)
+            {
+                if (_tree5!= null)
+                {
+                    _tree5.Play();
+                }
+            }
+            else if (random >= 4 && random <= 7)
+            {
+                if (_tree6 != null)
+                {
+                    _tree6.Play();
+                }
+            }
+            else
+            {
+                if (_tree7 != null)
+                {
+                    _tree7.Play();
+                }
+            }
             return false;
         }
         return true;
