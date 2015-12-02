@@ -252,6 +252,21 @@ public class BuildingSpawnScript : MonoBehaviour
                 break;
             //SlowTower            
             case 1:
+                if (_baseScript.Gold >= 150)
+                {
+                    _selectedTile[3].AddComponent<SlowTowerScript>();
+                    for (int i = 0; i < _selectedTile.Length; i++)
+                    {
+                        _selectedTile[i].GetComponent<Renderer>().material.mainTexture = _cannonTurretTextures[i];
+                        _selectedTile[i].AddComponent<UpgradeTowerScript>();
+                        _selectedTile[i].GetComponentInChildren<SpriteRenderer>().enabled = false;
+                    }
+                    _baseScript.LowerGold(150);
+                    if (_buy != null)
+                    {
+                        _buy.Play();
+                    }
+                }
                 break;
             //ArrowTower
             case 2:

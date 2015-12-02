@@ -112,7 +112,7 @@ public class SlowTowerScript : MonoBehaviour {
         _nextEnemy = 1;
         if (enemies.Length > 0)
         {
-            if (enemies[enemies.Length - _nextEnemy].IsSlowed || _isNextEnemy)
+            if (_isNextEnemy || enemies[enemies.Length - _nextEnemy].IsSlowed)
             {
                 if ((enemies[enemies.Length - _nextEnemy - 1].transform.position - _thisPosition).magnitude < _range)
                 {
