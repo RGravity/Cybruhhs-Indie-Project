@@ -5,6 +5,7 @@ public class SlowTowerScript : MonoBehaviour {
 
     private BuildingType _buildingType = BuildingType.Both;
     private GameObject _bullet;
+    [SerializeField]
     private int _tier = 1;
     private Vector3 _thisPosition;
     private float _timeLastShot;
@@ -65,6 +66,7 @@ public class SlowTowerScript : MonoBehaviour {
     private CheckForMusicScript _check;
 
     private int _nextEnemy = 1;
+    public int Tier { get { return _tier; } set { _tier = value; } }
 
     //AUDIOSOURCE NEEDS TO BE CHANGED
     // Use this for initializations
@@ -192,6 +194,7 @@ public class SlowTowerScript : MonoBehaviour {
             _rateOfFire = _rateOfFireTier2;
             _range = _rangeTier2;
             _slowAmount = _slowAmountTier2;
+            return false;
         }
         if (_tier == 3)
         {
@@ -199,6 +202,7 @@ public class SlowTowerScript : MonoBehaviour {
             _rateOfFire = _rateOfFireTier3;
             _range = _rangeTier3;
             _slowAmount = _slowAmountTier3;
+            return false;
         }
         return true;
     }

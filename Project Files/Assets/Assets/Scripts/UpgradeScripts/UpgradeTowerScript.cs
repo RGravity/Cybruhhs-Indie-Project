@@ -62,14 +62,13 @@ public class UpgradeTowerScript : MonoBehaviour {
             _upgradeOne.GetComponent<Image>().sprite = Resources.Load<Sprite>("TrollUpgrade1");
             _upgradeTwo.GetComponent<Image>().sprite = Resources.Load<Sprite>("TrollUpgrade2Locked");
             _upgradePanel.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
-            _upgradeTreeAppear = false;
+            _upgradeTrollAppear = false;
         }
         else if (_upgradeTreeAppear == true)
         {
             _upgradePanel.transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z);
-
-            _upgradeOne.GetComponent<Image>().sprite = Resources.Load<Sprite>("TreeUpgrade1");
-            _upgradeTwo.GetComponent<Image>().sprite = Resources.Load<Sprite>("TreeUpgrade2Locked");
+            _upgradeOne.GetComponent<Image>().sprite = Resources.Load<Sprite>("SpiderUpgrade1");
+            _upgradeTwo.GetComponent<Image>().sprite = Resources.Load<Sprite>("SpiderUpgrade2Locked");
             _upgradePanel.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
             _upgradeTreeAppear = false;
         }
@@ -78,31 +77,30 @@ public class UpgradeTowerScript : MonoBehaviour {
 
     private void objectsAppear2()
     {
-        if (_upgradeSpiderAppear == true)
+        if (_upgradeSpiderAppear2 == true)
         {
             _upgradePanel.transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z);
             _upgradeOne.GetComponent<Image>().sprite = Resources.Load<Sprite>("SpiderUpgrade1Locked");
             _upgradeTwo.GetComponent<Image>().sprite = Resources.Load<Sprite>("SpiderUpgrade2");
             _upgradePanel.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
-            _upgradeSpiderAppear = false;
+            _upgradeSpiderAppear2 = false;
         }
 
-        else if (_upgradeTrollAppear == true)
+        else if (_upgradeTrollAppear2 == true)
         {
             _upgradePanel.transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z);
             _upgradeOne.GetComponent<Image>().sprite = Resources.Load<Sprite>("TrollUpgrade1Locked");
             _upgradeTwo.GetComponent<Image>().sprite = Resources.Load<Sprite>("TrollUpgrade2");
             _upgradePanel.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
-            _upgradeTreeAppear = false;
+            _upgradeTrollAppear2 = false;
         }
-        else if (_upgradeTreeAppear == true)
+        else if (_upgradeTreeAppear2 == true)
         {
             _upgradePanel.transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z);
-
-            _upgradeOne.GetComponent<Image>().sprite = Resources.Load<Sprite>("TreeUpgrade1Locked");
-            _upgradeTwo.GetComponent<Image>().sprite = Resources.Load<Sprite>("TreeUpgrade2");
+            _upgradeOne.GetComponent<Image>().sprite = Resources.Load<Sprite>("SpiderUpgrade1Locked");
+            _upgradeTwo.GetComponent<Image>().sprite = Resources.Load<Sprite>("SpiderUpgrade2");
             _upgradePanel.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
-            _upgradeTreeAppear = false;
+            _upgradeTreeAppear2 = false;
         }
 
     }
@@ -113,6 +111,7 @@ public class UpgradeTowerScript : MonoBehaviour {
         if (_disappear == true)
         {
             _upgradePanel.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
+            
             _disappear = false;
         }
     }
@@ -122,24 +121,22 @@ public class UpgradeTowerScript : MonoBehaviour {
         if (_upgradeOne.Spider == true)
         {
             _slowTower.UpdateTowerSlow();
-            _upgradeOne.Spider = false;
-            _disappear = true;
+            _upgradeOne.Spider = _slowTower.UpdateTowerSlow();
+            _disappear = true;         
         }
         else if (_upgradeOne.Tree == true)
         {
             _arrowTower.UpdateTowerArrow();
             _upgradeOne.Tree = false;
-           
+            Debug.Log("Tier: " + _arrowTower.Tier);
             _disappear = true;
         }
         else if (_upgradeOne.Troll == true)
         {
             _cannonTower.UpdateTowerCannon();
-            _upgradeOne.Troll = false;
-            
             _disappear = true;
+            _upgradeOne.Troll = false;
         }
-
     }
 
     private void upgradeTowers2()
@@ -167,11 +164,23 @@ public class UpgradeTowerScript : MonoBehaviour {
 
     void OnMouseDown()
     {
-        if (gameObject.GetComponent<ArrowTowerScript>()) _upgradeTreeAppear = true;
-        //else if (gameObject.GetComponent<ArrowBulletScript>()) _upgradeTreeAppear2 = true;
-        else if (gameObject.GetComponent<CannonTowerScript>()) _upgradeTrollAppear = true;
-       // else if (gameObject.GetComponent<CannonTowerScript>()) _upgradeTrollAppear2 = true;
-        else if (gameObject.GetComponent<CannonTowerScript>()) _upgradeSpiderAppear = true;
-       // else if (gameObject.GetComponent<SlowTowerScript>()) _upgradeSpiderAppear2 = true;
+        if (gameObject.GetComponent<ArrowTowerScript>())
+        {
+            if (gameObject.GetComponent<ArrowTowerScript>().Tier == 1) _upgradeTreeAppear = true;
+
+            else if (gameObject.GetComponent<ArrowTowerScript>().Tier == 2) _upgradeTreeAppear2 = true;
+        }
+        else if (gameObject.GetComponent<CannonTowerScript>())
+        {
+            if (gameObject.GetComponent<CannonTowerScript>().Tier == 1) _upgradeTrollAppear = true;
+
+            else if (gameObject.GetComponent<CannonTowerScript>().Tier == 2) _upgradeTrollAppear2 = true;
+        }
+        //else
+        //{
+        //    if (gameObject.GetComponent<SlowTowerScript>().Tier == 1) _upgradeSpiderAppear = true;
+
+        //    else if (gameObject.GetComponent<SlowTowerScript>().Tier == 2) _upgradeSpiderAppear2 = true;
+        //}
     }
 }
