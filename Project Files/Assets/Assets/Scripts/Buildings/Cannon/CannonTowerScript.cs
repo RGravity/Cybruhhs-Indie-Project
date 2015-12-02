@@ -43,7 +43,7 @@ public class CannonTowerScript : MonoBehaviour {
     private float _countdownTime;
 
     [SerializeField]
-    private float _speedProjectile;
+    private float _speedProjectile = 4;
 
     private GameObject _enemyInRange;
     private AudioSource _cannonFire;

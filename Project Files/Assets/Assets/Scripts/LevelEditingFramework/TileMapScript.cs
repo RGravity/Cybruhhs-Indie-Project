@@ -28,6 +28,7 @@ public class TileMapScript : MonoBehaviour
     private int _level = 1;
     //Levels in XML presented as Objects
     private Object[] _xmlLevels;
+    private Object[] _lvlBGs;
     //TileData reads the XML Needs to be change with Tiled.
     private int[,] _tileData =
     {
@@ -88,6 +89,10 @@ public class TileMapScript : MonoBehaviour
         if (_xmlLevels == null)
         {
             _xmlLevels = Resources.LoadAll("Tiled/Levels");
+            if (_xmlLevels != null && _xmlLevels.Length > 0)
+            {
+                _lvlBGs = Resources.LoadAll("Tiled/LevelBGs/1");
+            }
         }
         //Parse Level to _tileData
         if (pLevel > 0 && pLevel <= _xmlLevels.Length)
@@ -340,6 +345,7 @@ public class TileMapScript : MonoBehaviour
     /// </summary>
     private void _generateMapVisual()
     {
+        int lvlBGindex = 0;
         for (int x = 0; x < _mapSizeX; x++)
         {
             for (int y = 0; y < _mapSizeY; y++)
@@ -349,6 +355,7 @@ public class TileMapScript : MonoBehaviour
                 if (tt.BuildingAllowed)
                 {
                     go.AddComponent<ClickableTileScript>();
+                    go.GetComponent<Material>().mainTexture = _lvlBGs[lvlBGindex] as Texture;
                     ClickableTileScript ct = go.GetComponent<ClickableTileScript>();
                     ct.tileX = x;
                     ct.tileY = y;

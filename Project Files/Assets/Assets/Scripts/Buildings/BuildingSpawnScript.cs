@@ -204,6 +204,7 @@ public class BuildingSpawnScript : MonoBehaviour
             }
 
             _index = (int)(angle / _angle);
+            Debug.Log("_index: " + _index);
         }
 
         //Draw the Textures if you need to show the button
@@ -252,27 +253,12 @@ public class BuildingSpawnScript : MonoBehaviour
                 break;
             //SlowTower            
             case 1:
-                if (_baseScript.Gold >= 150)
-                {
-                    _selectedTile[1].AddComponent<SlowTowerScript>();
-                    for (int i = 0; i < _selectedTile.Length; i++)
-                    {
-                        _selectedTile[i].GetComponent<Renderer>().material.mainTexture = _cannonTurretTextures[i];
-                        _selectedTile[i].AddComponent<UpgradeTowerScript>();
-                        _selectedTile[i].GetComponentInChildren<SpriteRenderer>().enabled = false;
-                    }
-                    _baseScript.LowerGold(150);
-                    if (_buy != null)
-                    {
-                        _buy.Play();
-                    }
-                }
                 break;
             //ArrowTower
-            case 2:
+            case 3:
                 if (_baseScript.Gold >= 200)
                 {
-                    _selectedTile[1].AddComponent<ArrowTowerScript>();
+                    _selectedTile[1].AddComponent<SlowTowerScript>();
                     for (int i = 0; i < _selectedTile.Length; i++)
                     {
                         _selectedTile[i].GetComponent<Renderer>().material.mainTexture = _arrowTurretTextures[i];
@@ -280,6 +266,23 @@ public class BuildingSpawnScript : MonoBehaviour
                         _selectedTile[i].GetComponentInChildren<SpriteRenderer>().enabled = false;
                     }
                     _baseScript.LowerGold(200);
+                    if (_buy != null)
+                    {
+                        _buy.Play();
+                    }
+                }
+                break;
+            case 2:
+                if (_baseScript.Gold >= 150)
+                {
+                    _selectedTile[1].AddComponent<ArrowTowerScript>();
+                    for (int i = 0; i < _selectedTile.Length; i++)
+                    {
+                        _selectedTile[i].GetComponent<Renderer>().material.mainTexture = _cannonTurretTextures[i];
+                        _selectedTile[i].AddComponent<UpgradeTowerScript>();
+                        _selectedTile[i].GetComponentInChildren<SpriteRenderer>().enabled = false;
+                    }
+                    _baseScript.LowerGold(150);
                     if (_buy != null)
                     {
                         _buy.Play();
