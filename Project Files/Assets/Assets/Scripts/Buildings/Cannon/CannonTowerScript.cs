@@ -4,6 +4,7 @@ using System.Collections;
 public class CannonTowerScript : MonoBehaviour {
     private BuildingType _buildingType = BuildingType.Ground;
     private GameObject _bullet;
+    [SerializeField]
     private int _tier = 1;
     private Vector3 _thisPosition;
     private float _timeLastShot;
@@ -42,11 +43,12 @@ public class CannonTowerScript : MonoBehaviour {
     private float _countdownTime;
 
     [SerializeField]
-    private float _speedProjectile;
+    private float _speedProjectile = 4;
 
     private GameObject _enemyInRange;
     private AudioSource _cannonFire;
     private CheckForMusicScript _check;
+    public int Tier { get { return _tier; } set { _tier = value; } }
     // Use this for initialization
     void Start()
     {
@@ -142,12 +144,14 @@ public class CannonTowerScript : MonoBehaviour {
             _damage = _damageTier2;
             _rateOfFire = _rateOfFireTier2;
             _range = _rangeTier2;
+            return false;
         }
         if (_tier == 3)
         {
             _damage = _damageTier3;
             _rateOfFire = _rateOfFireTier3;
             _range = _rangeTier3;
+            return false;
         }
         return true;
     }

@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BuildingSpawnScript : MonoBehaviour {
+public class BuildingSpawnScript : MonoBehaviour
+{
 
     [SerializeField]
     private int _radius = 125; // pixels radius to centor of all the radial buttons
@@ -13,16 +14,15 @@ public class BuildingSpawnScript : MonoBehaviour {
     private Texture[] _selectedButtons; //The selected state of the Buttons
     [SerializeField]
     private Camera _myCam;
-
-    //TOWERS
     [SerializeField]
-    private Texture[] _turretTextures;
+    private Texture[] _arrowTurretTextures; //TOWERS (Arrow)
+    [SerializeField]
+    private Texture[] _cannonTurretTextures; //Cannon
+    [SerializeField]
+    private Texture[] _slowTurretTextures; //Slow Turret
 
 
-    private int _offsetForRadialWheel;
-
-
-
+    private int _offsetForRadialWheel; //The Vertical Offset of the Wheel
     private Vector2 _center; //Position of the center Button
     private CheckForMusicScript _check; //Check for Music
     private int _ringCount; //Amount of Objects in Ring
@@ -38,7 +38,7 @@ public class BuildingSpawnScript : MonoBehaviour {
 
     // Use this for initialization
     //Load all the Variables and Prepare the Radial Menu
-    void Start ()
+    void Start()
     {
         _check = GameObject.FindObjectOfType<CheckForMusicScript>();
         _tileMap = FindObjectOfType<TileMapScript>();
@@ -93,6 +93,15 @@ public class BuildingSpawnScript : MonoBehaviour {
     {
         //Get the Y offset for the Menu
         _offsetForRadialWheel = Screen.height;
+
+        _onMouseClickMoveRadialMenu();
+    }
+
+    /// <summary>
+    /// Move Radial Menu to right spot when clicking on a Turret
+    /// </summary>
+    private void _onMouseClickMoveRadialMenu()
+    {
         //IF player clicks on a Tower Tile move the Menu to the right position
         if (Input.GetMouseButtonDown(0))
         {
@@ -107,9 +116,8 @@ public class BuildingSpawnScript : MonoBehaviour {
 
                 Collider[] tower = new Collider[0];
                 //If Gameobject has BuildPlacementTilesScript make sure to get all the Cubes for the turret, which is 4 tiles
-                if (vHit.collider.gameObject.GetComponent<BuildPlacementTilesScript>())
+                if (vHit.collider.gameObject.GetComponent<BuildPlacementTilesScript>() && !vHit.collider.gameObject.GetComponent<UpgradeTowerScript>())
                 {
-                    Debug.Log("THIS WORKS");
                     switch (vHit.collider.gameObject.GetComponent<BuildPlacementTilesScript>().TowerPlaceNr)
                     {
                         case TowerNoneNumbers.Tower1:
@@ -129,7 +137,7 @@ public class BuildingSpawnScript : MonoBehaviour {
                     }
 
                     //If im allowed to build a tower there and theres not another tower in place there, then start building
-                    if (_tileMap.TileTypes[indexofSelectedTile].BuildingAllowed && !vHit.collider.gameObject.GetComponent<ArrowTowerScript>() && !vHit.collider.gameObject.GetComponent<CannonTowerScript>() && !vHit.collider.gameObject.GetComponent<SlowTowerScript>())
+                    if (_tileMap.TileTypes[indexofSelectedTile].BuildingAllowed)
                     {
                         //Get the Screenpoint of the object
                         Vector2 tempPos = _myCam.WorldToScreenPoint(vHit.transform.position);
@@ -151,11 +159,19 @@ public class BuildingSpawnScript : MonoBehaviour {
                     _selectedTile = null;
                     _calculateEverything();
                 }
-            } 
+            }
         }
     }
-	
-	void OnGUI()
+
+    void OnGUI()
+    {
+        _radialFunctionality();
+    }
+
+    /// <summary>
+    /// The functionality of the Radial Menu
+    /// </summary>
+    private void _radialFunctionality()
     {
         Event currentEvent = Event.current;
 
@@ -166,12 +182,11 @@ public class BuildingSpawnScript : MonoBehaviour {
             _index = -1;
         }
 
-        //if mouseup then get the index and go to ResolveButtonPressed
+        //if mouseup then go to ResolveButtonPressed
         if (currentEvent.type == EventType.MouseUp)
         {
             if (_showButtons)
             {
-                Debug.Log("User selected #" + _index);
                 _resolveButtonPressed();
             }
             _showButtons = false;
@@ -189,7 +204,7 @@ public class BuildingSpawnScript : MonoBehaviour {
             }
 
             _index = (int)(angle / _angle);
-            Debug.Log(_index);
+            Debug.Log("_index: " + _index);
         }
 
         //Draw the Textures if you need to show the button
@@ -215,21 +230,21 @@ public class BuildingSpawnScript : MonoBehaviour {
     /// </summary>
     private void _resolveButtonPressed()
     {
-        //build the right turret if money is available
+        //build the right turret if money is available with the Index
         switch (_index)
         {
             //CannonTower
             case 0:
                 if (_baseScript.Gold >= 250)
                 {
+                    _selectedTile[1].AddComponent<CannonTowerScript>();
                     for (int i = 0; i < _selectedTile.Length; i++)
                     {
-                        _selectedTile[i].GetComponent<Renderer>().material.mainTexture = _turretTextures[i];
-                        _selectedTile[3].AddComponent<CannonTowerScript>();
+                        _selectedTile[i].GetComponent<Renderer>().material.mainTexture = _cannonTurretTextures[i];
                         _selectedTile[i].AddComponent<UpgradeTowerScript>();
                         _selectedTile[i].GetComponentInChildren<SpriteRenderer>().enabled = false;
                     }
-                    //_baseScript.LowerGold(200);
+                    _baseScript.LowerGold(250);
                     if (_buy != null)
                     {
                         _buy.Play();
@@ -240,17 +255,34 @@ public class BuildingSpawnScript : MonoBehaviour {
             case 1:
                 break;
             //ArrowTower
-            case 2:
+            case 3:
                 if (_baseScript.Gold >= 200)
                 {
+                    _selectedTile[1].AddComponent<SlowTowerScript>();
                     for (int i = 0; i < _selectedTile.Length; i++)
                     {
-                        _selectedTile[i].GetComponent<Renderer>().material.mainTexture = _turretTextures[i];
-                        _selectedTile[3].AddComponent<ArrowTowerScript>();
+                        _selectedTile[i].GetComponent<Renderer>().material.mainTexture = _arrowTurretTextures[i];
                         _selectedTile[i].AddComponent<UpgradeTowerScript>();
                         _selectedTile[i].GetComponentInChildren<SpriteRenderer>().enabled = false;
                     }
-                    //_baseScript.LowerGold(200);
+                    _baseScript.LowerGold(200);
+                    if (_buy != null)
+                    {
+                        _buy.Play();
+                    }
+                }
+                break;
+            case 2:
+                if (_baseScript.Gold >= 150)
+                {
+                    _selectedTile[1].AddComponent<ArrowTowerScript>();
+                    for (int i = 0; i < _selectedTile.Length; i++)
+                    {
+                        _selectedTile[i].GetComponent<Renderer>().material.mainTexture = _cannonTurretTextures[i];
+                        _selectedTile[i].AddComponent<UpgradeTowerScript>();
+                        _selectedTile[i].GetComponentInChildren<SpriteRenderer>().enabled = false;
+                    }
+                    _baseScript.LowerGold(150);
                     if (_buy != null)
                     {
                         _buy.Play();

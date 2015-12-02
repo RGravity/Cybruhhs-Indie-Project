@@ -77,7 +77,6 @@
     <Compile Include="Assets\Assets\Scripts\Buildings\Cannon\CannonTowerScript.cs" />
     <Compile Include="Assets\Assets\Scripts\Buildings\Slow\SlowBulletScript.cs" />
     <Compile Include="Assets\Assets\Scripts\Buildings\Slow\SlowTowerScript.cs" />
-    <Compile Include="Assets\Assets\Scripts\Buildings\UpgradeTowerScript.cs" />
     <Compile Include="Assets\Assets\Scripts\DontDestroyOnLoad\CheckForMusicScript.cs" />
     <Compile Include="Assets\Assets\Scripts\DontDestroyOnLoad\DontDestroyOnLoadMusicScript.cs" />
     <Compile Include="Assets\Assets\Scripts\DontDestroyOnLoad\DontDestroyOnLoadSoundScript.cs" />
@@ -109,6 +108,11 @@
     <Compile Include="Assets\Assets\Scripts\OptionsScripts\MusicVolumeScript.cs" />
     <Compile Include="Assets\Assets\Scripts\OptionsScripts\SFXVolumeScript.cs" />
     <Compile Include="Assets\Assets\Scripts\Timer\CountTimerScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\UpgradeScripts\CancelButtonScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\UpgradeScripts\SellButtonScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\UpgradeScripts\UpgradeOneButtonScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\UpgradeScripts\UpgradeTowerScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\UpgradeScripts\UpgradeTwoButtonScript.cs" />
     <Compile Include="Assets\Assets\Scripts\WaveEditingFramework\Wave Editing Wrappers\LevelWrapperScript.cs" />
     <Compile Include="Assets\Assets\Scripts\WaveEditingFramework\Wave Editing Wrappers\WaveWrapperScript.cs" />
     <Compile Include="Assets\Assets\Scripts\WaveEditingFramework\WaveMainScript.cs" />
@@ -126,6 +130,7 @@
     <None Include="Assets\Assets\Resources\Tiled\Levels\08.xml" />
     <None Include="Assets\Assets\Resources\Tiled\Levels\09.xml" />
     <None Include="Assets\Assets\Resources\Tiled\Levels\10.xml" />
+    <None Include="Assets\Assets\Resources\Tiled\Levels\11.xml" />
     <None Include="Assets\Assets\Resources\Tiled\Tiles\1.xml" />
     <None Include="Assets\ProjectSettings\ProjectVersion.txt" />
     <None Include="Assets\SavedData.xml" />
