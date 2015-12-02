@@ -47,6 +47,11 @@ public class CannonTowerScript : MonoBehaviour {
 
     private GameObject _enemyInRange;
     private AudioSource _cannonFire;
+    private AudioSource _troll3;// Troll3 voice
+    private AudioSource _troll4;//Troll4 voice
+    private AudioSource _troll5;// Troll5 voice
+    private AudioSource _troll6;//Troll6 voice
+    private AudioSource _troll7;// Troll7 voice
     private CheckForMusicScript _check;
     public int Tier { get { return _tier; } set { _tier = value; } }
     // Use this for initialization
@@ -58,6 +63,12 @@ public class CannonTowerScript : MonoBehaviour {
         if (_check.Check == true)
         {
             _cannonFire = GameObject.Find("CannonHit").GetComponent<AudioSource>();
+            _troll3 = GameObject.Find("Troll3").GetComponent<AudioSource>();
+            _troll4 = GameObject.Find("Troll4").GetComponent<AudioSource>();
+            _troll5 = GameObject.Find("Troll5").GetComponent<AudioSource>();
+            _troll6 = GameObject.Find("Troll6").GetComponent<AudioSource>();
+            _troll7 = GameObject.Find("Troll7").GetComponent<AudioSource>();
+
         }
         _damage = _damageTier1;
         _range = _rangeTier1;
@@ -144,6 +155,21 @@ public class CannonTowerScript : MonoBehaviour {
             _damage = _damageTier2;
             _rateOfFire = _rateOfFireTier2;
             _range = _rangeTier2;
+            int random = Random.Range(0, 1);
+            if (random == 0)
+            {
+                if (_troll3 != null)
+                {
+                    _troll3.Play();
+                }
+            }
+            else
+            {
+                if (_troll4 != null)
+                {
+                    _troll4.Play();
+                }
+            }
             return false;
         }
         if (_tier == 3)
@@ -151,6 +177,29 @@ public class CannonTowerScript : MonoBehaviour {
             _damage = _damageTier3;
             _rateOfFire = _rateOfFireTier3;
             _range = _rangeTier3;
+
+            int random = Random.Range(0, 9);
+            if (random <= 3)
+            {
+                if (_troll5 != null)
+                {
+                    _troll5.Play();
+                }
+            }
+            else if (random >= 4 && random <= 7)
+            {
+                if (_troll6 != null)
+                {
+                    _troll6.Play();
+                }
+            }
+            else
+            {
+                if (_troll7 != null)
+                {
+                    _troll7.Play();
+                }
+            }
             return false;
         }
         return true;

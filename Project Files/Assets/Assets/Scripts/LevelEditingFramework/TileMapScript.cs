@@ -345,8 +345,8 @@ public class TileMapScript : MonoBehaviour
     /// </summary>
     private void _generateMapVisual()
     {
-        for (int y = 0; y < _mapSizeY; y++)
-        {
+            for (int y = 0; y < _mapSizeY; y++)
+            {
             for (int x = 0; x < _mapSizeX; x++)
             {
                 TileTypeScript tt = _tileTypes[_tiles[x, y]];
