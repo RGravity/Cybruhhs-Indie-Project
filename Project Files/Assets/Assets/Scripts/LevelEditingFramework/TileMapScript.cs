@@ -355,7 +355,7 @@ public class TileMapScript : MonoBehaviour
                 if (tt.BuildingAllowed)
                 {
                     go.AddComponent<ClickableTileScript>();
-                    go.GetComponent<Material>().mainTexture = _lvlBGs[lvlBGindex] as Texture;
+                    //go.GetComponent<Material>().mainTexture = _lvlBGs[lvlBGindex] as Texture;
                     ClickableTileScript ct = go.GetComponent<ClickableTileScript>();
                     ct.tileX = x;
                     ct.tileY = y;
