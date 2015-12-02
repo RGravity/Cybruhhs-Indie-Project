@@ -6,6 +6,7 @@ public class ArrowTowerScript : MonoBehaviour {
 
     private BuildingType _buildingType = BuildingType.Both;
     private GameObject _bullet;
+    [SerializeField]
     private int _tier = 1;
     private Vector3 _thisPosition;
     private float _timeLastShot;
@@ -53,6 +54,7 @@ public class ArrowTowerScript : MonoBehaviour {
     private AudioSource _shoot3;
 
     private CheckForMusicScript _check;
+    public int Tier { get { return _tier; } set { _tier = value; }  }
     // Use this for initializations
     void Start()
     {
@@ -156,18 +158,21 @@ void Update()
         {
             return false;
         }
+
         _tier++;
         if (_tier == 2)
         {
             _damage = _damageTier2;
             _rateOfFire = _rateOfFireTier2;
             _range = _rangeTier2;
+            return false;
         }
         if (_tier == 3)
         {
             _damage = _damageTier3;
             _rateOfFire = _rateOfFireTier3;
             _range = _rangeTier3;
+            return false;
         }
         return true;
     }

@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class DontDestroyOnLoadSoundScript : MonoBehaviour {
+public class DontDestroyOnLoadSoundScript : MonoBehaviour
+{
 
     private static GameObject _instance;
     void Awake()
@@ -20,12 +22,14 @@ public class DontDestroyOnLoadSoundScript : MonoBehaviour {
         DontDestroyOnLoad(this.gameObject);
     }
     // Use this for initialization
-    void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 }
