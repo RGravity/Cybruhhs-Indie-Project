@@ -91,7 +91,7 @@ public class TileMapScript : MonoBehaviour
             _xmlLevels = Resources.LoadAll("Tiled/Levels");
             if (_xmlLevels != null && _xmlLevels.Length > 0)
             {
-                _lvlBGs = Resources.LoadAll("Tiled/LevelBGs/1");
+                _lvlBGs = Resources.LoadAll("Tiled/LevelBGs");
             }
         }
         //Parse Level to _tileData
@@ -345,17 +345,21 @@ public class TileMapScript : MonoBehaviour
     /// </summary>
     private void _generateMapVisual()
     {
-        int lvlBGindex = 0;
-        for (int x = 0; x < _mapSizeX; x++)
+        for (int y = 0; y < _mapSizeY; y++)
         {
-            for (int y = 0; y < _mapSizeY; y++)
+            for (int x = 0; x < _mapSizeX; x++)
             {
                 TileTypeScript tt = _tileTypes[_tiles[x, y]];
                 GameObject go = (GameObject)Instantiate(tt.TileVisualPrefab, new Vector3(x, y, 0), Quaternion.identity);
+                if (go.transform.position.x == ((int)(_mapSizeX/2)) && go.transform.position.y == (int)(_mapSizeY / 2))
+                {
+                    //go.GetComponent<SpriteRenderer>().sprite = _lvlBGs[1] as Sprite;
+                    GameObject got = (GameObject)Instantiate(_lvlBGs[_level-1]);
+                    got.transform.position = new Vector3(got.transform.position.x+15.5f, got.transform.position.y+8.8f, 0);
+                }
                 if (tt.BuildingAllowed)
                 {
                     go.AddComponent<ClickableTileScript>();
-                    go.GetComponent<Material>().mainTexture = _lvlBGs[lvlBGindex] as Texture;
                     ClickableTileScript ct = go.GetComponent<ClickableTileScript>();
                     ct.tileX = x;
                     ct.tileY = y;
