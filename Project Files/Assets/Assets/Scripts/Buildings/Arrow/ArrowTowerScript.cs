@@ -132,10 +132,14 @@ void Update()
             {
                 _enemyInRange = enemies[enemies.Length - 1].gameObject;
             }
-        }
-        else
-        {
-            _playIdleAnimation();
+            else
+            {
+                if (_towerArrowIdleLevel1 != null)
+                {
+                    _playIdleAnimation();
+                }
+                _checkForEnemies();
+            }
         }
 
     }
