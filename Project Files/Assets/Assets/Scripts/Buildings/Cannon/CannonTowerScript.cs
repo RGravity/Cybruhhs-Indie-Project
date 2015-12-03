@@ -11,40 +11,40 @@ public class CannonTowerScript : MonoBehaviour {
     private float _timeLastShot;
 
     #region Damage
-    private int _damage = 2;
+    private int _damage = 0;
     [SerializeField]
-    private int _damageTier1 = 2;
+    private int _damageTier1 = 0;
     [SerializeField]
-    private int _damageTier2 = 3;
+    private int _damageTier2 = 0;
     [SerializeField]
-    private int _damageTier3 = 4;
+    private int _damageTier3 = 0;
     #endregion
 
     #region Rate of fire
-    private float _rateOfFire = 1;
+    private float _rateOfFire = 0;
     [SerializeField]
-    private float _rateOfFireTier1 = 1;
+    private float _rateOfFireTier1 = 0;
     [SerializeField]
-    private float _rateOfFireTier2 = 1;
+    private float _rateOfFireTier2 = 0;
     [SerializeField]
-    private float _rateOfFireTier3 = 1;
+    private float _rateOfFireTier3 = 0;
     #endregion
 
     #region Range of fire
-    private float _range = 5;
+    private float _range = 0;
     [SerializeField]
-    private float _rangeTier1 = 5;
+    private float _rangeTier1 = 0;
     [SerializeField]
-    private float _rangeTier2 = 5;
+    private float _rangeTier2 = 0;
     [SerializeField]
-    private float _rangeTier3 = 5;
+    private float _rangeTier3 = 0;
     #endregion
 
     private bool _allowShoot = true;
     private float _countdownTime;
 
     [SerializeField]
-    private float _speedProjectile = 4;
+    private float _speedProjectile = 0;
 
     private GameObject _enemyInRange;
     private AudioSource _cannonFire;
@@ -112,14 +112,26 @@ public class CannonTowerScript : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (_enemyInRange == null)
-        {
-            _checkForEnemies();
-        }
-        else
+        //if (_enemyInRange == null)
+        //{
+        //    _checkForEnemies();
+        //}
+        //else
+        //{
+        //    _shootEnemy();
+        //}
+        //if (_enemyInRange == null)
+        //{
+        _checkForEnemies();
+        //}
+        //else
+        //{
+        if (_enemyInRange != null)
         {
             _shootEnemy();
+
         }
+        //}
 
     }
 
@@ -138,13 +150,14 @@ public class CannonTowerScript : MonoBehaviour {
                 {
                     _enemyInRange = enemies[enemies.Length - 1].gameObject;
                 }
-            }
-        }
-        else
-        {
-            if (TowerCannonIdleLevel1 != null)
-            {
-                _playIdleAnimation();
+                else
+                {
+                    if (_towerCannonIdleLevel1 != null)
+                    {
+                        _playIdleAnimation();
+                    }
+                    _checkForEnemies();
+                }
             }
         }
     }
@@ -156,7 +169,10 @@ public class CannonTowerScript : MonoBehaviour {
     {
         if (_allowShoot)
         {
-            _playAttackAnimation();
+            if (_towerCannonIdleLevel1 != null)
+            {
+                _playAttackAnimation();
+            }
                _allowShoot = false;
             _countdownTime = CountTimerScript.AddSeconds(_rateOfFire);
             if ((_enemyInRange.transform.position - _thisPosition).magnitude > _range)
@@ -182,7 +198,7 @@ public class CannonTowerScript : MonoBehaviour {
     {
         //GameObject towerAttack = Instantiate(_towerCannonAttackLevel1);
 
-        _towerCannonIdleLevel1.transform.position = _thisPosition;
+        //_towerCannonIdleLevel1.transform.position = _thisPosition;
         Transform[] towerParts = _towerCannonIdleLevel1.GetComponentsInChildren<Transform>();
         towerParts = towerParts.Except(new Transform[] { towerParts[0].transform }).ToArray();
         GameObject leftTop = null;

@@ -65,6 +65,7 @@
      <Compile Include="Assets\Assets\Scripts\HUD\LivesTextScript.cs" />
      <Compile Include="Assets\Assets\Scripts\HUD\NextWaveButtonScript.cs" />
      <Compile Include="Assets\Assets\Scripts\HUD\NextWaveTimerScript.cs" />
+     <Compile Include="Assets\Assets\Scripts\HUD\ScoreScreenScript.cs" />
      <Compile Include="Assets\Assets\Scripts\HUD\WaveIndicatorScript.cs" />
      <Compile Include="Assets\Assets\Scripts\LevelEditingFramework\TileMapScript.cs" />
      <Compile Include="Assets\Assets\Scripts\MenuScripts\CybruhhsTitleScreen.cs" />
