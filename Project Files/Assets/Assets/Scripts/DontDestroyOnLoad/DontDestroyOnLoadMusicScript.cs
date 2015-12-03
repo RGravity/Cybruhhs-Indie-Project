@@ -4,15 +4,11 @@ using System.Collections;
 public class DontDestroyOnLoadMusicScript : MonoBehaviour
 {
 
-    private static GameObject _instance;
-    private AudioSource[] _music;
-    private GameObject _creditCanvas;
-    private GameObject _menuCanvas;
-    private GameObject _optionsCanvas;
-    private GameObject _selectionCanvas;
-    private int _level = 1;
-    private bool _play = false;
-    private bool _play2 = false;
+    private static GameObject _instance; //empty static gameobject
+    private AudioSource[] _music; //array audiosource from music
+    private int _level = 0; ///Default level for the levelscript
+    private bool _play = false; //bool to play the buildingmusic
+    private bool _play2 = false; //bool to play the ingamemusic
     public int Level { get { return _level; } set { _level = value; }}
 
     public bool Play { get { return _play; } set { _play = value; } }
@@ -36,21 +32,22 @@ public class DontDestroyOnLoadMusicScript : MonoBehaviour
 
     void Start()
     {
-        _menuCanvas = GameObject.Find("MenuCanvas");
-        _optionsCanvas = GameObject.Find("OptionsCanvas");
-        _creditCanvas = GameObject.Find("CreditsCanvas");
-        _selectionCanvas = GameObject.Find("SelectionCanvas");
         _music = gameObject.GetComponentsInChildren<AudioSource>();
     }
 
     void Update()
     {
-        PlayNextMusic();
-        BackToMenu();
+        _playNextMusic();
+        _backToMenu();
     }
 
-
-    void PlayNextMusic()
+    /// <summary>
+    /// <para>If play is set to true, Stop the PlayNextIngameMusic first then Start it again,</para>
+    /// <para>this will make sure that it will play build music won't play twice or more.</para>
+    /// <para>After that stop the first music, which is the menu music, and play the first build wavemusic.</para>
+    /// <para>after that set the bool Play to false.</para>
+    /// </summary>
+    private void _playNextMusic()
     {
         if (_play == true)
         {
@@ -62,8 +59,11 @@ public class DontDestroyOnLoadMusicScript : MonoBehaviour
         }
 
     }
-
-    void BackToMenu()
+    /// <summary>
+    /// <para>If Play2 is set to true and stop all the music and stop the Coroutine PlayNextInGameMusic</para>
+    /// <para>Set the level back to 0 and application 0</para>
+    /// </summary>
+    private void _backToMenu()
     {
         if (_play2 == true)
         {

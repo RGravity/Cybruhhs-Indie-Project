@@ -14,7 +14,7 @@ public class MenuSelectionScript : MonoBehaviour {
 
    
     private string _strxml = "<SavedData></SavedData>";
-    private GameObject _level1;
+    private GameObject _level1; 
     private GameObject _level2;
     private GameObject _level3;
     private GameObject _level4;
@@ -70,16 +70,17 @@ public class MenuSelectionScript : MonoBehaviour {
         _map = GameObject.FindObjectOfType<DontDestroyOnLoadMusicScript>();
         _click = GameObject.Find("Click").GetComponent<AudioSource>();
         _loading = FindObjectOfType<MovingLoading2>();
-        saveAndLoad();
+        _saveAndLoad();
     }
 
     // Update is called once per frame
     void Update ()
     {
-        unlockLeveled();
+        _unlockLeveled();
     }
-    //With this it saves and loads the current progress of the player, for now it only has the bools to either see if it is true.
-    private void saveAndLoad()
+    /// <para>With this it will load and save the result, if the already exist it loads the file with the content,</para>
+    /// <para>if you want to resave just call the fuction again which calls the bool in the fuction which makes it save the data in the file again.</para>
+    private void _saveAndLoad()
     {
         XmlDocument _xml = new XmlDocument();
         _xml.LoadXml(_strxml);
@@ -203,54 +204,57 @@ public class MenuSelectionScript : MonoBehaviour {
 
     }
 
+    /// <summary>
+    /// <para>When level is unlocked with a bool it will change the sprite it will get from resources</para>
+    /// <para>And calls _saveAndLoad to save the result.</para>
+    /// </summary>
 
-
-    private void unlockLeveled()
+    private void _unlockLeveled()
     {
         if (_level2Unlocked == true)
         {
             _level2.GetComponent<Image>().sprite = Resources.Load<Sprite>("level select unlocked");
-            saveAndLoad();
+            _saveAndLoad();
         }
         if (_level3Unlocked == true)
         {
             _level3.GetComponent<Image>().sprite = Resources.Load<Sprite>("level select unlocked");
-            saveAndLoad();
+            _saveAndLoad();
         }
         if (_level4Unlocked == true)
         {
             _level4.GetComponent<Image>().sprite = Resources.Load<Sprite>("level select unlocked");
-            saveAndLoad();
+            _saveAndLoad();
         }
         if (_level5Unlocked == true)
         {
             _level5.GetComponent<Image>().sprite = Resources.Load<Sprite>("level select unlocked");
-            saveAndLoad();
+            _saveAndLoad();
         }
         if (_level6Unlocked == true)
         {
             _level6.GetComponent<Image>().sprite = Resources.Load<Sprite>("level select unlocked");
-            saveAndLoad();
+            _saveAndLoad();
         }
         if (_level7Unlocked == true)
         {
             _level7.GetComponent<Image>().sprite = Resources.Load<Sprite>("level select unlocked");
-            saveAndLoad();
+            _saveAndLoad();
         }
         if (_level8Unlocked == true)
         {
             _level8.GetComponent<Image>().sprite = Resources.Load<Sprite>("level select unlocked");
-            saveAndLoad();
+            _saveAndLoad();
         }
         if (_level9Unlocked == true)
         {
             _level9.GetComponent<Image>().sprite = Resources.Load<Sprite>("level select unlocked");
-            saveAndLoad();
+            _saveAndLoad();
         }
         if (_level10Unlocked == true)
         {
             _level10.GetComponent<Image>().sprite = Resources.Load<Sprite>("level select unlocked");
-            saveAndLoad();
+            _saveAndLoad();
         }
 
     }
