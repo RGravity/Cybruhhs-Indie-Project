@@ -34,11 +34,11 @@ public class ArrowBulletScript : MonoBehaviour {
         if (_enemy != null)
         {
             this.transform.position = Vector3.MoveTowards(this.transform.position, _enemy.transform.position, _speed * Time.deltaTime);
-            float arrowDirection = _thisStartPosition.x - _enemy.transform.position.x;
-            if (arrowDirection < 0)
-            {
-                this.transform.localScale = new Vector3(-1, this.transform.localScale.y, this.transform.localScale.z);
-            }
+            
+            //Rotation of the projectile
+            Vector3 arrowVectorDir = _thisStartPosition - _enemy.transform.position;
+            float angle = Mathf.Atan2(arrowVectorDir.y, arrowVectorDir.x) * Mathf.Rad2Deg;
+            this.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
             if (Vector3.Distance(transform.position, _enemy.transform.position) < 0.3f)
             {
