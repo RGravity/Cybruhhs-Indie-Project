@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public class CannonTowerScript : MonoBehaviour {
     private BuildingType _buildingType = BuildingType.Ground;
     private GameObject _bullet;
-    private GameObject _towerCannonAttack;
     [SerializeField]
     private int _tier = 1;
     private Vector3 _thisPosition;
@@ -55,10 +55,38 @@ public class CannonTowerScript : MonoBehaviour {
     private AudioSource _troll7;// Troll7 voice
     private CheckForMusicScript _check;
     public int Tier { get { return _tier; } set { _tier = value; } }
+
+    //Cannon towers prefabs except Level 1 Idle
+    private GameObject _towerCannonAttackLevel1;
+    private GameObject _towerCannonAttackLevel2;
+    private GameObject _towerCannonAttackLevel3;
+    private GameObject _towerCannonIdleLevel2;
+    private GameObject _towerCannonIdleLevel3;
+
+    //Properties of the Towers so it can swap positions in BuildingSpawnScript;
+    public GameObject TowerCannonIdleLevel2 { get { return _towerCannonIdleLevel2; } }
+    public GameObject TowerCannonIdleLevel3 { get { return _towerCannonIdleLevel3; } }
+
+    //Positions of the tiles
+    private Vector3 _tile1;
+    private Vector3 _tile2;
+    private Vector3 _tile3;
+    private Vector3 _tile4;
+    public Vector3 Tile1 { set { _tile1 = value; } }
+    public Vector3 Tile2 { set { _tile2 = value; } }
+    public Vector3 Tile3 { set { _tile3 = value; } }
+    public Vector3 Tile4 { set { _tile4 = value; } }
+
     // Use this for initialization
     void Start()
     {
-        _towerCannonAttack = (GameObject)Resources.Load("Towers/TrollAttackLevel1");
+        //Get the prefabs
+        _towerCannonAttackLevel1 = (GameObject)Resources.Load("Towers/TrollAttackLevel1");
+        _towerCannonAttackLevel2 = (GameObject)Resources.Load("Towers/TrollAttackLevel2");
+        _towerCannonAttackLevel3 = (GameObject)Resources.Load("Towers/TrollAttackLevel3");
+        _towerCannonIdleLevel2 = (GameObject)Resources.Load("Towers/TrollAttackIdle2");
+        _towerCannonIdleLevel3 = (GameObject)Resources.Load("Towers/TrollAttackIdle3");
+
         _thisPosition = this.gameObject.transform.position;
         _bullet = (GameObject)Resources.Load("CannonBullet");
         _check = GameObject.FindObjectOfType<CheckForMusicScript>();
@@ -124,8 +152,34 @@ public class CannonTowerScript : MonoBehaviour {
             {
                 _enemyInRange = null;
             }
-
-            GameObject bulletObject = Instantiate(_bullet);
+            GameObject towerAttack = Instantiate(_towerCannonAttackLevel1);
+            towerAttack.transform.position = _thisPosition;
+            Transform[] towerParts = towerAttack.GetComponentsInChildren<Transform>();
+            towerParts = towerParts.Except(new Transform[] { towerParts[0].transform }).ToArray();
+            GameObject leftTop = null;
+            GameObject rightTop = null;
+            GameObject leftBottom = null;
+            GameObject rightBottom = null;
+            foreach (Transform part in towerParts)
+            {
+                if (part.name.Contains("LeftTop"))
+                {
+                    leftTop = part.gameObject;
+                }
+                if (part.name.Contains("RightTop"))
+                {
+                    rightTop = part.gameObject;
+                }
+                if (part.name.Contains("LeftBottom"))
+                {
+                    leftBottom = part.gameObject;
+                }
+                if (part.name.Contains("RightBottom"))
+                {
+                    rightBottom = part.gameObject;
+                }
+            }
+                GameObject bulletObject = Instantiate(_bullet);
             bulletObject.transform.position = new Vector3(this._thisPosition.x, this._thisPosition.y, -1);
             bulletObject.GetComponent<CannonBulletScript>().ShootEnemy(_enemyInRange, _damage, _speedProjectile);
             if (_cannonFire != null)
