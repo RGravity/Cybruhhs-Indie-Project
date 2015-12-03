@@ -156,6 +156,7 @@ public class CannonTowerScript : MonoBehaviour {
                     {
                         _playIdleAnimation();
                     }
+                    _checkForEnemies();
                 }
             }
         }
