@@ -321,6 +321,12 @@ public class WaveMainScript : MonoBehaviour {
                 }
             }
             #endregion
+
+            if (part.TutorialSprites.Count > 0)
+            {
+                FindObjectOfType<TutorialMainScript>().ShowTutorial(part.TutorialSprites);
+            }
+
         }
     }
 
@@ -342,6 +348,8 @@ public class WaveMainScript : MonoBehaviour {
         partProgress.PaladinAmountSpawned = 0;
         partProgress.TimeBetweenEnemies = part.TimeBetweenEnemies;
         partProgress.SecToWaitForNextPart = part.SecToWaitForNextPart;
+        partProgress.TutorialSprites = part.TutorialSprites;
+
         //if no path is set take the first path
         if (part.Path == 0){
             partProgress.Path = 1;
@@ -392,7 +400,7 @@ public class WaveMainScript : MonoBehaviour {
         heavyObject.name = "Heavy";
         heavyObject.transform.parent = _heavyParent.transform;
         heavyObject.AddComponent<UnitScript>();
-        heavyObject.GetComponent<UnitScript>().Speed = 0.3f;
+        heavyObject.GetComponent<UnitScript>().Speed = 0.6f;
         heavyObject.GetComponent<UnitScript>().TileX = (int)pStartPosition.x;
         heavyObject.GetComponent<UnitScript>().TileY = (int)pStartPosition.y;
         heavyObject.GetComponent<UnitScript>().Map = _map;
