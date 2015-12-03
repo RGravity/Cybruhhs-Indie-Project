@@ -46,6 +46,7 @@ public class BuildingSpawnScript : MonoBehaviour
     //Load all the Variables and Prepare the Radial Menu
     void Start()
     {
+        _selectedTile = new GameObject[0];
         _check = GameObject.FindObjectOfType<CheckForMusicScript>();
         _tileMap = FindObjectOfType<TileMapScript>();
         _baseScript = GameObject.FindObjectOfType<BaseScript>();
@@ -216,7 +217,6 @@ public class BuildingSpawnScript : MonoBehaviour
             }
 
             _index = (int)(angle / _angle);
-            Debug.Log("_index: " + _index);
         }
 
         //Draw the Textures if you need to show the button
@@ -249,11 +249,12 @@ public class BuildingSpawnScript : MonoBehaviour
             case 0:
                 if (_baseScript.Gold >= 250)
                 {
-                    _selectedTile[1].AddComponent<CannonTowerScript>();
+                    CannonTowerScript tempCannon =_selectedTile[1].AddComponent<CannonTowerScript>();
                     for (int i = 0; i < _selectedTile.Length; i++)
                     {
                         _selectedTile[i].GetComponent<Renderer>().material.mainTexture = _cannonTurretTextures[i];
-                        _selectedTile[i].AddComponent<UpgradeTowerScript>();
+                        UpgradeTowerScript tempUpgrade =_selectedTile[i].AddComponent<UpgradeTowerScript>();
+                        tempUpgrade.CannonTower = tempCannon;
                         _selectedTile[i].GetComponentInChildren<SpriteRenderer>().enabled = false;
                     }
                     _baseScript.LowerGold(250);
@@ -275,18 +276,19 @@ public class BuildingSpawnScript : MonoBehaviour
                     }
                 }
                 break;
-            //SlowTower            
+            //quitTower          
             case 1:
                 break;
-            //ArrowTower
+            //slowTower
             case 3:
                 if (_baseScript.Gold >= 200)
                 {
-                    _selectedTile[1].AddComponent<SlowTowerScript>();
+                    SlowTowerScript tempSlow = _selectedTile[1].AddComponent<SlowTowerScript>();
                     for (int i = 0; i < _selectedTile.Length; i++)
                     {
-                        _selectedTile[i].GetComponent<Renderer>().material.mainTexture = _arrowTurretTextures[i];
-                        _selectedTile[i].AddComponent<UpgradeTowerScript>();
+                        _selectedTile[i].GetComponent<Renderer>().material.mainTexture = _slowTurretTextures[i];
+                        UpgradeTowerScript tempUpgrade = _selectedTile[i].AddComponent<UpgradeTowerScript>();
+                        tempUpgrade.SlowTower = tempSlow;
                         _selectedTile[i].GetComponentInChildren<SpriteRenderer>().enabled = false;
                     }
                     _baseScript.LowerGold(200);
@@ -310,14 +312,17 @@ public class BuildingSpawnScript : MonoBehaviour
 
                 }
                 break;
+            //Arrow Tower
             case 2:
                 if (_baseScript.Gold >= 150)
                 {
-                    _selectedTile[1].AddComponent<ArrowTowerScript>();
+                    UpgradeTowerScript tempUpgrade = null;
+                    ArrowTowerScript tempArrow = _selectedTile[1].AddComponent<ArrowTowerScript>();
                     for (int i = 0; i < _selectedTile.Length; i++)
                     {
-                        _selectedTile[i].GetComponent<Renderer>().material.mainTexture = _cannonTurretTextures[i];
-                        _selectedTile[i].AddComponent<UpgradeTowerScript>();
+                        _selectedTile[i].GetComponent<Renderer>().material.mainTexture = _arrowTurretTextures[i];
+                        tempUpgrade = _selectedTile[i].AddComponent<UpgradeTowerScript>();
+                        tempUpgrade.ArrowTower = tempArrow;
                         _selectedTile[i].GetComponentInChildren<SpriteRenderer>().enabled = false;
                     }
                     _baseScript.LowerGold(150);

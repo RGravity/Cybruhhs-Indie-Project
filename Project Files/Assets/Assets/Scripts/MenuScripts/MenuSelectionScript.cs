@@ -24,6 +24,7 @@ public class MenuSelectionScript : MonoBehaviour {
     private GameObject _level8;
     private GameObject _level9;
     private GameObject _level10;
+    private MovingLoading2 _loading;
 
     private bool _level2Unlocked;
     private bool _level3Unlocked;
@@ -68,7 +69,7 @@ public class MenuSelectionScript : MonoBehaviour {
 
         _map = GameObject.FindObjectOfType<DontDestroyOnLoadMusicScript>();
         _click = GameObject.Find("Click").GetComponent<AudioSource>();
-
+        _loading = FindObjectOfType<MovingLoading2>();
         saveAndLoad();
     }
 
@@ -374,7 +375,7 @@ public class MenuSelectionScript : MonoBehaviour {
         {
             _click.Play();
             _map.Play = true;
-            Application.LoadLevel(1);
+            _loading.GetComponent<Image>().enabled = true;
            
         }
     }
