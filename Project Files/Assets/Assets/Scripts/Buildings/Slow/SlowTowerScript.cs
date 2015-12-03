@@ -60,9 +60,12 @@ public class SlowTowerScript : MonoBehaviour {
     private float _speedProjectile = 6;
 
     private GameObject _enemyInRange;
-    private AudioSource _shoot1;
-    private AudioSource _shoot2;
-    private AudioSource _shoot3;
+    private AudioSource _shoot;
+    private AudioSource _spider3;
+    private AudioSource _spider4;
+    private AudioSource _spider5;
+    private AudioSource _spider6;
+    private AudioSource _spider7;
 
     private CheckForMusicScript _check;
 
@@ -78,9 +81,12 @@ public class SlowTowerScript : MonoBehaviour {
         _check = GameObject.FindObjectOfType<CheckForMusicScript>();
         if (_check.Check == true)
         {
-            _shoot1 = GameObject.Find("ArrowShoot1").GetComponent<AudioSource>();
-            _shoot2 = GameObject.Find("ArrowShoot2").GetComponent<AudioSource>();
-            _shoot3 = GameObject.Find("ArrowShoot3").GetComponent<AudioSource>();
+            _shoot = GameObject.Find("SlowShoot").GetComponent<AudioSource>();
+            _spider3 = GameObject.Find("Spider3").GetComponent<AudioSource>();
+            _spider4 = GameObject.Find("Spider4").GetComponent<AudioSource>();
+            _spider5 = GameObject.Find("Spider5").GetComponent<AudioSource>();
+            _spider6 = GameObject.Find("Spider6").GetComponent<AudioSource>();
+            _spider7 = GameObject.Find("Spider7").GetComponent<AudioSource>();
         }
         _slowTime = _slowTimeTier1;
         _range = _rangeTier1;
@@ -152,21 +158,8 @@ public class SlowTowerScript : MonoBehaviour {
             GameObject bulletObject = Instantiate(_bullet);
             bulletObject.transform.position = new Vector3(this._thisPosition.x, this._thisPosition.y, -1);
             bulletObject.GetComponent<SlowBulletScript>().ShootEnemy(_enemyInRange, _slowTime, _slowAmount, _speedProjectile);
-            int random = Random.Range(0, 2);
-
-            switch (random)
-            {
-                case 0:
-                    if (_shoot1 != null) _shoot1.Play();
-                    break;
-                case 1:
-                    if (_shoot1 != null) _shoot2.Play();
-                    break;
-                case 2:
-                    if (_shoot1 != null) _shoot3.Play();
-                    break;
-
-            }
+            if (_shoot != null) _shoot.Play();
+              
 
 
             //Debug.Log("Enemy Shot");
@@ -193,6 +186,22 @@ public class SlowTowerScript : MonoBehaviour {
             _rateOfFire = _rateOfFireTier2;
             _range = _rangeTier2;
             _slowAmount = _slowAmountTier2;
+            int random = Random.Range(0, 1);
+            if (random == 0)
+            {
+                if (_spider3 != null)
+                {
+                    _spider3.Play();
+                }
+            }
+            else
+            {
+                if (_spider4 != null)
+                {
+                    _spider4.Play();
+                }
+            }
+
             return false;
         }
         if (_tier == 3)
@@ -201,6 +210,28 @@ public class SlowTowerScript : MonoBehaviour {
             _rateOfFire = _rateOfFireTier3;
             _range = _rangeTier3;
             _slowAmount = _slowAmountTier3;
+            int random = Random.Range(0, 9);
+            if (random <= 3)
+            {
+                if (_spider5 != null)
+                {
+                    _spider5.Play();
+                }
+            }
+            else if (random >= 4 && random <= 7)
+            {
+                if (_spider6 != null)
+                {
+                    _spider6.Play();
+                }
+            }
+            else
+            {
+                if (_spider7 != null)
+                {
+                    _spider7.Play();
+                }
+            }
             return false;
         }
         return true;

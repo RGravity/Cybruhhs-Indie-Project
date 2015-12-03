@@ -28,6 +28,8 @@ public class TileMapScript : MonoBehaviour
     private int _level = 1;
     //Levels in XML presented as Objects
     private Object[] _xmlLevels;
+    private Object[] _lvlBGs;
+    private Object[] _lvlFGs;
     //TileData reads the XML Needs to be change with Tiled.
     private int[,] _tileData =
     {
@@ -88,6 +90,11 @@ public class TileMapScript : MonoBehaviour
         if (_xmlLevels == null)
         {
             _xmlLevels = Resources.LoadAll("Tiled/Levels");
+            if (_xmlLevels != null && _xmlLevels.Length > 0)
+            {
+                _lvlBGs = Resources.LoadAll("Tiled/LevelBGs");
+                _lvlFGs = Resources.LoadAll("Tiled/LevelFGs");
+            }
         }
         //Parse Level to _tileData
         if (pLevel > 0 && pLevel <= _xmlLevels.Length)
@@ -340,12 +347,20 @@ public class TileMapScript : MonoBehaviour
     /// </summary>
     private void _generateMapVisual()
     {
-        for (int x = 0; x < _mapSizeX; x++)
-        {
             for (int y = 0; y < _mapSizeY; y++)
+            {
+            for (int x = 0; x < _mapSizeX; x++)
             {
                 TileTypeScript tt = _tileTypes[_tiles[x, y]];
                 GameObject go = (GameObject)Instantiate(tt.TileVisualPrefab, new Vector3(x, y, 0), Quaternion.identity);
+                if (go.transform.position.x == ((int)(_mapSizeX/2)) && go.transform.position.y == (int)(_mapSizeY / 2))
+                {
+                    //go.GetComponent<SpriteRenderer>().sprite = _lvlBGs[1] as Sprite;
+                    GameObject BG = (GameObject)Instantiate(_lvlBGs[_level - 1]);
+                    GameObject FG = (GameObject)Instantiate(_lvlFGs[_level - 1]);
+                    BG.transform.position = new Vector3(BG.transform.position.x + 15.5f, BG.transform.position.y + 8.8f, 0);
+                    FG.transform.position = new Vector3(FG.transform.position.x + 15.5f, FG.transform.position.y + 8.8f, -2);
+                }
                 if (tt.BuildingAllowed)
                 {
                     go.AddComponent<ClickableTileScript>();
