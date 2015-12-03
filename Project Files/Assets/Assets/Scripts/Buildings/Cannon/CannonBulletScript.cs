@@ -9,6 +9,9 @@ public class CannonBulletScript : MonoBehaviour {
     private AudioSource _hit1;
     private AudioSource _hit2;
     private AudioSource _hit3;
+    private AudioSource _heavy;
+    private AudioSource _grunt;
+    private AudioSource _paladin;
 
     private CheckForMusicScript _check;
 
@@ -21,6 +24,9 @@ public class CannonBulletScript : MonoBehaviour {
             _hit1 = GameObject.Find("CannonShoot1").GetComponent<AudioSource>();
             _hit2 = GameObject.Find("CannonShoot2").GetComponent<AudioSource>();
             _hit3 = GameObject.Find("CannonShoot3").GetComponent<AudioSource>();
+            _heavy = GameObject.Find("HeavyCannon").GetComponent<AudioSource>();
+            _paladin = GameObject.Find("PaladinCannon").GetComponent<AudioSource>();
+            _grunt = GameObject.Find("GruntCannon").GetComponent<AudioSource>();
         }
     }
 
@@ -49,6 +55,19 @@ public class CannonBulletScript : MonoBehaviour {
                         if (_hit1 != null) _hit3.Play();
                         break;
 
+                }
+
+                if (_enemy.name == "Paladin")
+                {
+                    _paladin.Play();
+                }
+                if (_enemy.name == "Grunt")
+                {
+                    _grunt.Play();
+                }
+                if (_enemy.name == "Heavy")
+                {
+                    _heavy.Play();
                 }
                 Destroy(this.gameObject);
             }

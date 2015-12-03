@@ -7,11 +7,10 @@ public class SlowBulletScript : MonoBehaviour {
     private float _speedTime;
     private float _speed;
     private float _amountOfSpeed;
-    private AudioSource _hit1;
-    private AudioSource _hit2;
-    private AudioSource _hit3;
+    private AudioSource _hit;
 
     private CheckForMusicScript _check;
+   
 
     // Use this for initialization
     void Start()
@@ -19,9 +18,8 @@ public class SlowBulletScript : MonoBehaviour {
         _check = GameObject.FindObjectOfType<CheckForMusicScript>();
         if (_check.Check == true)
         {
-            _hit1 = GameObject.Find("CannonShoot1").GetComponent<AudioSource>();
-            _hit2 = GameObject.Find("CannonShoot2").GetComponent<AudioSource>();
-            _hit3 = GameObject.Find("CannonShoot3").GetComponent<AudioSource>();
+            _hit = GameObject.Find("SlowHit").GetComponent<AudioSource>();
+            
         }
         _speedTime = CountTimerScript.AddSeconds(_speedTime);
     }
@@ -34,6 +32,7 @@ public class SlowBulletScript : MonoBehaviour {
             this.transform.position = Vector3.MoveTowards(this.transform.position, _enemy.transform.position, _speed * Time.deltaTime);
             if (Vector3.Distance(transform.position, _enemy.transform.position) < 0.3f)
             {
+                _hit.Play();
                 UnitScript stats = _enemy.GetComponent<UnitScript>();
                 if (Time.time < _speedTime)
                 {
@@ -44,22 +43,6 @@ public class SlowBulletScript : MonoBehaviour {
                 {
                     stats.IsSlowed = false;
                     Destroy(this.gameObject);
-                }
-
-                int random = Random.Range(0, 2);
-
-                switch (random)
-                {
-                    case 0:
-                        if (_hit1 != null) _hit1.Play();
-                        break;
-                    case 1:
-                        if (_hit1 != null) _hit2.Play();
-                        break;
-                    case 2:
-                        if (_hit1 != null) _hit3.Play();
-                        break;
-
                 }
             }
         }
