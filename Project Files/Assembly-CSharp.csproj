@@ -65,6 +65,7 @@
      <Compile Include="Assets\Assets\Scripts\HUD\LivesTextScript.cs" />
      <Compile Include="Assets\Assets\Scripts\HUD\NextWaveButtonScript.cs" />
      <Compile Include="Assets\Assets\Scripts\HUD\NextWaveTimerScript.cs" />
+     <Compile Include="Assets\Assets\Scripts\HUD\ScoreScreenScript.cs" />
      <Compile Include="Assets\Assets\Scripts\HUD\WaveIndicatorScript.cs" />
      <Compile Include="Assets\Assets\Scripts\LevelEditingFramework\TileMapScript.cs" />
      <Compile Include="Assets\Assets\Scripts\MenuScripts\CybruhhsTitleScreen.cs" />
@@ -107,11 +108,17 @@
      <None Include="Assets\SavedData.xml" />
      <None Include="Assets\Assets\Resources\Tiled\Levels\05.xml" />
      <None Include="Assets\Assets\Resources\Tiled\Levels\02.xml" />
+ <Reference Include="UnityEngine.Advertisements">
+ <HintPath>D:/Programs/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Programs/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>D:/Programs/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>D:/Programs/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Cecil">
  <HintPath>D:/Programs/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>
