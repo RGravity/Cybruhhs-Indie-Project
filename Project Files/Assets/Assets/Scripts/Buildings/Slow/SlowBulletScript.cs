@@ -32,7 +32,6 @@ public class SlowBulletScript : MonoBehaviour {
             this.transform.position = Vector3.MoveTowards(this.transform.position, _enemy.transform.position, _speed * Time.deltaTime);
             if (Vector3.Distance(transform.position, _enemy.transform.position) < 0.3f)
             {
-                _hit.Play();
                 UnitScript stats = _enemy.GetComponent<UnitScript>();
                 if (Time.time < _speedTime)
                 {

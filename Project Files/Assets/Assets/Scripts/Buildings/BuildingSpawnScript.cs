@@ -226,7 +226,7 @@ public class BuildingSpawnScript : MonoBehaviour
             }
 
             _index = (int)(angle / _angle);
-            Debug.Log("_index: " + _index);
+            Debug.Log("_inde: " + _index);
         }
 
         //Draw the Textures if you need to show the button
@@ -335,8 +335,8 @@ public class BuildingSpawnScript : MonoBehaviour
             //SlowTower            
             case 1:
                 break;
-            //ArrowTower
-            case 3:
+            //Slow
+            case 2:
                 if (_baseScript.Gold >= 200)
                 {
                     _selectedTile[1].AddComponent<SlowTowerScript>();
@@ -414,7 +414,7 @@ public class BuildingSpawnScript : MonoBehaviour
 
                 }
                 break;
-            case 2:
+            case 3:
                 if (_baseScript.Gold >= 150)
                 {
                     _selectedTile[1].AddComponent<ArrowTowerScript>();
