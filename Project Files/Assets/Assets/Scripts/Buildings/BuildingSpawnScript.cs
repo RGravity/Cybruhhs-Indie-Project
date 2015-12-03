@@ -416,7 +416,7 @@ public class BuildingSpawnScript : MonoBehaviour
             case 3:
                 if (_baseScript.Gold >= 200)
                 {
-                    _selectedTile[1].AddComponent<ArrowTowerScript>();
+                    ArrowTowerScript tempArrow =_selectedTile[1].AddComponent<ArrowTowerScript>();
                     _towerArrowIdle = Instantiate(_towerArrowIdle);
                     _towerArrowIdle.transform.position = _selectedTile[1].gameObject.transform.position;
                     Transform[] towerParts = _towerArrowIdle.GetComponentsInChildren<Transform>();
@@ -467,7 +467,8 @@ public class BuildingSpawnScript : MonoBehaviour
                             rightBottom.transform.localScale = new Vector3(1, 1, 1);
                         }
                         //_selectedTile[i].GetComponent<Renderer>().material.mainTexture = _cannonTurretTextures[i];
-                        _selectedTile[i].AddComponent<UpgradeTowerScript>();
+                        UpgradeTowerScript tempTower = _selectedTile[i].AddComponent<UpgradeTowerScript>();
+                        tempTower.ArrowTower = tempArrow;
                         _selectedTile[i].GetComponentInChildren<SpriteRenderer>().enabled = false;
                     }
                     _baseScript.LowerGold(150);

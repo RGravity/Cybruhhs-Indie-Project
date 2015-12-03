@@ -4,9 +4,10 @@ using System.Collections;
 
 public class MovingLoading1 : MonoBehaviour {
 
-    public Sprite[] Sprites;
-    int index = 0;
-    float indexChanger = 0;
+    [SerializeField]
+    private Sprite[] _sprites;
+    private int _index = 0;
+    private float _indexChanger = 0;
 
     void Start()
     {
@@ -14,16 +15,16 @@ public class MovingLoading1 : MonoBehaviour {
 
     void Update()
     {
-        if (Sprites.Length == 0)
+        if (_sprites.Length == 0)
             return;
 
-        indexChanger += 0.15f;
-        index = (int)indexChanger;
-        if (index >= Sprites.Length)
+        _indexChanger += 0.15f;
+        _index = (int)_indexChanger;
+        if (_index >= _sprites.Length)
         {
-            indexChanger = 0;
-            index = 0;
+            _indexChanger = 0;
+            _index = 0;
         }
-        GetComponent<Image>().sprite = Sprites[index];
+        GetComponent<Image>().sprite = _sprites[_index];
     }
 }

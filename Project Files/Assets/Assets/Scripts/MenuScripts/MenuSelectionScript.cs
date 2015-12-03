@@ -78,7 +78,7 @@ public class MenuSelectionScript : MonoBehaviour {
     {
         unlockLeveled();
     }
-
+    //With this it saves and loads the current progress of the player, for now it only has the bools to either see if it is true.
     private void saveAndLoad()
     {
         XmlDocument _xml = new XmlDocument();
@@ -374,8 +374,8 @@ public class MenuSelectionScript : MonoBehaviour {
         if (_map.Level > 0)
         {
             _click.Play();
-            _map.Play = true;
             _loading.GetComponent<Image>().enabled = true;
+            _loading.CountDown = CountTimerScript.AddSeconds(10);
            
         }
     }
