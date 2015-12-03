@@ -172,6 +172,7 @@ void Update()
     {
         if (_tier > 3)
         {
+            _tier = 3;
             return false;
         }
 
@@ -196,7 +197,7 @@ void Update()
                     _tree4.Play();
                 }
             }
-            return false;
+            return true;
         }
         if (_tier == 3)
         {
@@ -225,7 +226,7 @@ void Update()
                     _tree7.Play();
                 }
             }
-            return false;
+            return true;
         }
         return true;
     }

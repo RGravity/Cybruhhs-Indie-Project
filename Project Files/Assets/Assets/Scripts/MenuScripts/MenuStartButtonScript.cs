@@ -8,6 +8,7 @@ public class MenuStartButtonScript : MonoBehaviour {
     
     private GameObject _startButton;
     private Animator _selectionAnimator;
+    private DontDestroyOnLoadMusicScript _map;
 
     private AudioSource _click;
     void Start ()
@@ -15,6 +16,7 @@ public class MenuStartButtonScript : MonoBehaviour {
         _startButton = GameObject.Find("Start Button");
         _selectionAnimator = GameObject.Find("SelectionMenu").GetComponent<Animator>(); 
         _click = GameObject.Find("Click").GetComponent<AudioSource>();
+        _map = FindObjectOfType<DontDestroyOnLoadMusicScript>();
     }
 
     // Update is called once per frame
@@ -28,6 +30,7 @@ public class MenuStartButtonScript : MonoBehaviour {
     public void ClickOn()
     {
         _selectionAnimator.Play("SelectionFadeIn");
+        _map.Level = 0;
         _click.Play();
     }
 
