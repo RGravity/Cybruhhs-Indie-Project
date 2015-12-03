@@ -35,6 +35,9 @@ public class MenuSelectionScript : MonoBehaviour {
     private bool _level8Unlocked;
     private bool _level9Unlocked;
     private bool _level10Unlocked;
+    private bool _pressedStart = true;
+
+    public bool PressedStart { get { return _pressedStart; } set { _pressedStart = value; } }
 
     private DontDestroyOnLoadMusicScript _map;
     private AudioSource _click;
@@ -379,7 +382,8 @@ public class MenuSelectionScript : MonoBehaviour {
         {
             _click.Play();
             _loading.GetComponent<Image>().enabled = true;
-            _loading.CountDown = CountTimerScript.AddSeconds(10);
+            _pressedStart = true;
+            _loading.CountDown = CountTimerScript.AddSeconds(5);
            
         }
     }

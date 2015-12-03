@@ -35,10 +35,11 @@ public class UpgradeTowerScript : MonoBehaviour {
 
     void Start()
     {
-        _upgradeOne = FindObjectOfType<UpgradeOneButtonScript>();
-        _upgradeTwo = FindObjectOfType<UpgradeTwoButtonScript>();
-        
-        _upgradePanel = GameObject.Find("UpgradePanel");
+        _upgradePanel = GameObject.Find("UpgradePanel"); //gets the panel in the game scene
+        _upgradeOne = FindObjectOfType<UpgradeOneButtonScript>(); //the first upgrade button in the panel
+        _upgradeTwo = FindObjectOfType<UpgradeTwoButtonScript>(); //the second upgrade button in the panel
+
+       
         
     }
 
@@ -52,6 +53,10 @@ public class UpgradeTowerScript : MonoBehaviour {
         _upgradeTowers();
         _upgradeTowers2();
     }
+    /// <summary>
+    /// <para>If one of the bools is true it will set the scale of the panel to the right size</para>
+    /// <para>It will also load the right sprites for the button for that tower</para>
+    /// </summary>
     private void _objectsAppear()
     {
         if (_upgradeTreeAppear == true)
@@ -79,6 +84,10 @@ public class UpgradeTowerScript : MonoBehaviour {
             _upgradeSpiderAppear = false;
         }
     }
+    /// <summary>
+    /// <para>If one of the bools is true it will set the scale of the panel to the right size</para>
+    /// <para>It will also load the right sprites for the button for that tower</para>
+    /// </summary>
 
     private void _objectsAppear2()
     {
@@ -107,6 +116,10 @@ public class UpgradeTowerScript : MonoBehaviour {
             _upgradeSpiderAppear2 = false;
         }
     }
+    /// <summary>
+    /// <para>If one of the bools is true it will set the scale of the panel to the right size</para>
+    /// <para>It will also load the right sprites for the button for that tower</para>
+    /// </summary>
     private void _objectsAppear3()
     {
          if (_upgradeTreeAppear3 == true)
@@ -135,7 +148,9 @@ public class UpgradeTowerScript : MonoBehaviour {
             _upgradeSpiderAppear3 = false;
         }
     }
-
+    /// <summary>
+    /// <para>If the boolean is true it will set the upgradepanel size to 0, so it disappears!</para>
+    /// </summary>
 
     private void _objectsDissappear()
     {
@@ -146,6 +161,11 @@ public class UpgradeTowerScript : MonoBehaviour {
             _disappear = false;
         }
     }
+
+    /// <summary>
+    /// <para>Gets the boolean from upgrade buttton one, if one of the bools is true then it will run the following:</para>
+    /// <para>The UpgradeTower fuction in the right script, it will set the bool in the upgrade one button to false and disappear becomes true</para>
+    /// </summary>
 
     private void _upgradeTowers()
     {
@@ -170,6 +190,11 @@ public class UpgradeTowerScript : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// <para>Gets the boolean from upgrade buttton two, if one of the bools is true then it will run the following:</para>
+    /// <para>The UpgradeTower fuction in the right script, it will set the bool in the upgrade one button to false and disappear becomes true</para>
+    /// </summary>
+
     private void _upgradeTowers2()
     {
         if (_upgradeTwo.Tree == true)
@@ -193,7 +218,10 @@ public class UpgradeTowerScript : MonoBehaviour {
         }
 
     }
-
+    /// <summary>
+    /// <para>With On Mouse down it will check which of the following towers it is by,</para>
+    /// <para>if the script is indeed there, check the tier of that script and set at the right tier the bool to true.</para>
+    /// </summary>
     void OnMouseDown()
     {
        
