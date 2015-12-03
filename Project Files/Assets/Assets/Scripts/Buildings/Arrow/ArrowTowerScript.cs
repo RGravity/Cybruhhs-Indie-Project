@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Linq;
 
 public class ArrowTowerScript : MonoBehaviour {
 
@@ -63,6 +63,19 @@ public class ArrowTowerScript : MonoBehaviour {
 
     private CheckForMusicScript _check;
     public int Tier { get { return _tier; } set { _tier = value; }  }
+
+    private GameObject _towerArrowIdleLevel1;
+    public GameObject TowerArrowIdleLevel1 { get { return _towerArrowIdleLevel1; } set { _towerArrowIdleLevel1 = value; } }
+
+    private Vector3 _tile1;
+    private Vector3 _tile2;
+    private Vector3 _tile3;
+    private Vector3 _tile4;
+    public Vector3 Tile1 { get { return _tile1; } set { _tile1 = value; } }
+    public Vector3 Tile2 { get { return _tile2; } set { _tile2 = value; } }
+    public Vector3 Tile3 { get { return _tile3; } set { _tile3 = value; } }
+    public Vector3 Tile4 { get { return _tile4; } set { _tile4 = value; } }
+
     // Use this for initializations
     void Start()
     {
@@ -115,11 +128,16 @@ void Update()
         UnitScript[] enemies = GameObject.FindObjectsOfType<UnitScript>();
         if (enemies.Length > 0)
         {
-            if ((enemies[enemies.Length-1].transform.position - _thisPosition).magnitude < _range)
+            if ((enemies[enemies.Length - 1].transform.position - _thisPosition).magnitude < _range)
             {
-                _enemyInRange = enemies[enemies.Length-1].gameObject;
+                _enemyInRange = enemies[enemies.Length - 1].gameObject;
             }
         }
+        else
+        {
+            _playIdleAnimation();
+        }
+
     }
 
     /// <summary>
@@ -164,6 +182,63 @@ void Update()
             _allowShoot = true;
         }
     }
+
+    private void _playIdleAnimation()
+    {
+        _towerArrowIdleLevel1.transform.position = _thisPosition;
+        Transform[] towerParts = _towerArrowIdleLevel1.GetComponentsInChildren<Transform>();
+        towerParts = towerParts.Except(new Transform[] { towerParts[0].transform }).ToArray();
+        GameObject leftTop = null;
+        GameObject rightTop = null;
+        GameObject leftBottom = null;
+        GameObject rightBottom = null;
+        foreach (Transform part in towerParts)
+        {
+            if (part.name.Contains("LeftTop"))
+            {
+                leftTop = part.gameObject;
+            }
+            if (part.name.Contains("RightTop"))
+            {
+                rightTop = part.gameObject;
+            }
+            if (part.name.Contains("LeftBottom"))
+            {
+                leftBottom = part.gameObject;
+            }
+            if (part.name.Contains("RightBottom"))
+            {
+                rightBottom = part.gameObject;
+            }
+        }
+        leftTop.transform.position = _tile1;
+        rightTop.transform.position = _tile2;
+        leftBottom.transform.position = _tile3;
+        rightBottom.transform.position = _tile4;
+
+        if (_tier == 1)
+        {
+            leftTop.GetComponent<Animator>().Play("LeftTopTreeAnimation");
+            rightTop.GetComponent<Animator>().Play("LeftTopTreeAnimation");
+            leftBottom.GetComponent<Animator>().Play("LeftTopTreeAnimation");
+            rightBottom.GetComponent<Animator>().Play("LeftTopTreeAnimation");
+        }
+        else if (_tier == 2)
+        {
+            leftTop.GetComponent<Animator>().Play("LeftTopTreeLvl2Animation");
+            rightTop.GetComponent<Animator>().Play("RightTopTreeLvl2Animation");
+            leftBottom.GetComponent<Animator>().Play("LeftBottomTreeLvl2Animation");
+            rightBottom.GetComponent<Animator>().Play("RightBottomTreeLvl2Animation");
+        }
+        else if (_tier == 3)
+        {
+            leftTop.GetComponent<Animator>().Play("LeftTopTreeLvl3Animation");
+            rightTop.GetComponent<Animator>().Play("RightTopTreeLvl3Animation");
+            leftBottom.GetComponent<Animator>().Play("LeftBottomTreeLvl3Animation");
+            rightBottom.GetComponent<Animator>().Play("RightBottomTreeLvl3Animation");
+        }
+    }
+
     /// <summary>
     /// Updates the Tier of the tower
     /// </summary>
