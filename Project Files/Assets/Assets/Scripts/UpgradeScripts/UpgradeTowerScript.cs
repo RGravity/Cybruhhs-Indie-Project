@@ -6,8 +6,11 @@ public class UpgradeTowerScript : MonoBehaviour {
 
   
     private ArrowTowerScript _arrowTower;
+    private ArrowTowerScript _tempTower;
     private CannonTowerScript _cannonTower;
+    private CannonTowerScript _tempCannon;
     private SlowTowerScript _slowTower;
+    private SlowTowerScript _tempSlow;
     private UpgradeOneButtonScript _upgradeOne;
     private UpgradeTwoButtonScript _upgradeTwo;
     private GameObject _towerObj;
@@ -29,6 +32,7 @@ public class UpgradeTowerScript : MonoBehaviour {
     private bool _upgradeTrollAppear3 = false;
     private bool _disappear = false;
 
+
     public bool Disappear { get { return _disappear; } set { _disappear = value; } }
 
     private GameObject _upgradePanel;
@@ -37,10 +41,7 @@ public class UpgradeTowerScript : MonoBehaviour {
     {
         _upgradePanel = GameObject.Find("UpgradePanel"); //gets the panel in the game scene
         _upgradeOne = FindObjectOfType<UpgradeOneButtonScript>(); //the first upgrade button in the panel
-        _upgradeTwo = FindObjectOfType<UpgradeTwoButtonScript>(); //the second upgrade button in the panel
-
-       
-        
+        _upgradeTwo = FindObjectOfType<UpgradeTwoButtonScript>(); //the second upgrade button in the panel      
     }
 
     // Update is called once per frame
@@ -157,7 +158,6 @@ public class UpgradeTowerScript : MonoBehaviour {
         if (_disappear == true)
         {
             _upgradePanel.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
-            
             _disappear = false;
         }
     }
@@ -171,20 +171,19 @@ public class UpgradeTowerScript : MonoBehaviour {
     {
         if (_upgradeOne.Tree == true)
         {
-            _arrowTower.UpdateTowerArrow();
+            _tempTower.UpdateTowerArrow();
             _upgradeOne.Tree = false;
             _disappear = true;
         }
         else if (_upgradeOne.Troll == true)
         {
-            _cannonTower.UpdateTowerCannon();
+            _tempCannon.UpdateTowerCannon();
             _upgradeOne.Troll = false;
             _disappear = true;
         }
         else if (_upgradeOne.Spider == true)
         {
-            
-            _slowTower.UpdateTowerSlow();
+            _tempSlow.UpdateTowerSlow();
             _upgradeOne.Spider = false;
             _disappear = true;         
         }
@@ -199,20 +198,20 @@ public class UpgradeTowerScript : MonoBehaviour {
     {
         if (_upgradeTwo.Tree == true)
         {
-            _arrowTower.UpdateTowerArrow();
+            _tempTower.UpdateTowerArrow();
             _upgradeTwo.Tree = false;
             _disappear = true;
         }
 
         else if (_upgradeTwo.Troll == true)
         {
-            _cannonTower.UpdateTowerCannon();
+            _tempCannon.UpdateTowerCannon();
             _upgradeTwo.Troll = false;
             _disappear = true;
         }
         else if (_upgradeTwo.Spider == true)
         {
-            _slowTower.UpdateTowerSlow();
+            _tempSlow.UpdateTowerSlow();
             _upgradeTwo.Spider = false;
             _disappear = true;
         }
@@ -224,42 +223,56 @@ public class UpgradeTowerScript : MonoBehaviour {
     /// </summary>
     void OnMouseDown()
     {
-       
         if (_arrowTower)
         {
-            
+            _tempTower = _arrowTower;
             if (_arrowTower.Tier == 1)
             {
                 _upgradeTreeAppear = true;
             }
-            if (_arrowTower.Tier == 2)
+            else if (_arrowTower.Tier == 2)
             {
-               
                 _upgradeTreeAppear2 = true;
             }
-            if (_arrowTower.Tier >= 3)
+            else if (_arrowTower.Tier >= 3)
             {
-             
                 _upgradeTreeAppear3 = true;
             }
         }
-        if (_cannonTower)
+        else if (_cannonTower)
         {
-           
-            if (_cannonTower.Tier == 1) _upgradeTrollAppear = true;
+            _tempCannon = _cannonTower;
+            if (_cannonTower.Tier == 1 )
+            {
+                _upgradeTrollAppear = true;
+            }
+            else if (_cannonTower.Tier == 2 )
+            {
+                _upgradeTrollAppear2 = true;
 
-            if (_cannonTower.Tier == 2) _upgradeTrollAppear2 = true;
-
-            if (_cannonTower.Tier >= 3) _upgradeTrollAppear3 = true;
+            }
+            else if (_cannonTower.Tier >= 3 )
+            {
+                _upgradeTrollAppear3 = true;
+            }
         }
-        if (_slowTower)
+        else if (_slowTower)
         {
-           
-            if (_slowTower.Tier == 1) _upgradeSpiderAppear = true;
+            _tempSlow = _slowTower;
+            if (_slowTower.Tier == 1)
+            {
+                _upgradeSpiderAppear = true;
+            }
 
-            if (_slowTower.Tier == 2) _upgradeSpiderAppear2 = true;
+            else if (_slowTower.Tier == 2)
+            {
+                _upgradeSpiderAppear2 = true;
+            }
 
-            if (_slowTower.Tier >= 3) _upgradeSpiderAppear3 = true;
+            else if (_slowTower.Tier >= 3)
+            {
+                _upgradeSpiderAppear3 = true;
+            }
         }
     }
 }
