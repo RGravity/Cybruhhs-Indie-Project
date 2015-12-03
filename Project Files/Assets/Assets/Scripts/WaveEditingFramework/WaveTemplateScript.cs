@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class WaveTemplateScript{
@@ -24,6 +25,8 @@ public class WaveTemplateScript{
     private int _path;
     [SerializeField]
     private float _secToWaitForNextPart;
+    [SerializeField]
+    private List<Sprite> _tutorialSprites;
 
 
     public string WavePartNr { get { return _WavePartNr; } }
@@ -36,5 +39,6 @@ public class WaveTemplateScript{
     public int EndPositionNr { get { return _endPositionNr; } }
     public int Path { get { return _path; } }
     public float SecToWaitForNextPart { get { return _secToWaitForNextPart; } }
+    public List<Sprite> TutorialSprites { get { return _tutorialSprites; } }
 
 }

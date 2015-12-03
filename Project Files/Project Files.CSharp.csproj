@@ -129,12 +129,6 @@
     <None Include="Assets\Assets\Resources\Tiled\Levels\03.xml" />
     <None Include="Assets\Assets\Resources\Tiled\Levels\04.xml" />
     <None Include="Assets\Assets\Resources\Tiled\Levels\05.xml" />
-    <None Include="Assets\Assets\Resources\Tiled\Levels\06.xml" />
-    <None Include="Assets\Assets\Resources\Tiled\Levels\07.xml" />
-    <None Include="Assets\Assets\Resources\Tiled\Levels\08.xml" />
-    <None Include="Assets\Assets\Resources\Tiled\Levels\09.xml" />
-    <None Include="Assets\Assets\Resources\Tiled\Levels\10.xml" />
-    <None Include="Assets\Assets\Resources\Tiled\Levels\11.xml" />
     <None Include="Assets\Assets\Resources\Tiled\Tiles\1.xml" />
     <None Include="Assets\ProjectSettings\ProjectVersion.txt" />
     <None Include="Assets\SavedData.xml" />
