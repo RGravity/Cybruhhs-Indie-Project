@@ -60,12 +60,16 @@ public class CannonTowerScript : MonoBehaviour {
     private GameObject _towerCannonAttackLevel1;
     private GameObject _towerCannonAttackLevel2;
     private GameObject _towerCannonAttackLevel3;
+    private GameObject _towerCannonIdleLevel1;
     private GameObject _towerCannonIdleLevel2;
     private GameObject _towerCannonIdleLevel3;
 
     //Properties of the Towers so it can swap positions in BuildingSpawnScript;
     public GameObject TowerCannonIdleLevel2 { get { return _towerCannonIdleLevel2; } }
     public GameObject TowerCannonIdleLevel3 { get { return _towerCannonIdleLevel3; } }
+
+
+    public GameObject TowerCannonIdleLevel1 { get { return _towerCannonIdleLevel1; } set { _towerCannonIdleLevel1 = value; } }
 
     //Positions of the tiles
     private Vector3 _tile1;
@@ -136,6 +140,13 @@ public class CannonTowerScript : MonoBehaviour {
                 }
             }
         }
+        else
+        {
+            if (TowerCannonIdleLevel1 != null)
+            {
+                _playIdleAnimation();
+            }
+        }
     }
 
     /// <summary>
@@ -145,56 +156,109 @@ public class CannonTowerScript : MonoBehaviour {
     {
         if (_allowShoot)
         {
-            //_enemyInRange.GetComponent<EnemyStatScript>().LowerHealth(_damage);
-            _allowShoot = false;
+            _playAttackAnimation();
+               _allowShoot = false;
             _countdownTime = CountTimerScript.AddSeconds(_rateOfFire);
             if ((_enemyInRange.transform.position - _thisPosition).magnitude > _range)
             {
                 _enemyInRange = null;
             }
-            GameObject towerAttack = Instantiate(_towerCannonAttackLevel1);
-            towerAttack.transform.position = _thisPosition;
-            Transform[] towerParts = towerAttack.GetComponentsInChildren<Transform>();
-            towerParts = towerParts.Except(new Transform[] { towerParts[0].transform }).ToArray();
-            GameObject leftTop = null;
-            GameObject rightTop = null;
-            GameObject leftBottom = null;
-            GameObject rightBottom = null;
-            foreach (Transform part in towerParts)
-            {
-                if (part.name.Contains("LeftTop"))
-                {
-                    leftTop = part.gameObject;
-                }
-                if (part.name.Contains("RightTop"))
-                {
-                    rightTop = part.gameObject;
-                }
-                if (part.name.Contains("LeftBottom"))
-                {
-                    leftBottom = part.gameObject;
-                }
-                if (part.name.Contains("RightBottom"))
-                {
-                    rightBottom = part.gameObject;
-                }
-            }
-                GameObject bulletObject = Instantiate(_bullet);
+            GameObject bulletObject = Instantiate(_bullet);
             bulletObject.transform.position = new Vector3(this._thisPosition.x, this._thisPosition.y, -1);
             bulletObject.GetComponent<CannonBulletScript>().ShootEnemy(_enemyInRange, _damage, _speedProjectile);
             if (_cannonFire != null)
             {
                 _cannonFire.Play();
             }
-
-            Debug.Log("Enemy Shot");
-            
         }
         else if (Time.time >= _countdownTime)
         {
             _allowShoot = true;
         }
     }
+
+
+    private void _playAttackAnimation()
+    {
+        //GameObject towerAttack = Instantiate(_towerCannonAttackLevel1);
+
+        _towerCannonIdleLevel1.transform.position = _thisPosition;
+        Transform[] towerParts = _towerCannonIdleLevel1.GetComponentsInChildren<Transform>();
+        towerParts = towerParts.Except(new Transform[] { towerParts[0].transform }).ToArray();
+        GameObject leftTop = null;
+        GameObject rightTop = null;
+        GameObject leftBottom = null;
+        GameObject rightBottom = null;
+        foreach (Transform part in towerParts)
+        {
+            if (part.name.Contains("LeftTop"))
+            {
+                leftTop = part.gameObject;
+            }
+            if (part.name.Contains("RightTop"))
+            {
+                rightTop = part.gameObject;
+            }
+            if (part.name.Contains("LeftBottom"))
+            {
+                leftBottom = part.gameObject;
+            }
+            if (part.name.Contains("RightBottom"))
+            {
+                rightBottom = part.gameObject;
+            }
+        }
+        leftTop.transform.position = _tile1;
+        rightTop.transform.position = _tile2;
+        leftBottom.transform.position = _tile3;
+        rightBottom.transform.position = _tile4;
+
+
+        leftTop.GetComponent<Animator>().Play("LeftTopTrollAttackLvl"+_tier+"Animation");
+        rightTop.GetComponent<Animator>().Play("RightTopTrollAttackLvl" + _tier + "Animation");
+        leftBottom.GetComponent<Animator>().Play("LeftBottomTrollAttackLvl" + _tier + "Animation");
+        rightBottom.GetComponent<Animator>().Play("RightBottomTrollAttackLvl" + _tier + "Animation");
+    }
+    private void _playIdleAnimation()
+    {
+        _towerCannonIdleLevel1.transform.position = _thisPosition;
+        Transform[] towerParts = _towerCannonIdleLevel1.GetComponentsInChildren<Transform>();
+        towerParts = towerParts.Except(new Transform[] { towerParts[0].transform }).ToArray();
+        GameObject leftTop = null;
+        GameObject rightTop = null;
+        GameObject leftBottom = null;
+        GameObject rightBottom = null;
+        foreach (Transform part in towerParts)
+        {
+            if (part.name.Contains("LeftTop"))
+            {
+                leftTop = part.gameObject;
+            }
+            if (part.name.Contains("RightTop"))
+            {
+                rightTop = part.gameObject;
+            }
+            if (part.name.Contains("LeftBottom"))
+            {
+                leftBottom = part.gameObject;
+            }
+            if (part.name.Contains("RightBottom"))
+            {
+                rightBottom = part.gameObject;
+            }
+        }
+        leftTop.transform.position = _tile1;
+        rightTop.transform.position = _tile2;
+        leftBottom.transform.position = _tile3;
+        rightBottom.transform.position = _tile4;
+
+
+        leftTop.GetComponent<Animator>().Play("LeftTopTrollIdleLvl" + _tier + "Animation");
+        rightTop.GetComponent<Animator>().Play("RightTopTrollIdleLvl" + _tier + "Animation");
+        leftBottom.GetComponent<Animator>().Play("LeftBottomTrollIdleLvl" + _tier + "Animation");
+        rightBottom.GetComponent<Animator>().Play("RightBottomTrollIdleLvl" + _tier + "Animation");
+    }
+
     /// <summary>
     /// Updates the Tier of the tower
     /// </summary>
