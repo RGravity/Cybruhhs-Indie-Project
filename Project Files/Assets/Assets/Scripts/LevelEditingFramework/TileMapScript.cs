@@ -29,6 +29,7 @@ public class TileMapScript : MonoBehaviour
     //Levels in XML presented as Objects
     private Object[] _xmlLevels;
     private Object[] _lvlBGs;
+    private Object[] _lvlFGs;
     //TileData reads the XML Needs to be change with Tiled.
     private int[,] _tileData =
     {
@@ -92,6 +93,7 @@ public class TileMapScript : MonoBehaviour
             if (_xmlLevels != null && _xmlLevels.Length > 0)
             {
                 _lvlBGs = Resources.LoadAll("Tiled/LevelBGs");
+                _lvlFGs = Resources.LoadAll("Tiled/LevelFGs");
             }
         }
         //Parse Level to _tileData
@@ -354,8 +356,10 @@ public class TileMapScript : MonoBehaviour
                 if (go.transform.position.x == ((int)(_mapSizeX/2)) && go.transform.position.y == (int)(_mapSizeY / 2))
                 {
                     //go.GetComponent<SpriteRenderer>().sprite = _lvlBGs[1] as Sprite;
-                    GameObject got = (GameObject)Instantiate(_lvlBGs[_level-1]);
-                    got.transform.position = new Vector3(got.transform.position.x+15.5f, got.transform.position.y+8.8f, 0);
+                    GameObject BG = (GameObject)Instantiate(_lvlBGs[_level - 1]);
+                    GameObject FG = (GameObject)Instantiate(_lvlFGs[_level - 1]);
+                    BG.transform.position = new Vector3(BG.transform.position.x + 15.5f, BG.transform.position.y + 8.8f, 0);
+                    FG.transform.position = new Vector3(FG.transform.position.x + 15.5f, FG.transform.position.y + 8.8f, -2);
                 }
                 if (tt.BuildingAllowed)
                 {
