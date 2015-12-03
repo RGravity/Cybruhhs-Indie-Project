@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public class SlowTowerScript : MonoBehaviour {
 
@@ -73,6 +74,18 @@ public class SlowTowerScript : MonoBehaviour {
     private int _nextEnemy = 1;
     public int Tier { get { return _tier; } set { _tier = value; } }
 
+    private Vector3 _tile1;
+    private Vector3 _tile2;
+    private Vector3 _tile3;
+    private Vector3 _tile4;
+    public Vector3 Tile1 { get { return _tile1; } set { _tile1 = value; } }
+    public Vector3 Tile2 { get { return _tile2; } set { _tile2 = value; } }
+    public Vector3 Tile3 { get { return _tile3; } set { _tile3 = value; } }
+    public Vector3 Tile4 { get { return _tile4; } set { _tile4 = value; } }
+
+    private GameObject _towerSlowIdleLevel1;
+    public GameObject TowerSlowIdleLevel1 { get { return _towerSlowIdleLevel1; } set { _towerSlowIdleLevel1 = value; } }
+
     //AUDIOSOURCE NEEDS TO BE CHANGED
     // Use this for initializations
     void Start()
@@ -139,6 +152,10 @@ public class SlowTowerScript : MonoBehaviour {
                 _isNextEnemy = true;
             }
         }
+        else
+        {
+            //_playIdleAnimation();
+        }
     }
 
     /// <summary>
@@ -150,6 +167,7 @@ public class SlowTowerScript : MonoBehaviour {
         {
             //_enemyInRange.GetComponent<EnemyStatScript>().LowerHealth(_damage);
             _allowShoot = false;
+            //_playAttackAnimation();
             _countdownTime = CountTimerScript.AddSeconds(_rateOfFire);
             if ((_enemyInRange.transform.position - _thisPosition).magnitude > _range)
             {
@@ -168,6 +186,107 @@ public class SlowTowerScript : MonoBehaviour {
         else if (Time.time >= _countdownTime)
         {
             _allowShoot = true;
+        }
+    }
+
+    private void _playAttackAnimation()
+    {
+        //GameObject towerAttack = Instantiate(_towerCannonAttackLevel1);
+
+        _towerSlowIdleLevel1.transform.position = _thisPosition;
+        Transform[] towerParts = _towerSlowIdleLevel1.GetComponentsInChildren<Transform>();
+        towerParts = towerParts.Except(new Transform[] { towerParts[0].transform }).ToArray();
+        GameObject leftTop = null;
+        GameObject rightTop = null;
+        GameObject leftBottom = null;
+        GameObject rightBottom = null;
+        foreach (Transform part in towerParts)
+        {
+            if (part.name.Contains("LeftTop"))
+            {
+                leftTop = part.gameObject;
+            }
+            if (part.name.Contains("RightTop"))
+            {
+                rightTop = part.gameObject;
+            }
+            if (part.name.Contains("LeftBottom"))
+            {
+                leftBottom = part.gameObject;
+            }
+            if (part.name.Contains("RightBottom"))
+            {
+                rightBottom = part.gameObject;
+            }
+        }
+        leftTop.transform.position = _tile1;
+        rightTop.transform.position = _tile2;
+        leftBottom.transform.position = _tile3;
+        rightBottom.transform.position = _tile4;
+
+        if (_tier == 1)
+        {
+
+            leftTop.GetComponent<Animator>().Play("LeftTopSpiderAttackAnimation");
+            rightTop.GetComponent<Animator>().Play("RightTopSpiderAttackAnimation");
+            leftBottom.GetComponent<Animator>().Play("LeftBottomSpiderAttackAnimation");
+            rightBottom.GetComponent<Animator>().Play("RightBottomSpiderAttackAnimation");
+        }
+        else
+        {
+            leftTop.GetComponent<Animator>().Play("LeftTopSpiderAttackLvl" + _tier + "Animation");
+            rightTop.GetComponent<Animator>().Play("RightTopSpiderAttackLvl" + _tier + "Animation");
+            leftBottom.GetComponent<Animator>().Play("LeftBottomSpiderAttackLvl" + _tier + "Animation");
+            rightBottom.GetComponent<Animator>().Play("RightBottomSpiderAttackLvl" + _tier + "Animation");
+        }
+    }
+    private void _playIdleAnimation()
+    {
+        _towerSlowIdleLevel1.transform.position = _thisPosition;
+        Transform[] towerParts = _towerSlowIdleLevel1.GetComponentsInChildren<Transform>();
+        towerParts = towerParts.Except(new Transform[] { towerParts[0].transform }).ToArray();
+        GameObject leftTop = null;
+        GameObject rightTop = null;
+        GameObject leftBottom = null;
+        GameObject rightBottom = null;
+        foreach (Transform part in towerParts)
+        {
+            if (part.name.Contains("LeftTop"))
+            {
+                leftTop = part.gameObject;
+            }
+            if (part.name.Contains("RightTop"))
+            {
+                rightTop = part.gameObject;
+            }
+            if (part.name.Contains("LeftBottom"))
+            {
+                leftBottom = part.gameObject;
+            }
+            if (part.name.Contains("RightBottom"))
+            {
+                rightBottom = part.gameObject;
+            }
+        }
+        leftTop.transform.position = _tile1;
+        rightTop.transform.position = _tile2;
+        leftBottom.transform.position = _tile3;
+        rightBottom.transform.position = _tile4;
+
+        if (_tier == 1)
+        {
+
+            leftTop.GetComponent<Animator>().Play("LeftTopSpiderIdleAnimation");
+            rightTop.GetComponent<Animator>().Play("RightTopSpiderIdleAnimation");
+            leftBottom.GetComponent<Animator>().Play("LeftBottomSpiderIdleAnimation");
+            rightBottom.GetComponent<Animator>().Play("RightBottomSpiderIdleAnimation");
+        }
+        else
+        {
+            leftTop.GetComponent<Animator>().Play("LeftTopSpiderIdleLvl" + _tier + "Animation");
+            rightTop.GetComponent<Animator>().Play("RightTopSpiderIdleLvl" + _tier + "Animation");
+            leftBottom.GetComponent<Animator>().Play("LeftBottomSpiderIdleLvl" + _tier + "Animation");
+            rightBottom.GetComponent<Animator>().Play("RightBottomSpiderIdleLvl" + _tier + "Animation");
         }
     }
     /// <summary>

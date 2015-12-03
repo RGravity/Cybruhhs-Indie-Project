@@ -266,7 +266,7 @@ public class BuildingSpawnScript : MonoBehaviour
                     //Get the prefab of the Cannon and create the prefab.
                     //Get all the children but remove the parent so only the 4 tiles are in the parts and can be adjusted to the world coordinates.
                     _towerCannonIdle = Instantiate(_towerCannonIdle);
-                    _towerCannonIdle.transform.position = _selectedTile[1].gameObject.transform.position;
+                    _towerCannonIdle.transform.position = new Vector3(_selectedTile[1].gameObject.transform.position.x, _selectedTile[1].gameObject.transform.position.y, -0.5f);
                     _selectedTile[1].GetComponent<CannonTowerScript>().TowerCannonIdleLevel1 = _towerCannonIdle;
                     Transform[] towerParts =_towerCannonIdle.GetComponentsInChildren<Transform>();
                     towerParts = towerParts.Except(new Transform[] { towerParts[0].transform }).ToArray();
@@ -299,30 +299,30 @@ public class BuildingSpawnScript : MonoBehaviour
                         if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower1)
                         {
                             //set on ID 1 LeftTop tile of the prefab
-                            leftTop.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
+                            leftTop.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -0.5f);
                             leftTop.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
-                            _selectedTile[1].GetComponent<CannonTowerScript>().Tile1 = _selectedTile[i].transform.position;// Set position in the script for next upgrades and changes
+                            _selectedTile[1].GetComponent<CannonTowerScript>().Tile1 = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -0.5f);// Set position in the script for next upgrades and changes
                         }
                         if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower2)
                         {
                             //set on ID 2 RightTop tile of the prefab
-                            rightTop.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
+                            rightTop.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -0.5f);
                             rightTop.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
-                            _selectedTile[1].GetComponent<CannonTowerScript>().Tile2 = _selectedTile[i].transform.position;// Set position in the script for next upgrades and changes
+                            _selectedTile[1].GetComponent<CannonTowerScript>().Tile2 = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -0.5f);// Set position in the script for next upgrades and changes
                         }
                         if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower3)
                         {
                             //set on ID 3 LeftBottom tile of the prefab
-                            leftBottom.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
+                            leftBottom.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -0.5f);
                             leftBottom.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
-                            _selectedTile[1].GetComponent<CannonTowerScript>().Tile3 = _selectedTile[i].transform.position;// Set position in the script for next upgrades and changes
+                            _selectedTile[1].GetComponent<CannonTowerScript>().Tile3 = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -0.5f);// Set position in the script for next upgrades and changes
                         }
                         if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower4)
                         {
                             //set on ID 4 RightBottom tile of the prefab
-                            rightBottom.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
+                            rightBottom.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -0.5f);
                             rightBottom.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
-                            _selectedTile[1].GetComponent<CannonTowerScript>().Tile4 = _selectedTile[i].transform.position; // Set position in the script for next upgrades and changes
+                            _selectedTile[1].GetComponent<CannonTowerScript>().Tile4 = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -0.5f); // Set position in the script for next upgrades and changes
                         }
                         UpgradeTowerScript upgradeTower = _selectedTile[i].AddComponent<UpgradeTowerScript>();
                         upgradeTower.CannonTower = tempTower;
@@ -359,7 +359,8 @@ public class BuildingSpawnScript : MonoBehaviour
                     //Get the prefab of the Slow Tower and create the prefab.
                     //Get all the children but remove the parent so only the 4 tiles are in the parts and can be adjusted to the world coordinates.
                     _towerSpiderIdle = Instantiate(_towerSpiderIdle);
-                    _towerSpiderIdle.transform.position = _selectedTile[1].gameObject.transform.position;
+                    _towerSpiderIdle.transform.position = new Vector3(_selectedTile[1].gameObject.transform.position.x, _selectedTile[1].gameObject.transform.position.y, -0.5f);
+                    _selectedTile[1].GetComponent<SlowTowerScript>().TowerSlowIdleLevel1 = _towerSpiderIdle;
                     Transform[] towerParts = _towerSpiderIdle.GetComponentsInChildren<Transform>();
                     towerParts = towerParts.Except(new Transform[] { towerParts[0].transform }).ToArray();
                     //Save the 4 positions
@@ -391,26 +392,30 @@ public class BuildingSpawnScript : MonoBehaviour
                         if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower1)
                         {
                             //set on ID 1 LeftTop tile of the prefab
-                            leftTop.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
+                            leftTop.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -0.5f);
                             leftTop.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
+                            _selectedTile[1].GetComponent<SlowTowerScript>().Tile1 = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -0.5f);// Set position in the script for next upgrades and changes
                         }
                         if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower2)
                         {
                             //set on ID 2 RightTop tile of the prefab
-                            rightTop.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
+                            rightTop.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -0.5f);
                             rightTop.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
+                            _selectedTile[1].GetComponent<SlowTowerScript>().Tile2 = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -0.5f);// Set position in the script for next upgrades and changes
                         }
                         if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower3)
                         {
                             //set on ID 3 LeftBottom tile of the prefab
-                            leftBottom.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
+                            leftBottom.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -0.5f);
                             leftBottom.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
+                            _selectedTile[1].GetComponent<SlowTowerScript>().Tile3 = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -0.5f);// Set position in the script for next upgrades and changes
                         }
                         if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower4)
                         {
                             //set on ID 4 RightBottom tile of the prefab
-                            rightBottom.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
+                            rightBottom.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -0.5f);
                             rightBottom.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
+                            _selectedTile[1].GetComponent<SlowTowerScript>().Tile4 = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -0.5f);// Set position in the script for next upgrades and changes
                         }
                         UpgradeTowerScript upgradeTower = _selectedTile[i].AddComponent<UpgradeTowerScript>();
                         upgradeTower.SlowTower = tempTower;
@@ -445,7 +450,8 @@ public class BuildingSpawnScript : MonoBehaviour
                     //Get the prefab of the Slow Tower and create the prefab.
                     //Get all the children but remove the parent so only the 4 tiles are in the parts and can be adjusted to the world coordinates.
                     _towerArrowIdle = Instantiate(_towerArrowIdle);
-                    _towerArrowIdle.transform.position = _selectedTile[1].gameObject.transform.position;
+                    _towerArrowIdle.transform.position = new Vector3(_selectedTile[1].gameObject.transform.position.x, _selectedTile[1].gameObject.transform.position.y, -0.5f);
+                    _selectedTile[1].GetComponent<ArrowTowerScript>().TowerArrowIdleLevel1 = _towerArrowIdle;
                     Transform[] towerParts = _towerArrowIdle.GetComponentsInChildren<Transform>();
                     towerParts = towerParts.Except(new Transform[] { towerParts[0].transform }).ToArray();
                     //Save the 4 positions
@@ -477,26 +483,30 @@ public class BuildingSpawnScript : MonoBehaviour
                         if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower1)
                         {
                             //set on ID 1 LeftTop tile of the prefab
-                            leftTop.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
+                            leftTop.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -0.5f);
                             leftTop.transform.localScale = new Vector3(1, 1, 1);
+                            _selectedTile[1].GetComponent<ArrowTowerScript>().Tile1 = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -0.5f);// Set position in the script for next upgrades and changes
                         }
                         if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower2)
                         {
                             //set on ID 2 RightTop tile of the prefab
-                            rightTop.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
+                            rightTop.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -0.5f);
                             rightTop.transform.localScale = new Vector3(1, 1, 1);
+                            _selectedTile[1].GetComponent<ArrowTowerScript>().Tile2 = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -0.5f);// Set position in the script for next upgrades and changes
                         }
                         if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower3)
                         {
                             //set on ID 3 LeftBottom tile of the prefab
-                            leftBottom.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
+                            leftBottom.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -0.5f);
                             leftBottom.transform.localScale = new Vector3(1, 1, 1);
+                            _selectedTile[1].GetComponent<ArrowTowerScript>().Tile3 = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -0.5f);// Set position in the script for next upgrades and changes
                         }
                         if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower4)
                         {
                             //set on ID 4 RightBottom tile of the prefab
-                            rightBottom.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
+                            rightBottom.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -0.5f);
                             rightBottom.transform.localScale = new Vector3(1, 1, 1);
+                            _selectedTile[1].GetComponent<ArrowTowerScript>().Tile4 = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -0.5f);// Set position in the script for next upgrades and changes
                         }
                         UpgradeTowerScript upgradeTower = _selectedTile[i].AddComponent<UpgradeTowerScript>();
                         upgradeTower.ArrowTower = tempTower;
