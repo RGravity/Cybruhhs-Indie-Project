@@ -10,8 +10,9 @@ public class BaseScript : MonoBehaviour {
 
     private bool _isDead;
 
-    public int Gold { get { return _gold; } }
+    public int Gold { get { return _gold; } set { _gold = value; } }
     public bool IsDead { get { return _isDead; } set { _isDead = value; } }
+    public int Health { get { return _health; } }
 
     void Start()
     {
@@ -34,7 +35,6 @@ public class BaseScript : MonoBehaviour {
         if (_health <= 0)
         {
             //TEMP; HERE COMES GAME OVER
-            Time.timeScale = 0;
             _isDead = true;
         }
     }

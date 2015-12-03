@@ -124,7 +124,7 @@ public class WaveMainScript : MonoBehaviour {
 
                 if (_levelList[_debugLevel - 1].WaveList.Count < _debugWave || _levelList[_currentLevel - 1].WaveList.Count < _currentWave)
                 {
-
+                    GameObject.FindObjectOfType<ScoreScreenScript>().EndLevel = true;
                 }
 
                 _buildWaveScript.StartBuildingWave();

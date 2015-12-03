@@ -62,7 +62,7 @@ public class PauseScript : MonoBehaviour {
         }
         else
         {
-            if (!_baseScript.IsDead)
+            if (!_baseScript.IsDead && !GameObject.FindObjectOfType<ScoreScreenScript>().EndLevel)
             {
                 Time.timeScale = 1;
                 _backGround.SetActive(false);
@@ -70,6 +70,7 @@ public class PauseScript : MonoBehaviour {
             }
             else
             {
+                Time.timeScale = 0;
                 _backGround.SetActive(true);
                 _hud.SetActive(false);                
             }
