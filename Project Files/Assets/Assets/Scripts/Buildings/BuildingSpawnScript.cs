@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public class BuildingSpawnScript : MonoBehaviour
 {
@@ -34,7 +35,7 @@ public class BuildingSpawnScript : MonoBehaviour
     private GameObject[] _selectedTile; //The Current Tower Tile selected for the menu
     private BaseScript _baseScript; //Base Script to lower gold and such.
     private TileMapScript _tileMap; //Tilemap to see if buildable
-    private AudioSource _buy; //Buy Sound
+  
     private AudioSource _troll1; //Troll voice one
     private AudioSource _troll2; //Troll voice two
     private AudioSource _spider1; //Spider voice one
@@ -42,23 +43,32 @@ public class BuildingSpawnScript : MonoBehaviour
     private AudioSource _tree1; //Tree voice one
     private AudioSource _tree2; //Tree voice one
 
+    //Towers Level 1
+    private GameObject _towerArrowIdle;
+    private GameObject _towerCannonIdle;
+    private GameObject _towerSpiderIdle;
+
     // Use this for initialization
     //Load all the Variables and Prepare the Radial Menu
     void Start()
     {
+        _towerArrowIdle = (GameObject)Resources.Load("Towers/TreeIdleLevel1");
+        _towerCannonIdle = (GameObject)Resources.Load("Towers/TrollIdleLevel1");
+        _towerSpiderIdle = (GameObject)Resources.Load("Towers/SpiderIdleLevel1");
+
         _check = GameObject.FindObjectOfType<CheckForMusicScript>();
         _tileMap = FindObjectOfType<TileMapScript>();
         _baseScript = GameObject.FindObjectOfType<BaseScript>();
         _calculateEverything();
         if (_check.Check == true)
         {
-            //_buy = GameObject.Find("SellSound").GetComponent<AudioSource>();
-            //_troll1 = GameObject.Find("Troll1").GetComponent<AudioSource>();
-            //_troll2 = GameObject.Find("Troll2").GetComponent<AudioSource>();
-            //_spider1 = GameObject.Find("Spider1").GetComponent<AudioSource>();
-            //_spider2 = GameObject.Find("Spider2").GetComponent<AudioSource>();
-            //_tree1 = GameObject.Find("Tree1").GetComponent<AudioSource>();
-            //_tree2 = GameObject.Find("Tree2").GetComponent<AudioSource>();
+           
+            _troll1 = GameObject.Find("Troll1").GetComponent<AudioSource>();
+            _troll2 = GameObject.Find("Troll2").GetComponent<AudioSource>();
+            _spider1 = GameObject.Find("Spider1").GetComponent<AudioSource>();
+            _spider2 = GameObject.Find("Spider2").GetComponent<AudioSource>();
+            _tree1 = GameObject.Find("Tree1").GetComponent<AudioSource>();
+            _tree2 = GameObject.Find("Tree2").GetComponent<AudioSource>();
         }
     }
 
@@ -250,27 +260,75 @@ public class BuildingSpawnScript : MonoBehaviour
                 if (_baseScript.Gold >= 250)
                 {
                     _selectedTile[1].AddComponent<CannonTowerScript>();
+                    _towerCannonIdle = Instantiate(_towerCannonIdle);
+                    _towerCannonIdle.transform.position = _selectedTile[1].gameObject.transform.position;
+                    Transform[] towerParts =_towerCannonIdle.GetComponentsInChildren<Transform>();
+                    towerParts = towerParts.Except(new Transform[] { towerParts[0].transform }).ToArray();
+                    GameObject leftTop = null;
+                    GameObject rightTop = null;
+                    GameObject leftBottom = null;
+                    GameObject rightBottom = null;
+                    foreach (Transform part in towerParts)
+                    {
+                        if (part.name.Contains("LeftTop"))
+                        {
+                            leftTop = part.gameObject;
+                        }
+                        if (part.name.Contains("RightTop"))
+                        {
+                            rightTop = part.gameObject;
+                        }
+                        if (part.name.Contains("LeftBottom"))
+                        {
+                            leftBottom = part.gameObject;
+                        }
+                        if (part.name.Contains("RightBottom"))
+                        {
+                            rightBottom = part.gameObject;
+                        }
+                    }
                     for (int i = 0; i < _selectedTile.Length; i++)
                     {
-                        _selectedTile[i].GetComponent<Renderer>().material.mainTexture = _cannonTurretTextures[i];
+                        if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower1)
+                        {
+                            leftTop.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
+                            leftTop.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
+                        }
+                        if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower2)
+                        {
+                            rightTop.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
+                            rightTop.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
+                        }
+                        if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower3)
+                        {
+                            leftBottom.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
+                            leftBottom.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
+                        }
+                        if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower4)
+                        {
+                            rightBottom.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
+                            rightBottom.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
+                        }
+                        //_selectedTile[i].GetComponent<Renderer>().material.mainTexture = _cannonTurretTextures[i];
                         _selectedTile[i].AddComponent<UpgradeTowerScript>();
                         _selectedTile[i].GetComponentInChildren<SpriteRenderer>().enabled = false;
                     }
                     _baseScript.LowerGold(250);
-                    int random = Random.Range(0, 1);
-                    if (random == 0)
+                    int random = Random.Range(0, 2);
+                    switch (random)
                     {
-                        if (_spider1 != null)
-                        {
-                            _spider1.Play();
-                        }
-                    }
-                    else
-                    {
-                        if (_spider1 != null)
-                        {
-                            _spider2.Play();
-                        }
+                        case 0:
+                            if (_troll1 != null)
+                            {
+                                _troll1.Play();
+                            }
+                            break;
+                        case 1:
+                            if (_troll2 != null)
+                            {
+                                _troll2.Play();
+                            }
+                            break;
                     }
                 }
                 break;
@@ -282,28 +340,77 @@ public class BuildingSpawnScript : MonoBehaviour
                 if (_baseScript.Gold >= 200)
                 {
                     _selectedTile[1].AddComponent<SlowTowerScript>();
+                    _towerSpiderIdle = Instantiate(_towerSpiderIdle);
+                    _towerSpiderIdle.transform.position = _selectedTile[1].gameObject.transform.position;
+                    Transform[] towerParts = _towerSpiderIdle.GetComponentsInChildren<Transform>();
+                    towerParts = towerParts.Except(new Transform[] { towerParts[0].transform }).ToArray();
+                    GameObject leftTop = null;
+                    GameObject rightTop = null;
+                    GameObject leftBottom = null;
+                    GameObject rightBottom = null;
+                    foreach (Transform part in towerParts)
+                    {
+                        if (part.name.Contains("LeftTop"))
+                        {
+                            leftTop = part.gameObject;
+                        }
+                        if (part.name.Contains("RightTop"))
+                        {
+                            rightTop = part.gameObject;
+                        }
+                        if (part.name.Contains("LeftBottom"))
+                        {
+                            leftBottom = part.gameObject;
+                        }
+                        if (part.name.Contains("RightBottom"))
+                        {
+                            rightBottom = part.gameObject;
+                        }
+                    }
                     for (int i = 0; i < _selectedTile.Length; i++)
                     {
-                        _selectedTile[i].GetComponent<Renderer>().material.mainTexture = _arrowTurretTextures[i];
+                        if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower1)
+                        {
+                            leftTop.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
+                            leftTop.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
+                        }
+                        if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower2)
+                        {
+                            rightTop.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
+                            rightTop.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
+                        }
+                        if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower3)
+                        {
+                            leftBottom.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
+                            leftBottom.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
+                        }
+                        if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower4)
+                        {
+                            rightBottom.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
+                            rightBottom.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
+                        }
+                        //_selectedTile[i].GetComponent<Renderer>().material.mainTexture = _arrowTurretTextures[i];
                         _selectedTile[i].AddComponent<UpgradeTowerScript>();
                         _selectedTile[i].GetComponentInChildren<SpriteRenderer>().enabled = false;
                     }
                     _baseScript.LowerGold(200);
-                    int random = Random.Range(0, 1);
-                    if (random == 0)
+                    int random = Random.Range(0, 2);
+                    switch (random)
                     {
-                        if (_troll1 != null)
-                        {
-                            _troll1.Play();
-                        }
+                        case 0:
+                            if (_spider1 != null)
+                            {
+                                _spider1.Play();
+                            }
+                            break;
+                        case 1:
+                            if (_spider2 != null)
+                            {
+                                _spider2.Play();
+                            }
+                            break;
                     }
-                    else
-                    {
-                        if (_troll2 != null)
-                        {
-                            _troll2.Play();
-                        }
-                    }
+
 
                 }
                 break;
@@ -311,27 +418,75 @@ public class BuildingSpawnScript : MonoBehaviour
                 if (_baseScript.Gold >= 150)
                 {
                     _selectedTile[1].AddComponent<ArrowTowerScript>();
+                    _towerArrowIdle = Instantiate(_towerArrowIdle);
+                    _towerArrowIdle.transform.position = _selectedTile[1].gameObject.transform.position;
+                    Transform[] towerParts = _towerArrowIdle.GetComponentsInChildren<Transform>();
+                    towerParts = towerParts.Except(new Transform[] { towerParts[0].transform }).ToArray();
+                    GameObject leftTop = null;
+                    GameObject rightTop = null;
+                    GameObject leftBottom = null;
+                    GameObject rightBottom = null;
+                    foreach (Transform part in towerParts)
+                    {
+                        if (part.name.Contains("LeftTop"))
+                        {
+                            leftTop = part.gameObject;
+                        }
+                        if (part.name.Contains("RightTop"))
+                        {
+                            rightTop = part.gameObject;
+                        }
+                        if (part.name.Contains("LeftBottom"))
+                        {
+                            leftBottom = part.gameObject;
+                        }
+                        if (part.name.Contains("RightBottom"))
+                        {
+                            rightBottom = part.gameObject;
+                        }
+                    }
                     for (int i = 0; i < _selectedTile.Length; i++)
                     {
-                        _selectedTile[i].GetComponent<Renderer>().material.mainTexture = _cannonTurretTextures[i];
+                        if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower1)
+                        {
+                            leftTop.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
+                            leftTop.transform.localScale = new Vector3(1, 1, 1);
+                        }
+                        if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower2)
+                        {
+                            rightTop.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
+                            rightTop.transform.localScale = new Vector3(1, 1, 1);
+                        }
+                        if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower3)
+                        {
+                            leftBottom.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
+                            leftBottom.transform.localScale = new Vector3(1, 1, 1);
+                        }
+                        if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower4)
+                        {
+                            rightBottom.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
+                            rightBottom.transform.localScale = new Vector3(1, 1, 1);
+                        }
+                        //_selectedTile[i].GetComponent<Renderer>().material.mainTexture = _cannonTurretTextures[i];
                         _selectedTile[i].AddComponent<UpgradeTowerScript>();
                         _selectedTile[i].GetComponentInChildren<SpriteRenderer>().enabled = false;
                     }
                     _baseScript.LowerGold(150);
-                    int random = Random.Range(0, 1);
-                    if (random == 0)
+                    int random = Random.Range(0, 2);
+                    switch (random)
                     {
-                        if (_tree1 != null)
-                        {
-                            _tree1.Play();
-                        }
-                    }
-                    else
-                    {
-                        if (_tree2 != null)
-                        {
-                            _tree2.Play();
-                        }
+                        case 0:
+                            if (_tree1 != null)
+                            {
+                                _tree1.Play();
+                            }
+                            break;
+                        case 1:
+                            if (_tree2 != null)
+                            {
+                                _tree2.Play();
+                            }
+                            break;
                     }
                 }
                 break;

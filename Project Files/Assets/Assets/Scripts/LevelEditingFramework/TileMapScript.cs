@@ -113,10 +113,7 @@ public class TileMapScript : MonoBehaviour
         else
         {
             Debug.Log("Could not load level " + pLevel);
-        }
-        
-
-        
+        }       
     }
 
     /// <summary>

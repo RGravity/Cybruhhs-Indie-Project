@@ -10,7 +10,10 @@ public class ArrowTowerScript : MonoBehaviour {
     private int _tier = 1;
     private Vector3 _thisPosition;
     private float _timeLastShot;
-
+    private int _tileX;
+    private int _tileY;
+    public int TileX { get { return _tileX; } }
+    public int TileY { get { return _tileY; } }
     #region Damage
     private int _damage = 2;
     [SerializeField]
@@ -63,6 +66,8 @@ public class ArrowTowerScript : MonoBehaviour {
     // Use this for initializations
     void Start()
     {
+        _tileX = (int)gameObject.transform.position.x;
+        _tileY = (int)gameObject.transform.position.y;
         _thisPosition = this.gameObject.transform.position;
         _bullet = (GameObject)Resources.Load("ArrowBullet");
         _check = GameObject.FindObjectOfType<CheckForMusicScript>();

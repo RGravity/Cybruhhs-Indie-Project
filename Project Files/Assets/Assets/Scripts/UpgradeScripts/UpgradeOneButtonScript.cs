@@ -27,16 +27,12 @@ public class UpgradeOneButtonScript : MonoBehaviour {
 
     public void OnClickSpider()
     {
-        //if (gameObject.GetComponent<Image>().sprite == Resources.Load<Sprite>("SpiderUpgrade1"))_spider = true;
+        if (gameObject.GetComponent<Image>().sprite == Resources.Load<Sprite>("SpiderUpgrade1"))_spider = true;
     }
 
     public void OnClickTree()
     {
-        if (gameObject.GetComponent<Image>().sprite == Resources.Load<Sprite>("SpiderUpgrade1"))
-        {
-            _tree = true;
-            
-        }
+        if (gameObject.GetComponent<Image>().sprite == Resources.Load<Sprite>("TreeUpgrade1"))_tree = true;
     }
 
     public void OnClickTroll()

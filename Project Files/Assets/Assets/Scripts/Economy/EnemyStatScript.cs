@@ -16,6 +16,10 @@ public class EnemyStatScript : MonoBehaviour {
 
 
     private BaseScript _baseStats;
+    private AudioSource _heavy;
+    private AudioSource _paladin;
+    private AudioSource _flying;
+    private AudioSource _grunt;
 
 
     public int Health { get { return _health; } }
@@ -23,6 +27,10 @@ public class EnemyStatScript : MonoBehaviour {
     void Start()
     {
         _baseStats = GameObject.FindObjectOfType<BaseScript>();
+        //_grunt = GameObject.Find("GruntBase").GetComponent<AudioSource>();
+        //_flying = GameObject.Find("GriffonBase").GetComponent<AudioSource>();
+        //_paladin = GameObject.Find("PaladinBase").GetComponent<AudioSource>();
+        //_heavy = GameObject.Find("HeavyBase").GetComponent<AudioSource>();
         //this.GetComponent<MeshCollider>().isTrigger = true;
     }
 
@@ -59,6 +67,22 @@ public class EnemyStatScript : MonoBehaviour {
         {
             _baseStats.LowerHealth(_damageToBase);
             _baseStats.LowerGold(_goldCarrying);
+            //if (this.name == "Grunt")
+            //{
+            //    _grunt.Play();
+            //}
+            //if (this.name == "Flying")
+            //{
+            //    _flying.Play();
+            //}
+            //if (this.name == "Paladin")
+            //{
+            //    _paladin.Play();
+            //}
+            //if (this.name == "Heavy")
+            //{
+            //    _heavy.Play();
+            //}
             Destroy(this.gameObject);
         }
     }
