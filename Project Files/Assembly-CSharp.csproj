@@ -61,6 +61,8 @@
      <Compile Include="Assets\Assets\Scripts\Economy\EnemyStatScript.cs" />
      <Compile Include="Assets\Assets\Scripts\Enemies\GruntScript.cs" />
      <Compile Include="Assets\Assets\Scripts\EnumScript.cs" />
+     <Compile Include="Assets\Assets\Scripts\HUD\GoldTextScript.cs" />
+     <Compile Include="Assets\Assets\Scripts\HUD\LivesTextScript.cs" />
      <Compile Include="Assets\Assets\Scripts\HUD\NextWaveButtonScript.cs" />
      <Compile Include="Assets\Assets\Scripts\HUD\NextWaveTimerScript.cs" />
      <Compile Include="Assets\Assets\Scripts\HUD\WaveIndicatorScript.cs" />
@@ -109,17 +111,11 @@
      <None Include="Assets\Assets\Resources\Tiled\Levels\11.xml" />
      <None Include="Assets\Assets\Resources\Tiled\Levels\09.xml" />
      <None Include="Assets\Assets\Resources\Tiled\Levels\10.xml" />
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>D:/Programs/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Programs/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>D:/Programs/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Analytics">
- <HintPath>D:/Programs/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Cecil">
  <HintPath>D:/Programs/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>
