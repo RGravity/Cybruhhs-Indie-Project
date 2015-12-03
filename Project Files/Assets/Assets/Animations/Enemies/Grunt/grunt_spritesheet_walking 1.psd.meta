@@ -1,18 +1,18 @@
 fileFormatVersion: 2
-guid: f40f6b86f5aaaa541bd9323beb4a1ef4
-timeCreated: 1448366535
+guid: 3dacd78b5f542de4e9815583c5da08fd
+timeCreated: 1449129642
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: grunt_spritesheet_walking_0
-    21300002: grunt_spritesheet_walking_1
-    21300004: grunt_spritesheet_walking_2
-    21300006: grunt_spritesheet_walking_3
-    21300008: grunt_spritesheet_walking_4
-    21300010: grunt_spritesheet_walking_5
-    21300012: grunt_spritesheet_walking_6
-    21300014: grunt_spritesheet_walking_7
-    21300016: grunt_spritesheet_walking_8
+    21300000: grunt_spritesheet_walking 1_0
+    21300002: grunt_spritesheet_walking 1_1
+    21300004: grunt_spritesheet_walking 1_2
+    21300006: grunt_spritesheet_walking 1_3
+    21300008: grunt_spritesheet_walking 1_4
+    21300010: grunt_spritesheet_walking 1_5
+    21300012: grunt_spritesheet_walking 1_6
+    21300014: grunt_spritesheet_walking 1_7
+    21300016: grunt_spritesheet_walking 1_8
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -59,7 +59,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: grunt_spritesheet_walking_0
+    - name: grunt_spritesheet_walking 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -69,7 +69,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: grunt_spritesheet_walking_1
+    - name: grunt_spritesheet_walking 1_1
       rect:
         serializedVersion: 2
         x: 64
@@ -79,7 +79,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: grunt_spritesheet_walking_2
+    - name: grunt_spritesheet_walking 1_2
       rect:
         serializedVersion: 2
         x: 128
@@ -89,7 +89,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: grunt_spritesheet_walking_3
+    - name: grunt_spritesheet_walking 1_3
       rect:
         serializedVersion: 2
         x: 192
@@ -99,7 +99,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: grunt_spritesheet_walking_4
+    - name: grunt_spritesheet_walking 1_4
       rect:
         serializedVersion: 2
         x: 256
@@ -109,7 +109,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: grunt_spritesheet_walking_5
+    - name: grunt_spritesheet_walking 1_5
       rect:
         serializedVersion: 2
         x: 0
@@ -119,7 +119,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: grunt_spritesheet_walking_6
+    - name: grunt_spritesheet_walking 1_6
       rect:
         serializedVersion: 2
         x: 64
@@ -129,7 +129,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: grunt_spritesheet_walking_7
+    - name: grunt_spritesheet_walking 1_7
       rect:
         serializedVersion: 2
         x: 128
@@ -139,7 +139,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: grunt_spritesheet_walking_8
+    - name: grunt_spritesheet_walking 1_8
       rect:
         serializedVersion: 2
         x: 192
