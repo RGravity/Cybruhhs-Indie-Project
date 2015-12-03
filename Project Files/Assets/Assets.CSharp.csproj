@@ -90,6 +90,8 @@
     <Compile Include="Assets\Scripts\Economy\EnemyStatScript.cs" />
     <Compile Include="Assets\Scripts\Enemies\GruntScript.cs" />
     <Compile Include="Assets\Scripts\EnumScript.cs" />
+    <Compile Include="Assets\Scripts\HUD\GoldTextScript.cs" />
+    <Compile Include="Assets\Scripts\HUD\LivesTextScript.cs" />
     <Compile Include="Assets\Scripts\HUD\NextWaveButtonScript.cs" />
     <Compile Include="Assets\Scripts\HUD\NextWaveTimerScript.cs" />
     <Compile Include="Assets\Scripts\HUD\WaveIndicatorScript.cs" />

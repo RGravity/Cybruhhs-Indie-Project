@@ -4,6 +4,7 @@ using System.Collections;
 public class CannonTowerScript : MonoBehaviour {
     private BuildingType _buildingType = BuildingType.Ground;
     private GameObject _bullet;
+    private GameObject _towerCannonAttack;
     [SerializeField]
     private int _tier = 1;
     private Vector3 _thisPosition;
@@ -57,6 +58,7 @@ public class CannonTowerScript : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        _towerCannonAttack = (GameObject)Resources.Load("Towers/TrollAttackLevel1");
         _thisPosition = this.gameObject.transform.position;
         _bullet = (GameObject)Resources.Load("CannonBullet");
         _check = GameObject.FindObjectOfType<CheckForMusicScript>();

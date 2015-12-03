@@ -10,6 +10,12 @@ public class BaseScript : MonoBehaviour {
 
     public int Gold { get { return _gold; } }
 
+    void Start()
+    {
+        FindObjectOfType<GoldTextScript>().UpdateGold(_gold);
+        FindObjectOfType<LivesTextScript>().UpdateLives(_health);
+    }
+
     void Update()
     {
         //Debug.Log("Current Gold amount is: " + _gold);
@@ -35,6 +41,7 @@ public class BaseScript : MonoBehaviour {
     public void LowerHealth(int pAmount)
     {
         _health = _health - pAmount;
+        FindObjectOfType<LivesTextScript>().UpdateLives(_health);
     }
 
     /// <summary>
@@ -43,6 +50,7 @@ public class BaseScript : MonoBehaviour {
     public void AddGold(int pAmount)
     {
         _gold = _gold + pAmount;
+        FindObjectOfType<GoldTextScript>().UpdateGold(_gold);
     }
 
     /// <summary>
@@ -51,6 +59,7 @@ public class BaseScript : MonoBehaviour {
     public void LowerGold(int pAmount)
     {
         _gold = _gold - pAmount;
+        FindObjectOfType<GoldTextScript>().UpdateGold(_gold);
     }
 
 

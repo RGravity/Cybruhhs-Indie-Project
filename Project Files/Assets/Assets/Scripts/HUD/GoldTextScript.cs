@@ -1,15 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class GoldTextScript : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    
+    public void UpdateGold(int pGold)
+    {
+        GetComponent<Text>().text = pGold.ToString();
+    }
 }
