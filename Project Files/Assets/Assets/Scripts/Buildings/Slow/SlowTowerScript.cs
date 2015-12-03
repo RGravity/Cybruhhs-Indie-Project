@@ -12,43 +12,43 @@ public class SlowTowerScript : MonoBehaviour {
     private float _timeLastShot;
 
     #region SlowTime
-    private float _slowTime = 2;
+    private float _slowTime = 0;
     [SerializeField]
-    private float _slowTimeTier1 = 2;
+    private float _slowTimeTier1 = 0;
     [SerializeField]
-    private float _slowTimeTier2 = 5;
+    private float _slowTimeTier2 = 0;
     [SerializeField]
-    private float _slowTimeTier3 = 8;
+    private float _slowTimeTier3 = 0;
     #endregion
 
     #region SlowAmount
-    private float _slowAmount = 0.5f;
+    private float _slowAmount = 0;
     [SerializeField]
-    private float _slowAmountTier1 = 0.5f;
+    private float _slowAmountTier1 = 0;
     [SerializeField]
-    private float _slowAmountTier2 = 5;
+    private float _slowAmountTier2 = 0;
     [SerializeField]
-    private float _slowAmountTier3 = 8;
+    private float _slowAmountTier3 = 0;
     #endregion
 
     #region Rate of fire
     private float _rateOfFire = 0;
     [SerializeField]
-    private float _rateOfFireTier1 = 2;
+    private float _rateOfFireTier1 = 0;
     [SerializeField]
-    private float _rateOfFireTier2 = 1.5f;
+    private float _rateOfFireTier2 = 0;
     [SerializeField]
-    private float _rateOfFireTier3 = 0.5f;
+    private float _rateOfFireTier3 = 0;
     #endregion
 
     #region Range of fire
-    private float _range = 5;
+    private float _range = 0;
     [SerializeField]
-    private float _rangeTier1 = 5;
+    private float _rangeTier1 = 0;
     [SerializeField]
-    private float _rangeTier2 = 5;
+    private float _rangeTier2 = 0;
     [SerializeField]
-    private float _rangeTier3 = 5;
+    private float _rangeTier3 = 0;
     #endregion
 
     private bool _isNextEnemy = false;
@@ -58,7 +58,7 @@ public class SlowTowerScript : MonoBehaviour {
     [SerializeField]
     private float _countdownTime;
     [SerializeField]
-    private float _speedProjectile = 6;
+    private float _speedProjectile = 0;
 
     private GameObject _enemyInRange;
     private AudioSource _shoot;
@@ -149,12 +149,12 @@ public class SlowTowerScript : MonoBehaviour {
             }
             else
             {
+                if (TowerSlowIdleLevel1 != null)
+                {
+                    _playIdleAnimation();
+                }
                 _isNextEnemy = true;
             }
-        }
-        else
-        {
-            //_playIdleAnimation();
         }
     }
 
@@ -167,7 +167,10 @@ public class SlowTowerScript : MonoBehaviour {
         {
             //_enemyInRange.GetComponent<EnemyStatScript>().LowerHealth(_damage);
             _allowShoot = false;
-            //_playAttackAnimation();
+            if (_towerSlowIdleLevel1 != null)
+            {
+                _playAttackAnimation();
+            }
             _countdownTime = CountTimerScript.AddSeconds(_rateOfFire);
             if ((_enemyInRange.transform.position - _thisPosition).magnitude > _range)
             {
@@ -224,21 +227,31 @@ public class SlowTowerScript : MonoBehaviour {
         leftBottom.transform.position = _tile3;
         rightBottom.transform.position = _tile4;
 
-        if (_tier == 1)
-        {
+        //if (_tier == 1)
+        //{
 
-            leftTop.GetComponent<Animator>().Play("LeftTopSpiderAttackAnimation");
-            rightTop.GetComponent<Animator>().Play("RightTopSpiderAttackAnimation");
-            leftBottom.GetComponent<Animator>().Play("LeftBottomSpiderAttackAnimation");
-            rightBottom.GetComponent<Animator>().Play("RightBottomSpiderAttackAnimation");
+        //    leftTop.GetComponent<Animator>().Play("LeftTopSpiderAttackAnimation");
+        //    rightTop.GetComponent<Animator>().Play("RightTopSpiderAttackAnimation");
+        //    leftBottom.GetComponent<Animator>().Play("LeftBottomSpiderAttackAnimation");
+        //    rightBottom.GetComponent<Animator>().Play("RightBottomSpiderAttackAnimation");
+        //}
+        //else
+        //{
+        if (_tier == 2)
+        {
+            leftTop.GetComponent<Animator>().Play("LeftTopSpiderAttacklLvl3Animation");
+            rightTop.GetComponent<Animator>().Play("RightTopSpiderAttacklLvl3Animation");
+            leftBottom.GetComponent<Animator>().Play("LeftBottomSpiderAttacklLvl3Animation");
+            rightBottom.GetComponent<Animator>().Play("RightBottomSpiderAttacklLvl3Animation");
         }
         else
         {
-            leftTop.GetComponent<Animator>().Play("LeftTopSpiderAttackLvl" + _tier + "Animation");
-            rightTop.GetComponent<Animator>().Play("RightTopSpiderAttackLvl" + _tier + "Animation");
-            leftBottom.GetComponent<Animator>().Play("LeftBottomSpiderAttackLvl" + _tier + "Animation");
-            rightBottom.GetComponent<Animator>().Play("RightBottomSpiderAttackLvl" + _tier + "Animation");
+            leftTop.GetComponent<Animator>().Play("LeftTopSpiderAttacklLvl" + _tier + "Animation");
+            rightTop.GetComponent<Animator>().Play("RightTopSpiderAttacklLvl" + _tier + "Animation");
+            leftBottom.GetComponent<Animator>().Play("LeftBottomSpiderAttacklLvl" + _tier + "Animation");
+            rightBottom.GetComponent<Animator>().Play("RightBottomSpiderAttacklLvl" + _tier + "Animation");
         }
+        //}
     }
     private void _playIdleAnimation()
     {
@@ -273,13 +286,22 @@ public class SlowTowerScript : MonoBehaviour {
         leftBottom.transform.position = _tile3;
         rightBottom.transform.position = _tile4;
 
-        if (_tier == 1)
-        {
+        //if (_tier == 1)
+        //{
 
-            leftTop.GetComponent<Animator>().Play("LeftTopSpiderIdleAnimation");
-            rightTop.GetComponent<Animator>().Play("RightTopSpiderIdleAnimation");
-            leftBottom.GetComponent<Animator>().Play("LeftBottomSpiderIdleAnimation");
-            rightBottom.GetComponent<Animator>().Play("RightBottomSpiderIdleAnimation");
+        //    leftTop.GetComponent<Animator>().Play("LeftTopSpiderIdleAnimation");
+        //    rightTop.GetComponent<Animator>().Play("RightTopSpiderIdleAnimation");
+        //    leftBottom.GetComponent<Animator>().Play("LeftBottomSpiderIdleAnimation");
+        //    rightBottom.GetComponent<Animator>().Play("RightBottomSpiderIdleAnimation");
+        //}
+        //else
+        //{
+        if (_tier == 2)
+        {
+            leftTop.GetComponent<Animator>().Play("LeftTopSpiderIdleLvl3Animation");
+            rightTop.GetComponent<Animator>().Play("RightTopSpiderIdleLvl3Animation");
+            leftBottom.GetComponent<Animator>().Play("LeftBottomSpiderIdleLvl3Animation");
+            rightBottom.GetComponent<Animator>().Play("RightBottomSpiderIdleLvl3Animation");
         }
         else
         {
@@ -288,6 +310,7 @@ public class SlowTowerScript : MonoBehaviour {
             leftBottom.GetComponent<Animator>().Play("LeftBottomSpiderIdleLvl" + _tier + "Animation");
             rightBottom.GetComponent<Animator>().Play("RightBottomSpiderIdleLvl" + _tier + "Animation");
         }
+        //}
     }
     /// <summary>
     /// Updates the Tier of the tower
