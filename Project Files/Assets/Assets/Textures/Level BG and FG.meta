@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Project Files/Assets/Assets/Textures/Level BG and FG.meta
 guid: ebca3d6225a0e3e4d883c6903b3bb19c
 folderAsset: yes
 timeCreated: 1449081222
+=======
+guid: 37503d3bab2012e44ae0340940c862cc
+folderAsset: yes
+timeCreated: 1449082821
+>>>>>>> de8e74a09ba01015550a0eb8b82b7650e427b24c:Project Files/Assets/Assets/Resources/Tiled/LevelBGs/1/Materials.meta
 licenseType: Free
 DefaultImporter:
   userData: 

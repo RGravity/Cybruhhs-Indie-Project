@@ -16,17 +16,25 @@ public class UnitScript : MonoBehaviour
     // Our pathfinding info.  Null if we have no destination ordered.
     private List<NodeScript> _currentPath = null;
 
+    //Tile the unit is on.
     public int TileX { get { return _tileX; } set { _tileX = value; } }
     public int TileY { get { return _tileY; } set { _tileY = value; } }
     public TileMapScript Map { get { return _map; } set { _map = value; } }
+    //Path the unit is walking.
     public List<NodeScript> CurrentPath { get { return _currentPath; } set { _currentPath = value; } }
+
+    //Speed of the unit
     public float Speed { get { return _speed; } set { _speed = value; } }
 
+    //If the unit is slowed down by the Spider
     private bool _isSlowed = false;
     public bool IsSlowed { get { return _isSlowed; } set { _isSlowed = value; } }
 
+    //Direction of the Animation
     private bool _isDirectionRight = false;
     private bool _isDirectionLeft = false;
+    private bool _isDirectionUp = false;
+    private bool _isDirectionDown = false;
 
     void Update()
     {
@@ -60,21 +68,25 @@ public class UnitScript : MonoBehaviour
             }
             // Smoothly animate towards the correct map tile.
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(_tileX, _tileY, -1), _speed * Time.deltaTime);
-            if (transform.position.x - _tileX < 0 && _isDirectionLeft == false)
+            
+                //Animation of left and right
+                if (transform.position.x - _tileX < 0 && _isDirectionLeft == false)
             {
+                this.GetComponent<Animator>().Play("Walking");
+
                 if (transform.localScale.x == 1)
                 {
                     transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
                 }
-                else if (transform.localScale.x == -1)
-                {
-                    transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
-                }
                 _isDirectionLeft = true;
                 _isDirectionRight = false;
+                _isDirectionDown = false;
+                _isDirectionUp = false;
             }
-            if (transform.position.x - _tileX > 0 && _isDirectionRight == false)
+            else if (transform.position.x - _tileX > 0 && _isDirectionRight == false)
             {
+                this.GetComponent<Animator>().Play("Walking");
+
                 if (transform.localScale.x == -1)
                 {
                     transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
@@ -85,6 +97,25 @@ public class UnitScript : MonoBehaviour
                 }
                 _isDirectionRight = true;
                 _isDirectionLeft = false;
+                _isDirectionDown = false;
+                _isDirectionUp = false;
+            }
+            //Animation of up and Down
+            else if (transform.position.y - _tileY > 0)
+            {
+                _isDirectionLeft = false;
+                _isDirectionRight = false;
+                _isDirectionDown = true;
+                _isDirectionUp = false;
+                this.GetComponent<Animator>().Play("WalkingDown");
+            }
+            else if (transform.position.y - _tileY < 0)
+            {
+                _isDirectionLeft = false;
+                _isDirectionRight = false;
+                _isDirectionDown = false;
+                _isDirectionUp = true;
+                this.GetComponent<Animator>().Play("WalkingUp");
             }
         }
     }
