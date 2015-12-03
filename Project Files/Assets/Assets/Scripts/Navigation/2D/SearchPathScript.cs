@@ -16,7 +16,7 @@ public class SearchPathScript
 
 
     /// <summary>
-    /// This method creates a path out of parents nodes.
+    /// <param>This method creates a path out of parents nodes.</param>
     /// </summary>
     /// <param name="pNode"> The parent node</param>
     /// <returns></returns>
@@ -31,10 +31,10 @@ public class SearchPathScript
         return path;
     }
     /// <summary>
-    /// Search for 2 different paths! More in the next days.
-    /// Give backs a list of a list with nodes! 1 list with nodes is a path.
-    /// It's a list of possible paths.
-    /// Work in progress.
+    /// <param>Search for 2 different paths! More in the next days.</param>
+    /// <param>Give backs a list of a list with nodes! 1 list with nodes is a path.</param>
+    /// <param>It's a list of possible paths.</param>
+    /// <param>Work in progress.</param>
     /// </summary>
     /// <param name="pStartNode">Start of the wave</param>
     /// <param name="pGoalNode">End of the wave</param>
@@ -54,6 +54,7 @@ public class SearchPathScript
         int listCount = 0;
         while (openList != null)
         {
+            //If there are more counts then available in the list.
             if (listCount >= openList.Count)
             {
                 return _possibleRoutes;
@@ -67,14 +68,6 @@ public class SearchPathScript
                     List<NodeScript> pathList = _constructPath(pGoalNode);
                     pathList.Reverse();
                     bool isEqual = _isEqual(pathList, nodeList);
-                    //if (isEqual == false)
-                    //{
-                    //    multipleRoutes++;
-                    //    _possibleRoutes.Add(pathList);
-                    //    _searchPaths(_graph[(int)WaveStartPosition.x, (int)WaveStartPosition.y], _graph[(int)_endPosition.x, (int)_endPosition.y], pathList, multipleRoutes);
-                    //    break;
-                    //}
-                    /*else*/
                     if (isEqual)
                     {
                         return _possibleRoutes;
@@ -104,7 +97,7 @@ public class SearchPathScript
                     SearchPaths(pStartNode, pGoalNode, path, multipleRoutes);
                 }
 
-                return _possibleRoutes;//_searchPaths(_graph[(int)WaveStartPosition.x, (int)WaveStartPosition.y], _graph[(int)_endPosition.x, (int)_endPosition.y], path, ++multipleRoutes);
+                return _possibleRoutes;
             }
             else
             {
@@ -234,11 +227,6 @@ public class SearchPathScript
                                     }
                                 }
                             }
-                            //if (node.Neighbours.Count != i + 1)
-                            //{
-                            //    break;
-                            //}
-                            //listCount++;
                         }
                         else if (!closedList.Contains(neighborNode) && !openList.Contains(neighborNode) && pPreviousPath.Count < 1)
                         {
@@ -331,7 +319,7 @@ public class SearchPathScript
         return null;
     }
     /// <summary>
-    /// Compares 2 list with each other. When all are the same return true else false
+    /// <param>Compares 2 list with each other. When all are the same return true else false</param>
     /// </summary>
     /// <param name="pList1">List 1</param>
     /// <param name="pList2">List 2</param>
