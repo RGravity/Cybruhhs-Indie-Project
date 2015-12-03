@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public class BuildingSpawnScript : MonoBehaviour
 {
@@ -42,10 +43,19 @@ public class BuildingSpawnScript : MonoBehaviour
     private AudioSource _tree1; //Tree voice one
     private AudioSource _tree2; //Tree voice one
 
+    //Towers Level 1
+    private GameObject _towerArrowIdle;
+    private GameObject _towerCannonIdle;
+    private GameObject _towerSpiderIdle;
+
     // Use this for initialization
     //Load all the Variables and Prepare the Radial Menu
     void Start()
     {
+        _towerArrowIdle = (GameObject)Resources.Load("Towers/TreeIdleLevel1");
+        _towerCannonIdle = (GameObject)Resources.Load("Towers/TrollIdleLevel1");
+        _towerSpiderIdle = (GameObject)Resources.Load("Towers/SpiderIdleLevel1");
+
         _check = GameObject.FindObjectOfType<CheckForMusicScript>();
         _tileMap = FindObjectOfType<TileMapScript>();
         _baseScript = GameObject.FindObjectOfType<BaseScript>();
@@ -250,9 +260,56 @@ public class BuildingSpawnScript : MonoBehaviour
                 if (_baseScript.Gold >= 250)
                 {
                     _selectedTile[1].AddComponent<CannonTowerScript>();
+                    _towerCannonIdle = Instantiate(_towerCannonIdle);
+                    _towerCannonIdle.transform.position = _selectedTile[1].gameObject.transform.position;
+                    Transform[] towerParts =_towerCannonIdle.GetComponentsInChildren<Transform>();
+                    towerParts = towerParts.Except(new Transform[] { towerParts[0].transform }).ToArray();
+                    GameObject leftTop = null;
+                    GameObject rightTop = null;
+                    GameObject leftBottom = null;
+                    GameObject rightBottom = null;
+                    foreach (Transform part in towerParts)
+                    {
+                        if (part.name.Contains("LeftTop"))
+                        {
+                            leftTop = part.gameObject;
+                        }
+                        if (part.name.Contains("RightTop"))
+                        {
+                            rightTop = part.gameObject;
+                        }
+                        if (part.name.Contains("LeftBottom"))
+                        {
+                            leftBottom = part.gameObject;
+                        }
+                        if (part.name.Contains("RightBottom"))
+                        {
+                            rightBottom = part.gameObject;
+                        }
+                    }
                     for (int i = 0; i < _selectedTile.Length; i++)
                     {
-                        _selectedTile[i].GetComponent<Renderer>().material.mainTexture = _cannonTurretTextures[i];
+                        if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower1)
+                        {
+                            leftTop.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
+                            leftTop.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
+                        }
+                        if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower2)
+                        {
+                            rightTop.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
+                            rightTop.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
+                        }
+                        if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower3)
+                        {
+                            leftBottom.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
+                            leftBottom.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
+                        }
+                        if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower4)
+                        {
+                            rightBottom.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
+                            rightBottom.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
+                        }
+                        //_selectedTile[i].GetComponent<Renderer>().material.mainTexture = _cannonTurretTextures[i];
                         _selectedTile[i].AddComponent<UpgradeTowerScript>();
                         _selectedTile[i].GetComponentInChildren<SpriteRenderer>().enabled = false;
                     }
@@ -283,9 +340,56 @@ public class BuildingSpawnScript : MonoBehaviour
                 if (_baseScript.Gold >= 200)
                 {
                     _selectedTile[1].AddComponent<SlowTowerScript>();
+                    _towerSpiderIdle = Instantiate(_towerSpiderIdle);
+                    _towerSpiderIdle.transform.position = _selectedTile[1].gameObject.transform.position;
+                    Transform[] towerParts = _towerSpiderIdle.GetComponentsInChildren<Transform>();
+                    towerParts = towerParts.Except(new Transform[] { towerParts[0].transform }).ToArray();
+                    GameObject leftTop = null;
+                    GameObject rightTop = null;
+                    GameObject leftBottom = null;
+                    GameObject rightBottom = null;
+                    foreach (Transform part in towerParts)
+                    {
+                        if (part.name.Contains("LeftTop"))
+                        {
+                            leftTop = part.gameObject;
+                        }
+                        if (part.name.Contains("RightTop"))
+                        {
+                            rightTop = part.gameObject;
+                        }
+                        if (part.name.Contains("LeftBottom"))
+                        {
+                            leftBottom = part.gameObject;
+                        }
+                        if (part.name.Contains("RightBottom"))
+                        {
+                            rightBottom = part.gameObject;
+                        }
+                    }
                     for (int i = 0; i < _selectedTile.Length; i++)
                     {
-                        _selectedTile[i].GetComponent<Renderer>().material.mainTexture = _arrowTurretTextures[i];
+                        if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower1)
+                        {
+                            leftTop.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
+                            leftTop.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
+                        }
+                        if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower2)
+                        {
+                            rightTop.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
+                            rightTop.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
+                        }
+                        if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower3)
+                        {
+                            leftBottom.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
+                            leftBottom.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
+                        }
+                        if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower4)
+                        {
+                            rightBottom.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
+                            rightBottom.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
+                        }
+                        //_selectedTile[i].GetComponent<Renderer>().material.mainTexture = _arrowTurretTextures[i];
                         _selectedTile[i].AddComponent<UpgradeTowerScript>();
                         _selectedTile[i].GetComponentInChildren<SpriteRenderer>().enabled = false;
                     }
@@ -314,9 +418,56 @@ public class BuildingSpawnScript : MonoBehaviour
                 if (_baseScript.Gold >= 150)
                 {
                     _selectedTile[1].AddComponent<ArrowTowerScript>();
+                    _towerArrowIdle = Instantiate(_towerArrowIdle);
+                    _towerArrowIdle.transform.position = _selectedTile[1].gameObject.transform.position;
+                    Transform[] towerParts = _towerArrowIdle.GetComponentsInChildren<Transform>();
+                    towerParts = towerParts.Except(new Transform[] { towerParts[0].transform }).ToArray();
+                    GameObject leftTop = null;
+                    GameObject rightTop = null;
+                    GameObject leftBottom = null;
+                    GameObject rightBottom = null;
+                    foreach (Transform part in towerParts)
+                    {
+                        if (part.name.Contains("LeftTop"))
+                        {
+                            leftTop = part.gameObject;
+                        }
+                        if (part.name.Contains("RightTop"))
+                        {
+                            rightTop = part.gameObject;
+                        }
+                        if (part.name.Contains("LeftBottom"))
+                        {
+                            leftBottom = part.gameObject;
+                        }
+                        if (part.name.Contains("RightBottom"))
+                        {
+                            rightBottom = part.gameObject;
+                        }
+                    }
                     for (int i = 0; i < _selectedTile.Length; i++)
                     {
-                        _selectedTile[i].GetComponent<Renderer>().material.mainTexture = _cannonTurretTextures[i];
+                        if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower1)
+                        {
+                            leftTop.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
+                            leftTop.transform.localScale = new Vector3(1, 1, 1);
+                        }
+                        if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower2)
+                        {
+                            rightTop.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
+                            rightTop.transform.localScale = new Vector3(1, 1, 1);
+                        }
+                        if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower3)
+                        {
+                            leftBottom.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
+                            leftBottom.transform.localScale = new Vector3(1, 1, 1);
+                        }
+                        if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower4)
+                        {
+                            rightBottom.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
+                            rightBottom.transform.localScale = new Vector3(1, 1, 1);
+                        }
+                        //_selectedTile[i].GetComponent<Renderer>().material.mainTexture = _cannonTurretTextures[i];
                         _selectedTile[i].AddComponent<UpgradeTowerScript>();
                         _selectedTile[i].GetComponentInChildren<SpriteRenderer>().enabled = false;
                     }
