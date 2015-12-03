@@ -4,7 +4,7 @@ using System.Collections;
 
 public class ScoreScreenScript : MonoBehaviour {
 
-    private bool _endLevel;
+    private bool _endLevel = false;
     private GameObject _score;
     private BaseScript _baseScript;
     private DontDestroyOnLoadMusicScript _map;
@@ -21,7 +21,7 @@ public class ScoreScreenScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        _score = GameObject.Find("Score");
+        _score = GameObject.Find("BackgroundScore");
         _baseScript = GameObject.FindObjectOfType<BaseScript>();
         _map = GameObject.FindObjectOfType<DontDestroyOnLoadMusicScript>();
         _0Stars = GameObject.Find("BigStarsEmpty").GetComponent<Image>();
@@ -36,6 +36,10 @@ public class ScoreScreenScript : MonoBehaviour {
         {
             _score.SetActive(true);
             _checkCriteria();
+        }
+        else
+        {
+            _score.SetActive(false);
         }
 	}
 

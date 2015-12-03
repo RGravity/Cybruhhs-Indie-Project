@@ -13,6 +13,7 @@ public class PauseScript : MonoBehaviour {
     private GameObject _radialMenu;
     private BaseScript _baseScript;
     private GameObject _hud;
+    private ScoreScreenScript _ScoreScreenScript;
 
     public bool PauseGame { get { return _pauseGame; } set { _pauseGame = value; } }
 
@@ -23,6 +24,7 @@ public class PauseScript : MonoBehaviour {
         _quitButton = GameObject.Find("QuitButton");
         _backGround = GameObject.Find("OverlayPause");
         _pauseButton = GameObject.Find("PauseButton");
+        _ScoreScreenScript = GameObject.Find("ScoreScreen").GetComponent<ScoreScreenScript>();
         _radialMenu = GameObject.FindObjectOfType<BuildingSpawnScript>().gameObject;
         _check = GameObject.FindObjectOfType<CheckForMusicScript>();
         _hud = GameObject.Find("HUD");
@@ -62,7 +64,7 @@ public class PauseScript : MonoBehaviour {
         }
         else
         {
-            if (!_baseScript.IsDead && !GameObject.FindObjectOfType<ScoreScreenScript>().EndLevel)
+            if (!_baseScript.IsDead && !_ScoreScreenScript.EndLevel)
             {
                 Time.timeScale = 1;
                 _backGround.SetActive(false);
