@@ -1,7 +1,7 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assets.CSharp", "Assets.CSharp.csproj", "{6C235361-B470-3276-688F-51A089C02B13}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{9AEDEAF1-F77B-8642-ABE5-28503B8C5DE8}") = "Assets", "Assembly-CSharp.csproj", "{17533FA3-357A-CEC6-ED1C-9FA92629C572}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,17 +9,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6C235361-B470-3276-688F-51A089C02B13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6C235361-B470-3276-688F-51A089C02B13}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6C235361-B470-3276-688F-51A089C02B13}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6C235361-B470-3276-688F-51A089C02B13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17533FA3-357A-CEC6-ED1C-9FA92629C572}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17533FA3-357A-CEC6-ED1C-9FA92629C572}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17533FA3-357A-CEC6-ED1C-9FA92629C572}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17533FA3-357A-CEC6-ED1C-9FA92629C572}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-<<<<<<< HEAD
-=======
-													GlobalSection(MonoDevelopProperties) = preSolution
+																GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
@@ -39,5 +37,4 @@ Global
 		$3.scope = text/plain
 	EndGlobalSection
 
->>>>>>> origin/master
 EndGlobal
