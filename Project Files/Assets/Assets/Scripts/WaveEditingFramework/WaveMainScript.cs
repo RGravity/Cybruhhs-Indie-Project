@@ -316,6 +316,12 @@ public class WaveMainScript : MonoBehaviour {
                 }
             }
             #endregion
+
+            if (part.TutorialSprites.Count > 0)
+            {
+                FindObjectOfType<TutorialMainScript>().ShowTutorial(part.TutorialSprites);
+            }
+
         }
     }
 
@@ -337,6 +343,8 @@ public class WaveMainScript : MonoBehaviour {
         partProgress.PaladinAmountSpawned = 0;
         partProgress.TimeBetweenEnemies = part.TimeBetweenEnemies;
         partProgress.SecToWaitForNextPart = part.SecToWaitForNextPart;
+        partProgress.TutorialSprites = part.TutorialSprites;
+
         //if no path is set take the first path
         if (part.Path == 0){
             partProgress.Path = 1;

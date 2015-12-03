@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class WavePartProgressScript {
 
@@ -22,6 +23,8 @@ public class WavePartProgressScript {
     private int _beginPositionNr;
     private int _endPositionNr;
 
+    private List<Sprite> _tutorialSprites;
+
     public float TimeStarted { get { return _timeStarted; } set { _timeStarted = value; } }
 
     public int GruntAmountSpawned { get { return _gruntAmountSpawned; } set { _gruntAmountSpawned = value; } }
@@ -40,5 +43,7 @@ public class WavePartProgressScript {
 
     public int BeginPositionNr { get { return _beginPositionNr; } set { _beginPositionNr = value; } }
     public int EndPositionNr { get { return _endPositionNr; } set { _endPositionNr = value; } }
+
+    public List<Sprite> TutorialSprites { get { return _tutorialSprites; } set { _tutorialSprites = value; } }
 
 }
