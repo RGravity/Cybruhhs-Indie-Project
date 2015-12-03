@@ -387,7 +387,7 @@ public class WaveMainScript : MonoBehaviour {
         heavyObject.name = "Heavy";
         heavyObject.transform.parent = _heavyParent.transform;
         heavyObject.AddComponent<UnitScript>();
-        heavyObject.GetComponent<UnitScript>().Speed = 0.3f;
+        heavyObject.GetComponent<UnitScript>().Speed = 0.6f;
         heavyObject.GetComponent<UnitScript>().TileX = (int)pStartPosition.x;
         heavyObject.GetComponent<UnitScript>().TileY = (int)pStartPosition.y;
         heavyObject.GetComponent<UnitScript>().Map = _map;
