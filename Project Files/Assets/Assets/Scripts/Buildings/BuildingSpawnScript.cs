@@ -337,7 +337,7 @@ public class BuildingSpawnScript : MonoBehaviour
                 break;
             //Slow
             case 2:
-                if (_baseScript.Gold >= 200)
+                if (_baseScript.Gold >= 150)
                 {
                     _selectedTile[1].AddComponent<SlowTowerScript>();
                     _towerSpiderIdle = Instantiate(_towerSpiderIdle);
@@ -415,7 +415,7 @@ public class BuildingSpawnScript : MonoBehaviour
                 }
                 break;
             case 3:
-                if (_baseScript.Gold >= 150)
+                if (_baseScript.Gold >= 200)
                 {
                     _selectedTile[1].AddComponent<ArrowTowerScript>();
                     _towerArrowIdle = Instantiate(_towerArrowIdle);
