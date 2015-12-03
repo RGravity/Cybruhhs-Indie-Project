@@ -54,6 +54,10 @@ public class SearchPathScript
         int listCount = 0;
         while (openList != null)
         {
+            if (listCount >= openList.Count)
+            {
+                return _possibleRoutes;
+            }
             NodeScript node = openList[listCount];
             if (node == pGoalNode)
             {
