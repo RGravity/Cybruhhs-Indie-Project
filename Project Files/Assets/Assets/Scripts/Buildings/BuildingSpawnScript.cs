@@ -292,21 +292,25 @@ public class BuildingSpawnScript : MonoBehaviour
                         {
                             leftTop.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
                             leftTop.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
+                            _selectedTile[1].GetComponent<CannonTowerScript>().Tile1 = _selectedTile[i].transform.position;
                         }
                         if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower2)
                         {
                             rightTop.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
                             rightTop.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
+                            _selectedTile[1].GetComponent<CannonTowerScript>().Tile2 = _selectedTile[i].transform.position;
                         }
                         if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower3)
                         {
                             leftBottom.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
                             leftBottom.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
+                            _selectedTile[1].GetComponent<CannonTowerScript>().Tile3 = _selectedTile[i].transform.position;
                         }
                         if (_selectedTile[i].GetComponent<BuildPlacementTilesScript>().TowerPlaceNr == TowerNoneNumbers.Tower4)
                         {
                             rightBottom.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
                             rightBottom.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
+                            _selectedTile[1].GetComponent<CannonTowerScript>().Tile4 = _selectedTile[i].transform.position;
                         }
                         //_selectedTile[i].GetComponent<Renderer>().material.mainTexture = _cannonTurretTextures[i];
                         _selectedTile[i].AddComponent<UpgradeTowerScript>();
@@ -392,7 +396,7 @@ public class BuildingSpawnScript : MonoBehaviour
                         _selectedTile[i].AddComponent<UpgradeTowerScript>();
                         _selectedTile[i].GetComponentInChildren<SpriteRenderer>().enabled = false;
                     }
-                    _baseScript.LowerGold(200);
+                    _baseScript.LowerGold(150);
                     int random = Random.Range(0, 2);
                     switch (random)
                     {
@@ -470,7 +474,7 @@ public class BuildingSpawnScript : MonoBehaviour
                         _selectedTile[i].AddComponent<UpgradeTowerScript>();
                         _selectedTile[i].GetComponentInChildren<SpriteRenderer>().enabled = false;
                     }
-                    _baseScript.LowerGold(150);
+                    _baseScript.LowerGold(200);
                     int random = Random.Range(0, 2);
                     switch (random)
                     {
