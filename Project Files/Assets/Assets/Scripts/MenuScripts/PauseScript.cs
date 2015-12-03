@@ -11,17 +11,21 @@ public class PauseScript : MonoBehaviour {
     private GameObject _backGround;
     private GameObject _pauseButton;
     private GameObject _radialMenu;
+    private BaseScript _baseScript;
+    private GameObject _hud;
 
     public bool PauseGame { get { return _pauseGame; } set { _pauseGame = value; } }
 
 	// Use this for initialization
 	void Start () {
+        _baseScript = GameObject.FindObjectOfType<BaseScript>();
         _resumeButton = GameObject.Find("ResumeButton");
         _quitButton = GameObject.Find("QuitButton");
         _backGround = GameObject.Find("OverlayPause");
         _pauseButton = GameObject.Find("PauseButton");
         _radialMenu = GameObject.FindObjectOfType<BuildingSpawnScript>().gameObject;
         _check = GameObject.FindObjectOfType<CheckForMusicScript>();
+        _hud = GameObject.Find("HUD");
         if (_check.Check == true)_map = GameObject.FindObjectOfType<DontDestroyOnLoadMusicScript>();
 	
 	}
@@ -48,18 +52,30 @@ public class PauseScript : MonoBehaviour {
         if (_pauseGame)
 	    {
             Time.timeScale = 0;
+            //Show the Pause Screen
             _resumeButton.SetActive(true);
             _quitButton.SetActive(true);
             _backGround.SetActive(true);
             _pauseButton.SetActive(false);
             _radialMenu.SetActive(false);
-	    }
+            _hud.SetActive(false);
+        }
         else
         {
-            Time.timeScale = 1;
+            if (!_baseScript.IsDead)
+            {
+                Time.timeScale = 1;
+                _backGround.SetActive(false);
+                _hud.SetActive(true);
+            }
+            else
+            {
+                _backGround.SetActive(true);
+                _hud.SetActive(false);                
+            }
+            //Hide the Pause Screen
             _resumeButton.SetActive(false);
             _quitButton.SetActive(false);
-            _backGround.SetActive(false);
             _pauseButton.SetActive(true);
             _radialMenu.SetActive(true);
         }
@@ -67,6 +83,9 @@ public class PauseScript : MonoBehaviour {
 
     public void QuitGame()
     {
+        _baseScript.IsDead = false;
+        _pauseGame = false;
+        Time.timeScale = 1;
         _map.Play2 = true;
     }
 }

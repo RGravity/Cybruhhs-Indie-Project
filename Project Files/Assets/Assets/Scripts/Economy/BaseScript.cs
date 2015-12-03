@@ -8,7 +8,10 @@ public class BaseScript : MonoBehaviour {
     [SerializeField]
     private int _gold;
 
+    private bool _isDead;
+
     public int Gold { get { return _gold; } }
+    public bool IsDead { get { return _isDead; } set { _isDead = value; } }
 
     void Start()
     {
@@ -32,6 +35,7 @@ public class BaseScript : MonoBehaviour {
         {
             //TEMP; HERE COMES GAME OVER
             Time.timeScale = 0;
+            _isDead = true;
         }
     }
 

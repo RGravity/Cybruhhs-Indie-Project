@@ -262,7 +262,7 @@ public class BuildingSpawnScript : MonoBehaviour
                 if (_baseScript.Gold >= 250)
                 {
                     //create on 1 tile the script that is needed.
-                    _selectedTile[1].AddComponent<CannonTowerScript>();
+                    CannonTowerScript tempTower = _selectedTile[1].AddComponent<CannonTowerScript>();
                     //Get the prefab of the Cannon and create the prefab.
                     //Get all the children but remove the parent so only the 4 tiles are in the parts and can be adjusted to the world coordinates.
                     _towerCannonIdle = Instantiate(_towerCannonIdle);
@@ -324,7 +324,8 @@ public class BuildingSpawnScript : MonoBehaviour
                             rightBottom.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
                             _selectedTile[1].GetComponent<CannonTowerScript>().Tile4 = _selectedTile[i].transform.position; // Set position in the script for next upgrades and changes
                         }
-                        _selectedTile[i].AddComponent<UpgradeTowerScript>();
+                        UpgradeTowerScript upgradeTower = _selectedTile[i].AddComponent<UpgradeTowerScript>();
+                        upgradeTower.CannonTower = tempTower;
                         _selectedTile[i].GetComponentInChildren<SpriteRenderer>().enabled = false;
                     }
                     _baseScript.LowerGold(250);
@@ -354,7 +355,7 @@ public class BuildingSpawnScript : MonoBehaviour
                 if (_baseScript.Gold >= 150)
                 {
                     //create on 1 tile the script that is needed.
-                    _selectedTile[1].AddComponent<SlowTowerScript>();
+                    SlowTowerScript tempTower = _selectedTile[1].AddComponent<SlowTowerScript>();
                     //Get the prefab of the Slow Tower and create the prefab.
                     //Get all the children but remove the parent so only the 4 tiles are in the parts and can be adjusted to the world coordinates.
                     _towerSpiderIdle = Instantiate(_towerSpiderIdle);
@@ -411,7 +412,8 @@ public class BuildingSpawnScript : MonoBehaviour
                             rightBottom.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
                             rightBottom.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
                         }
-                        _selectedTile[i].AddComponent<UpgradeTowerScript>();
+                        UpgradeTowerScript upgradeTower = _selectedTile[i].AddComponent<UpgradeTowerScript>();
+                        upgradeTower.SlowTower = tempTower;
                         _selectedTile[i].GetComponentInChildren<SpriteRenderer>().enabled = false;
                     }
                     _baseScript.LowerGold(150);
@@ -439,7 +441,7 @@ public class BuildingSpawnScript : MonoBehaviour
                 if (_baseScript.Gold >= 200)
                 {
                     //create on 1 tile the script that is needed.
-                    ArrowTowerScript tempArrow =_selectedTile[1].AddComponent<ArrowTowerScript>();
+                    ArrowTowerScript tempTower =_selectedTile[1].AddComponent<ArrowTowerScript>();
                     //Get the prefab of the Slow Tower and create the prefab.
                     //Get all the children but remove the parent so only the 4 tiles are in the parts and can be adjusted to the world coordinates.
                     _towerArrowIdle = Instantiate(_towerArrowIdle);
@@ -496,8 +498,8 @@ public class BuildingSpawnScript : MonoBehaviour
                             rightBottom.transform.position = new Vector3(_selectedTile[i].transform.position.x, _selectedTile[i].transform.position.y, -2);
                             rightBottom.transform.localScale = new Vector3(1, 1, 1);
                         }
-                        UpgradeTowerScript tempTower = _selectedTile[i].AddComponent<UpgradeTowerScript>();
-                        tempTower.ArrowTower = tempArrow;
+                        UpgradeTowerScript upgradeTower = _selectedTile[i].AddComponent<UpgradeTowerScript>();
+                        upgradeTower.ArrowTower = tempTower;
                         _selectedTile[i].GetComponentInChildren<SpriteRenderer>().enabled = false;
                     }
                     _baseScript.LowerGold(200);
