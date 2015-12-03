@@ -31,7 +31,6 @@ public class EnemyStatScript : MonoBehaviour {
         //_flying = GameObject.Find("GriffonBase").GetComponent<AudioSource>();
         //_paladin = GameObject.Find("PaladinBase").GetComponent<AudioSource>();
         //_heavy = GameObject.Find("HeavyBase").GetComponent<AudioSource>();
-        //this.GetComponent<MeshCollider>().isTrigger = true;
     }
 
 	// Update is called once per frame
