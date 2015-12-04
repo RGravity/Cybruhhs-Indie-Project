@@ -6,7 +6,7 @@ public class UpgradeTowerScript : MonoBehaviour {
 
   
     private ArrowTowerScript _arrowTower;
-    private ArrowTowerScript _tempTower;
+    private ArrowTowerScript _tempArrow;
     private CannonTowerScript _cannonTower;
     private CannonTowerScript _tempCannon;
     private SlowTowerScript _slowTower;
@@ -159,6 +159,9 @@ public class UpgradeTowerScript : MonoBehaviour {
         {
             _upgradePanel.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
             _disappear = false;
+            _tempArrow = null;
+            _tempCannon = null;
+            _tempSlow = null;
         }
     }
 
@@ -169,21 +172,31 @@ public class UpgradeTowerScript : MonoBehaviour {
 
     private void _upgradeTowers()
     {
+        
         if (_upgradeOne.Tree == true)
         {
-            _tempTower.UpdateTowerArrow();
+            if (_tempArrow != null)
+            {
+                _tempArrow.UpdateTowerArrow();
+            }
             _upgradeOne.Tree = false;
             _disappear = true;
         }
         else if (_upgradeOne.Troll == true)
         {
-            _tempCannon.UpdateTowerCannon();
+            if (_tempCannon != null)
+            {
+                _tempCannon.UpdateTowerCannon();
+            }
             _upgradeOne.Troll = false;
             _disappear = true;
         }
         else if (_upgradeOne.Spider == true)
         {
-            _tempSlow.UpdateTowerSlow();
+            if (_tempSlow != null)
+            {
+                _tempSlow.UpdateTowerSlow();
+            }
             _upgradeOne.Spider = false;
             _disappear = true;         
         }
@@ -198,20 +211,29 @@ public class UpgradeTowerScript : MonoBehaviour {
     {
         if (_upgradeTwo.Tree == true)
         {
-            _tempTower.UpdateTowerArrow();
+            if (_tempArrow != null)
+            {
+                _tempArrow.UpdateTowerArrow();
+            }
             _upgradeTwo.Tree = false;
             _disappear = true;
         }
 
         else if (_upgradeTwo.Troll == true)
         {
-            _tempCannon.UpdateTowerCannon();
+            if (_tempCannon != null)
+            {
+                _tempCannon.UpdateTowerCannon();
+            }
             _upgradeTwo.Troll = false;
             _disappear = true;
         }
         else if (_upgradeTwo.Spider == true)
         {
-            _tempSlow.UpdateTowerSlow();
+            if (_tempSlow != null)
+            {
+                _tempSlow.UpdateTowerSlow();
+            }
             _upgradeTwo.Spider = false;
             _disappear = true;
         }
@@ -225,22 +247,26 @@ public class UpgradeTowerScript : MonoBehaviour {
     {
         if (_arrowTower)
         {
-            _tempTower = _arrowTower;
+            _tempArrow = null;
+            _tempArrow = _arrowTower;
             if (_arrowTower.Tier == 1)
             {
                 _upgradeTreeAppear = true;
             }
             else if (_arrowTower.Tier == 2)
             {
+                _tempArrow = _arrowTower;
                 _upgradeTreeAppear2 = true;
             }
             else if (_arrowTower.Tier >= 3)
             {
+                _tempArrow = _arrowTower;
                 _upgradeTreeAppear3 = true;
             }
         }
         else if (_cannonTower)
         {
+            _tempCannon = null;
             _tempCannon = _cannonTower;
             if (_cannonTower.Tier == 1 )
             {
@@ -258,6 +284,7 @@ public class UpgradeTowerScript : MonoBehaviour {
         }
         else if (_slowTower)
         {
+            _tempSlow = null;
             _tempSlow = _slowTower;
             if (_slowTower.Tier == 1)
             {

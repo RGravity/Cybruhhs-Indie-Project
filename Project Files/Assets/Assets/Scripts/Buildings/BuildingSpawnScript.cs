@@ -65,12 +65,12 @@ public class BuildingSpawnScript : MonoBehaviour
         if (_check.Check == true)
         {
            
-            //_troll1 = GameObject.Find("Troll1").GetComponent<AudioSource>();
-            //_troll2 = GameObject.Find("Troll2").GetComponent<AudioSource>();
-            //_spider1 = GameObject.Find("Spider1").GetComponent<AudioSource>();
-            //_spider2 = GameObject.Find("Spider2").GetComponent<AudioSource>();
-            //_tree1 = GameObject.Find("Tree1").GetComponent<AudioSource>();
-            //_tree2 = GameObject.Find("Tree2").GetComponent<AudioSource>();
+            _troll1 = GameObject.Find("Troll1").GetComponent<AudioSource>();
+            _troll2 = GameObject.Find("Troll2").GetComponent<AudioSource>();
+            _spider1 = GameObject.Find("Spider1").GetComponent<AudioSource>();
+            _spider2 = GameObject.Find("Spider2").GetComponent<AudioSource>();
+            _tree1 = GameObject.Find("Tree1").GetComponent<AudioSource>();
+            _tree2 = GameObject.Find("Tree2").GetComponent<AudioSource>();
         }
     }
 
