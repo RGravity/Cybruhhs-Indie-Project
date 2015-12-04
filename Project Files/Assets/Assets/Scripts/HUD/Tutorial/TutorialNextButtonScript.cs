@@ -11,6 +11,7 @@ public class TutorialNextButtonScript : MonoBehaviour {
     {
         if (_nextButtonClicked)
         {
+            _nextButtonClicked = false;
             FindObjectOfType<TutorialMainScript>().NextImage();
         }
     }

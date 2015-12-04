@@ -47,6 +47,7 @@ public class WaveMainScript : MonoBehaviour {
     private bool _buildWaveStarted = false;
     private bool _buildWaveEnded = true;
     private bool _spawningDone = true;
+    private bool _tutorialShown = false;
 
 
     public int DebugLevel { get { return _debugLevel; } }
@@ -117,6 +118,8 @@ public class WaveMainScript : MonoBehaviour {
                 _startNextWavePart = true;
                 _currentWavePart = 0;
                 _currentWave++;
+                _tutorialShown = false;
+                _waveProgressList.Clear();
                 if (_debugLevel > 0 || _debugWave > 0)
                 {
                     _debugWave++;
@@ -322,9 +325,10 @@ public class WaveMainScript : MonoBehaviour {
             }
             #endregion
 
-            if (part.TutorialSprites.Count > 0)
+            if (part.TutorialSprites.Count > 0 && !_tutorialShown)
             {
                 FindObjectOfType<TutorialMainScript>().ShowTutorial(part.TutorialSprites);
+                _tutorialShown = true;
             }
 
         }

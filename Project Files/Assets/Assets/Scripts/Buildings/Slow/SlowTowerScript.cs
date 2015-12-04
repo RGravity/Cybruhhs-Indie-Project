@@ -93,6 +93,7 @@ public class SlowTowerScript : MonoBehaviour {
         _thisPosition = this.gameObject.transform.position;
         _bullet = (GameObject)Resources.Load("SlowBullet");
         _check = GameObject.FindObjectOfType<CheckForMusicScript>();
+        _thisPosition = this.gameObject.transform.position;
         if (_check.Check == true)
         {
             _shoot = GameObject.Find("SlowShoot").GetComponent<AudioSource>();
@@ -149,10 +150,7 @@ public class SlowTowerScript : MonoBehaviour {
             }
             else
             {
-                if (TowerSlowIdleLevel1 != null)
-                {
-                    _playIdleAnimation();
-                }
+                _playIdleAnimation();
                 _isNextEnemy = true;
             }
         }
@@ -167,10 +165,7 @@ public class SlowTowerScript : MonoBehaviour {
         {
             //_enemyInRange.GetComponent<EnemyStatScript>().LowerHealth(_damage);
             _allowShoot = false;
-            if (_towerSlowIdleLevel1 != null)
-            {
-                _playAttackAnimation();
-            }
+            _playAttackAnimation();
             _countdownTime = CountTimerScript.AddSeconds(_rateOfFire);
             if ((_enemyInRange.transform.position - _thisPosition).magnitude > _range)
             {
@@ -181,10 +176,6 @@ public class SlowTowerScript : MonoBehaviour {
             bulletObject.transform.position = new Vector3(this._thisPosition.x, this._thisPosition.y, -1);
             bulletObject.GetComponent<SlowBulletScript>().ShootEnemy(_enemyInRange, _slowTime, _slowAmount, _speedProjectile);
             if (_shoot != null) _shoot.Play();
-              
-
-
-            //Debug.Log("Enemy Shot");
         }
         else if (Time.time >= _countdownTime)
         {
@@ -226,17 +217,7 @@ public class SlowTowerScript : MonoBehaviour {
         rightTop.transform.position = _tile2;
         leftBottom.transform.position = _tile3;
         rightBottom.transform.position = _tile4;
-
-        //if (_tier == 1)
-        //{
-
-        //    leftTop.GetComponent<Animator>().Play("LeftTopSpiderAttackAnimation");
-        //    rightTop.GetComponent<Animator>().Play("RightTopSpiderAttackAnimation");
-        //    leftBottom.GetComponent<Animator>().Play("LeftBottomSpiderAttackAnimation");
-        //    rightBottom.GetComponent<Animator>().Play("RightBottomSpiderAttackAnimation");
-        //}
-        //else
-        //{
+        
         if (_tier == 2)
         {
             leftTop.GetComponent<Animator>().Play("LeftTopSpiderAttacklLvl3Animation");
