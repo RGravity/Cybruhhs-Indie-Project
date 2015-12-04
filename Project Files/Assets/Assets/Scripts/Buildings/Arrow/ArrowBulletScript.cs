@@ -22,10 +22,6 @@ public class ArrowBulletScript : MonoBehaviour {
         if (_check.Check == true)
         {
             _arrowHit = GameObject.Find("ArrowHit").GetComponent<AudioSource>();
-            _heavy = GameObject.Find("HeavyArrow").GetComponent<AudioSource>();
-            _flying = GameObject.Find("GriffonArrow").GetComponent<AudioSource>();
-            _paladin = GameObject.Find("PaladinArrow").GetComponent<AudioSource>();
-            _grunt = GameObject.Find("GruntArrow").GetComponent<AudioSource>();
         }
     }
 	
@@ -46,22 +42,6 @@ public class ArrowBulletScript : MonoBehaviour {
                 stats.LowerHealth(_damage);
                 if (_arrowHit != null)
                 {
-                    if (_enemy.name == "Paladin")
-                    {
-                        _paladin.Play();
-                    }
-                    if (_enemy.name == "Grunt")
-                    {
-                        _grunt.Play();
-                    }
-                    if (_enemy.name == "Flying")
-                    {
-                        _flying.Play();
-                    }
-                    if (_enemy.name == "Heavy")
-                    {
-                        _heavy.Play();
-                    }
                     _arrowHit.Play();
 
                 }

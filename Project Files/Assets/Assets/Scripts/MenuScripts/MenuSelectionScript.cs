@@ -216,47 +216,47 @@ public class MenuSelectionScript : MonoBehaviour {
     {
         if (_level2Unlocked == true)
         {
-            _level2.GetComponent<Image>().sprite = Resources.Load<Sprite>("level select unlocked");
+            _level2.GetComponent<Image>().sprite = Resources.Load<Sprite>("UnlockedLevel");
             _saveAndLoad();
         }
         if (_level3Unlocked == true)
         {
-            _level3.GetComponent<Image>().sprite = Resources.Load<Sprite>("level select unlocked");
+            _level3.GetComponent<Image>().sprite = Resources.Load<Sprite>("UnlockedLevel");
             _saveAndLoad();
         }
         if (_level4Unlocked == true)
         {
-            _level4.GetComponent<Image>().sprite = Resources.Load<Sprite>("level select unlocked");
+            _level4.GetComponent<Image>().sprite = Resources.Load<Sprite>("UnlockedLevel");
             _saveAndLoad();
         }
         if (_level5Unlocked == true)
         {
-            _level5.GetComponent<Image>().sprite = Resources.Load<Sprite>("level select unlocked");
+            _level5.GetComponent<Image>().sprite = Resources.Load<Sprite>("UnlockedLevel");
             _saveAndLoad();
         }
         if (_level6Unlocked == true)
         {
-            _level6.GetComponent<Image>().sprite = Resources.Load<Sprite>("level select unlocked");
+            _level6.GetComponent<Image>().sprite = Resources.Load<Sprite>("UnlockedLevel");
             _saveAndLoad();
         }
         if (_level7Unlocked == true)
         {
-            _level7.GetComponent<Image>().sprite = Resources.Load<Sprite>("level select unlocked");
+            _level7.GetComponent<Image>().sprite = Resources.Load<Sprite>("UnlockedLevel");
             _saveAndLoad();
         }
         if (_level8Unlocked == true)
         {
-            _level8.GetComponent<Image>().sprite = Resources.Load<Sprite>("level select unlocked");
+            _level8.GetComponent<Image>().sprite = Resources.Load<Sprite>("UnlockedLevel");
             _saveAndLoad();
         }
         if (_level9Unlocked == true)
         {
-            _level9.GetComponent<Image>().sprite = Resources.Load<Sprite>("level select unlocked");
+            _level9.GetComponent<Image>().sprite = Resources.Load<Sprite>("UnlockedLevel");
             _saveAndLoad();
         }
         if (_level10Unlocked == true)
         {
-            _level10.GetComponent<Image>().sprite = Resources.Load<Sprite>("level select unlocked");
+            _level10.GetComponent<Image>().sprite = Resources.Load<Sprite>("UnlockedLevel");
             _saveAndLoad();
         }
 

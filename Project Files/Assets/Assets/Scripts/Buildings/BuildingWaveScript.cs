@@ -9,6 +9,7 @@ public class BuildingWaveScript : MonoBehaviour {
     private bool _buildingWaveActive = false;
     private WaveMainScript _waveScript;
     private NextWaveTimerScript _waveTimer;
+    private DontDestroyOnLoadMusicScript _music;
     private bool _startNextWave = false;
 
     public bool BuildingWaveActive { get { return _buildingWaveActive; } }
@@ -19,6 +20,7 @@ public class BuildingWaveScript : MonoBehaviour {
         _waveScript = FindObjectOfType<WaveMainScript>();
         _waveTimer = FindObjectOfType<NextWaveTimerScript>();
         _milliSecondsRemaining = _SecondsToBuild;
+        _music = FindObjectOfType<DontDestroyOnLoadMusicScript>();
     }
 	
 	// Update is called once per frame
@@ -27,6 +29,7 @@ public class BuildingWaveScript : MonoBehaviour {
         {
             if (_startNextWave)
             {
+                _music.Play3 = true;
                 _milliSecondsRemaining = 0;
                 _startNextWave = false;
             }
@@ -54,7 +57,7 @@ public class BuildingWaveScript : MonoBehaviour {
     {
         _buildingWaveActive = true;
         _milliSecondsRemaining = _SecondsToBuild;
-
+        _music.Play = true;
         _waveScript.BuildWaveStarted = true;
         _waveScript.BuildWaveEnded = false;
     }

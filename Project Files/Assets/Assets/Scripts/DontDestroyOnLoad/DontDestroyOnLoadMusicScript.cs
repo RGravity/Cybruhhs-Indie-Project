@@ -9,10 +9,12 @@ public class DontDestroyOnLoadMusicScript : MonoBehaviour
     private int _level = 0; ///Default level for the levelscript
     private bool _play = false; //bool to play the buildingmusic
     private bool _play2 = false; //bool to play the ingamemusic
+    private bool _play3 = false; //bool to play the skipwavemusic
     public int Level { get { return _level; } set { _level = value; }}
 
     public bool Play { get { return _play; } set { _play = value; } }
     public bool Play2 { get { return _play2; } set { _play2 = value; } }
+    public bool Play3 { get { return _play3; } set { _play3 = value; } }
 
     void Awake()
     {
@@ -39,6 +41,7 @@ public class DontDestroyOnLoadMusicScript : MonoBehaviour
     {
         _playNextMusic();
         _backToMenu();
+        _playMusicAtSkip();
     }
 
     /// <summary>
@@ -59,6 +62,17 @@ public class DontDestroyOnLoadMusicScript : MonoBehaviour
             _play = false;
         }
 
+    }
+
+    private void _playMusicAtSkip()
+    {
+        if (_play3 == true)
+        {
+            StopCoroutine("PlayNextInGameMusic");
+            _music[1].Stop();
+            _music[2].Play();
+            _play3 = false;
+        }
     }
     /// <summary>
     /// <para>If Play2 is set to true and stop all the music and stop the Coroutine PlayNextInGameMusic</para>
