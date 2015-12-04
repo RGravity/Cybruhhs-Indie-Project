@@ -132,23 +132,16 @@ void Update()
         UnitScript[] enemies = GameObject.FindObjectsOfType<UnitScript>();
         if (enemies.Length > 0)
         {
-            if (_isNextEnemy)
+            if (enemies[enemies.Length - 1].gameObject.GetComponent<EnemyStatScript>().EnemyType == EnemyType.Ground)
             {
-                _indexEnemy++;
-                if (_indexEnemy >= enemies.Length)
+                if ((enemies[enemies.Length - 1].transform.position - _thisPosition).magnitude < _range)
                 {
-                    _indexEnemy = 0;
+                    _enemyInRange = enemies[enemies.Length - 1].gameObject;
                 }
-                _isNextEnemy = false;
-            }
-            if ((enemies[_indexEnemy].transform.position - _thisPosition).magnitude < _range)
-            {
-                _enemyInRange = enemies[_indexEnemy].gameObject;
-            }
-            else
-            {
-                _playIdleAnimation();
-                _isNextEnemy = true;
+                else
+                {
+                    _playIdleAnimation();
+                }
             }
         }
 
