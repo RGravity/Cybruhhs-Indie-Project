@@ -70,6 +70,7 @@ public class TileMapScript : MonoBehaviour
         //temporary: for loading level 1 when the game starts(REMOVE WHEN LEVEL SELECTION IS IMPLEMENTED)
         if (_map != null)
         {
+            _level = _map.Level;
             StartLevel(_map.Level);
         }
         else
