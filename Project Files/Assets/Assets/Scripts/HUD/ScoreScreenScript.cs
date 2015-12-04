@@ -78,6 +78,9 @@ public class ScoreScreenScript : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// <para>Go Back to Menu on Score Screen</para>
+    /// </summary>
     public void QuitGame()
     {
         _baseScript.IsDead = false;
@@ -86,12 +89,18 @@ public class ScoreScreenScript : MonoBehaviour {
         _map.Play2 = true;
     }
 
+    /// <summary>
+    /// <para>Retry Current Level</para>
+    /// </summary>
     public void RetryLevel()
     {
         Application.LoadLevel(1);
         _map.Play = true;
     }
 
+    /// <summary>
+    /// Go to Next Level
+    /// </summary>
     public void NextLevel()
     {
         _map.Level = _map.Level + 1;

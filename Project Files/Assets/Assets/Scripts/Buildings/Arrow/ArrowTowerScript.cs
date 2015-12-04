@@ -138,7 +138,6 @@ void Update()
                 {
                     _playIdleAnimation();
                 }
-                _checkForEnemies();
             }
         }
 

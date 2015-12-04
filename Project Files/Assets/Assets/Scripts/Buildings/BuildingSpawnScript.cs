@@ -65,12 +65,12 @@ public class BuildingSpawnScript : MonoBehaviour
         if (_check.Check == true)
         {
            
-            //_troll1 = GameObject.Find("Troll1").GetComponent<AudioSource>();
-            //_troll2 = GameObject.Find("Troll2").GetComponent<AudioSource>();
-            //_spider1 = GameObject.Find("Spider1").GetComponent<AudioSource>();
-            //_spider2 = GameObject.Find("Spider2").GetComponent<AudioSource>();
-            //_tree1 = GameObject.Find("Tree1").GetComponent<AudioSource>();
-            //_tree2 = GameObject.Find("Tree2").GetComponent<AudioSource>();
+            _troll1 = GameObject.Find("Troll1").GetComponent<AudioSource>();
+            _troll2 = GameObject.Find("Troll2").GetComponent<AudioSource>();
+            _spider1 = GameObject.Find("Spider1").GetComponent<AudioSource>();
+            _spider2 = GameObject.Find("Spider2").GetComponent<AudioSource>();
+            _tree1 = GameObject.Find("Tree1").GetComponent<AudioSource>();
+            _tree2 = GameObject.Find("Tree2").GetComponent<AudioSource>();
         }
     }
 
@@ -263,11 +263,12 @@ public class BuildingSpawnScript : MonoBehaviour
                 {
                     //create on 1 tile the script that is needed.
                     CannonTowerScript tempTower = _selectedTile[1].AddComponent<CannonTowerScript>();
+                    _selectedTile[1].GetComponent<CannonTowerScript>().TowerCannonIdleLevel1 = _towerCannonIdle;
+                    _selectedTile[1].GetComponent<CannonTowerScript>().testId = 4;
                     //Get the prefab of the Cannon and create the prefab.
                     //Get all the children but remove the parent so only the 4 tiles are in the parts and can be adjusted to the world coordinates.
                     _towerCannonIdle = Instantiate(_towerCannonIdle);
                     _towerCannonIdle.transform.position = new Vector3(_selectedTile[1].gameObject.transform.position.x, _selectedTile[1].gameObject.transform.position.y, -0.5f);
-                    _selectedTile[1].GetComponent<CannonTowerScript>().TowerCannonIdleLevel1 = _towerCannonIdle;
                     Transform[] towerParts =_towerCannonIdle.GetComponentsInChildren<Transform>();
                     towerParts = towerParts.Except(new Transform[] { towerParts[0].transform }).ToArray();
                     //Save the 4 positions
