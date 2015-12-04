@@ -5,39 +5,46 @@ using UnityEngine.UI;
 public class UpgradeTwoButtonScript : MonoBehaviour
 {
 
-    private bool _spider = false;
-    private bool _tree = false;
-    private bool _troll = false;
-
-    public bool Spider { get { return _spider; } set { _spider = value; } }
-    public bool Tree { get { return _tree; } set { _tree = value; } }
-    public bool Troll { get { return _troll; } set { _troll = value; } }
-
+    private UpgradeTowerScript _upgrade;
     // Use this for initialization
     void Start()
     {
-
+        _upgrade = FindObjectOfType<UpgradeTowerScript>();
     }
 
     // Update is called once per frame
     void Update()
     {
 
+
     }
 
 
     public void OnClickSpider()
     {
-       if (gameObject.GetComponent <Image>().sprite == Resources.Load<Sprite>("SpiderUpgrade2"))_spider = true;
+        if (gameObject.GetComponent<Image>().sprite == Resources.Load<Sprite>("SpiderUpgrade2"))
+        {
+            _upgrade.SlowTower.UpdateTowerSlow();
+            _upgrade.Disappear = true;
+        }
     }
 
     public void OnClickTree()
     {
-        if (gameObject.GetComponent<Image>().sprite == Resources.Load<Sprite>("TreeUpgrade2"))_tree = true;
+        if (gameObject.GetComponent<Image>().sprite == Resources.Load<Sprite>("TreeUpgrade2"))
+        {
+
+            _upgrade.ArrowTower.UpdateTowerArrow();
+            _upgrade.Disappear = true;
+        }
     }
 
     public void OnClickTroll()
     {
-        if (gameObject.GetComponent<Image>().sprite == Resources.Load<Sprite>("TrollUpgrade2"))_troll = true;
+        if (gameObject.GetComponent<Image>().sprite == Resources.Load<Sprite>("TrollUpgrade2"))
+        {
+            _upgrade.CannonTower.UpdateTowerCannon();
+            _upgrade.Disappear = true;
+        }
     }
 }

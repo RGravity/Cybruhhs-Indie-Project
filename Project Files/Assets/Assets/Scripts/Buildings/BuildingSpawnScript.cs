@@ -47,6 +47,10 @@ public class BuildingSpawnScript : MonoBehaviour
     private GameObject _towerArrowIdle;
     private GameObject _towerCannonIdle;
     private GameObject _towerSpiderIdle;
+    //Towers level 1 copy
+    private GameObject _towerArrowIdleC;
+    private GameObject _towerCannonIdleC;
+    private GameObject _towerSpiderIdleC;
 
     // Use this for initialization
     //Load all the Variables and Prepare the Radial Menu
@@ -264,11 +268,11 @@ public class BuildingSpawnScript : MonoBehaviour
                     //create on 1 tile the script that is needed.
                     //Get the prefab of the Cannon and create the prefab.
                     //Get all the children but remove the parent so only the 4 tiles are in the parts and can be adjusted to the world coordinates.
-                    _towerCannonIdle = Instantiate(_towerCannonIdle);
-                    CannonTowerScript tempTower = _towerCannonIdle.GetComponent<CannonTowerScript>();
-                    _towerCannonIdle.transform.position = new Vector3(_selectedTile[1].gameObject.transform.position.x, _selectedTile[1].gameObject.transform.position.y, -0.5f);
-                    tempTower.GetComponent<CannonTowerScript>().TowerCannonIdleLevel1 = _towerCannonIdle;
-                    Transform[] towerParts =_towerCannonIdle.GetComponentsInChildren<Transform>();
+                    _towerCannonIdleC = Instantiate(_towerCannonIdle);
+                    CannonTowerScript tempTower = _towerCannonIdleC.GetComponent<CannonTowerScript>();
+                    _towerCannonIdleC.transform.position = new Vector3(_selectedTile[1].gameObject.transform.position.x, _selectedTile[1].gameObject.transform.position.y, -0.5f);
+                    tempTower.GetComponent<CannonTowerScript>().TowerCannonIdleLevel1 = _towerCannonIdleC;
+                    Transform[] towerParts =_towerCannonIdleC.GetComponentsInChildren<Transform>();
                     towerParts = towerParts.Except(new Transform[] { towerParts[0].transform }).ToArray();
                     //Save the 4 positions
                     GameObject leftTop = null;
@@ -358,11 +362,11 @@ public class BuildingSpawnScript : MonoBehaviour
                     //SlowTowerScript tempTower = _selectedTile[1].AddComponent<SlowTowerScript>();
                     //Get the prefab of the Slow Tower and create the prefab.
                     //Get all the children but remove the parent so only the 4 tiles are in the parts and can be adjusted to the world coordinates.
-                    _towerSpiderIdle = Instantiate(_towerSpiderIdle);
-                    SlowTowerScript tempTower = _towerSpiderIdle.GetComponent<SlowTowerScript>();
-                    _towerSpiderIdle.transform.position = new Vector3(_selectedTile[1].gameObject.transform.position.x, _selectedTile[1].gameObject.transform.position.y, -0.5f);
-                    tempTower.GetComponent<SlowTowerScript>().TowerSlowIdleLevel1 = _towerSpiderIdle;
-                    Transform[] towerParts = _towerSpiderIdle.GetComponentsInChildren<Transform>();
+                    _towerSpiderIdleC = Instantiate(_towerSpiderIdle);
+                    SlowTowerScript tempTower = _towerSpiderIdleC.GetComponent<SlowTowerScript>();
+                    _towerSpiderIdleC.transform.position = new Vector3(_selectedTile[1].gameObject.transform.position.x, _selectedTile[1].gameObject.transform.position.y, -0.5f);
+                    tempTower.GetComponent<SlowTowerScript>().TowerSlowIdleLevel1 = _towerSpiderIdleC;
+                    Transform[] towerParts = _towerSpiderIdleC.GetComponentsInChildren<Transform>();
                     towerParts = towerParts.Except(new Transform[] { towerParts[0].transform }).ToArray();
                     //Save the 4 positions
                     GameObject leftTop = null;
@@ -450,11 +454,11 @@ public class BuildingSpawnScript : MonoBehaviour
                     //ArrowTowerScript tempTower =_selectedTile[1].AddComponent<ArrowTowerScript>();
                     //Get the prefab of the Slow Tower and create the prefab.
                     //Get all the children but remove the parent so only the 4 tiles are in the parts and can be adjusted to the world coordinates.
-                    _towerArrowIdle = Instantiate(_towerArrowIdle);
-                    ArrowTowerScript tempTower = _towerArrowIdle.GetComponent<ArrowTowerScript>();
-                    _towerArrowIdle.transform.position = new Vector3(_selectedTile[1].gameObject.transform.position.x, _selectedTile[1].gameObject.transform.position.y, -0.5f);
-                    tempTower.GetComponent<ArrowTowerScript>().TowerArrowIdleLevel1 = _towerArrowIdle;
-                    Transform[] towerParts = _towerArrowIdle.GetComponentsInChildren<Transform>();
+                    _towerArrowIdleC = Instantiate(_towerArrowIdle);
+                    ArrowTowerScript tempTower = _towerArrowIdleC.GetComponent<ArrowTowerScript>();
+                    _towerArrowIdleC.transform.position = new Vector3(tempTower.gameObject.transform.position.x, tempTower.gameObject.transform.position.y, -0.5f);
+                    tempTower.GetComponent<ArrowTowerScript>().TowerArrowIdleLevel1 = _towerArrowIdleC;
+                    Transform[] towerParts = _towerArrowIdleC.GetComponentsInChildren<Transform>();
                     towerParts = towerParts.Except(new Transform[] { towerParts[0].transform }).ToArray();
                     //Save the 4 positions
                     GameObject leftTop = null;

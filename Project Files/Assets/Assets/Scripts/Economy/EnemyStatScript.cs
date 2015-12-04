@@ -46,18 +46,18 @@ public class EnemyStatScript : MonoBehaviour {
         shadowObject.transform.localPosition = new Vector3(shadowObject.transform.localPosition.x+0.09f, shadowObject.transform.localPosition.y - 0.5f, shadowObject.transform.localPosition.z);
         shadowObject.transform.parent = this.transform;
         _baseStats = GameObject.FindObjectOfType<BaseScript>();
-        //_gruntBase = GameObject.Find("GruntBase").GetComponent<AudioSource>();
-        //_flyingBase = GameObject.Find("GriffonBase").GetComponent<AudioSource>();
-        //_paladinBase = GameObject.Find("PaladinBase").GetComponent<AudioSource>();
-        //_heavyBase = GameObject.Find("HeavyBase").GetComponent<AudioSource>();
-        //_gruntDeathArrow = GameObject.Find("GruntArrow").GetComponent<AudioSource>();
-        //_flyingDeathArrow = GameObject.Find("GriffonArrow").GetComponent<AudioSource>();
-        //_paladinDeathArrow = GameObject.Find("PaladinArrow").GetComponent<AudioSource>();
-        //_heavyDeathArrow = GameObject.Find("HeavyArrow").GetComponent<AudioSource>();
-        //_gruntDeathCannon = GameObject.Find("GruntCannon").GetComponent<AudioSource>();
-        //_flyingDeathCannon = GameObject.Find("GriffonCannon").GetComponent<AudioSource>();
-        //_paladinDeathCannon = GameObject.Find("PaladinCannon").GetComponent<AudioSource>();
-        //_heavyDeathCannon = GameObject.Find("HeavyCannon").GetComponent<AudioSource>();
+        _gruntBase = GameObject.Find("GruntBase").GetComponent<AudioSource>();
+        _flyingBase = GameObject.Find("GriffonBase").GetComponent<AudioSource>();
+        _paladinBase = GameObject.Find("PaladinBase").GetComponent<AudioSource>();
+        _heavyBase = GameObject.Find("HeavyBase").GetComponent<AudioSource>();
+        _gruntDeathArrow = GameObject.Find("GruntArrow").GetComponent<AudioSource>();
+        _flyingDeathArrow = GameObject.Find("GriffonArrow").GetComponent<AudioSource>();
+        _paladinDeathArrow = GameObject.Find("PaladinArrow").GetComponent<AudioSource>();
+        _heavyDeathArrow = GameObject.Find("HeavyArrow").GetComponent<AudioSource>();
+        _gruntDeathCannon = GameObject.Find("GruntCannon").GetComponent<AudioSource>();
+        _flyingDeathCannon = GameObject.Find("GriffonCannon").GetComponent<AudioSource>();
+        _paladinDeathCannon = GameObject.Find("PaladinCannon").GetComponent<AudioSource>();
+        _heavyDeathCannon = GameObject.Find("HeavyCannon").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -79,22 +79,22 @@ public class EnemyStatScript : MonoBehaviour {
             _baseStats.AddGold(_goldCarrying);
             //RemoveGameObject, And Fix Pathfinding.
             this.gameObject.GetComponent<UnitScript>().Map = null;
-            //if (this.name == "Grunt")
-            //{
-            //    _gruntDeathArrow.Play();
-            //}
-            //if (this.name == "Flying")
-            //{
-            //    _flyingDeathArrow.Play();
-            //}
-            //if (this.name == "Paladin")
-            //{
-            //    _paladinDeathArrow.Play();
-            //}
-            //if (this.name == "Heavy")
-            //{
-            //    _heavyDeathArrow.Play();
-            //}
+            if (this.name == "Grunt")
+            {
+                _gruntDeathArrow.Play();
+            }
+            if (this.name == "Flying")
+            {
+               _flyingDeathArrow.Play();
+            }
+            if (this.name == "Paladin")
+            {
+                _paladinDeathArrow.Play();
+            }
+            if (this.name == "Heavy")
+            {
+                _heavyDeathArrow.Play();
+            }
             Destroy(this.gameObject);
         }
     }
@@ -108,22 +108,22 @@ public class EnemyStatScript : MonoBehaviour {
         {
             _baseStats.LowerHealth(_damageToBase);
             _baseStats.LowerGold(_goldCarrying);
-            //if (this.name == "Grunt")
-            //{
-            //    _gruntBase.Play();
-            //}
-            //if (this.name == "Flying")
-            //{
-            //    _flyingBase.Play();
-            //}
-            //if (this.name == "Paladin")
-            //{
-            //    _paladinBase.Play();
-            //}
-            //if (this.name == "Heavy")
-            //{
-            //    _heavyBase.Play();
-            //}
+            if (this.name == "Grunt")
+            { 
+                _gruntBase.Play();
+            }
+            if (this.name == "Flying")
+            {
+                _flyingBase.Play();
+            }
+            if (this.name == "Paladin")
+            {
+                _paladinBase.Play();
+            }
+            if (this.name == "Heavy")
+            {
+                _heavyBase.Play();
+            }
             Destroy(this.gameObject);
         }
     }

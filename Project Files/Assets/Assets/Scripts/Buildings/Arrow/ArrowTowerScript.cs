@@ -108,19 +108,8 @@ public class ArrowTowerScript : MonoBehaviour {
 // Update is called once per frame
 void Update()
     {
-        //if (_enemyInRange == null)
-        //{
             _checkForEnemies();
-        //}
-        //else
-        //{
-        if (_enemyInRange != null)
-        {
             _shootEnemy();
-
-        }
-        //}
-        
     }
 
     /// <summary>
@@ -132,15 +121,11 @@ void Update()
         UnitScript[] enemies = GameObject.FindObjectsOfType<UnitScript>();
         if (enemies.Length > 0)
         {
-            if (enemies[enemies.Length - 1].gameObject.GetComponent<EnemyStatScript>().EnemyType == EnemyType.Ground)
+            foreach (UnitScript Unit in enemies)
             {
-                if ((enemies[enemies.Length - 1].transform.position - _thisPosition).magnitude < _range)
+                if ((Unit.transform.position - _thisPosition).magnitude < _range)
                 {
-                    _enemyInRange = enemies[enemies.Length - 1].gameObject;
-                }
-                else
-                {
-                    _playIdleAnimation();
+                    _enemyInRange = Unit.gameObject;
                 }
             }
         }
@@ -154,17 +139,18 @@ void Update()
     {
         if (_allowShoot)
         {
-            //_enemyInRange.GetComponent<EnemyStatScript>().LowerHealth(_damage);
             _allowShoot = false;
             _countdownTime = CountTimerScript.AddSeconds(_rateOfFire);
             if ((_enemyInRange.transform.position - _thisPosition).magnitude > _range)
             {
                 _enemyInRange = null;
+                
             }
-
+            if (_enemyInRange != null)
+            {
             GameObject bulletObject = Instantiate(_bullet);
-            bulletObject.transform.position =new Vector3(this._thisPosition.x,this._thisPosition.y,-1);
-            bulletObject.GetComponent<ArrowBulletScript>().ShootEnemy(_enemyInRange, _damage,_speedProjectile);
+                bulletObject.transform.position = new Vector3(this._thisPosition.x, this._thisPosition.y, -1);
+                bulletObject.GetComponent<ArrowBulletScript>().ShootEnemy(_enemyInRange, _damage, _speedProjectile);
             int random = Random.Range(0, 2);
 
             switch (random)
@@ -180,6 +166,8 @@ void Update()
                     break;
 
             }
+            }
+
 
 
             //Debug.Log("Enemy Shot");
