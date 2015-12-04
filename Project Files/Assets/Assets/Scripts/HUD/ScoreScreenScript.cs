@@ -27,7 +27,7 @@ public class ScoreScreenScript : MonoBehaviour {
         _menuSelection = GameObject.FindObjectOfType<MenuSelectionScript>();
         _baseScript = GameObject.FindObjectOfType<BaseScript>();
         _map = GameObject.FindObjectOfType<DontDestroyOnLoadMusicScript>();
-        //_currentLevel = GameObject.Find("")
+        _currentLevel = GameObject.Find("CurrentLevelScore");
         _0Stars = GameObject.Find("BigStarsEmpty").GetComponent<Image>();
         _1Star = GameObject.Find("BigStarsFill1").GetComponent<Image>();
         _2Stars = GameObject.Find("BigStarsFill2").GetComponent<Image>();
@@ -56,6 +56,7 @@ public class ScoreScreenScript : MonoBehaviour {
                     break;
             }
             _score.SetActive(true);
+            _currentLevel.GetComponent<Text>().text = _map.Level.ToString();
             _checkCriteria();
         }
         else
