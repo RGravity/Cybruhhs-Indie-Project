@@ -14,10 +14,15 @@ public class UpgradeTowerScript : MonoBehaviour {
     private UpgradeOneButtonScript _upgradeOne;
     private UpgradeTwoButtonScript _upgradeTwo;
     private GameObject _towerObj;
+    private BaseScript _baseScript;
 
-    public ArrowTowerScript ArrowTower { set { _arrowTower = value; } }
-    public CannonTowerScript CannonTower { set { _cannonTower = value; } }
-    public SlowTowerScript SlowTower { set { _slowTower = value; } }
+    public ArrowTowerScript ArrowTower { get { return _arrowTower; } set { _arrowTower = value; } }
+    public CannonTowerScript CannonTower { get { return _cannonTower; } set { _cannonTower = value; } }
+    public SlowTowerScript SlowTower { get { return _slowTower; } set { _slowTower = value; } }
+
+    public ArrowTowerScript TempArrow { get { return _tempArrow; } set { _tempArrow = value; } }
+    public CannonTowerScript TempCannon { get { return _tempCannon; } set { _tempCannon = value; } }
+    public SlowTowerScript TempSlow { get { return _tempSlow; } set { _tempSlow = value; } }
 
     public GameObject TowerObj { set { _towerObj = value; } }
 
@@ -31,6 +36,8 @@ public class UpgradeTowerScript : MonoBehaviour {
     private bool _upgradeTrollAppear2 = false;
     private bool _upgradeTrollAppear3 = false;
     private bool _disappear = false;
+    private bool _check = false;
+    
 
 
     public bool Disappear { get { return _disappear; } set { _disappear = value; } }
@@ -41,7 +48,8 @@ public class UpgradeTowerScript : MonoBehaviour {
     {
         _upgradePanel = GameObject.Find("UpgradePanel"); //gets the panel in the game scene
         _upgradeOne = FindObjectOfType<UpgradeOneButtonScript>(); //the first upgrade button in the panel
-        _upgradeTwo = FindObjectOfType<UpgradeTwoButtonScript>(); //the second upgrade button in the panel      
+        _upgradeTwo = FindObjectOfType<UpgradeTwoButtonScript>(); //the second upgrade button in the panel  
+        _baseScript = FindObjectOfType<BaseScript>();    
     }
 
     // Update is called once per frame
@@ -51,9 +59,15 @@ public class UpgradeTowerScript : MonoBehaviour {
         _objectsAppear2();
         _objectsAppear3();
         _objectsDissappear();
-        _upgradeTowers();
-        _upgradeTowers2();
+       
+        if (_upgradeOne.IntUpdate == 1)
+        {
+            _cannonTower.UpdateTowerCannon();
+            _upgradeOne.IntUpdate = 0;
+            //Update 1 is geklikt
+        }
     }
+
     /// <summary>
     /// <para>If one of the bools is true it will set the scale of the panel to the right size</para>
     /// <para>It will also load the right sprites for the button for that tower</para>
@@ -159,87 +173,10 @@ public class UpgradeTowerScript : MonoBehaviour {
         {
             _upgradePanel.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
             _disappear = false;
-            _tempArrow = null;
-            _tempCannon = null;
-            _tempSlow = null;
         }
     }
 
-    /// <summary>
-    /// <para>Gets the boolean from upgrade buttton one, if one of the bools is true then it will run the following:</para>
-    /// <para>The UpgradeTower fuction in the right script, it will set the bool in the upgrade one button to false and disappear becomes true</para>
-    /// </summary>
-
-    private void _upgradeTowers()
-    {
-        
-        if (_upgradeOne.Tree == true)
-        {
-            if (_tempArrow != null)
-            {
-                _tempArrow.UpdateTowerArrow();
-            }
-            _upgradeOne.Tree = false;
-            _disappear = true;
-        }
-        else if (_upgradeOne.Troll == true)
-        {
-            if (_tempCannon != null)
-            {
-                _tempCannon.UpdateTowerCannon();
-            }
-            _upgradeOne.Troll = false;
-            _disappear = true;
-        }
-        else if (_upgradeOne.Spider == true)
-        {
-            if (_tempSlow != null)
-            {
-                _tempSlow.UpdateTowerSlow();
-            }
-            _upgradeOne.Spider = false;
-            _disappear = true;         
-        }
-    }
-
-    /// <summary>
-    /// <para>Gets the boolean from upgrade buttton two, if one of the bools is true then it will run the following:</para>
-    /// <para>The UpgradeTower fuction in the right script, it will set the bool in the upgrade one button to false and disappear becomes true</para>
-    /// </summary>
-
-    private void _upgradeTowers2()
-    {
-        if (_upgradeTwo.Tree == true)
-        {
-            if (_tempArrow != null)
-            {
-                _tempArrow.UpdateTowerArrow();
-            }
-            _upgradeTwo.Tree = false;
-            _disappear = true;
-        }
-
-        else if (_upgradeTwo.Troll == true)
-        {
-            if (_tempCannon != null)
-            {
-                _tempCannon.UpdateTowerCannon();
-            }
-            _upgradeTwo.Troll = false;
-            _disappear = true;
-        }
-        else if (_upgradeTwo.Spider == true)
-        {
-            if (_tempSlow != null)
-            {
-                _tempSlow.UpdateTowerSlow();
-            }
-            _upgradeTwo.Spider = false;
-            _disappear = true;
-        }
-
-    }
-    /// <summary>
+  
     /// <para>With On Mouse down it will check which of the following towers it is by,</para>
     /// <para>if the script is indeed there, check the tier of that script and set at the right tier the bool to true.</para>
     /// </summary>
@@ -247,59 +184,59 @@ public class UpgradeTowerScript : MonoBehaviour {
     {
         if (_arrowTower)
         {
-            _tempArrow = null;
             _tempArrow = _arrowTower;
-            if (_arrowTower.Tier == 1)
+            if (_arrowTower.Tier == 1 && _baseScript.Gold >= 250)
             {
-                _upgradeTreeAppear = true;
+                _tempArrow.UpdateTowerArrow();
+                _baseScript.LowerGold(250);
             }
-            else if (_arrowTower.Tier == 2)
+            else if (_arrowTower.Tier == 2 && _baseScript.Gold >= 300)
             {
-                _tempArrow = _arrowTower;
-                _upgradeTreeAppear2 = true;
+                _tempArrow.UpdateTowerArrow();
+                _baseScript.LowerGold(300);
             }
-            else if (_arrowTower.Tier >= 3)
-            {
-                _tempArrow = _arrowTower;
-                _upgradeTreeAppear3 = true;
-            }
+            //else if (_arrowTower.Tier == 3)
+            //{
+            //    _tempArrow.UpdateTowerArrow();
+            //}
         }
         else if (_cannonTower)
         {
-            _tempCannon = null;
             _tempCannon = _cannonTower;
-            if (_cannonTower.Tier == 1 )
+            if (_cannonTower.Tier == 1 && _baseScript.Gold >= 300)
             {
-                _upgradeTrollAppear = true;
+                _tempCannon.UpdateTowerCannon();
+                _baseScript.LowerGold(300);
             }
-            else if (_cannonTower.Tier == 2 )
+            else if (_cannonTower.Tier == 2 && _baseScript.Gold >= 400)
             {
-                _upgradeTrollAppear2 = true;
-
+                _tempCannon.UpdateTowerCannon();
+                _baseScript.LowerGold(400);
             }
-            else if (_cannonTower.Tier >= 3 )
-            {
-                _upgradeTrollAppear3 = true;
-            }
+            //else if (_cannonTower.Tier == 3 )
+            //{
+            //    _tempCannon.UpdateTowerCannon();
+            //}
         }
         else if (_slowTower)
         {
-            _tempSlow = null;
             _tempSlow = _slowTower;
-            if (_slowTower.Tier == 1)
+            if (_slowTower.Tier == 1 && _baseScript.Gold >= 200)
             {
-                _upgradeSpiderAppear = true;
+                _tempSlow.UpdateTowerSlow();
+                _baseScript.LowerGold(200);
             }
 
-            else if (_slowTower.Tier == 2)
+            else if (_slowTower.Tier == 2 && _baseScript.Gold >= 300)
             {
-                _upgradeSpiderAppear2 = true;
+                _tempSlow.UpdateTowerSlow();
+                _baseScript.LowerGold(300);
             }
 
-            else if (_slowTower.Tier >= 3)
-            {
-                _upgradeSpiderAppear3 = true;
-            }
+            //else if (_slowTower.Tier == 3)
+            //{
+            //    _tempSlow.UpdateTowerSlow();
+            //}
         }
     }
 }

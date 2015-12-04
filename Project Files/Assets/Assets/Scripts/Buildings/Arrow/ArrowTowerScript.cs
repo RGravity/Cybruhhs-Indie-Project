@@ -105,11 +105,11 @@ public class ArrowTowerScript : MonoBehaviour {
         _range = _rangeTier1;
     }
 
-    // Update is called once per frame
-    void Update()
+// Update is called once per frame
+void Update()
     {
-        _checkForEnemies();
-        _shootEnemy();
+            _checkForEnemies();
+            _shootEnemy();
     }
 
     /// <summary>
@@ -148,26 +148,26 @@ public class ArrowTowerScript : MonoBehaviour {
             }
             if (_enemyInRange != null)
             {
-                GameObject bulletObject = Instantiate(_bullet);
+            GameObject bulletObject = Instantiate(_bullet);
                 bulletObject.transform.position = new Vector3(this._thisPosition.x, this._thisPosition.y, -1);
                 bulletObject.GetComponent<ArrowBulletScript>().ShootEnemy(_enemyInRange, _damage, _speedProjectile);
-                int random = Random.Range(0, 2);
+            int random = Random.Range(0, 2);
 
-                switch (random)
-                {
-                    case 0:
-                        if (_shoot1 != null) _shoot1.Play();
-                        break;
-                    case 1:
-                        if (_shoot1 != null) _shoot2.Play();
-                        break;
-                    case 2:
-                        if (_shoot1 != null) _shoot3.Play();
-                        break;
+            switch (random)
+            {
+                case 0:
+                    if (_shoot1 != null) _shoot1.Play();
+                    break;
+                case 1:
+                    if (_shoot1 != null) _shoot2.Play();
+                    break;
+                case 2:
+                    if (_shoot1 != null) _shoot3.Play();
+                    break;
 
-                }
             }
-            
+            }
+
 
 
             //Debug.Log("Enemy Shot");
