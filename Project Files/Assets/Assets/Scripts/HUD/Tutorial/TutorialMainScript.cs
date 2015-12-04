@@ -16,13 +16,13 @@ public class TutorialMainScript : MonoBehaviour {
     private bool _skipTutorial = false;
     private bool _tutorialActive = false;
 
+    public bool TutorialActive { get { return _tutorialActive; } }
+
     // Use this for initialization
     void Start () {
-        _tutorialBG = FindObjectOfType<TutorialBackgroundScript>().gameObject;
         _tutorialNextButton = FindObjectOfType<TutorialNextButtonScript>().gameObject;
         _tutorialSkipButton = FindObjectOfType<TutorialSkipButtonScript>().gameObject;
         _tutorialImage = FindObjectOfType<TutorialImageScript>().gameObject;
-        _tutorialBG.SetActive(false);
         _tutorialNextButton.SetActive(false);
         _tutorialSkipButton.SetActive(false);
         _tutorialImage.SetActive(false);
@@ -33,14 +33,18 @@ public class TutorialMainScript : MonoBehaviour {
         if (_loadNextImage && _tutorialSprites.Count > _spriteIndex)
         {
             _spriteIndex++;
-            if (_tutorialSprites.Count == _spriteIndex)
+            if (_tutorialSprites.Count != _spriteIndex)
             {
                 _loadNextImage = false;
                 _loadImage();
             }
             else
             {
-                _tutorialBG.SetActive(false);
+                _tutorialSprites = null;
+                _spriteIndex = 0;
+                _loadNextImage = false;
+                _skipTutorial = false;
+                _tutorialActive = false;
                 _tutorialNextButton.SetActive(false);
                 _tutorialSkipButton.SetActive(false);
                 _tutorialImage.SetActive(false);
@@ -55,7 +59,6 @@ public class TutorialMainScript : MonoBehaviour {
             _loadNextImage = false;
             _skipTutorial = false;
             _tutorialActive = false;
-            _tutorialBG.SetActive(false);
             _tutorialNextButton.SetActive(false);
             _tutorialSkipButton.SetActive(false);
             _tutorialImage.SetActive(false);
@@ -68,13 +71,18 @@ public class TutorialMainScript : MonoBehaviour {
         _loadNextImage = true;
     }
 
+    public void SkipTutorial()
+    {
+        _skipTutorial = true;
+    }
+
     public void ShowTutorial(List<Sprite> pTutorialSprite)
     {
         _tutorialSprites = pTutorialSprite;
-        _tutorialBG.SetActive(true);
         _tutorialImage.SetActive(true);
         _tutorialNextButton.SetActive(true);
         _tutorialSkipButton.SetActive(true);
+        _tutorialActive = true;
         _loadImage();
     }
 
