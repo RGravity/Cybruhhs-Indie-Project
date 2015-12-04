@@ -61,6 +61,9 @@ public class ArrowTowerScript : MonoBehaviour {
     private AudioSource _tree6;
     private AudioSource _tree7;
 
+    private bool _isNextEnemy = false;
+    private int _indexEnemy = 0;
+
     private CheckForMusicScript _check;
     public int Tier { get { return _tier; } set { _tier = value; }  }
 
@@ -129,13 +132,23 @@ void Update()
         UnitScript[] enemies = GameObject.FindObjectsOfType<UnitScript>();
         if (enemies.Length > 0)
         {
-            if ((enemies[enemies.Length - 1].transform.position - _thisPosition).magnitude < _range)
+            if (_isNextEnemy)
             {
-                _enemyInRange = enemies[enemies.Length - 1].gameObject;
+                _indexEnemy++;
+                if (_indexEnemy >= enemies.Length)
+                {
+                    _indexEnemy = 0;
+                }
+                _isNextEnemy = false;
+            }
+            if ((enemies[_indexEnemy].transform.position - _thisPosition).magnitude < _range)
+            {
+                _enemyInRange = enemies[_indexEnemy].gameObject;
             }
             else
             {
                 _playIdleAnimation();
+                _isNextEnemy = true;
             }
         }
 
