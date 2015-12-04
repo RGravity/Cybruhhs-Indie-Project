@@ -112,18 +112,8 @@ public class SlowTowerScript : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        //if (_enemyInRange == null)
-        //{
         _checkForEnemies();
-        //}
-        //else
-        //{
-        if (_enemyInRange != null)
-        {
-            _shootEnemy();
-
-        }
-        //}
+        _shootEnemy();
 
     }
 
@@ -136,23 +126,23 @@ public class SlowTowerScript : MonoBehaviour {
         UnitScript[] enemies = GameObject.FindObjectsOfType<UnitScript>();
         if (enemies.Length > 0)
         {
-            if (_isNextEnemy || enemies[_indexForEnemy].IsSlowed)
+            float dist = 0;
+            foreach (UnitScript Unit in enemies)
             {
-                _indexForEnemy++;
-                if (_indexForEnemy >= enemies.Length)
+                if ((Unit.transform.position - _thisPosition).magnitude < _range)
                 {
-                    _indexForEnemy = 0;
+                    if (dist == 0)
+                    {
+                        _enemyInRange = Unit.gameObject;
+                        dist = (Unit.transform.position - _thisPosition).magnitude;
+                    }
+                    else if ((Unit.transform.position - _thisPosition).magnitude < dist)
+                    {
+                        _enemyInRange = Unit.gameObject;
+                        dist = (Unit.transform.position - _thisPosition).magnitude;
+                    }
+                    
                 }
-                _isNextEnemy = false;
-            }
-            if ((enemies[_indexForEnemy].transform.position - _thisPosition).magnitude < _range)
-            {
-                _enemyInRange = enemies[_indexForEnemy].gameObject;
-            }
-            else
-            {
-                _playIdleAnimation();
-                _isNextEnemy = true;
             }
         }
     }
@@ -164,7 +154,6 @@ public class SlowTowerScript : MonoBehaviour {
     {
         if (_allowShoot)
         {
-            //_enemyInRange.GetComponent<EnemyStatScript>().LowerHealth(_damage);
             _allowShoot = false;
             _playAttackAnimation();
             _countdownTime = CountTimerScript.AddSeconds(_rateOfFire);
@@ -172,11 +161,16 @@ public class SlowTowerScript : MonoBehaviour {
             {
                 _enemyInRange = null;
             }
+            if (_enemyInRange != null)
+            {
+                GameObject bulletObject = Instantiate(_bullet);
+                bulletObject.transform.position = new Vector3(this._thisPosition.x, this._thisPosition.y, -1);
+                bulletObject.GetComponent<SlowBulletScript>().ShootEnemy(_enemyInRange, _slowTime, _slowAmount, _speedProjectile);
+                if (_shoot != null) _shoot.Play();
+                _enemyInRange = null;
+            }
 
-            GameObject bulletObject = Instantiate(_bullet);
-            bulletObject.transform.position = new Vector3(this._thisPosition.x, this._thisPosition.y, -1);
-            bulletObject.GetComponent<SlowBulletScript>().ShootEnemy(_enemyInRange, _slowTime, _slowAmount, _speedProjectile);
-            if (_shoot != null) _shoot.Play();
+            
         }
         else if (Time.time >= _countdownTime)
         {

@@ -115,27 +115,8 @@ public class CannonTowerScript : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (_enemyInRange == null)
-        {
-            _checkForEnemies();
-        }
-        else
-        {
-            _shootEnemy();
-        }
-        //if (_enemyInRange == null)
-        //{
-        //    _checkForEnemies();
-        ////}
-        ////else
-        ////{
-        //if (_enemyInRange != null)
-        //{
-        //    _shootEnemy();
-
-        //}
-        //}
-
+        _checkForEnemies();
+        _shootEnemy();
     }
 
     /// <summary>
@@ -147,22 +128,33 @@ public class CannonTowerScript : MonoBehaviour {
         UnitScript[] enemies = GameObject.FindObjectsOfType<UnitScript>();
         if (enemies.Length > 0)
         {
-            if (enemies[enemies.Length - 1 - _nextEnemy].gameObject.GetComponent<EnemyStatScript>().EnemyType == EnemyType.Ground)
+            foreach (UnitScript Unit in enemies)
             {
-                if ((enemies[enemies.Length - 1 - _nextEnemy].transform.position - _thisPosition).magnitude < _range)
+                if ((Unit.transform.position - _thisPosition).magnitude < _range && Unit.gameObject.GetComponent<EnemyStatScript>().EnemyType == EnemyType.Ground)
                 {
-                    _enemyInRange = enemies[enemies.Length - 1].gameObject;
-                }
-                else
-                {
-                    _nextEnemy++;
-                    if (_nextEnemy >= enemies.Length)
-                    {
-                        _nextEnemy = 0;
-                    }
-                    _playIdleAnimation();
+                    _enemyInRange = Unit.gameObject;
                 }
             }
+            //if (enemies[enemies.Length - 1 - _nextEnemy].gameObject.GetComponent<EnemyStatScript>().EnemyType == EnemyType.Ground)
+            //{
+            //    if ((enemies[enemies.Length - 1 - _nextEnemy].transform.position - _thisPosition).magnitude < _range)
+            //    {
+            //        _enemyInRange = enemies[enemies.Length - 1].gameObject;
+            //    }
+            //    else
+            //    {
+            //        _nextEnemy++;
+            //        if (_nextEnemy >= enemies.Length)
+            //        {
+            //            _nextEnemy = 0;
+            //        }
+            //        _playIdleAnimation();
+            //    }
+            //}
+        }
+        if (_enemyInRange == null)
+        {
+            _playIdleAnimation();
         }
     }
 
@@ -173,23 +165,25 @@ public class CannonTowerScript : MonoBehaviour {
     {
         if (_allowShoot)
         {
-            //if (_towerCannonIdleLevel1 != null)
-            //{
-                _playAttackAnimation();
-            //}
-               _allowShoot = false;
+            _playAttackAnimation();
+            _allowShoot = false;
             _countdownTime = CountTimerScript.AddSeconds(_rateOfFire);
             if ((_enemyInRange.transform.position - _thisPosition).magnitude > _range)
             {
                 _enemyInRange = null;
             }
-            GameObject bulletObject = Instantiate(_bullet);
-            bulletObject.transform.position = new Vector3(this._thisPosition.x, this._thisPosition.y, -1);
-            bulletObject.GetComponent<CannonBulletScript>().ShootEnemy(_enemyInRange, _damage, _speedProjectile);
-            if (_cannonFire != null)
+            if (_enemyInRange != null)
             {
-                _cannonFire.Play();
+                GameObject bulletObject = Instantiate(_bullet);
+                bulletObject.transform.position = new Vector3(this._thisPosition.x, this._thisPosition.y, -1);
+                bulletObject.GetComponent<CannonBulletScript>().ShootEnemy(_enemyInRange, _damage, _speedProjectile);
+                if (_cannonFire != null)
+                {
+                    _cannonFire.Play();
+                }
             }
+            
+            
         }
         else if (Time.time >= _countdownTime)
         {
