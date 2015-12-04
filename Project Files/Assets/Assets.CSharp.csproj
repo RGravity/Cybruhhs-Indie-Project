@@ -84,6 +84,7 @@
     <Compile Include="Assets\Scripts\Economy\EnemyStatScript.cs" />
     <Compile Include="Assets\Scripts\Enemies\GruntScript.cs" />
     <Compile Include="Assets\Scripts\EnumScript.cs" />
+    <Compile Include="Assets\Scripts\HUD\DefeatScreenScript.cs" />
     <Compile Include="Assets\Scripts\HUD\GoldTextScript.cs" />
     <Compile Include="Assets\Scripts\HUD\LivesTextScript.cs" />
     <Compile Include="Assets\Scripts\HUD\NextWaveButtonScript.cs" />
@@ -107,7 +108,6 @@
     <Compile Include="Assets\Scripts\MenuScripts\MovingLoading1.cs" />
     <Compile Include="Assets\Scripts\MenuScripts\MovingLoading2.cs" />
     <Compile Include="Assets\Scripts\MenuScripts\PauseScript.cs" />
-    <Compile Include="Assets\Scripts\Michiel TEST Scripts\EnemyTestScript.cs" />
     <Compile Include="Assets\Scripts\Navigation\2D\ClickableTileScript.cs" />
     <Compile Include="Assets\Scripts\Navigation\2D\GenerateNodeMap.cs" />
     <Compile Include="Assets\Scripts\Navigation\2D\NodeScript.cs" />
