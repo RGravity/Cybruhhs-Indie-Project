@@ -152,7 +152,6 @@ public class SlowTowerScript : MonoBehaviour {
                 if (TowerSlowIdleLevel1 != null)
                 {
                     _playIdleAnimation();
-                    _checkForEnemies();
                 }
                 _isNextEnemy = true;
             }
