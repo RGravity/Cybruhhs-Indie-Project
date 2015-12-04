@@ -452,7 +452,7 @@ public class BuildingSpawnScript : MonoBehaviour
                     //Get all the children but remove the parent so only the 4 tiles are in the parts and can be adjusted to the world coordinates.
                     _towerArrowIdle = Instantiate(_towerArrowIdle);
                     ArrowTowerScript tempTower = _towerArrowIdle.GetComponent<ArrowTowerScript>();
-                    _towerArrowIdle.transform.position = new Vector3(tempTower.gameObject.transform.position.x, tempTower.gameObject.transform.position.y, -0.5f);
+                    _towerArrowIdle.transform.position = new Vector3(_selectedTile[1].gameObject.transform.position.x, _selectedTile[1].gameObject.transform.position.y, -0.5f);
                     tempTower.GetComponent<ArrowTowerScript>().TowerArrowIdleLevel1 = _towerArrowIdle;
                     Transform[] towerParts = _towerArrowIdle.GetComponentsInChildren<Transform>();
                     towerParts = towerParts.Except(new Transform[] { towerParts[0].transform }).ToArray();
