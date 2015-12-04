@@ -28,5 +28,9 @@ public class MovingLoading : MonoBehaviour {
 
         }
         GetComponent<Image>().sprite = _sprites[_index];
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
+        {
+            Application.LoadLevel("Menu Scene");
+        }
     }
 }

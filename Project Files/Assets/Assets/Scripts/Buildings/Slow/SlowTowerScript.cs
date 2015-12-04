@@ -106,6 +106,7 @@ public class SlowTowerScript : MonoBehaviour {
         _slowTime = _slowTimeTier1;
         _range = _rangeTier1;
         _rateOfFire = _rateOfFireTier1;
+        _slowAmount = _slowAmountTier1;
     }
 
     // Update is called once per frame

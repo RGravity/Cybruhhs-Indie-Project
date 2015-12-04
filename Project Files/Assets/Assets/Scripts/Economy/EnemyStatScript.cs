@@ -11,6 +11,8 @@ public class EnemyStatScript : MonoBehaviour {
     private int _damageToBase;
     [SerializeField]
     private EnemyType _enemyType;
+    [SerializeField]
+    private Sprite _shadowSprite;
 
     public EnemyType EnemyType { get { return _enemyType; } }
 
@@ -36,6 +38,13 @@ public class EnemyStatScript : MonoBehaviour {
 
     void Start()
     {
+        GameObject shadowObject = new GameObject();
+        shadowObject.name = "Shadow";
+        shadowObject.transform.position = this.transform.position;
+        shadowObject.AddComponent<SpriteRenderer>().sprite = _shadowSprite;
+        shadowObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        shadowObject.transform.localPosition = new Vector3(shadowObject.transform.localPosition.x+0.09f, shadowObject.transform.localPosition.y - 0.5f, shadowObject.transform.localPosition.z);
+        shadowObject.transform.parent = this.transform;
         _baseStats = GameObject.FindObjectOfType<BaseScript>();
         //_gruntBase = GameObject.Find("GruntBase").GetComponent<AudioSource>();
         //_flyingBase = GameObject.Find("GriffonBase").GetComponent<AudioSource>();
