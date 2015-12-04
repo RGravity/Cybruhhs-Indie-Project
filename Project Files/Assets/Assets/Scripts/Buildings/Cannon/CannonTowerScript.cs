@@ -11,40 +11,40 @@ public class CannonTowerScript : MonoBehaviour {
     private float _timeLastShot;
 
     #region Damage
-    private int _damage = 2;
+    private int _damage = 0;
     [SerializeField]
-    private int _damageTier1 = 2;
+    private int _damageTier1 = 0;
     [SerializeField]
-    private int _damageTier2 = 3;
+    private int _damageTier2 = 0;
     [SerializeField]
-    private int _damageTier3 = 4;
+    private int _damageTier3 = 0;
     #endregion
 
     #region Rate of fire
-    private float _rateOfFire = 1;
+    private float _rateOfFire = 0;
     [SerializeField]
-    private float _rateOfFireTier1 = 1;
+    private float _rateOfFireTier1 = 0;
     [SerializeField]
-    private float _rateOfFireTier2 = 1;
+    private float _rateOfFireTier2 = 0;
     [SerializeField]
-    private float _rateOfFireTier3 = 1;
+    private float _rateOfFireTier3 = 0;
     #endregion
 
     #region Range of fire
-    private float _range = 5;
+    private float _range = 0;
     [SerializeField]
-    private float _rangeTier1 = 5;
+    private float _rangeTier1 = 0;
     [SerializeField]
-    private float _rangeTier2 = 5;
+    private float _rangeTier2 = 0;
     [SerializeField]
-    private float _rangeTier3 = 5;
+    private float _rangeTier3 = 0;
     #endregion
 
     private bool _allowShoot = true;
     private float _countdownTime;
 
     [SerializeField]
-    private float _speedProjectile = 4;
+    private float _speedProjectile = 0;
 
     private GameObject _enemyInRange;
     private AudioSource _cannonFire;
@@ -67,9 +67,9 @@ public class CannonTowerScript : MonoBehaviour {
     //Properties of the Towers so it can swap positions in BuildingSpawnScript;
     public GameObject TowerCannonIdleLevel2 { get { return _towerCannonIdleLevel2; } }
     public GameObject TowerCannonIdleLevel3 { get { return _towerCannonIdleLevel3; } }
-
-
     public GameObject TowerCannonIdleLevel1 { get { return _towerCannonIdleLevel1; } set { _towerCannonIdleLevel1 = value; } }
+
+    public int testId = 1;
 
     //Positions of the tiles
     private Vector3 _tile1;
@@ -81,6 +81,8 @@ public class CannonTowerScript : MonoBehaviour {
     public Vector3 Tile3 { set { _tile3 = value; } }
     public Vector3 Tile4 { set { _tile4 = value; } }
 
+    private int _nextEnemy=0;
+
     // Use this for initialization
     void Start()
     {
@@ -88,8 +90,9 @@ public class CannonTowerScript : MonoBehaviour {
         _towerCannonAttackLevel1 = (GameObject)Resources.Load("Towers/TrollAttackLevel1");
         _towerCannonAttackLevel2 = (GameObject)Resources.Load("Towers/TrollAttackLevel2");
         _towerCannonAttackLevel3 = (GameObject)Resources.Load("Towers/TrollAttackLevel3");
-        _towerCannonIdleLevel2 = (GameObject)Resources.Load("Towers/TrollAttackIdle2");
-        _towerCannonIdleLevel3 = (GameObject)Resources.Load("Towers/TrollAttackIdle3");
+        //_towerCannonIdleLevel1 = (GameObject)Resources.Load("Towers/TrollIdleLevel1");
+        _towerCannonIdleLevel2 = (GameObject)Resources.Load("Towers/TrollIdleLevel2");
+        _towerCannonIdleLevel3 = (GameObject)Resources.Load("Towers/TrollIdleLevel3");
 
         _thisPosition = this.gameObject.transform.position;
         _bullet = (GameObject)Resources.Load("CannonBullet");
@@ -120,6 +123,18 @@ public class CannonTowerScript : MonoBehaviour {
         {
             _shootEnemy();
         }
+        //if (_enemyInRange == null)
+        //{
+        //    _checkForEnemies();
+        ////}
+        ////else
+        ////{
+        //if (_enemyInRange != null)
+        //{
+        //    _shootEnemy();
+
+        //}
+        //}
 
     }
 
@@ -132,19 +147,24 @@ public class CannonTowerScript : MonoBehaviour {
         UnitScript[] enemies = GameObject.FindObjectsOfType<UnitScript>();
         if (enemies.Length > 0)
         {
-            if (enemies[enemies.Length - 1].gameObject.GetComponent<EnemyStatScript>().EnemyType == EnemyType.Ground)
+            if (enemies[enemies.Length - 1 - _nextEnemy].gameObject.GetComponent<EnemyStatScript>().EnemyType == EnemyType.Ground)
             {
-                if ((enemies[enemies.Length - 1].transform.position - _thisPosition).magnitude < _range)
+                if ((enemies[enemies.Length - 1 - _nextEnemy].transform.position - _thisPosition).magnitude < _range)
                 {
                     _enemyInRange = enemies[enemies.Length - 1].gameObject;
                 }
-            }
-        }
-        else
-        {
-            if (TowerCannonIdleLevel1 != null)
-            {
-                _playIdleAnimation();
+                else
+                {
+                    _nextEnemy++;
+                    if (_nextEnemy >= enemies.Length)
+                    {
+                        _nextEnemy = 0;
+                    }
+                    if (_towerCannonIdleLevel1 != null)
+                    {
+                        _playIdleAnimation();
+                    }
+                }
             }
         }
     }
@@ -156,7 +176,10 @@ public class CannonTowerScript : MonoBehaviour {
     {
         if (_allowShoot)
         {
-            _playAttackAnimation();
+            //if (_towerCannonIdleLevel1 != null)
+            //{
+                _playAttackAnimation();
+            //}
                _allowShoot = false;
             _countdownTime = CountTimerScript.AddSeconds(_rateOfFire);
             if ((_enemyInRange.transform.position - _thisPosition).magnitude > _range)
@@ -180,11 +203,16 @@ public class CannonTowerScript : MonoBehaviour {
 
     private void _playAttackAnimation()
     {
-        //GameObject towerAttack = Instantiate(_towerCannonAttackLevel1);
-
+        // GameObject towerAttack = Instantiate(_towerCannonAttackLevel1);
+        int test  = testId;
         _towerCannonIdleLevel1.transform.position = _thisPosition;
-        Transform[] towerParts = _towerCannonIdleLevel1.GetComponentsInChildren<Transform>();
-        towerParts = towerParts.Except(new Transform[] { towerParts[0].transform }).ToArray();
+        Transform child1 = _towerCannonIdleLevel1.transform.GetChild(0);
+        Transform child2 = _towerCannonIdleLevel1.transform.GetChild(1);
+        Transform child3 = _towerCannonIdleLevel1.transform.GetChild(2);
+        Transform child4 = _towerCannonIdleLevel1.transform.GetChild(3);
+        Transform[] towerParts = new Transform[] { child1, child2, child3, child4 };
+        //Transform[] towerParts = _towerCannonIdleLevel1.gameObject.GetComponentsInChildren<Transform>();
+        //towerParts = towerParts.Except(new Transform[] { towerParts[0].transform }).ToArray();
         GameObject leftTop = null;
         GameObject rightTop = null;
         GameObject leftBottom = null;
@@ -222,8 +250,13 @@ public class CannonTowerScript : MonoBehaviour {
     private void _playIdleAnimation()
     {
         _towerCannonIdleLevel1.transform.position = _thisPosition;
-        Transform[] towerParts = _towerCannonIdleLevel1.GetComponentsInChildren<Transform>();
-        towerParts = towerParts.Except(new Transform[] { towerParts[0].transform }).ToArray();
+        Transform child1 = _towerCannonIdleLevel1.transform.GetChild(0);
+        Transform child2 = _towerCannonIdleLevel1.transform.GetChild(1);
+        Transform child3 = _towerCannonIdleLevel1.transform.GetChild(2);
+        Transform child4 = _towerCannonIdleLevel1.transform.GetChild(3);
+        Transform[] towerParts = new Transform[] { child1, child2, child3, child4 };
+        //Transform[] towerParts = _towerCannonIdleLevel1.gameObject.GetComponentsInChildren<Transform>();
+        //towerParts = towerParts.Except(new Transform[] { towerParts[0].transform }).ToArray();
         GameObject leftTop = null;
         GameObject rightTop = null;
         GameObject leftBottom = null;

@@ -15,33 +15,33 @@ public class ArrowTowerScript : MonoBehaviour {
     public int TileX { get { return _tileX; } }
     public int TileY { get { return _tileY; } }
     #region Damage
-    private int _damage = 2;
+    private int _damage = 0;
     [SerializeField]
-    private int _damageTier1 = 2;
+    private int _damageTier1 = 0;
     [SerializeField]
-    private int _damageTier2 = 4;
+    private int _damageTier2 = 0;
     [SerializeField]
-    private int _damageTier3 = 6;
+    private int _damageTier3 = 0;
     #endregion
 
     #region Rate of fire
     private float _rateOfFire = 0;
     [SerializeField]
-    private float _rateOfFireTier1 = 2;
+    private float _rateOfFireTier1 = 0;
     [SerializeField]
-    private float _rateOfFireTier2 = 1.5f;
+    private float _rateOfFireTier2 = 0;
     [SerializeField]
-    private float _rateOfFireTier3 = 0.5f;
+    private float _rateOfFireTier3 = 0;
     #endregion
 
     #region Range of fire
-    private float _range = 5;
+    private float _range = 0f;
     [SerializeField]
-    private float _rangeTier1 = 5;
+    private float _rangeTier1 = 0;
     [SerializeField]
-    private float _rangeTier2 = 5;
+    private float _rangeTier2 = 0;
     [SerializeField]
-    private float _rangeTier3 = 5;
+    private float _rangeTier3 = 0;
     #endregion
 
     private bool _allowShoot = true;
@@ -49,7 +49,7 @@ public class ArrowTowerScript : MonoBehaviour {
     private float _countdownTime;
 
     [SerializeField]
-    private float _speedProjectile = 7; //this needs to be changed
+    private float _speedProjectile = 0; //this needs to be changed
     
     private GameObject _enemyInRange;
     private AudioSource _shoot1;
@@ -132,10 +132,13 @@ void Update()
             {
                 _enemyInRange = enemies[enemies.Length - 1].gameObject;
             }
-        }
-        else
-        {
-            _playIdleAnimation();
+            else
+            {
+                if (_towerArrowIdleLevel1 != null)
+                {
+                    _playIdleAnimation();
+                }
+            }
         }
 
     }
