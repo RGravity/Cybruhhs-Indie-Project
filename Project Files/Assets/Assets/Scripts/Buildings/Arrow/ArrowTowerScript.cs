@@ -84,6 +84,7 @@ public class ArrowTowerScript : MonoBehaviour {
         _thisPosition = this.gameObject.transform.position;
         _bullet = (GameObject)Resources.Load("ArrowBullet");
         _check = GameObject.FindObjectOfType<CheckForMusicScript>();
+        _thisPosition = this.gameObject.transform.position;
         if (_check.Check == true)
         {
             _shoot1 = GameObject.Find("ArrowShoot1").GetComponent<AudioSource>();
@@ -134,10 +135,7 @@ void Update()
             }
             else
             {
-                if (_towerArrowIdleLevel1 != null)
-                {
-                    _playIdleAnimation();
-                }
+                _playIdleAnimation();
             }
         }
 

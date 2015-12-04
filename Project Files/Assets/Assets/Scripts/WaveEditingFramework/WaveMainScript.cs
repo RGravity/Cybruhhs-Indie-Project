@@ -119,6 +119,7 @@ public class WaveMainScript : MonoBehaviour {
                 _currentWavePart = 0;
                 _currentWave++;
                 _tutorialShown = false;
+                _waveProgressList.Clear();
                 if (_debugLevel > 0 || _debugWave > 0)
                 {
                     _debugWave++;

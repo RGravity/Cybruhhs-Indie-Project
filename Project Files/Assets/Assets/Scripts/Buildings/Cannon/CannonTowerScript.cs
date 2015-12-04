@@ -160,10 +160,7 @@ public class CannonTowerScript : MonoBehaviour {
                     {
                         _nextEnemy = 0;
                     }
-                    if (_towerCannonIdleLevel1 != null)
-                    {
-                        _playIdleAnimation();
-                    }
+                    _playIdleAnimation();
                 }
             }
         }
@@ -204,7 +201,6 @@ public class CannonTowerScript : MonoBehaviour {
     private void _playAttackAnimation()
     {
         // GameObject towerAttack = Instantiate(_towerCannonAttackLevel1);
-        int test  = testId;
         _towerCannonIdleLevel1.transform.position = _thisPosition;
         Transform child1 = _towerCannonIdleLevel1.transform.GetChild(0);
         Transform child2 = _towerCannonIdleLevel1.transform.GetChild(1);
