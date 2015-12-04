@@ -89,6 +89,11 @@
     <Compile Include="Assets\Scripts\HUD\NextWaveButtonScript.cs" />
     <Compile Include="Assets\Scripts\HUD\NextWaveTimerScript.cs" />
     <Compile Include="Assets\Scripts\HUD\ScoreScreenScript.cs" />
+    <Compile Include="Assets\Scripts\HUD\Tutorial\TutorialBackgroundScript.cs" />
+    <Compile Include="Assets\Scripts\HUD\Tutorial\TutorialImageScript.cs" />
+    <Compile Include="Assets\Scripts\HUD\Tutorial\TutorialMainScript.cs" />
+    <Compile Include="Assets\Scripts\HUD\Tutorial\TutorialNextButtonScript.cs" />
+    <Compile Include="Assets\Scripts\HUD\Tutorial\TutorialSkipButtonScript.cs" />
     <Compile Include="Assets\Scripts\HUD\WaveIndicatorScript.cs" />
     <Compile Include="Assets\Scripts\LevelEditingFramework\TileMapScript.cs" />
     <Compile Include="Assets\Scripts\MenuScripts\CybruhhsTitleScreen.cs" />
