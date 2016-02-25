@@ -24,7 +24,7 @@ public class ScoreScreenScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
         _score = GameObject.Find("BackgroundScore");
-        _menuSelection = GameObject.FindObjectOfType<MenuSelectionScript>();
+        //_menuSelection = GameObject.FindObjectOfType<MenuSelectionScript>();
         _baseScript = GameObject.FindObjectOfType<BaseScript>();
         _map = GameObject.FindObjectOfType<DontDestroyOnLoadMusicScript>();
         _currentLevel = GameObject.Find("CurrentLevelScore");
@@ -38,23 +38,23 @@ public class ScoreScreenScript : MonoBehaviour {
 	void Update () {
         if (_endLevel)
         {
-            switch (_map.Level)
-            {
-                case 1:
-                    _menuSelection.Level2Unlocked = true;
-                    break;
-                case 2:
-                    _menuSelection.Level3Unlocked = true;
-                    break;
-                case 3:
-                    _menuSelection.Level4Unlocked = true;
-                    break;
-                case 4:
-                    _menuSelection.Level5Unlocked = true;
-                    break;
-                default:
-                    break;
-            }
+            //switch (_map.Level)
+            //{
+            //    case 1:
+            //        _menuSelection.Level2Unlocked = true;
+            //        break;
+            //    case 2:
+            //        _menuSelection.Level3Unlocked = true;
+            //        break;
+            //    case 3:
+            //        _menuSelection.Level4Unlocked = true;
+            //        break;
+            //    case 4:
+            //        _menuSelection.Level5Unlocked = true;
+            //        break;
+            //    default:
+            //        break;
+            //}
             _score.SetActive(true);
             _currentLevel.GetComponent<Text>().text = _map.Level.ToString();
             _checkCriteria();

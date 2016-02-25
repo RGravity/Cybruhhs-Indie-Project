@@ -163,7 +163,7 @@ public class CannonTowerScript : MonoBehaviour {
     /// </summary>
     private void _shootEnemy()
     {
-        if (_allowShoot)
+        if (_allowShoot && _enemyInRange != null)
         {
             _playAttackAnimation();
             _allowShoot = false;

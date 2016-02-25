@@ -54,10 +54,7 @@ public class EnemyStatScript : MonoBehaviour {
         _flyingDeathArrow = GameObject.Find("GriffonArrow").GetComponent<AudioSource>();
         _paladinDeathArrow = GameObject.Find("PaladinArrow").GetComponent<AudioSource>();
         _heavyDeathArrow = GameObject.Find("HeavyArrow").GetComponent<AudioSource>();
-        _gruntDeathCannon = GameObject.Find("GruntCannon").GetComponent<AudioSource>();
-        _flyingDeathCannon = GameObject.Find("GriffonCannon").GetComponent<AudioSource>();
-        _paladinDeathCannon = GameObject.Find("PaladinCannon").GetComponent<AudioSource>();
-        _heavyDeathCannon = GameObject.Find("HeavyCannon").GetComponent<AudioSource>();
+        
     }
 
     // Update is called once per frame

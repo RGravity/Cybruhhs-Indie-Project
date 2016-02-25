@@ -128,6 +128,7 @@ void Update()
                     _enemyInRange = Unit.gameObject;
                 }
             }
+            _playIdleAnimation();
         }
 
     }
@@ -137,7 +138,7 @@ void Update()
     /// </summary>
     private void _shootEnemy()
     {
-        if (_allowShoot)
+        if (_allowShoot && _enemyInRange != null)
         {
             _allowShoot = false;
             _countdownTime = CountTimerScript.AddSeconds(_rateOfFire);
